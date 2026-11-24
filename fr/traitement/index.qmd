@@ -15,3 +15,4 @@ Les tableaux intermédiaires sont enregistrés au format Parquet dans `data/inte
 | [02. Extraction de l'inventaire des GES](02-extraction-crt/index.qmd) | Feuilles `Data` des tableaux CRT de 2015 à 2022, contrôle avec `Summary2` |
 | [03. Extraction des tableaux des ressources et des emplois](03-extraction-tre/index.qmd) | TRE de l'INS de 2015 à 2023 en format long, contrôles d'équilibre |
 | [10. Le bilan dans le modèle du PEFA Converter](10-bilan-format-aie/index.qmd) | Flux et produits de l'ONEM dans la présentation de l'AIE, en TJ, avec les signes de l'AIE |
+| [11. Des secteurs du bilan aux branches d'activité](11-activites/index.qmd) | Correspondance des flux du bilan avec les 24 branches du TRE et les ménages, clés de répartition du transport routier et du tertiaire |

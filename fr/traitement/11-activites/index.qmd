@@ -1,0 +1,156 @@
+---
+title: "Des secteurs du bilan aux branches d'activité"
+subtitle: "Correspondance entre les flux du bilan et les 24 branches du TRE, et clés de répartition"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: Consultant du FMI
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+---
+
+## Objet
+
+Les comptes PEFA enregistrent l'énergie par unité économique, classée par branche d'activité comme dans les comptes nationaux [@seeaenergy2019]. Le bilan énergétique classe la consommation par secteur d'usage : branches industrielles, modes de transport, ménages, tertiaire, agriculture. Cette page associe chaque flux du bilan, dans le modèle de l'AIE, à une ou plusieurs des 24 branches du tableau des ressources et des emplois (TRE) de l'INS, ou aux ménages.
+
+Le PEFA Converter du FMI [@pegoue2026pefa] travaille au niveau des sections de la CITI (A, B, C, D, E, F, H, une section « Other » et les ménages). Les branches tunisiennes sont plus fines. Chaque branche porte donc aussi sa section, ce qui permet de comparer les résultats avec ceux de l'outil.
+
+```{python}
+#| label: parametres
+import polars as pl
+
+NOMENCLATURES = "data/nomenclatures"
+SORTIE = "data/intermediaires/cles_activites.parquet"
+CODES = {"code": pl.String, "activite": pl.String, "produit_cle": pl.String}
+
+tre = pl.read_parquet("data/intermediaires/tre.parquet")
+modele = pl.read_parquet("data/intermediaires/bilan_modele_fmi.parquet")
+```
+
+## Nomenclature des activités
+
+La table `data/nomenclatures/activites.csv` reprend les 24 branches du TRE. Elle ajoute les ménages et les quatre pseudo-activités de l'outil : le reste du monde (importations et exportations), l'accumulation (variation des stocks), l'environnement (ressources naturelles et résidus) et l'écart statistique. La colonne `section_fmi` donne le code d'activité correspondant dans l'outil.
+
+```{python}
+#| label: activites
+activites = pl.read_csv(f"{NOMENCLATURES}/activites.csv", schema_overrides=CODES)
+activites.select("code", "section_fmi", "fr")
+```
+
+## Correspondance des flux
+
+La table `data/nomenclatures/bilan_vers_activites.csv` associe chaque flux du modèle à une activité. Une ligne peut ne concerner qu'un produit, par exemple la production de pétrole brut ou les pertes d'électricité. Les lignes sans produit s'appliquent à tous les produits du flux. La colonne `methode` vaut `direct` quand le flux va entièrement à une activité, et `cle` quand il est réparti entre plusieurs activités. La colonne `justification` explique chaque choix.
+
+```{python}
+#| label: correspondance
+correspondance = pl.read_csv(f"{NOMENCLATURES}/bilan_vers_activites.csv", schema_overrides=CODES)
+correspondance.filter(pl.col("methode") == "direct").select("flux_modele", "produit_modele", "activite", "justification")
+```
+
+Chaque flux non nul du bilan doit avoir une correspondance. Les importations, les exportations, la variation des stocks et l'écart statistique n'en ont pas besoin, car l'outil les attribue au reste du monde et à l'accumulation.
+
+```{python}
+#| label: couverture
+PSEUDO = {"Imports", "Exports", "Stock changes", "Statistical differences"}
+couverts = set(correspondance["flux_modele"])
+manquants = set(modele["flux_modele"]) - couverts - PSEUDO
+assert not manquants, f"Flux sans correspondance : {manquants}"
+print(f"{len(set(modele['flux_modele']) - PSEUDO)} flux du bilan, tous couverts")
+```
+
+## Clés de répartition
+
+Deux flux du bilan regroupent plusieurs branches. Le transport routier est donné par mode et non par utilisateur ; il est consommé par les transporteurs, par toutes les autres branches et par les ménages. La ligne « commerce, administration, hôtels » couvre une dizaine de branches de services. Leur répartition suit la structure des emplois du TRE, en valeur, pour un produit clé.
+
+- Le transport routier est réparti selon les emplois de produits pétroliers raffinés (produit 19) : consommation intermédiaire des branches et consommation finale des ménages. Le raffinage et l'électricité sont exclus, car leurs emplois de produit 19 sont surtout des entrées de transformation.
+- Le tertiaire est réparti selon les emplois d'électricité et de gaz (produit 35) des branches de services.
+
+La clé d'une activité est sa part dans les emplois du produit clé, parmi les activités candidates, pour l'année considérée. Les ménages prennent la colonne de dépense de consommation finale des ménages.
+
+```{python}
+#| label: cles
+def emplois_produit(tre: pl.DataFrame, produit: str) -> pl.DataFrame:
+    """Emplois d'un produit du TRE par branche (consommation intermédiaire) et par les ménages (MDT)."""
+    emplois = tre.filter(pl.col("bloc") == "emplois", pl.col("ligne") == produit, ~pl.col("agregat"))
+    return emplois.with_columns(
+        activite=pl.when(pl.col("colonne") == "P3_MEN").then(pl.lit("MEN")).otherwise(pl.col("colonne"))
+    ).select("annee", "activite", "valeur")
+
+
+def calculer_cles(correspondance: pl.DataFrame, tre: pl.DataFrame, annees: list[int]) -> pl.DataFrame:
+    """Facteurs de répartition par année, flux, produit et activité. Les facteurs d'un flux somment à 1."""
+    directes = correspondance.filter(pl.col("methode") == "direct").join(
+        pl.DataFrame({"annee": annees}, schema={"annee": pl.Int16}), how="cross"
+    ).with_columns(facteur=pl.lit(1.0))
+    a_repartir = correspondance.filter(pl.col("methode") == "cle")
+    poids = pl.concat(
+        [emplois_produit(tre, p).with_columns(produit_cle=pl.lit(p)) for p in a_repartir["produit_cle"].unique()]
+    )
+    reparties = (
+        a_repartir.join(poids, on=["activite", "produit_cle"], how="left")
+        .filter(pl.col("annee").is_in(annees))
+        .with_columns(pl.col("valeur").fill_null(0))
+        .with_columns(facteur=pl.col("valeur") / pl.col("valeur").sum().over("annee", "flux_modele", "produit_modele"))
+    )
+    colonnes = ["annee", "flux_modele", "produit_modele", "activite", "methode", "facteur"]
+    return pl.concat([directes.select(colonnes), reparties.select(colonnes)]).sort(colonnes[:4])
+
+
+ANNEES = sorted(modele["annee"].unique().to_list())
+cles = calculer_cles(correspondance, tre, ANNEES)
+sommes = cles.group_by("annee", "flux_modele", "produit_modele").agg(pl.col("facteur").sum())
+assert (sommes["facteur"] - 1).abs().max() < 1e-9, "Les facteurs d'un flux doivent sommer à 1"
+```
+
+Le tableau suivant donne les clés du transport routier, en pourcentage, pour quelques années.
+
+```{python}
+#| label: cles-route
+(
+    cles.filter(pl.col("flux_modele") == "Road", pl.col("annee").is_in([2015, 2019, 2022]))
+    .with_columns((pl.col("facteur") * 100).round(1))
+    .pivot("annee", index="activite", values="facteur")
+    .join(activites.select(pl.col("code").alias("activite"), "fr"), on="activite")
+    .sort("2022", descending=True)
+)
+```
+
+::: {.callout-note}
+## Question ouverte
+La clé du transport routier repose sur la valeur des produits pétroliers achetés par chaque branche et par les ménages. Elle mêle le carburant et les autres usages (gaz de pétrole liquéfié pour la cuisson, fioul pour la chaleur). Une enquête sur l'usage des carburants par type de véhicule et d'utilisateur, si elle existe à l'INS ou à l'ANME, donnerait une répartition plus juste.
+:::
+
+Les clés du tertiaire suivent.
+
+```{python}
+#| label: cles-tertiaire
+(
+    cles.filter(pl.col("flux_modele") == "Commercial and public services", pl.col("annee").is_in([2015, 2019, 2022]))
+    .with_columns((pl.col("facteur") * 100).round(1))
+    .pivot("annee", index="activite", values="facteur")
+    .join(activites.select(pl.col("code").alias("activite"), "fr"), on="activite")
+    .sort("2022", descending=True)
+)
+```
+
+## Enregistrement
+
+```{python}
+#| label: enregistrement
+cles.write_parquet(SORTIE, compression="zstd")
+print(f"{SORTIE} : {cles.height} lignes, années {ANNEES[0]} à {ANNEES[-1]}")
+```
+
+## Références
+
+::: {#refs}
+:::
