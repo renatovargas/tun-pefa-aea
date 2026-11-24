@@ -1,0 +1,295 @@
+---
+title: "جرد غازات الاحتباس الحراري لحسابات AEA"
+subtitle: "الانبعاثات حسب فئة CRT وحسب الغاز، بمكافئ ثاني أكسيد الكربون، من 2015 إلى 2022"
+author:
+  - name: "ريناتو فارغاس"
+    affiliations:
+      - name: مستشار لدى صندوق النقد الدولي
+lang: ar-TN
+dir: rtl
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-ar.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+  eval: false
+---
+
+::: {.callout-note}
+تعرض هذه الصفحة شيفرة [الصفحة المرجعية بالفرنسية](../../../fr/traitement/20-inventaire-aea/index.qmd) دون تنفيذها. النتائج والمخرجات موجودة في الصفحة الفرنسية. تبقى التعليقات داخل الشيفرة بالفرنسية.
+:::
+
+## الغرض
+
+تنطلق حسابات انبعاثات الهواء (AEA) من الجرد الوطني لغازات الاحتباس الحراري، وتعيد إسناد انبعاثاته إلى فروع النشاط والأسر التي تنتجها [@eurostat2015aea; @seea2014]. تُعدّ هذه الصفحة الجرد التونسي لهذا العمل. تنطلق من جداول CRT المستخرجة في الصفحة 02، وتحسب الانبعاثات بمكافئ ثاني أكسيد الكربون حسب الفئة وحسب الغاز، وتفصل ما يدخل في الحسابات عمّا يُستبعد منها أو يُذكر للتذكير. تغذي النتيجة، `data/intermediaires/inventaire_ges.parquet`، الحسابين اللذين تُبنى بهما حسابات AEA، أي استدعاء أداة I2A لصندوق النقد الدولي وإعادة تنفيذها الصريحة بمكتبة polars.
+
+```{python}
+#| label: parametres
+import sys
+
+import openpyxl
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import extraire_crt as ec
+import outils_fmi as of
+
+PRG = ec.PRG_AR5
+F_GAZ = ["HFCs", "PFCs", "Unspecified mix of HFCs and PFCs", "SF6", "NF3"]
+POLLUANTS_ATMOSPHERIQUES = ["CO", "NOx", "NMVOC", "SO2"]
+SORTIE = "data/intermediaires/inventaire_ges.parquet"
+
+crt = pl.read_parquet("data/intermediaires/crt.parquet").filter(pl.col("parametre") == "emission")
+ANNEES = sorted(crt["annee"].unique().to_list())
+PRG
+```
+
+## انبعاثات CO2 وCH4 وN2O
+
+تعطي الورقة `Data` من جداول CRT الانبعاثات بالكيلوطن لكل غاز، لكل فئة مفصلة. تُحوَّل انبعاثات CH4 وN2O إلى مكافئ ثاني أكسيد الكربون بإمكانات الاحترار العالمي على مدى 100 عام الواردة في تقرير التقييم الخامس للهيئة الحكومية الدولية المعنية بتغير المناخ، وهي التي يستخدمها الجرد التونسي [@ipcc2006]. واستُخدمت المعاملات نفسها في التحقق في الصفحة 02.
+
+تُكتب رموز الانبعاثات المتسربة من التنفيس والحرق في الشعلة `1.b.2.c…` في الورقة `Data`، بحرف «b» صغير. وتُعاد كتابتها `1.B.2.c…`، كما في تصنيف CRT.
+
+```{python}
+#| label: emissions
+def code_crt(colonne: str) -> pl.Expr:
+    """Code CRT avec la majuscule de la nomenclature (1.b.2.c… devient 1.B.2.c…)."""
+    return pl.col(colonne).str.replace(r"^1\.b\.", "1.B.")
+
+
+emissions = (
+    crt.filter(pl.col("gaz").is_in(list(PRG)))
+    .with_columns(crt=code_crt("crt"))
+    .group_by("annee", "crt", "gaz")
+    .agg(kt=pl.col("valeur").sum())
+    .with_columns(kt_eq_co2=pl.col("kt") * pl.col("gaz").replace_strict(PRG, return_dtype=pl.Float64))
+)
+# Total par gaz, en kt d'équivalent CO2, toutes catégories (UTCATF et éléments pour mémoire compris)
+emissions.group_by("annee", "gaz").agg(pl.col("kt_eq_co2").sum().round(1)).pivot("gaz", index="annee", values="kt_eq_co2").sort("annee")
+```
+
+## الغازات المفلورة
+
+تعطي الورقة `Data` الغازات المفلورة نوعًا نوعًا (HFC-134a وHFC-125 وSF6 وغيرها)، بالكيلوطن. ولكل نوع إمكانية احترار خاصة به. وبدلًا من إدخال هذه المعاملات يدويًا، تأخذ الصفحة الانبعاثات بمكافئ ثاني أكسيد الكربون المنشورة في الورقة `Summary2` من المصنف نفسه، حسب فئة الصناعة (2.A إلى 2.H) وحسب عائلة الغازات.
+
+لإسناد هذه الانبعاثات إلى فئة مفصلة، تبحث الصفحة في `Data` عن الفئات التي تُصدر غازات مفلورة. في تونس، لا توجد سوى فئة واحدة لكل فئة من `Summary2`، هي التبريد التجاري (2.F.1.a) لمركبات HFC والمعدات الكهربائية (2.G.1) لغاز SF6. تتوقف الشيفرة إذا ضمّت فئة من `Summary2` عدة فئات، لأنه يلزم حينئذ قاعدة توزيع.
+
+```{python}
+#| label: fgaz
+def fgaz_summary2(annee: int) -> pl.DataFrame:
+    """Gaz fluorés en kt d'équivalent CO2 par catégorie de l'industrie (2.A à 2.H), feuille Summary2."""
+    brut = pl.read_excel(ec.fichiers_crt()[annee], sheet_name="Summary2", engine="calamine", has_header=False, infer_schema_length=0)
+    ligne = brut.with_row_index().filter(pl.col("column_0").str.starts_with("GREENHOUSE GAS SOURCE"))["index"][0]
+    entetes = {f"column_{j}": " ".join((brut[ligne, j] or "").split()) for j in range(1, brut.width)}
+    colonnes = [c for c, nom in entetes.items() if nom in F_GAZ]
+    return (
+        brut[ligne + 2 :]
+        .with_columns(categorie=pl.col("column_0").str.extract(r"^\s*(2\.[A-H])\.?\s"))
+        .filter(pl.col("categorie").is_not_null())
+        .select("categorie", kt_eq_co2=pl.sum_horizontal(pl.col(colonnes).cast(pl.Float64, strict=False).fill_null(0)))
+        .filter(pl.col("kt_eq_co2") != 0)
+        .with_columns(annee=pl.lit(annee, dtype=pl.Int16))
+    )
+
+
+especes = (
+    crt.filter(~pl.col("gaz").is_in([*PRG, *POLLUANTS_ATMOSPHERIQUES, "CO2bio"]), pl.col("valeur") != 0)
+    .with_columns(categorie=pl.col("crt").str.slice(0, 3))
+    .group_by("annee", "categorie")
+    .agg(pl.col("crt").unique().sort(), pl.col("gaz").unique().sort().alias("especes"))
+)
+fgaz = pl.concat([fgaz_summary2(a) for a in ANNEES]).join(especes, on=["annee", "categorie"], how="left")
+assert (fgaz["crt"].list.len() == 1).all(), "Une catégorie de Summary2 a plusieurs sources de gaz fluorés"
+fgaz = fgaz.with_columns(pl.col("crt").list.first(), gaz=pl.lit("F-gases"), kt=pl.lit(None, dtype=pl.Float64))
+fgaz.select("annee", "categorie", "crt", "especes", pl.col("kt_eq_co2").round(1)).sort("annee", "crt")
+```
+
+## النطاق
+
+لا تدخل جميع انبعاثات الجرد في حسابات AEA.
+
+- تُستبعد من حسابات AEA الانبعاثات وعمليات الإزالة الناتجة عن استخدام الأراضي وتغيير استخدام الأراضي والحراجة (LULUCF، الفئة 4). وهي تظهر في جدول الربط بين الجرد والحسابات.
+- لا تُعدّ البنود التذكيرية للفئة 1.D (المستودعات الدولية الجوية والبحرية) جزءًا من المجموع الوطني للجرد. وتُستخدم للتحقق من تعديل الإقامة.
+- ثاني أكسيد الكربون الناتج عن الكتلة الحيوية بند تذكيري أيضًا. ولا يُحتسب لا في الجرد ولا في حسابات AEA.
+
+```{python}
+#| label: perimetre
+co2_biomasse = (
+    crt.filter(pl.col("gaz") == "CO2bio")
+    .with_columns(crt=code_crt("crt"))
+    .group_by("annee", "crt", "gaz")
+    .agg(kt=pl.col("valeur").sum())
+    .with_columns(kt_eq_co2=pl.col("kt"))
+)
+inventaire = (
+    pl.concat([emissions, fgaz.select(emissions.columns), co2_biomasse.select(emissions.columns)])
+    .filter(pl.col("kt_eq_co2") != 0)
+    .with_columns(
+        perimetre=pl.when(pl.col("crt").str.starts_with("1.D") | (pl.col("gaz") == "CO2bio"))
+        .then(pl.lit("pour_memoire"))
+        .when(pl.col("crt").str.starts_with("4."))
+        .then(pl.lit("utcatf"))
+        .otherwise(pl.lit("inventaire"))
+    )
+    .sort("annee", "crt", "gaz")
+)
+(
+    inventaire.group_by("annee", "perimetre")
+    .agg(pl.col("kt_eq_co2").sum().round(1))
+    .pivot("perimetre", index="annee", values="kt_eq_co2")
+    .sort("annee")
+)
+```
+
+## التحقق بالمقارنة مع مجموع Summary2
+
+يجب أن يساوي مجموع الجرد، بما في ذلك LULUCF ودون البنود التذكيرية، مجموع صافي الانبعاثات في الورقة `Summary2`، لكل سنة. الفارق الوحيد المعروف مصدره انبعاثات N2O من الفئة 1.B.2.b.ii. فقد بيّنت الصفحة 02 أنها تظهر في `Data` ابتداءً من 2019 ولا تظهر في `Summary2`. يحتفظ الجرد بقيم `Data`، ويتحقق الاختبار من أن الفارق يساوي هذه الانبعاثات تمامًا.
+
+```{python}
+#| label: controle-summary2
+def total_summary2(annee: int) -> float:
+    """Total des émissions nettes (kt éq. CO2), dernière colonne de la ligne « Total (net emissions) »."""
+    brut = pl.read_excel(ec.fichiers_crt()[annee], sheet_name="Summary2", engine="calamine", has_header=False, infer_schema_length=0)
+    ligne = brut.filter(pl.col("column_0").str.starts_with("Total (net emissions)")).row(0)
+    return float([x for x in ligne if x not in (None, "")][-1])
+
+
+controle = (
+    inventaire.filter(pl.col("perimetre") != "pour_memoire")
+    .group_by("annee")
+    .agg(inventaire=pl.col("kt_eq_co2").sum())
+    .with_columns(summary2=pl.col("annee").map_elements(total_summary2, return_dtype=pl.Float64))
+    .join(
+        emissions.filter(pl.col("crt") == "1.B.2.b.ii", pl.col("gaz") == "N2O").select("annee", n2o_1b2bii="kt_eq_co2"),
+        on="annee",
+        how="left",
+    )
+    .with_columns(pl.col("n2o_1b2bii").fill_null(0), ecart=pl.col("inventaire") - pl.col("summary2"))
+    .sort("annee")
+)
+assert (controle["ecart"] - controle["n2o_1b2bii"]).abs().max() < 0.01, "Écart inexpliqué avec le total de Summary2"
+controle.with_columns(pl.col("inventaire", "summary2").round(1), pl.col("ecart", "n2o_1b2bii").round(3))
+```
+
+## الملف المُعدّ لأداة I2A
+
+يحتوي مجلد المصادر أيضًا على `Tunisia_UNFCCC.xlsx`، المُعدّ وفق عرض الملف `Tool_UNFCCC.csv` من أداة I2A. لا يُستخدم هذا الملف في الحسابات، لثلاثة أسباب تثبتها الشيفرة التالية.
+
+أولًا، قيمه بالكيلوطن لكل غاز. وهي تساوي مجاميع الورقة `Data` بالكيلوطن، لا بمكافئ ثاني أكسيد الكربون. غير أن الأداة تنتظر جردًا بآلاف الأطنان من مكافئ ثاني أكسيد الكربون [@imf2026i2a].
+
+```{python}
+#| label: fichier-unite
+classeur = openpyxl.load_workbook("data/sources/inventaire-ges/Tunisia_UNFCCC.xlsx", read_only=True, data_only=True)
+lignes = list(classeur.worksheets[0].iter_rows(values_only=True))
+classeur.close()
+fichier = (
+    pl.DataFrame(lignes[1:], schema=[str(c) for c in lignes[0]], orient="row", infer_schema_length=None)
+    .unpivot(index=["POLLUTANT", "IPCC", "IPCCDesc"], on=[str(a) for a in ANNEES], variable_name="annee", value_name="fichier")
+    .with_columns(pl.col("annee").cast(pl.Int16), code=pl.col("IPCC").cast(pl.String), fichier=pl.col("fichier").cast(pl.Float64))
+)
+
+
+def somme_crt(code: str, gaz: str, annee: int, colonne: str) -> float:
+    """Somme des émissions détaillées d'une catégorie, hors éléments pour mémoire."""
+    lignes = emissions.filter(
+        pl.col("annee") == annee, pl.col("gaz") == gaz, (pl.col("crt") + ".").str.starts_with(code + "."), ~pl.col("crt").str.starts_with("1.D")
+    )
+    return lignes[colonne].sum()
+
+
+comparaison = (
+    fichier.filter(pl.col("annee") == 2022, pl.col("code").is_in(["1", "2", "3", "5"]), pl.col("POLLUTANT").is_in(["CO2", "CH4", "N20"]))
+    .with_columns(gaz=pl.col("POLLUTANT").replace({"N20": "N2O"}))
+    .sort("code", "gaz")
+)
+comparaison = comparaison.with_columns(
+    crt_kt=pl.Series([somme_crt(c, g, 2022, "kt") for c, g in zip(comparaison["code"], comparaison["gaz"])]),
+    crt_kt_eq_co2=pl.Series([somme_crt(c, g, 2022, "kt_eq_co2") for c, g in zip(comparaison["code"], comparaison["gaz"])]),
+)
+assert (comparaison["fichier"] - comparaison["crt_kt"]).abs().max() < 0.01
+comparaison.select("code", "IPCCDesc", "POLLUTANT", pl.col("fichier", "crt_kt", "crt_kt_eq_co2").round(1))
+```
+
+ثانيًا، يُكتب فيه N2O «N20»، بالصفر. ولا تتعرف الأداة إلا على «N2O»، فتترك هذه الانبعاثات دون نشاط. ثالثًا، لا يحتوي الملف على الغازات المفلورة ولا على جميع الفئات الفرعية. ولا تعالج الأداة إلا المكونات الأكثر تفصيلًا في الجرد. فإذا لم يتضمن الملف سوى جزء من الفئات الفرعية لفئة ما، ضاع الباقي. يبيّن الجدول التالي ذلك لسنة 2022، بالكيلوطن لكل غاز.
+
+```{python}
+#| label: fichier-detail
+codes = fichier["code"].unique().to_list()
+
+
+def enfants(code: str) -> list[str]:
+    """Sous-catégories directes d'un code présentes dans le fichier."""
+    prefixe = code.rstrip(".") + "."
+    return [c for c in codes if c.startswith(prefixe) and "." not in c[len(prefixe):]]
+
+
+detail = []
+for code in sorted(codes):
+    if code in ("1", "4") or not enfants(code):
+        continue
+    for gaz in ["CO2", "CH4", "N20"]:
+        valeurs = fichier.filter(pl.col("annee") == 2022, pl.col("POLLUTANT") == gaz)
+        parent = valeurs.filter(pl.col("code") == code)["fichier"].sum()
+        sous_categories = valeurs.filter(pl.col("code").is_in(enfants(code)))["fichier"].sum()
+        if abs(parent - sous_categories) > 0.01:
+            detail.append((code, gaz, ", ".join(enfants(code)), round(parent, 1), round(sous_categories, 1), round(parent - sous_categories, 1)))
+pl.DataFrame(detail, schema=["code", "gaz", "sous_categories_presentes", "categorie", "somme_sous_categories", "non_detaille"], orient="row")
+```
+
+لذلك ينطلق الجرد في هذه الصفحة من الورقة `Data`، التي تم التحقق منها في الصفحة 02، على المستوى الأكثر تفصيلًا وبمكافئ ثاني أكسيد الكربون.
+
+::: {.callout-note}
+## مسألة مفتوحة
+يتعين مراجعة الملف `Tunisia_UNFCCC.xlsx` مع فريق الجرد (الوكالة الوطنية للتحكم في الطاقة) إذا كان سيُستخدم لأغراض أخرى، من حيث الوحدة بمكافئ ثاني أكسيد الكربون، ورمز N2O، واكتمال الفئات الفرعية، والغازات المفلورة.
+:::
+
+## رموز أداة I2A
+
+تربط أداة I2A الجرد بمصفوفة التحويل الخاصة بها عبر الرمز الدقيق للفئة [@pegoue2026i2a]. وتنزل قائمة رموزها إلى المستوى الخامس من تصنيف CRT. أما الورقة `Data` فتذهب أحيانًا أبعد من ذلك، كما في الفئات الفرعية للحيوانات (3.A.1.a.iv.1) أو مناجم الفحم (1.B.1.a.i.1). لذلك تتلقى كل فئة، في العمود `code_outil`، الرمز الأكثر تفصيلًا من قائمة الأداة الذي تنتمي إليه. ويجب أن يظهر هذا الرمز في مصفوفة التحويل وفي جدول فئات CRT للأداة معًا. فالأداة تجمع أسطرها حسب الرمز وحسب تسمية الفئة (السطران 257 و559 من `I2A.py`). وتختفي الفئة التي لا تسمية لها من هذه التجميعات، دون أي رسالة. تغيب بعض رموز المصفوفة عن جدول الفئات، كما تبيّن الشيفرة التالية. ولا تتلقى البنود التذكيرية رمزًا، لأنها لا تمر عبر الأداة.
+
+```{python}
+#| label: codes-outil
+plages_outil = of.plages_i2a()
+codes_matrice = {ligne[2] for ligne in plages_outil["Conversion_Matrix"][1:]}
+codes_crt = {ligne[1] for ligne in plages_outil["CRT"][1:]}
+CODES_OUTIL = codes_matrice & codes_crt
+print(f"{len(codes_matrice)} codes dans la matrice, {len(codes_crt)} dans la table CRT, {len(CODES_OUTIL)} dans les deux")
+print("Codes de la matrice absents de la table CRT :", sorted(codes_matrice - codes_crt))
+
+
+def code_outil(code: str) -> str | None:
+    """Code le plus détaillé de la liste de l'outil dont relève une catégorie CRT (« 3 » s'écrit « 3. »)."""
+    parties = code.split(".")
+    for k in range(len(parties), 0, -1):
+        candidat = ".".join(parties[:k]) + ("." if k == 1 else "")
+        if candidat in CODES_OUTIL:
+            return candidat
+    return None
+
+
+inventaire = inventaire.with_columns(
+    code_outil=pl.when(pl.col("perimetre") != "pour_memoire").then(
+        pl.col("crt").map_elements(code_outil, return_dtype=pl.String)
+    )
+)
+assert inventaire.filter(pl.col("perimetre") != "pour_memoire")["code_outil"].null_count() == 0, "Catégorie sans code de l'outil"
+inventaire.filter(pl.col("code_outil") != pl.col("crt")).select("crt", "code_outil").unique().sort("crt")
+```
+
+## الحفظ
+
+```{python}
+#| label: enregistrement
+inventaire.write_parquet(SORTIE, compression="zstd")
+print(f"{SORTIE} : {inventaire.height} lignes, {inventaire['crt'].n_unique()} catégories, années {ANNEES[0]} à {ANNEES[-1]}")
+```
+
+## المراجع
+
+::: {#refs}
+:::

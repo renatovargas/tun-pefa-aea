@@ -19,3 +19,7 @@ The French pages run the code. This English version shows the same code without 
 | [12. Concordance matrix and bridging items](12-matrice-concordance/index.qmd) | Tunisian matrix by industry built on the default matrix of the tool, documented differences, bunkers and residence adjustments |
 | [13. Physical energy supply and use tables](13-tableaux-pefa/index.qmd) | Explicit re-implementation of the PEFA Converter in polars, comparison with the tool, PEFA by industry from 2015 to 2022 |
 | [14. Checks, indicators and export of the PEFA](14-controles-export-pefa/index.qmd) | Balance of the tables, plausibility against the SUT, energy intensities, workbooks in three languages |
+| [20. The greenhouse gas inventory for the AEA](20-inventaire-aea/index.qmd) | Emissions by CRT category and by gas in CO2 equivalent, fluorinated gases, scope, check against `Summary2`, I2A tool codes |
+| [21. From inventory categories to industries](21-correspondance-aea/index.qmd) | Default conversion matrix of the I2A tool, Tunisian correspondence by SUT industry, allocation keys shared with the PEFA |
+| [22. Air emissions accounts](22-comptes-aea/index.qmd) | Explicit re-implementation of the I2A tool in polars, comparison with the tool, OECD residence adjustments, AEA by industry from 2015 to 2022 |
+| [23. Bridge, checks, indicators and export of the AEA](23-passage-export-aea/index.qmd) | Bridge table with the inventory, international bunkers, plausibility against the PEFA, emission intensities, workbooks in three languages |

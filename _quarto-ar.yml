@@ -106,6 +106,16 @@ website:
               text: جداول PEFA
             - href: ar/traitement/14-controles-export-pefa/index.qmd
               text: التحقق والتصدير
+        - section: حسابات انبعاثات الهواء (AEA)
+          contents:
+            - href: ar/traitement/20-inventaire-aea/index.qmd
+              text: جرد غازات الاحتباس الحراري
+            - href: ar/traitement/21-correspondance-aea/index.qmd
+              text: الفئات والفروع
+            - href: ar/traitement/22-comptes-aea/index.qmd
+              text: حسابات AEA
+            - href: ar/traitement/23-passage-export-aea/index.qmd
+              text: الربط والتصدير
 
 format:
   html:

@@ -71,6 +71,16 @@ website:
               text: PEFA tables
             - href: en/traitement/14-controles-export-pefa/index.qmd
               text: Checks and export
+        - section: Air emissions accounts (AEA)
+          contents:
+            - href: en/traitement/20-inventaire-aea/index.qmd
+              text: GHG inventory
+            - href: en/traitement/21-correspondance-aea/index.qmd
+              text: Categories and industries
+            - href: en/traitement/22-comptes-aea/index.qmd
+              text: AEA accounts
+            - href: en/traitement/23-passage-export-aea/index.qmd
+              text: Bridge and export
 
 format:
   html:
