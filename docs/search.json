@@ -1069,5 +1069,113 @@
     "title": "Des secteurs du bilan aux branches d’activité",
     "section": "6 Références",
     "text": "6 Références\n\n\nPegoue, A. (2026). PEFA Converter: Excel workbook and Python function EB2PEFA. International Monetary Fund, Statistics Department. Repéré à https://github.com/renatovargas/tun-pefa-aea/tree/main/outils-fmi/pefa-converter\n\n\nUnited Nations. (2019). System of Environmental-Economic Accounting for Energy: SEEA-Energy. New York: United Nations."
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html",
+    "href": "fr/traitement/12-matrice-concordance/index.html",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "",
+    "text": "La matrice de concordance du PEFA Converter (International Monetary Fund, 2024; Pegoue, 2026) dit, pour chaque flux et chaque produit du bilan, à quel produit PEFA, à quelle activité et à quel quadrant (ressources ou emplois) l’énergie est attribuée, et dans quelle proportion. La matrice livrée avec l’outil attribue chaque flux à une section de la CITI. Cette page construit une matrice tunisienne par branche du TRE, à partir de la matrice par défaut et des correspondances de la page précédente, et documente chaque différence. Elle traite aussi les éléments de passage entre le bilan et les comptes : soutes internationales et ajustements de résidence.\n\nimport sys\n\nimport polars as pl\n\nsys.path.insert(0, \"scripts\")\nimport outils_fmi as of\n\nCODES = {\"code\": pl.String, \"activite\": pl.String, \"produit_cle\": pl.String}\nSORTIE = \"data/intermediaires/concordance_tunisie.parquet\"\n\nactivites = pl.read_csv(\"data/nomenclatures/activites.csv\", schema_overrides=CODES)\ncorrespondance = pl.read_csv(\"data/nomenclatures/bilan_vers_activites.csv\", schema_overrides=CODES)\ncles = pl.read_parquet(\"data/intermediaires/cles_activites.parquet\")\nmodele = pl.read_parquet(\"data/intermediaires/bilan_modele_fmi.parquet\")",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html#objet",
+    "href": "fr/traitement/12-matrice-concordance/index.html#objet",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "",
+    "text": "La matrice de concordance du PEFA Converter (International Monetary Fund, 2024; Pegoue, 2026) dit, pour chaque flux et chaque produit du bilan, à quel produit PEFA, à quelle activité et à quel quadrant (ressources ou emplois) l’énergie est attribuée, et dans quelle proportion. La matrice livrée avec l’outil attribue chaque flux à une section de la CITI. Cette page construit une matrice tunisienne par branche du TRE, à partir de la matrice par défaut et des correspondances de la page précédente, et documente chaque différence. Elle traite aussi les éléments de passage entre le bilan et les comptes : soutes internationales et ajustements de résidence.\n\nimport sys\n\nimport polars as pl\n\nsys.path.insert(0, \"scripts\")\nimport outils_fmi as of\n\nCODES = {\"code\": pl.String, \"activite\": pl.String, \"produit_cle\": pl.String}\nSORTIE = \"data/intermediaires/concordance_tunisie.parquet\"\n\nactivites = pl.read_csv(\"data/nomenclatures/activites.csv\", schema_overrides=CODES)\ncorrespondance = pl.read_csv(\"data/nomenclatures/bilan_vers_activites.csv\", schema_overrides=CODES)\ncles = pl.read_parquet(\"data/intermediaires/cles_activites.parquet\")\nmodele = pl.read_parquet(\"data/intermediaires/bilan_modele_fmi.parquet\")",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html#la-matrice-par-défaut",
+    "href": "fr/traitement/12-matrice-concordance/index.html#la-matrice-par-défaut",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "2 La matrice par défaut",
+    "text": "2 La matrice par défaut\nLe module scripts/outils_fmi.py1 lit la plage nommée Concordance_Matrix du classeur de l’outil, comme Excel la passe à la fonction EB2PEFA. La matrice compte une ligne par flux, produit et activité cible. Les facteurs d’allocation sont ramenés à une somme de 1 par flux, produit, produit cible et quadrant par l’outil lui-même.\n\nplages = of.plages_classeur()\nCOLONNES_CM = plages[\"CM\"][0]\n\n\ndef matrice_en_polars(plage: list[list]) -&gt; pl.DataFrame:\n    \"\"\"Convertit la plage Concordance_Matrix en tableau polars ; les facteurs non numériques valent 0, comme dans l'outil.\"\"\"\n    tableau = pl.DataFrame(plage[1:], schema=[str(c) for c in plage[0]], orient=\"row\", infer_schema_length=None)\n    return tableau.with_columns(pl.col(\"Allocation Factor\").cast(pl.Float64, strict=False).fill_null(0))\n\n\ndefaut = matrice_en_polars(plages[\"CM\"])\nprint(f\"{defaut.height} lignes, colonnes : {', '.join(defaut.columns)}\")\ndefaut.filter(pl.col(\"EB_Flow\") == \"Road\", pl.col(\"EB_Product\") == \"Motor gasoline excl. biofuels\")\n\n4882 lignes, colonnes : EB_Flow_Level1, EB_Flow_Level2, EB_Flow, EB_Product, Allocation Factor, PEFA_Target_Product, PEFA_Target_Activity, Comment, PEFA_Target_Product_Level1, PEFA_Target_Product_Level2, PEFA_Quadrant, EB_Category\n\n\n\nshape: (1, 12)\n\n\n\nEB_Flow_Level1\nEB_Flow_Level2\nEB_Flow\nEB_Product\nAllocation Factor\nPEFA_Target_Product\nPEFA_Target_Activity\nComment\nPEFA_Target_Product_Level1\nPEFA_Target_Product_Level2\nPEFA_Quadrant\nEB_Category\n\n\nstr\nstr\nstr\nstr\nf64\nstr\nstr\nnull\nstr\nstr\nstr\nstr\n\n\n\n\n\"Total final consumption\"\n\"Transport\"\n\"Road\"\n\"Motor gasoline excl. biofuels\"\n1.0\n\"Oil\"\n\"H\"\nnull\n\"Energy products:\"\n\"End-use of energy products by …\n\"Use\"\n\"Transport\"",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html#la-matrice-tunisienne",
+    "href": "fr/traitement/12-matrice-concordance/index.html#la-matrice-tunisienne",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "3 La matrice tunisienne",
+    "text": "3 La matrice tunisienne\nLa matrice tunisienne garde toutes les colonnes de la matrice par défaut et ne change que l’activité cible et le facteur. Pour chaque flux couvert par data/nomenclatures/bilan_vers_activites.csv, les lignes par défaut sont remplacées par une ligne par activité tunisienne, avec la clé de l’année comme facteur. Une correspondance propre à un produit (par exemple les pertes de pétrole brut) l’emporte sur la correspondance générale du flux. Les flux absents du bilan tunisien et les pseudo-activités de l’outil (reste du monde, accumulation) gardent la matrice par défaut.\nLes clés du transport routier et du tertiaire changent chaque année. Il y a donc une matrice par année.\n\ndef matrice_tunisienne(defaut: pl.DataFrame, cles_annee: pl.DataFrame) -&gt; pl.DataFrame:\n    \"\"\"Remplace l'activité et le facteur des flux couverts par les clés tunisiennes d'une année.\"\"\"\n    flux_couverts = cles_annee[\"flux_modele\"].unique()\n    specifiques = cles_annee.filter(pl.col(\"produit_modele\").is_not_null())\n    generales = cles_annee.filter(pl.col(\"produit_modele\").is_null()).drop(\"produit_modele\")\n\n    a_remplacer = defaut.filter(pl.col(\"EB_Flow\").is_in(flux_couverts.implode()))\n    # Une ligne par flux, produit et quadrant suffit comme gabarit : les autres colonnes sont identiques.\n    gabarit = a_remplacer.unique(subset=[\"EB_Flow\", \"EB_Product\", \"PEFA_Quadrant\"], keep=\"first\", maintain_order=True)\n    avec_specifique = gabarit.join(\n        specifiques.select(pl.col(\"flux_modele\").alias(\"EB_Flow\"), pl.col(\"produit_modele\").alias(\"EB_Product\"), \"activite\", \"facteur\"),\n        on=[\"EB_Flow\", \"EB_Product\"],\n    )\n    sans_specifique = gabarit.join(\n        specifiques.select(pl.col(\"flux_modele\").alias(\"EB_Flow\"), pl.col(\"produit_modele\").alias(\"EB_Product\")).unique(),\n        on=[\"EB_Flow\", \"EB_Product\"], how=\"anti\",\n    ).join(generales.select(pl.col(\"flux_modele\").alias(\"EB_Flow\"), \"activite\", \"facteur\"), on=\"EB_Flow\")\n    remplacees = pl.concat([avec_specifique, sans_specifique]).with_columns(\n        pl.col(\"activite\").alias(\"PEFA_Target_Activity\"), pl.col(\"facteur\").alias(\"Allocation Factor\")\n    ).select(defaut.columns)\n    conservees = defaut.filter(~pl.col(\"EB_Flow\").is_in(flux_couverts.implode()))\n    return pl.concat([conservees, remplacees])\n\n\nANNEES = sorted(cles[\"annee\"].unique().to_list())\ntunisie = pl.concat(\n    [\n        matrice_tunisienne(defaut, cles.filter(pl.col(\"annee\") == a).drop(\"annee\", \"methode\")).with_columns(\n            annee=pl.lit(a, pl.Int16)\n        )\n        for a in ANNEES\n    ]\n)\ntunisie.filter(pl.col(\"annee\") == 2022).group_by(\"annee\").len()\n\n\nshape: (1, 2)\n\n\n\nannee\nlen\n\n\ni16\nu32\n\n\n\n\n2022\n6721\n\n\n\n\n\n\nChaque flux et produit couvert doit garder une somme de facteurs égale à 1 dans la matrice tunisienne, pour chaque quadrant et chaque produit cible.\n\ncouverts = tunisie.filter(pl.col(\"EB_Flow\").is_in(correspondance[\"flux_modele\"].unique().implode()))\nsommes = couverts.group_by(\"annee\", \"EB_Flow\", \"EB_Product\", \"PEFA_Target_Product\", \"PEFA_Quadrant\").agg(\n    pl.col(\"Allocation Factor\").sum()\n)\nassert (sommes[\"Allocation Factor\"] - 1).abs().max() &lt; 1e-9\nprint(f\"{sommes.height} combinaisons contrôlées, facteurs entre {sommes['Allocation Factor'].min():.6f} et {sommes['Allocation Factor'].max():.6f}\")\n\n13992 combinaisons contrôlées, facteurs entre 1.000000 et 1.000000",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html#différences-avec-la-matrice-par-défaut",
+    "href": "fr/traitement/12-matrice-concordance/index.html#différences-avec-la-matrice-par-défaut",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "4 Différences avec la matrice par défaut",
+    "text": "4 Différences avec la matrice par défaut\nLe tableau suivant compare, pour chaque flux présent dans le bilan tunisien, l’activité de la matrice par défaut et l’activité tunisienne, ramenée à sa section. Les lignes marquées oui dans la colonne section_modifiee changent le résultat de l’outil, même au niveau des sections. Les autres ajoutent seulement le détail par branche.\n\nflux_tunisiens = modele.select(\"flux_modele\", \"produit_modele\").unique()\ndefaut_tunisien = defaut.join(flux_tunisiens, left_on=[\"EB_Flow\", \"EB_Product\"], right_on=[\"flux_modele\", \"produit_modele\"])\npar_defaut_produit = defaut_tunisien.group_by(\"EB_Flow\", \"EB_Product\").agg(\n    pl.col(\"PEFA_Target_Activity\").unique().sort().str.join(\", \").alias(\"defaut_produit\")\n)\n# Pour la correspondance générale d'un flux, les produits qui ont une correspondance propre sont exclus.\npropres = correspondance.filter(pl.col(\"produit_modele\").is_not_null()).select(\n    pl.col(\"flux_modele\").alias(\"EB_Flow\"), pl.col(\"produit_modele\").alias(\"EB_Product\")\n)\npar_defaut = defaut_tunisien.join(propres, on=[\"EB_Flow\", \"EB_Product\"], how=\"anti\").group_by(\"EB_Flow\").agg(\n    pl.col(\"PEFA_Target_Activity\").unique().sort().str.join(\", \").alias(\"defaut_flux\")\n)\nsections = dict(zip(activites[\"code\"], activites[\"section_fmi\"]))\ntunisiennes = (\n    correspondance.with_columns(section=pl.col(\"activite\").replace_strict(sections))\n    .group_by(\"flux_modele\", \"produit_modele\", \"justification\", maintain_order=True)\n    .agg(\n        pl.col(\"activite\").str.join(\", \").alias(\"tunisie\"),\n        pl.col(\"section\").unique().sort().str.join(\", \").alias(\"sections_tunisie\"),\n    )\n)\ndifferences = (\n    tunisiennes.join(par_defaut, left_on=\"flux_modele\", right_on=\"EB_Flow\", how=\"left\")\n    .join(par_defaut_produit, left_on=[\"flux_modele\", \"produit_modele\"], right_on=[\"EB_Flow\", \"EB_Product\"], how=\"left\")\n    .with_columns(defaut=pl.coalesce(\"defaut_produit\", \"defaut_flux\"))\n    .with_columns(\n        section_modifiee=pl.when(pl.col(\"defaut\") == pl.col(\"sections_tunisie\")).then(pl.lit(\"non\")).otherwise(pl.lit(\"oui\"))\n    )\n    .select(\"flux_modele\", \"produit_modele\", \"defaut\", \"sections_tunisie\", \"section_modifiee\", \"tunisie\", \"justification\")\n)\ndifferences.filter(pl.col(\"section_modifiee\") == \"oui\")\n\n\nshape: (7, 7)\n\n\n\nflux_modele\nproduit_modele\ndefaut\nsections_tunisie\nsection_modifiee\ntunisie\njustification\n\n\nstr\nstr\nstr\nstr\nstr\nstr\nstr\n\n\n\n\n\"Production\"\n\"Solar thermal\"\n\"D\"\n\"HH\"\n\"oui\"\n\"MEN\"\n\"La chaleur solaire provient su…\n\n\n\"Production\"\n\"Heat\"\n\"D\"\n\"C\"\n\"oui\"\n\"20\"\n\"La chaleur récupérée provient …\n\n\n\"Autoproducer electricity plant…\nnull\n\"D\"\n\"C\"\n\"oui\"\n\"20\"\n\"Les autoproducteurs d'électric…\n\n\n\"Charcoal production plants (tr…\nnull\n\"C\"\n\"A\"\n\"oui\"\n\"01\"\n\"Les charbonnières sont une act…\n\n\n\"Road\"\nnull\n\"H\"\n\"A, B, C, E, F, H, HH, Other\"\n\"oui\"\n\"01, 06, 07, 10, 13, 20, 23, 24…\n\"Le bilan donne le transport ro…\n\n\n\"Commercial and public services\"\nnull\n\"Other\"\n\"E, Other\"\n\"oui\"\n\"36, 45, 55, 60, 64, 77, 84, 85…\n\"La ligne « commerce, administr…\n\n\n\"Non-energy use industry/transf…\nnull\n\"C\"\n\"F\"\n\"oui\"\n\"41\"\n\"Les usages non énergétiques so…\n\n\n\n\n\n\nPour la production et les pertes, la matrice par défaut attribue chaque produit à une activité, et la comparaison se fait produit par produit. Le tableau complet est enregistré avec la matrice.\n\n\n\n\n\n\nNoteQuestion ouverte\n\n\n\nLes choix qui s’écartent des sections de l’outil sont à valider avec l’INS et l’ONEM. Les autoproducteurs d’électricité et la chaleur récupérée sont classés dans l’industrie chimique. La chaleur solaire est produite par les ménages. Les charbonnières relèvent de la sylviculture. Les usages non énergétiques sont attribués à la construction. Le transport routier et le tertiaire sont répartis par clés.",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html#éléments-de-passage",
+    "href": "fr/traitement/12-matrice-concordance/index.html#éléments-de-passage",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "5 Éléments de passage",
+    "text": "5 Éléments de passage\n\n5.1 Soutes internationales\nLe bilan de l’ONEM donne les soutes internationales par produit. L’inventaire des gaz à effet de serre donne aussi le carburant des soutes, en TJ, dans les éléments pour mémoire de la catégorie 1.D. Pour les soutes aériennes, les deux sources concordent à moins de 1 % près chaque année. Les soutes maritimes, beaucoup plus petites, s’écartent davantage certaines années. Le bilan reste la source des comptes PEFA, et l’écart est à examiner avec l’ANME pour les comptes des émissions.\n\ncrt = pl.read_parquet(\"data/intermediaires/crt.parquet\")\nsoutes_crt = (\n    crt.filter(pl.col(\"crt\").str.starts_with(\"1.D.1\"), pl.col(\"parametre\") == \"activity\", pl.col(\"unite\") == \"TJ\")\n    .with_columns(flux_modele=pl.when(pl.col(\"crt\") == \"1.D.1.a\").then(pl.lit(\"International aviation bunkers\")).otherwise(pl.lit(\"International marine bunkers\")))\n    .group_by(\"annee\", \"flux_modele\").agg(pl.col(\"valeur\").sum().alias(\"crt_tj\"))\n)\nsoutes_bilan = (\n    modele.filter(pl.col(\"flux_modele\").str.starts_with(\"International\"))\n    .group_by(\"annee\", \"flux_modele\").agg((-pl.col(\"tj\").sum()).alias(\"bilan_tj\"))\n)\nsoutes = (\n    soutes_bilan.join(soutes_crt, on=[\"annee\", \"flux_modele\"], how=\"full\", coalesce=True)\n    .with_columns(ecart_pct=((pl.col(\"bilan_tj\") / pl.col(\"crt_tj\") - 1) * 100).round(2))\n    .sort(\"flux_modele\", \"annee\")\n)\nassert soutes.filter(pl.col(\"flux_modele\") == \"International aviation bunkers\")[\"ecart_pct\"].abs().max() &lt; 1\nsoutes.with_columns(pl.col(\"bilan_tj\", \"crt_tj\").round(0))\n\n\nshape: (16, 5)\n\n\n\nannee\nflux_modele\nbilan_tj\ncrt_tj\necart_pct\n\n\ni16\nstr\nf64\nf64\nf64\n\n\n\n\n2015\n\"International aviation bunkers\"\n8750.0\n8744.0\n0.07\n\n\n2016\n\"International aviation bunkers\"\n9295.0\n9300.0\n-0.06\n\n\n2017\n\"International aviation bunkers\"\n10886.0\n10882.0\n0.03\n\n\n2018\n\"International aviation bunkers\"\n12309.0\n12292.0\n0.14\n\n\n2019\n\"International aviation bunkers\"\n12979.0\n12999.0\n-0.15\n\n\n…\n…\n…\n…\n…\n\n\n2018\n\"International marine bunkers\"\n419.0\n432.0\n-3.01\n\n\n2019\n\"International marine bunkers\"\n419.0\n417.0\n0.32\n\n\n2020\n\"International marine bunkers\"\n293.0\n287.0\n2.25\n\n\n2021\n\"International marine bunkers\"\n461.0\n456.0\n0.95\n\n\n2022\n\"International marine bunkers\"\n335.0\n333.0\n0.59\n\n\n\n\n\n\nL’outil attribue les soutes aux transporteurs résidents de la branche transport. C’est l’hypothèse retenue faute d’information : une partie des soutes est achetée en Tunisie par des transporteurs non résidents, qui relèvent des exportations dans les comptes.\n\n\n5.2 Ajustements de résidence\nLes comptes suivent le principe de résidence des comptes nationaux. Le carburant acheté à l’étranger par les unités résidentes s’ajoute aux importations et à leurs emplois. Le carburant acheté en Tunisie par les non-résidents s’ajoute aux exportations. L’outil reçoit ces quantités dans la feuille Bridging_Items, par produit PEFA. Aucune source tunisienne ne les fournit pour l’instant ; la plage reste vide, comme dans le classeur livré avec l’outil.\n\nponts = plages[\"EB_Bridging_Items\"]\nvaleurs = [x for ligne in ponts[1:] for x in ligne[2:12] if isinstance(x, float) and x != 0]\nassert not valeurs, \"Des éléments de passage sont renseignés : les traiter dans la couche explicite\"\nprint(f\"Feuille Bridging_Items : {len(ponts) - 1} lignes, aucune quantité renseignée\")\n\nFeuille Bridging_Items : 29 lignes, aucune quantité renseignée\n\n\n\n\n\n\n\n\nNoteQuestion ouverte\n\n\n\nQuelles données l’INS ou l’ONEM peuvent-ils fournir sur le carburant acheté à l’étranger par les transporteurs résidents et sur le carburant acheté en Tunisie par les non-résidents ? Les données de l’OCDE sur le transport aérien et maritime, présentes dans l’outil I2A, couvrent la Tunisie et pourraient servir de première estimation.",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html#enregistrement",
+    "href": "fr/traitement/12-matrice-concordance/index.html#enregistrement",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "6 Enregistrement",
+    "text": "6 Enregistrement\n\ntunisie.write_parquet(SORTIE, compression=\"zstd\")\ndifferences.write_parquet(\"data/intermediaires/concordance_differences.parquet\", compression=\"zstd\")\nprint(f\"{SORTIE} : {tunisie.height} lignes pour {len(ANNEES)} années\")\n\ndata/intermediaires/concordance_tunisie.parquet : 53768 lignes pour 8 années",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html#références",
+    "href": "fr/traitement/12-matrice-concordance/index.html#références",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "7 Références",
+    "text": "7 Références\n\n\nInternational Monetary Fund. (2024). PEFA Converter: A Framework for Converting Energy Balance into Physical Supply and Use Tables. User Manual (Version 0.0). (S.l.): Statistics Department, Real Sector Division.\n\n\nPegoue, A. (2026). PEFA Converter: Excel workbook and Python function EB2PEFA. International Monetary Fund, Statistics Department. Repéré à https://github.com/renatovargas/tun-pefa-aea/tree/main/outils-fmi/pefa-converter",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/12-matrice-concordance/index.html#footnotes",
+    "href": "fr/traitement/12-matrice-concordance/index.html#footnotes",
+    "title": "Matrice de concordance et éléments de passage",
+    "section": "Notes de bas de page",
+    "text": "Notes de bas de page\n\n\nCode source : https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/outils_fmi.py.↩︎",
+    "crumbs": [
+      "Traitement",
+      "Comptes de l'énergie (PEFA)",
+      "Matrice de concordance"
+    ]
   }
 ]

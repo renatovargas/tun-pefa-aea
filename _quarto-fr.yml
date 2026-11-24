@@ -66,6 +66,8 @@ website:
               text: Bilan au format de l'AIE
             - href: fr/traitement/11-activites/index.qmd
               text: Branches d'activité
+            - href: fr/traitement/12-matrice-concordance/index.qmd
+              text: Matrice de concordance
 
 format:
   html:
