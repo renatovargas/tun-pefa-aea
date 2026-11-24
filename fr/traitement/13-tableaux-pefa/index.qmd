@@ -322,8 +322,8 @@ print(f"Couche explicite : {ecarts.height} cellules, écart maximal avec l'outil
 ```
 
 ::: {.callout-note}
-## Question ouverte
-Le double compte des usages non énergétiques avec la colonne « Total » est à signaler à l'auteur de l'outil. La correction peut porter sur la matrice par défaut, en retirant ses lignes « Total », ou sur la plage `Energy_Balance`, en excluant sa colonne « Total ».
+## Choix retenu
+L'outil est utilisé tel quel, sans modification de son code ni de sa matrice par défaut. La correction porte sur les données d'entrée : la plage `Energy_Balance` est transmise sans la colonne « Total », pour l'exemple comme pour la Tunisie (fonction `sans_total` ci-dessus et liste `PRODUITS_MODELE` en tête de page). Le dossier `outils-fmi/` décrit ce choix dans son fichier `README.md`. Le double compte est signalé à l'auteur de l'outil.
 :::
 
 ## Comptes de la Tunisie

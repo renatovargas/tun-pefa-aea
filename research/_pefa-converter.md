@@ -21,7 +21,7 @@ Notes from reading `outils-fmi/pefa-converter/PEFA_Converter.py` (function `EB2P
 
 ## Findings
 
-- The plan's sample imbalance (supply 24 197.846 PJ, use 24 386.288 PJ) comes from the default CM, which has rows for the `Total` column on the four non-energy flows. Non-energy use is counted twice. Dropping the `Total` column from the balance range gives supply = use = 24 009.40 PJ. Report to the author.
+- The plan's sample imbalance (supply 24 197.846 PJ, use 24 386.288 PJ) comes from the default CM, which has rows for the `Total` column on the four non-energy flows. Non-energy use is counted twice. Dropping the `Total` column from the balance range gives supply = use = 24 009.40 PJ. Decision (Renato, 2026-11-24): the tool stays unchanged; pages pass the balance without the `Total` column; documented in `outils-fmi/README.md` and on page 13 (callout « Choix retenu »). Renato reports it to Achille Pegoue.
 - With filter `'  o/w Statistical differences'`, the statistical difference is counted twice (once in the main table, once in the appended block).
 - Road transport goes entirely to H; no household split. Solar thermal production goes to D.
 - pandas must be < 3 (`fillna('Zachille_')` on a float column fails under pandas 3).

@@ -716,7 +716,7 @@ div.csl-indent {
 <div class="cell-output cell-output-stdout">
 <pre><code>Avec la colonne Total : {'Supply': 24197.846, 'Use': 24386.288}
 Sans la colonne Total : {'Supply': 24009.402, 'Use': 24009.4}
-Couche explicite : 99 cellules, écart maximal avec l'outil 9.09e-13 PJ</code></pre>
+Couche explicite : 99 cellules, écart maximal avec l'outil 4.55e-13 PJ</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -725,11 +725,11 @@ Couche explicite : 99 cellules, écart maximal avec l'outil 9.09e-13 PJ</code></
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Question ouverte
+<span class="screen-reader-only">Note</span>Choix retenu
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Le double compte des usages non énergétiques avec la colonne « Total » est à signaler à l’auteur de l’outil. La correction peut porter sur la matrice par défaut, en retirant ses lignes « Total », ou sur la plage <code>Energy_Balance</code>, en excluant sa colonne « Total ».</p>
+<p>L’outil est utilisé tel quel, sans modification de son code ni de sa matrice par défaut. La correction porte sur les données d’entrée : la plage <code>Energy_Balance</code> est transmise sans la colonne « Total », pour l’exemple comme pour la Tunisie (fonction <code>sans_total</code> ci-dessus et liste <code>PRODUITS_MODELE</code> en tête de page). Le dossier <code>outils-fmi/</code> décrit ce choix dans son fichier <code>README.md</code>. Le double compte est signalé à l’auteur de l’outil.</p>
 </div>
 </div>
 </section>
@@ -821,7 +821,7 @@ Couche explicite : 99 cellules, écart maximal avec l'outil 9.09e-13 PJ</code></
 <tr class="even">
 <td>2016</td>
 <td>67</td>
-<td>2.8422e-14</td>
+<td>5.6843e-14</td>
 <td>1423.416</td>
 <td>1423.278</td>
 <td>3.3</td>
@@ -923,7 +923,7 @@ Couche explicite : 99 cellules, écart maximal avec l'outil 9.09e-13 PJ</code></
 <tr class="odd">
 <td>2015</td>
 <td>155</td>
-<td>1.4211e-14</td>
+<td>2.8422e-14</td>
 <td>1452.402</td>
 <td>1452.265</td>
 <td>3.3</td>
@@ -947,7 +947,7 @@ Couche explicite : 99 cellules, écart maximal avec l'outil 9.09e-13 PJ</code></
 <tr class="even">
 <td>2018</td>
 <td>156</td>
-<td>1.4211e-14</td>
+<td>2.8422e-14</td>
 <td>1415.783</td>
 <td>1415.917</td>
 <td>-3.2</td>
@@ -1842,8 +1842,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb13-336"><a href="#cb13-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-337"><a href="#cb13-337" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-338"><a href="#cb13-338" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb13-339"><a href="#cb13-339" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question ouverte</span></span>
-<span id="cb13-340"><a href="#cb13-340" aria-hidden="true" tabindex="-1"></a>Le double compte des usages non énergétiques avec la colonne « Total » est à signaler à l'auteur de l'outil. La correction peut porter sur la matrice par défaut, en retirant ses lignes « Total », ou sur la plage <span class="in">`Energy_Balance`</span>, en excluant sa colonne « Total ».</span>
+<span id="cb13-339"><a href="#cb13-339" aria-hidden="true" tabindex="-1"></a><span class="fu">## Choix retenu</span></span>
+<span id="cb13-340"><a href="#cb13-340" aria-hidden="true" tabindex="-1"></a>L'outil est utilisé tel quel, sans modification de son code ni de sa matrice par défaut. La correction porte sur les données d'entrée : la plage <span class="in">`Energy_Balance`</span> est transmise sans la colonne « Total », pour l'exemple comme pour la Tunisie (fonction <span class="in">`sans_total`</span> ci-dessus et liste <span class="in">`PRODUITS_MODELE`</span> en tête de page). Le dossier <span class="in">`outils-fmi/`</span> décrit ce choix dans son fichier <span class="in">`README.md`</span>. Le double compte est signalé à l'auteur de l'outil.</span>
 <span id="cb13-341"><a href="#cb13-341" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb13-342"><a href="#cb13-342" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-343"><a href="#cb13-343" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comptes de la Tunisie</span></span>
