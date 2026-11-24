@@ -86,6 +86,26 @@ website:
           text: معالجة البيانات
         - href: ar/traitement/00-bilan-energetique/index.qmd
           text: قراءة ميزان الطاقة
+        - section: استخراج المصادر
+          contents:
+            - href: ar/traitement/01-extraction-bilans/index.qmd
+              text: موازين الطاقة
+            - href: ar/traitement/02-extraction-crt/index.qmd
+              text: جرد غازات الاحتباس الحراري (CRT)
+            - href: ar/traitement/03-extraction-tre/index.qmd
+              text: جداول الموارد والاستخدامات
+        - section: حسابات الطاقة (PEFA)
+          contents:
+            - href: ar/traitement/10-bilan-format-aie/index.qmd
+              text: الميزان بصيغة الوكالة الدولية للطاقة
+            - href: ar/traitement/11-activites/index.qmd
+              text: فروع النشاط
+            - href: ar/traitement/12-matrice-concordance/index.qmd
+              text: مصفوفة التوافق
+            - href: ar/traitement/13-tableaux-pefa/index.qmd
+              text: جداول PEFA
+            - href: ar/traitement/14-controles-export-pefa/index.qmd
+              text: التحقق والتصدير
 
 format:
   html:

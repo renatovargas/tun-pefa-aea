@@ -1,0 +1,162 @@
+---
+title: "من قطاعات الميزان إلى فروع النشاط"
+subtitle: "المقابلة بين تدفقات الميزان وفروع النشاط الأربعة والعشرين في جداول الموارد والاستخدامات، ومفاتيح التوزيع"
+author:
+  - name: "ريناتو فارغاس"
+    affiliations:
+      - name: مستشار لدى صندوق النقد الدولي
+lang: ar-TN
+dir: rtl
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-ar.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+  eval: false
+---
+
+::: {.callout-note}
+تعرض هذه الصفحة شيفرة [الصفحة المرجعية بالفرنسية](../../../fr/traitement/11-activites/index.qmd) دون تنفيذها. النتائج والمخرجات موجودة في الصفحة الفرنسية. تبقى التعليقات داخل الشيفرة بالفرنسية.
+:::
+
+## الغرض
+
+تسجل حسابات PEFA الطاقة حسب الوحدة الاقتصادية، مصنفةً حسب فرع النشاط كما في الحسابات القومية [@seeaenergy2019]. أما ميزان الطاقة فيصنف الاستهلاك حسب قطاع الاستخدام، أي حسب الفرع الصناعي ونمط النقل، وللأسر والخدمات والفلاحة. تربط هذه الصفحة كل تدفق من الميزان، في نموذج الوكالة الدولية للطاقة، بفرع أو أكثر من فروع النشاط الأربعة والعشرين في جداول الموارد والاستخدامات للمعهد الوطني للإحصاء، أو بالأسر.
+
+تعمل أداة PEFA Converter لصندوق النقد الدولي [@pegoue2026pefa] على مستوى أبواب التصنيف الصناعي الدولي الموحد (A وB وC وD وE وF وH وباب «Other» والأسر). أما الفروع التونسية فأكثر تفصيلًا. لذلك يحمل كل فرع أيضًا الباب الذي ينتمي إليه، مما يسمح بمقارنة النتائج بنتائج الأداة.
+
+```{python}
+#| label: parametres
+import polars as pl
+
+NOMENCLATURES = "data/nomenclatures"
+SORTIE = "data/intermediaires/cles_activites.parquet"
+CODES = {"code": pl.String, "activite": pl.String, "produit_cle": pl.String}
+
+tre = pl.read_parquet("data/intermediaires/tre.parquet")
+modele = pl.read_parquet("data/intermediaires/bilan_modele_fmi.parquet")
+```
+
+## تصنيف الأنشطة
+
+يتضمن الجدول `data/nomenclatures/activites.csv` فروع النشاط الأربعة والعشرين في جداول الموارد والاستخدامات. ويضيف إليها الأسر والأنشطة الافتراضية الأربعة للأداة. تتلقى بقية العالم الواردات والصادرات، ويتلقى التراكم التغير في المخزون، وتتلقى البيئة الموارد الطبيعية والبقايا؛ والنشاط الرابع هو الفارق الإحصائي. يعطي العمود `section_fmi` رمز النشاط المقابل في الأداة.
+
+```{python}
+#| label: activites
+activites = pl.read_csv(f"{NOMENCLATURES}/activites.csv", schema_overrides=CODES)
+activites.select("code", "section_fmi", "fr")
+```
+
+## مقابلة التدفقات
+
+يربط الجدول `data/nomenclatures/bilan_vers_activites.csv` كل تدفق من النموذج بنشاط. قد يخص سطرٌ منتجًا واحدًا فقط، مثل إنتاج النفط الخام أو خسائر الكهرباء. وتنطبق الأسطر التي لا تحدد منتجًا على جميع منتجات التدفق. يأخذ العمود `methode` القيمة `direct` حين يذهب التدفق كله إلى نشاط واحد، والقيمة `cle` حين يوزَّع بين عدة أنشطة. ويشرح العمود `justification` كل اختيار.
+
+```{python}
+#| label: correspondance
+correspondance = pl.read_csv(f"{NOMENCLATURES}/bilan_vers_activites.csv", schema_overrides=CODES)
+correspondance.filter(pl.col("methode") == "direct").select("flux_modele", "produit_modele", "activite", "justification")
+```
+
+يجب أن يكون لكل تدفق غير معدوم في الميزان مقابل. لا تحتاج الواردات والصادرات والتغير في المخزون والفارق الإحصائي إلى مقابل، لأن الأداة تسندها إلى بقية العالم وإلى التراكم.
+
+```{python}
+#| label: couverture
+PSEUDO = {"Imports", "Exports", "Stock changes", "Statistical differences"}
+couverts = set(correspondance["flux_modele"])
+manquants = set(modele["flux_modele"]) - couverts - PSEUDO
+assert not manquants, f"Flux sans correspondance : {manquants}"
+print(f"{len(set(modele['flux_modele']) - PSEUDO)} flux du bilan, tous couverts")
+```
+
+## مفاتيح التوزيع
+
+يجمع تدفقان من الميزان عدة فروع. يعطي الميزان النقل البري حسب النمط؛ ويقوم بهذا النقل الناقلون وسائر الفروع الأخرى والأسر. ويغطي السطر «commerce, administration, hôtels» (التجارة والإدارة والفنادق) نحو عشرة فروع خدمات. يتبع توزيعهما بنية الاستخدامات في جداول الموارد والاستخدامات، بالقيمة، لمنتج مفتاحي.
+
+- يوزَّع النقل البري حسب استخدامات المنتجات النفطية المكررة (المنتج 19)، في الاستهلاك الوسيط للفروع وفي الاستهلاك النهائي للأسر. يُستبعد التكرير والكهرباء، لأن استخداماتهما من المنتج 19 هي في معظمها مدخلات تحويل.
+- يوزَّع قطاع الخدمات حسب استخدامات الكهرباء والغاز (المنتج 35) في فروع الخدمات.
+
+مفتاح النشاط هو حصته في استخدامات المنتج المفتاحي، من بين الأنشطة المرشحة، في السنة المعنية. وتأخذ الأسر عمود الإنفاق على الاستهلاك النهائي للأسر.
+
+```{python}
+#| label: cles
+def emplois_produit(tre: pl.DataFrame, produit: str) -> pl.DataFrame:
+    """Emplois d'un produit du TRE par branche (consommation intermédiaire) et par les ménages (MDT)."""
+    emplois = tre.filter(pl.col("bloc") == "emplois", pl.col("ligne") == produit, ~pl.col("agregat"))
+    return emplois.with_columns(
+        activite=pl.when(pl.col("colonne") == "P3_MEN").then(pl.lit("MEN")).otherwise(pl.col("colonne"))
+    ).select("annee", "activite", "valeur")
+
+
+def calculer_cles(correspondance: pl.DataFrame, tre: pl.DataFrame, annees: list[int]) -> pl.DataFrame:
+    """Facteurs de répartition par année, flux, produit et activité. Les facteurs d'un flux somment à 1."""
+    directes = correspondance.filter(pl.col("methode") == "direct").join(
+        pl.DataFrame({"annee": annees}, schema={"annee": pl.Int16}), how="cross"
+    ).with_columns(facteur=pl.lit(1.0))
+    a_repartir = correspondance.filter(pl.col("methode") == "cle")
+    poids = pl.concat(
+        [emplois_produit(tre, p).with_columns(produit_cle=pl.lit(p)) for p in a_repartir["produit_cle"].unique()]
+    )
+    reparties = (
+        a_repartir.join(poids, on=["activite", "produit_cle"], how="left")
+        .filter(pl.col("annee").is_in(annees))
+        .with_columns(pl.col("valeur").fill_null(0))
+        .with_columns(facteur=pl.col("valeur") / pl.col("valeur").sum().over("annee", "flux_modele", "produit_modele"))
+    )
+    colonnes = ["annee", "flux_modele", "produit_modele", "activite", "methode", "facteur"]
+    return pl.concat([directes.select(colonnes), reparties.select(colonnes)]).sort(colonnes[:4])
+
+
+ANNEES = sorted(modele["annee"].unique().to_list())
+cles = calculer_cles(correspondance, tre, ANNEES)
+sommes = cles.group_by("annee", "flux_modele", "produit_modele").agg(pl.col("facteur").sum())
+assert (sommes["facteur"] - 1).abs().max() < 1e-9, "Les facteurs d'un flux doivent sommer à 1"
+```
+
+يعطي الجدول التالي مفاتيح النقل البري، بالنسبة المئوية، لبعض السنوات.
+
+```{python}
+#| label: cles-route
+(
+    cles.filter(pl.col("flux_modele") == "Road", pl.col("annee").is_in([2015, 2019, 2022]))
+    .with_columns((pl.col("facteur") * 100).round(1))
+    .pivot("annee", index="activite", values="facteur")
+    .join(activites.select(pl.col("code").alias("activite"), "fr"), on="activite")
+    .sort("2022", descending=True)
+)
+```
+
+::: {.callout-note}
+## مسألة مفتوحة
+يعتمد مفتاح النقل البري على قيمة المنتجات النفطية التي يشتريها كل فرع وتشتريها الأسر. ويخلط بين الوقود والاستخدامات الأخرى (غاز البترول المسال للطهي، والفيول للتدفئة). ومن شأن مسح لاستخدام الوقود حسب نوع المركبة والمستخدم، إن وُجد لدى المعهد الوطني للإحصاء أو الوكالة الوطنية للتحكم في الطاقة، أن يعطي توزيعًا أدق.
+:::
+
+تليه مفاتيح قطاع الخدمات.
+
+```{python}
+#| label: cles-tertiaire
+(
+    cles.filter(pl.col("flux_modele") == "Commercial and public services", pl.col("annee").is_in([2015, 2019, 2022]))
+    .with_columns((pl.col("facteur") * 100).round(1))
+    .pivot("annee", index="activite", values="facteur")
+    .join(activites.select(pl.col("code").alias("activite"), "fr"), on="activite")
+    .sort("2022", descending=True)
+)
+```
+
+## الحفظ
+
+```{python}
+#| label: enregistrement
+cles.write_parquet(SORTIE, compression="zstd")
+print(f"{SORTIE} : {cles.height} lignes, années {ANNEES[0]} à {ANNEES[-1]}")
+```
+
+## المراجع
+
+::: {#refs}
+:::

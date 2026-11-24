@@ -1,0 +1,203 @@
+---
+title: "The ONEM balance in the PEFA Converter template"
+subtitle: "Flows and products of the Tunisian balance in the IEA layout, in terajoules"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: IMF Consultant
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+  eval: false
+---
+
+::: {.callout-note}
+This page shows the code of the [French reference page](../../../fr/traitement/10-bilan-format-aie/index.qmd) without running it. Results and outputs are in the French page. Code comments stay in French.
+:::
+
+## Purpose
+
+The IMF PEFA Converter [@pegoue2026pefa; @imf2024pefa] reads an energy balance laid out like those of the International Energy Agency (IEA), with 95 flows in a fixed order, 63 products, values in terajoules (TJ) and IEA signs. This page transfers the ONEM balances from 2015 to 2022 into that template. The result, `data/intermediaires/bilan_modele_fmi.parquet`, feeds both calculations of the PEFA, the call to the IMF tool and its explicit re-implementation in polars.
+
+```{python}
+#| label: parametres
+import sys
+
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import outils_fmi as of
+
+NOMENCLATURES = "data/nomenclatures"
+SORTIE = "data/intermediaires/bilan_modele_fmi.parquet"
+
+bilans = pl.read_parquet("data/intermediaires/bilans_energetiques.parquet")
+```
+
+The module `scripts/outils_fmi.py`[^outils] reads the lists of flows and products from the `Energy_Balance_Template` sheet of the tool workbook.
+
+[^outils]: Source code: <https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/outils_fmi.py>. The workbook and function of the tool are in <https://github.com/renatovargas/tun-pefa-aea/tree/main/outils-fmi/pefa-converter>.
+
+```{python}
+#| label: modele
+FLUX_MODELE = of.lignes_flux_modele()
+PRODUITS_MODELE = [p for p in of.produits_modele() if p != "Total"]
+print(f"{len(FLUX_MODELE)} flux et {len(PRODUITS_MODELE)} produits dans le modèle")
+FLUX_MODELE[:12]
+```
+
+## Sign conventions
+
+The ONEM balance publishes all flows as positive values and combines them by addition or subtraction. The IEA template carries the sign in the value. Exports, international bunkers, transformation inputs, energy sector own use and losses are negative there. Stock changes keep the ONEM sign, because both balances add them to supply.
+
+The statistical difference changes sign. In the ONEM balance, the amount available for final consumption equals final consumption plus the statistical difference. In the IEA template, the statistical difference is added to supply to equal final consumption. The IEA difference is therefore the opposite of the ONEM one.
+
+## Correspondences
+
+Each elementary flow of the balance receives a template flow and a sign, in the columns `flux_modele` and `signe_modele` of `data/nomenclatures/bilan_flux.csv`. Each elementary product receives a template product in the column `produit_modele` of `data/nomenclatures/bilan_produits.csv`. The balance aggregates (gross inland consumption, total petroleum products, etc.) have no correspondence, because the template recomputes them.
+
+```{python}
+#| label: correspondance-flux
+flux = pl.read_csv(f"{NOMENCLATURES}/bilan_flux.csv")
+flux.filter(pl.col("flux_modele").is_not_null()).select("code", "fr", "flux_modele", "signe_modele")
+```
+
+```{python}
+#| label: correspondance-produits
+produits = pl.read_csv(f"{NOMENCLATURES}/bilan_produits.csv")
+produits.filter(pl.col("produit_modele").is_not_null()).select("code", "fr", "produit_modele")
+```
+
+Some cells of the balance need special treatment. They are listed, with their justification, in `data/nomenclatures/bilan_vers_modele_exceptions.csv`. An exception replaces the default flow, product or sign for a specific (flow, product) pair.
+
+```{python}
+#| label: exceptions
+exceptions = pl.read_csv(f"{NOMENCLATURES}/bilan_vers_modele_exceptions.csv")
+exceptions
+```
+
+Two points need explaining. The ONEM balance records electricity generation from wind, solar and hydro as an exchange between products, in which the primary production of each source moves to electricity. The IEA template treats these sources as inputs to power plants, and the electricity generated as an output. The exceptions therefore move these exchanges to the power plant row. The ONEM balance also places charcoal production in the biomass column; its output becomes the template product « Charcoal ».
+
+::: {.callout-note}
+## Open question
+Energy sector own use is not broken down by industry in the balance. Natural gas, gas oil and natural gas liquids are assigned to oil and gas extraction, fuel oil and refinery gas to the refinery, and electricity to power plants. This allocation is to be confirmed with ONEM.
+:::
+
+## Transfer
+
+The following function applies the default correspondences, then the exceptions, and changes the signs. The TJ values come from the extraction of the balances. Aggregate cells are left aside. The conservation check, further below, verifies that no elementary cell is lost.
+
+```{python}
+#| label: transposition
+def transposer(bilans: pl.DataFrame) -> pl.DataFrame:
+    """Transpose le bilan long de l'ONEM dans les flux et produits du modèle de l'AIE (TJ, signes de l'AIE)."""
+    defaut = (
+        bilans.join(
+            flux.select(pl.col("code").alias("code_flux"), "flux_modele", "signe_modele"), on="code_flux"
+        )
+        .join(produits.select(pl.col("code").alias("code_produit"), "produit_modele"), on="code_produit")
+        # Seules les cellules élémentaires (flux et produit non agrégés) sont transposées.
+        .filter(pl.col("flux_modele").is_not_null() & pl.col("produit_modele").is_not_null())
+    )
+
+    regles = exceptions.select(
+        "code_flux", "code_produit",
+        pl.col("flux_modele").alias("flux_exc"),
+        pl.col("produit_modele").alias("produit_exc"),
+        pl.col("signe_modele").cast(pl.Int8).alias("signe_exc"),
+    )
+    return (
+        defaut.join(regles, on=["code_flux", "code_produit"], how="left")
+        .with_columns(
+            flux_modele=pl.coalesce("flux_exc", "flux_modele"),
+            produit_modele=pl.coalesce("produit_exc", "produit_modele"),
+            signe_modele=pl.coalesce("signe_exc", "signe_modele"),
+        )
+        .with_columns(tj=pl.col("tj") * pl.col("signe_modele"))
+        .select("annee", "code_flux", "code_produit", "flux_modele", "produit_modele", "tj")
+    )
+
+
+modele = transposer(bilans)
+inconnus = set(modele["flux_modele"]) - set(FLUX_MODELE) | set(modele["produit_modele"]) - set(PRODUITS_MODELE)
+assert not inconnus, f"Libellés absents du modèle : {inconnus}"
+modele.filter(pl.col("annee") == 2022, pl.col("code_produit") == "GN").head(8)
+```
+
+## Checks
+
+**Conservation.** Each elementary cell of the balance is found in the template, apart from the unit conversion. The sum of absolute values is therefore the same before and after the transfer.
+
+```{python}
+#| label: controle-conservation
+KTEP_EN_TJ = 41.868
+elementaires = bilans.filter(
+    pl.col("code_flux").is_in(flux.filter(pl.col("flux_modele").is_not_null())["code"].implode()),
+    pl.col("code_produit").is_in(produits.filter(pl.col("produit_modele").is_not_null())["code"].implode()),
+)
+avant = elementaires.group_by("annee").agg((pl.col("ktep").abs().sum() * KTEP_EN_TJ).alias("avant_tj"))
+apres = modele.group_by("annee").agg(pl.col("tj").abs().sum().alias("apres_tj"))
+conservation = avant.join(apres, on="annee").with_columns(ecart=pl.col("avant_tj") - pl.col("apres_tj")).sort("annee")
+assert conservation["ecart"].abs().max() < 1e-6
+conservation
+```
+
+**IEA identity.** For each ONEM product, supply, transfers, the statistical difference, transformation, energy sector own use and losses, with their signs, must add up to final consumption. The check is done by ONEM product, because biomass feeds two template products (wood and charcoal). The check adds up about forty cells rounded to the ktoe, rather than published aggregates as in the extraction. The tolerance is therefore 3 ktoe, about 126 TJ. It is reached only for natural gas in 2017 and 2018.
+
+```{python}
+#| label: controle-identite
+CONSOMMATION_FINALE = flux.filter(
+    pl.col("code").str.starts_with("IND_") | pl.col("code").str.starts_with("TRA_")
+    | pl.col("code").str.starts_with("AUT_") | pl.col("code").str.starts_with("CFNE_")
+)["code"].to_list()
+identite = (
+    modele.with_columns(finale=pl.col("code_flux").is_in(CONSOMMATION_FINALE))
+    .group_by("annee", "code_produit")
+    .agg(
+        pl.col("tj").filter(~pl.col("finale")).sum().alias("ressources_nettes"),
+        pl.col("tj").filter(pl.col("finale")).sum().alias("consommation_finale"),
+    )
+    .with_columns(ecart_tj=pl.col("ressources_nettes") - pl.col("consommation_finale"))
+)
+assert identite["ecart_tj"].abs().max() < 3 * KTEP_EN_TJ + 1e-6, "Identité de l'AIE non vérifiée"
+identite.group_by("annee").agg(pl.col("ecart_tj").abs().max().round(1).alias("ecart_max_tj")).sort("annee")
+```
+
+## The 2022 balance in the template
+
+The following table shows the 2022 balance in the template, in thousand TJ (PJ), for the products present. The aggregate rows of the template are left empty, because the tool does not use them.
+
+```{python}
+#| label: apercu-2022
+apercu = (
+    modele.filter(pl.col("annee") == 2022)
+    .group_by("flux_modele", "produit_modele")
+    .agg((pl.col("tj").sum() / 1000).round(1).alias("pj"))
+    .pivot("produit_modele", index="flux_modele", values="pj")
+)
+ordre = {f: i for i, f in enumerate(FLUX_MODELE)}
+apercu.sort(pl.col("flux_modele").replace_strict(ordre, return_dtype=pl.Int32))
+```
+
+## Saving
+
+The long table keeps the ONEM codes next to the template labels. Several ONEM cells can end up in the same template cell (for example the three exchange rows), and the function `outils_fmi.bilan_vers_plage` adds them up when it builds the tool range.
+
+```{python}
+#| label: enregistrement
+modele.write_parquet(SORTIE, compression="zstd")
+print(f"{SORTIE} : {modele.height} lignes")
+```
+
+## References
+
+::: {#refs}
+:::

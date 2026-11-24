@@ -51,6 +51,26 @@ website:
           text: Data processing
         - href: en/traitement/00-bilan-energetique/index.qmd
           text: Reading the energy balance
+        - section: Source extraction
+          contents:
+            - href: en/traitement/01-extraction-bilans/index.qmd
+              text: Energy balances
+            - href: en/traitement/02-extraction-crt/index.qmd
+              text: GHG inventory (CRT)
+            - href: en/traitement/03-extraction-tre/index.qmd
+              text: Supply and use tables
+        - section: Energy accounts (PEFA)
+          contents:
+            - href: en/traitement/10-bilan-format-aie/index.qmd
+              text: Balance in IEA format
+            - href: en/traitement/11-activites/index.qmd
+              text: Industries
+            - href: en/traitement/12-matrice-concordance/index.qmd
+              text: Concordance matrix
+            - href: en/traitement/13-tableaux-pefa/index.qmd
+              text: PEFA tables
+            - href: en/traitement/14-controles-export-pefa/index.qmd
+              text: Checks and export
 
 format:
   html:

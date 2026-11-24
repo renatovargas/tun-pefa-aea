@@ -1,0 +1,183 @@
+---
+title: "استخراج موازين الطاقة"
+subtitle: "موازين المرصد الوطني للطاقة والمناجم من 2015 إلى 2022 في جدول طويل واحد برموز ثابتة"
+author:
+  - name: "ريناتو فارغاس"
+    affiliations:
+      - name: مستشار لدى صندوق النقد الدولي
+lang: ar-TN
+dir: rtl
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-ar.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+  eval: false
+---
+
+::: {.callout-note}
+تعرض هذه الصفحة شيفرة [الصفحة المرجعية بالفرنسية](../../../fr/traitement/01-extraction-bilans/index.qmd) دون تنفيذها. النتائج والمخرجات موجودة في الصفحة الفرنسية. تبقى التعليقات داخل الشيفرة بالفرنسية.
+:::
+
+## الغرض
+
+ينشر المرصد الوطني للطاقة والمناجم ميزانًا للطاقة كل سنة، بآلاف الأطنان المكافئة نفطًا. تتبع المصنفات الثمانية من 2015 إلى 2022 المنطق نفسه، لكن عرضها يتغير من سنة إلى أخرى. تجمع هذه الصفحة الموازين في جدول طويل واحد، مع رمز ثابت لكل تدفق ولكل منتج. هذا الجدول، `data/intermediaires/bilans_energetiques.parquet`، هو نقطة انطلاق حسابات التدفقات المادية للطاقة (PEFA).
+
+توجد الدوال في البرنامج النصي `scripts/extraire_bilans.py`[^script]، الذي تستورده هذه الصفحة وتنفذه خطوة بخطوة. يمكن تشغيل البرنامج نفسه وحده بالأمر `uv run python scripts/extraire_bilans.py`.
+
+[^script]: الشيفرة المصدرية: <https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extraire_bilans.py>.
+
+```{python}
+#| label: parametres
+import sys
+
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import extraire_bilans as eb
+
+fichiers = eb.fichiers_bilans()
+{annee: chemin.name for annee, chemin in fichiers.items()}
+```
+
+## قراءة ميزان
+
+لكل مصنف ورقة واحدة. تشغل أسماء المنتجات سطرين من العناوين، ابتداءً من السطر الذي تبدأ خليته الأولى بعبارة «en 1000 tep». تجمع الدالة `lire_bilan` هذين السطرين في تسمية واحدة، وتقرأ التدفقات ابتداءً من «Production primaire» (الإنتاج الأولي)، وتضع الجدول في صيغة طويلة. الخلايا الفارغة أصفار وتُحذف. تحتوي خلية من سنة 2015 على «0 *» مع إحالة؛ تُحذف النجمة.
+
+تتكرر بعض تسميات التدفقات. تظهر «Raffineries» (المصافي) في مدخلات التحويل وفي مخرجاته، وتظهر «Chimie» (الكيمياء) في الاستهلاك غير الطاقوي وفي الصناعة. يحتفظ العمود `bloc` بآخر عنوان كتلة يرد فوق كل سطر، وبذلك يزول الالتباس.
+
+```{python}
+#| label: lecture-2022
+exemple = eb.lire_bilan(fichiers[2022], 2022)
+exemple.filter(pl.col("flux_source") == "Raffineries", pl.col("produit_source") == "Pétrole brut")
+```
+
+## تغير العرض بين السنوات
+
+لا تعرض المصنفات كلها الأعمدة نفسها ولا الأسطر نفسها. يحصي الجدول التالي التسميات المختلفة لكل سنة.
+
+```{python}
+#| label: derive
+lus = pl.concat([eb.lire_bilan(chemin, annee) for annee, chemin in fichiers.items()])
+lus.group_by("annee").agg(
+    pl.col("produit_source").n_unique().alias("colonnes de produits"),
+    pl.col("flux_source").n_unique().alias("libellés de flux"),
+).sort("annee")
+```
+
+أهم الفروق مبينة أدناه.
+
+- في 2015، يحمل عمود سوائل الغاز الطبيعي اسم «GPL primaire» (غاز البترول المسال الأولي)، ولا يوجد عمود «Gaz de raffinage» (غاز التكرير).
+- في 2016، يُضاف عمود «géothermie» (الطاقة الحرارية الجوفية) إلى الطاقات المتجددة. هذا هو العمود الإضافي لتلك السنة.
+- في عدة سنوات، يتوزع عنوانا طاقة الرياح والطاقة المائية بشكل منزاح على السطرين. تعطي القراءة «Energie éolienne hydraulique» لطاقة الرياح و«Energie» للطاقة المائية؛ وتؤكد قيم الإنتاج الأولي هذه القراءة.
+- في 2015، تضم الصناعة ثلاثة أسطر هي «Sidérurgie» (الحديد والصلب) و«Métaux non ferreux» (المعادن غير الحديدية) و«Fabrications métalliques» (المصنوعات المعدنية). أما السنوات اللاحقة فلها سطر واحد هو «Fabrications métalliques y compris sidérurgie» (المصنوعات المعدنية بما فيها الحديد والصلب). لا يحمل السطر «Fabrications mécaniques et électriques» (الصناعات الميكانيكية والكهربائية) قيمًا إلا ابتداءً من 2019.
+- يتغير رسم عدة تسميات («Soutess internationales» و«Consommation intérieur brute» و«Agriculture» ثم «Agriculture et pêche»).
+
+## إسناد الرموز
+
+لا تُستعمل التسميات معرّفات. يربط جدولا مقابلة، يُحرَّران يدويًا، كل تسمية أصلية برمز.
+
+- يربط `data/nomenclatures/bilan_flux_sources.csv` كل زوج (كتلة، تسمية) برمز تدفق.
+- يربط `data/nomenclatures/bilan_produits_sources.csv` كل تسمية منتج برمز منتج.
+
+توصف الرموز في `data/nomenclatures/bilan_flux.csv` و`data/nomenclatures/bilan_produits.csv`، مع تسمياتها بالفرنسية والإنجليزية والعربية، والمجمّع الذي تنتمي إليه، وبالنسبة إلى التدفقات، إشارة مساهمتها في هذا المجمّع. يشير العمود `a_verifier` إلى الترجمات التي ينبغي أن يراجعها النظراء التونسيون.
+
+```{python}
+#| label: nomenclature-flux
+pl.read_csv("data/nomenclatures/bilan_flux.csv").select("code", "parent", "signe", "fr", "en")
+```
+
+```{python}
+#| label: nomenclature-produits
+pl.read_csv("data/nomenclatures/bilan_produits.csv").select("code", "parent", "fr", "en")
+```
+
+تربط الدالة `coder` بين الجدولين وتتوقف إذا لم يكن لتسمية ما رمز. وهكذا يُنتج ميزان جديد يتغير عرضه مرة أخرى خطأً صريحًا بدل انزياح صامت.
+
+في 2015، تحصل «Sidérurgie» و«Métaux non ferreux» و«Fabrications métalliques» كلها على الرمز `IND_MET`. تجمع الدالة `agreger` الأسطر التي تشترك في رمز واحد وتحتفظ بالتسميات الأصلية. مجموع 2015 من رتبة السطر الوحيد للسنوات اللاحقة نفسها، وهذا يدعم هذا الاختيار.
+
+```{python}
+#| label: metaux
+bilans = eb.extraire()
+(
+    bilans.filter(pl.col("code_flux").is_in(["IND_MET", "IND_MEC"]), pl.col("code_produit") == "TOTAL")
+    .pivot("code_flux", index="annee", values="ktep")
+    .sort("annee")
+)
+```
+
+::: {.callout-note}
+## مسألة مفتوحة
+قد يقابل سطر «Fabrications métalliques» لسنة 2015 الصناعات الميكانيكية والكهربائية، كما يوحي موقعه في الجدول. صُنّف هنا مع الحديد والصلب، لأن الصناعات الميكانيكية والكهربائية لا تحمل قيمًا قبل 2019. يتعين التأكد من ذلك مع المرصد الوطني للطاقة والمناجم.
+:::
+
+## التحويل إلى التيراجول
+
+تُعبَّر حسابات PEFA بالتيراجول. يساوي الطن المكافئ نفطًا 41.868 جيغاجول، أي أن ألف طن مكافئ نفط يساوي 41.868 تيراجول [@seeaenergy2019].
+
+```{python}
+#| label: apercu
+bilans.head(6)
+```
+
+## عمليات التحقق
+
+ينشر الميزان قيمًا مقرّبة إلى ألف طن مكافئ نفط، وأحيانًا إلى رقم عشري واحد. لذلك تقبل عمليات التحقق فارقًا قدره 2 ألف طن مكافئ نفط.
+
+**مجمّعات التدفقات.** يجب أن يساوي كل مجمّع (الصناعة، النقل، مدخلات التحويل، الاستهلاك الداخلي الخام، إلخ) المجموع الجبري لمكوناته، لكل منتج ولكل سنة. فمثلًا، يساوي الاستهلاك الداخلي الخام الإنتاج الأولي، زائد الواردات والتغير في المخزون، ناقص الصادرات والمستودعات الدولية.
+
+**مجمّعات المنتجات.** يجب أن يساوي العمود «Total tous produits» (مجموع كل المنتجات) مجموع منتجات المستوى الأول، وأن يساوي عمودا المنتجات النفطية والطاقات المتجددة مجموع منتجاتهما.
+
+**المتاح للاستهلاك النهائي.** يجب أن يساوي، لكل منتج، الاستهلاك الداخلي الخام، ناقص مدخلات التحويل، زائد مخرجات التحويل والمبادلات، ناقص استهلاك قطاع الطاقة والخسائر.
+
+```{python}
+#| label: controles
+TOLERANCE = 2.0
+controles = {
+    "Agrégats de flux": eb.ecarts_hierarchie(bilans, "flux"),
+    "Agrégats de produits": eb.ecarts_hierarchie(bilans, "produit"),
+    "Disponible pour la consommation finale": eb.ecarts_identites(bilans),
+}
+resume = pl.DataFrame(
+    {
+        "controle": list(controles),
+        "cellules": [t.height for t in controles.values()],
+        "ecart_max_ktep": [t["ecart"].abs().max() for t in controles.values()],
+        "ecarts_sup_1_ktep": [t.filter(pl.col("ecart").abs() > 1).height for t in controles.values()],
+    }
+)
+assert (resume["ecart_max_ktep"] <= TOLERANCE).all(), "Écart supérieur à la tolérance : vérifier la lecture"
+resume
+```
+
+ترد أدناه الفوارق القليلة التي تتجاوز ألف طن مكافئ نفط. وهي ناتجة عن تقريب القيم المنشورة.
+
+```{python}
+#| label: ecarts-detail
+pl.concat(
+    [t.rename({c: "element" for c in t.columns if c.startswith("code_")}).select(
+        pl.lit(nom).alias("controle"), "annee", pl.col("element"), pl.col("ecart").round(2)
+    ) for nom, t in controles.items()]
+).filter(pl.col("ecart").abs() > 1).sort("annee")
+```
+
+## الحفظ
+
+يُحفظ الجدول بصيغة Parquet، مضغوطًا بخوارزمية zstd. ويحتفظ بالتسميات الأصلية بجانب الرموز، لضمان إمكانية التتبع.
+
+```{python}
+#| label: enregistrement
+eb.SORTIE.parent.mkdir(parents=True, exist_ok=True)
+bilans.write_parquet(eb.SORTIE, compression="zstd")
+print(f"{eb.SORTIE} : {bilans.height} lignes, {bilans['annee'].n_unique()} années")
+```
+
+## المراجع
+
+::: {#refs}
+:::

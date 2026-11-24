@@ -1,0 +1,231 @@
+---
+title: "Concordance matrix and bridging items"
+subtitle: "From the default PEFA Converter matrix to a Tunisian matrix by industry, and treatment of bunkers"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: IMF Consultant
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+  eval: false
+---
+
+::: {.callout-note}
+This page shows the code of the [French reference page](../../../fr/traitement/12-matrice-concordance/index.qmd) without running it. Results and outputs are in the French page. Code comments stay in French.
+:::
+
+## Purpose
+
+The concordance matrix of the PEFA Converter [@pegoue2026pefa; @imf2024pefa] states, for each flow and product of the balance, to which PEFA product, activity and quadrant (supply or use) the energy is assigned, and in what proportion. The matrix supplied with the tool assigns each flow to an ISIC section. This page builds a Tunisian matrix by SUT industry, from the default matrix and the correspondences of the previous page, and documents each difference. It also deals with the bridging items between the balance and the accounts, namely international bunkers and residence adjustments.
+
+```{python}
+#| label: parametres
+import sys
+
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import outils_fmi as of
+
+CODES = {"code": pl.String, "activite": pl.String, "produit_cle": pl.String}
+SORTIE = "data/intermediaires/concordance_tunisie.parquet"
+
+activites = pl.read_csv("data/nomenclatures/activites.csv", schema_overrides=CODES)
+correspondance = pl.read_csv("data/nomenclatures/bilan_vers_activites.csv", schema_overrides=CODES)
+cles = pl.read_parquet("data/intermediaires/cles_activites.parquet")
+modele = pl.read_parquet("data/intermediaires/bilan_modele_fmi.parquet")
+```
+
+## The default matrix
+
+The module `scripts/outils_fmi.py`[^outils] reads the named range `Concordance_Matrix` of the tool workbook, as Excel passes it to the function `EB2PEFA`. The matrix has one row per flow, product and target activity. The tool itself rescales the allocation factors to a sum of 1 per flow, product, target product and quadrant.
+
+[^outils]: Source code: <https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/outils_fmi.py>.
+
+```{python}
+#| label: matrice-defaut
+plages = of.plages_classeur()
+COLONNES_CM = plages["CM"][0]
+
+
+def matrice_en_polars(plage: list[list]) -> pl.DataFrame:
+    """Convertit la plage Concordance_Matrix en tableau polars ; les facteurs non numériques valent 0, comme dans l'outil."""
+    tableau = pl.DataFrame(plage[1:], schema=[str(c) for c in plage[0]], orient="row", infer_schema_length=None)
+    return tableau.with_columns(pl.col("Allocation Factor").cast(pl.Float64, strict=False).fill_null(0))
+
+
+defaut = matrice_en_polars(plages["CM"])
+print(f"{defaut.height} lignes, colonnes : {', '.join(defaut.columns)}")
+defaut.filter(pl.col("EB_Flow") == "Road", pl.col("EB_Product") == "Motor gasoline excl. biofuels")
+```
+
+## The Tunisian matrix
+
+The Tunisian matrix keeps all columns of the default matrix and changes only the target activity and the factor. For each flow covered by `data/nomenclatures/bilan_vers_activites.csv`, the default rows are replaced by one row per Tunisian activity, with the key of the year as factor. A product-specific correspondence (for example crude oil losses) takes precedence over the general correspondence of the flow. Flows absent from the Tunisian balance and the pseudo-activities of the tool (rest of the world, accumulation) keep the default matrix.
+
+The road transport and services keys change every year. There is therefore one matrix per year.
+
+```{python}
+#| label: matrice-tunisienne
+def matrice_tunisienne(defaut: pl.DataFrame, cles_annee: pl.DataFrame) -> pl.DataFrame:
+    """Remplace l'activité et le facteur des flux couverts par les clés tunisiennes d'une année."""
+    flux_couverts = cles_annee["flux_modele"].unique()
+    specifiques = cles_annee.filter(pl.col("produit_modele").is_not_null())
+    generales = cles_annee.filter(pl.col("produit_modele").is_null()).drop("produit_modele")
+
+    a_remplacer = defaut.filter(pl.col("EB_Flow").is_in(flux_couverts.implode()))
+    # Une ligne par flux, produit et quadrant suffit comme gabarit : les autres colonnes sont identiques.
+    gabarit = a_remplacer.unique(subset=["EB_Flow", "EB_Product", "PEFA_Quadrant"], keep="first", maintain_order=True)
+    avec_specifique = gabarit.join(
+        specifiques.select(pl.col("flux_modele").alias("EB_Flow"), pl.col("produit_modele").alias("EB_Product"), "activite", "facteur"),
+        on=["EB_Flow", "EB_Product"],
+    )
+    sans_specifique = gabarit.join(
+        specifiques.select(pl.col("flux_modele").alias("EB_Flow"), pl.col("produit_modele").alias("EB_Product")).unique(),
+        on=["EB_Flow", "EB_Product"], how="anti",
+    ).join(generales.select(pl.col("flux_modele").alias("EB_Flow"), "activite", "facteur"), on="EB_Flow")
+    remplacees = pl.concat([avec_specifique, sans_specifique]).with_columns(
+        pl.col("activite").alias("PEFA_Target_Activity"), pl.col("facteur").alias("Allocation Factor")
+    ).select(defaut.columns)
+    conservees = defaut.filter(~pl.col("EB_Flow").is_in(flux_couverts.implode()))
+    return pl.concat([conservees, remplacees])
+
+
+ANNEES = sorted(cles["annee"].unique().to_list())
+tunisie = pl.concat(
+    [
+        matrice_tunisienne(defaut, cles.filter(pl.col("annee") == a).drop("annee", "methode")).with_columns(
+            annee=pl.lit(a, pl.Int16)
+        )
+        for a in ANNEES
+    ]
+)
+tunisie.filter(pl.col("annee") == 2022).group_by("annee").len()
+```
+
+Each covered flow and product must keep factors that add up to 1 in the Tunisian matrix, for each quadrant and each target product.
+
+```{python}
+#| label: controle-facteurs
+couverts = tunisie.filter(pl.col("EB_Flow").is_in(correspondance["flux_modele"].unique().implode()))
+sommes = couverts.group_by("annee", "EB_Flow", "EB_Product", "PEFA_Target_Product", "PEFA_Quadrant").agg(
+    pl.col("Allocation Factor").sum()
+)
+assert (sommes["Allocation Factor"] - 1).abs().max() < 1e-9
+print(f"{sommes.height} combinaisons contrôlées, facteurs entre {sommes['Allocation Factor'].min():.6f} et {sommes['Allocation Factor'].max():.6f}")
+```
+
+## Differences from the default matrix
+
+The following table compares, for each flow present in the Tunisian balance, the activity of the default matrix and the Tunisian activity, mapped back to its section. Rows marked `oui` (yes) in the column `section_modifiee` change the result of the tool, even at section level. The others only add industry detail.
+
+```{python}
+#| label: differences
+flux_tunisiens = modele.select("flux_modele", "produit_modele").unique()
+defaut_tunisien = defaut.join(flux_tunisiens, left_on=["EB_Flow", "EB_Product"], right_on=["flux_modele", "produit_modele"])
+par_defaut_produit = defaut_tunisien.group_by("EB_Flow", "EB_Product").agg(
+    pl.col("PEFA_Target_Activity").unique().sort().str.join(", ").alias("defaut_produit")
+)
+# Pour la correspondance générale d'un flux, les produits qui ont une correspondance propre sont exclus.
+propres = correspondance.filter(pl.col("produit_modele").is_not_null()).select(
+    pl.col("flux_modele").alias("EB_Flow"), pl.col("produit_modele").alias("EB_Product")
+)
+par_defaut = defaut_tunisien.join(propres, on=["EB_Flow", "EB_Product"], how="anti").group_by("EB_Flow").agg(
+    pl.col("PEFA_Target_Activity").unique().sort().str.join(", ").alias("defaut_flux")
+)
+sections = dict(zip(activites["code"], activites["section_fmi"]))
+tunisiennes = (
+    correspondance.with_columns(section=pl.col("activite").replace_strict(sections))
+    .group_by("flux_modele", "produit_modele", "justification", maintain_order=True)
+    .agg(
+        pl.col("activite").str.join(", ").alias("tunisie"),
+        pl.col("section").unique().sort().str.join(", ").alias("sections_tunisie"),
+    )
+)
+differences = (
+    tunisiennes.join(par_defaut, left_on="flux_modele", right_on="EB_Flow", how="left")
+    .join(par_defaut_produit, left_on=["flux_modele", "produit_modele"], right_on=["EB_Flow", "EB_Product"], how="left")
+    .with_columns(defaut=pl.coalesce("defaut_produit", "defaut_flux"))
+    .with_columns(
+        section_modifiee=pl.when(pl.col("defaut") == pl.col("sections_tunisie")).then(pl.lit("non")).otherwise(pl.lit("oui"))
+    )
+    .select("flux_modele", "produit_modele", "defaut", "sections_tunisie", "section_modifiee", "tunisie", "justification")
+)
+differences.filter(pl.col("section_modifiee") == "oui")
+```
+
+For production and losses, the default matrix assigns each product to an activity, and the comparison is made product by product. The full table is saved with the matrix.
+
+::: {.callout-note}
+## Open question
+The choices that depart from the tool sections are to be validated with INS and ONEM. Electricity autoproducers and recovered heat are classified in the chemical industry. Solar heat is produced by households. Charcoal kilns belong to forestry. Non-energy uses are assigned to construction. Road transport and services are allocated by keys.
+:::
+
+## Bridging items
+
+### International bunkers
+
+The ONEM balance gives international bunkers by product. The greenhouse gas inventory also gives bunker fuel, in TJ, in the memo items of category 1.D. For aviation bunkers, the two sources agree within 1% every year. Marine bunkers, which are much smaller, differ more in some years. The balance remains the source for PEFA, and the difference is to be examined with ANME for the emissions accounts.
+
+```{python}
+#| label: soutes
+crt = pl.read_parquet("data/intermediaires/crt.parquet")
+soutes_crt = (
+    crt.filter(pl.col("crt").str.starts_with("1.D.1"), pl.col("parametre") == "activity", pl.col("unite") == "TJ")
+    .with_columns(flux_modele=pl.when(pl.col("crt") == "1.D.1.a").then(pl.lit("International aviation bunkers")).otherwise(pl.lit("International marine bunkers")))
+    .group_by("annee", "flux_modele").agg(pl.col("valeur").sum().alias("crt_tj"))
+)
+soutes_bilan = (
+    modele.filter(pl.col("flux_modele").str.starts_with("International"))
+    .group_by("annee", "flux_modele").agg((-pl.col("tj").sum()).alias("bilan_tj"))
+)
+soutes = (
+    soutes_bilan.join(soutes_crt, on=["annee", "flux_modele"], how="full", coalesce=True)
+    .with_columns(ecart_pct=((pl.col("bilan_tj") / pl.col("crt_tj") - 1) * 100).round(2))
+    .sort("flux_modele", "annee")
+)
+assert soutes.filter(pl.col("flux_modele") == "International aviation bunkers")["ecart_pct"].abs().max() < 1
+soutes.with_columns(pl.col("bilan_tj", "crt_tj").round(0))
+```
+
+The tool assigns bunkers to resident carriers in the transport industry. This assumption is kept for lack of information. Part of the bunkers is bought in Tunisia by non-resident carriers, which count as exports in the accounts.
+
+### Residence adjustments
+
+The accounts follow the residence principle of the national accounts. Fuel bought abroad by resident units is added to imports and to their uses. Fuel bought in Tunisia by non-residents is added to exports. The tool receives these quantities in the `Bridging_Items` sheet, by PEFA product. No Tunisian source provides them for now; the range stays empty, as in the workbook supplied with the tool.
+
+```{python}
+#| label: elements-passage
+ponts = plages["EB_Bridging_Items"]
+valeurs = [x for ligne in ponts[1:] for x in ligne[2:12] if isinstance(x, float) and x != 0]
+assert not valeurs, "Des éléments de passage sont renseignés : les traiter dans la couche explicite"
+print(f"Feuille Bridging_Items : {len(ponts) - 1} lignes, aucune quantité renseignée")
+```
+
+::: {.callout-note}
+## Open question
+What data can INS or ONEM provide on fuel bought abroad by resident carriers and on fuel bought in Tunisia by non-residents? The OECD data on air and maritime transport, included in the I2A tool, cover Tunisia and could serve as a first estimate.
+:::
+
+## Saving
+
+```{python}
+#| label: enregistrement
+tunisie.write_parquet(SORTIE, compression="zstd")
+differences.write_parquet("data/intermediaires/concordance_differences.parquet", compression="zstd")
+print(f"{SORTIE} : {tunisie.height} lignes pour {len(ANNEES)} années")
+```
+
+## References
+
+::: {#refs}
+:::

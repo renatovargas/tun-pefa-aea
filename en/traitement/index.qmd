@@ -11,3 +11,11 @@ The French pages run the code. This English version shows the same code without 
 | Page | Contents |
 |:-----|:---------|
 | [00. Reading the energy balance](00-bilan-energetique/index.qmd) | Reading the 2022 balance, long format and conversion to terajoules |
+| [01. Extracting the energy balances](01-extraction-bilans/index.qmd) | ONEM balances from 2015 to 2022 in long format, stable flow and product codes, ktoe and TJ |
+| [02. Extracting the GHG inventory](02-extraction-crt/index.qmd) | `Data` sheets of the CRT tables from 2015 to 2022, check against `Summary2` |
+| [03. Extracting the supply and use tables](03-extraction-tre/index.qmd) | INS supply and use tables from 2015 to 2023 in long format, balance checks |
+| [10. The balance in the PEFA Converter template](10-bilan-format-aie/index.qmd) | ONEM flows and products in the IEA layout, in TJ, with IEA signs |
+| [11. From balance sectors to industries](11-activites/index.qmd) | Correspondence of balance flows with the 24 SUT industries and households, allocation keys for road transport and services |
+| [12. Concordance matrix and bridging items](12-matrice-concordance/index.qmd) | Tunisian matrix by industry built on the default matrix of the tool, documented differences, bunkers and residence adjustments |
+| [13. Physical energy supply and use tables](13-tableaux-pefa/index.qmd) | Explicit re-implementation of the PEFA Converter in polars, comparison with the tool, PEFA by industry from 2015 to 2022 |
+| [14. Checks, indicators and export of the PEFA](14-controles-export-pefa/index.qmd) | Balance of the tables, plausibility against the SUT, energy intensities, workbooks in three languages |

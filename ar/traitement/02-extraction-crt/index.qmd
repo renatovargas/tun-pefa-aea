@@ -1,0 +1,115 @@
+---
+title: "استخراج جرد غازات الاحتباس الحراري"
+subtitle: "جداول CRT من 2015 إلى 2022 في جدول طويل واحد"
+author:
+  - name: "ريناتو فارغاس"
+    affiliations:
+      - name: مستشار لدى صندوق النقد الدولي
+lang: ar-TN
+dir: rtl
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-ar.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+  eval: false
+---
+
+::: {.callout-note}
+تعرض هذه الصفحة شيفرة [الصفحة المرجعية بالفرنسية](../../../fr/traitement/02-extraction-crt/index.qmd) دون تنفيذها. النتائج والمخرجات موجودة في الصفحة الفرنسية. تبقى التعليقات داخل الشيفرة بالفرنسية.
+:::
+
+## الغرض
+
+تقدّم تونس جردها لغازات الاحتباس الحراري إلى اتفاقية الأمم المتحدة الإطارية بشأن تغير المناخ وفق جداول الإبلاغ المشتركة (CRT، *Common Reporting Tables*). يوجد مصنف لكل سنة، من 2015 إلى 2022. تحتوي الورقة `Data` في كل مصنف على جميع القيم بصيغة طويلة، بسطر واحد لكل فئة CRT ومعلمة ونوع ووقود وغاز. تكدّس هذه الصفحة الأوراق الثماني في `data/intermediaires/crt.parquet`، الذي سيغذي حسابات انبعاثات الهواء (AEA).
+
+توجد الدوال في البرنامج النصي `scripts/extraire_crt.py`[^script]، الذي تستورده هذه الصفحة وتنفذه.
+
+[^script]: الشيفرة المصدرية: <https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extraire_crt.py>.
+
+```{python}
+#| label: parametres
+import sys
+
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import extraire_crt as ec
+
+{annee: chemin.name for annee, chemin in ec.fichiers_crt().items()}
+```
+
+## بنية الورقة Data
+
+للورقة ثمانية أعمدة. تُعاد تسميتها بالفرنسية. يُقرأ العمود `valeur` نصًا ثم يُحوَّل إلى عدد.
+
+```{python}
+#| label: colonnes
+pl.DataFrame({"colonne CRT": list(ec.COLONNES), "nom retenu": list(ec.COLONNES.values())})
+```
+
+تميّز المعلمة بين ثلاثة أنواع من الأسطر. تعطي أسطر `activity` بيانات النشاط، مثل استهلاك الوقود بالتيراجول. وتعطي أسطر `emission` الانبعاثات بالكيلوطن من كل غاز. وتعطي أسطر `information` معاملات الانبعاث وبيانات سياقية أخرى.
+
+```{python}
+#| label: extraction
+crt, doublons = ec.extraire()
+crt.filter(pl.col("annee") == 2022).group_by("parametre", "unite").len().sort("len", descending=True).head(8)
+```
+
+## الأسطر المكررة
+
+تحتوي كل ورقة `Data` على أسطر متطابقة تمامًا ومكررة. تُحذف هذه الأسطر، لأن الجمع سيحسبها مرتين. يعطي الجدول التالي عدد الأسطر المحذوفة في كل سنة.
+
+```{python}
+#| label: doublons
+pl.DataFrame({"annee": list(doublons), "lignes_retirees": list(doublons.values())})
+```
+
+## التحقق بالمقارنة مع الجدول Summary2
+
+تعطي الورقة `Summary2` في كل مصنف الانبعاثات حسب الفئة والغاز، بالكيلوطن من مكافئ ثاني أكسيد الكربون. يجمع التحقق انبعاثات `Data` لكل فئة، غازًا غازًا، ويحوّلها إلى مكافئ ثاني أكسيد الكربون باستعمال إمكانات الاحترار العالمي على مدى 100 سنة الواردة في تقرير التقييم الخامس للهيئة الحكومية الدولية المعنية بتغير المناخ، وهي التي يستعملها الجرد التونسي (CH4: 28، N2O: 265). تُستبعد البنود التذكيرية (الفئة 1.D، المستودعات الدولية) من مجاميع الطاقة، كما في `Summary2`.
+
+```{python}
+#| label: controle-summary2
+comparaisons = pl.concat([ec.comparer_summary2(crt, a).with_columns(annee=pl.lit(a)) for a in sorted(doublons)])
+resume = comparaisons.group_by("annee").agg(
+    pl.len().alias("cellules"),
+    pl.col("ecart").abs().max().round(4).alias("ecart_max"),
+    (pl.col("ecart").abs() > 0.01).sum().alias("ecarts_sup_0_01"),
+).sort("annee")
+assert resume["ecart_max"].max() < 1, "Écart important avec Summary2 : vérifier la lecture"
+resume
+```
+
+تطابق بيانات `Data` الجدول `Summary2` في جميع الفئات من 2015 إلى 2018. وابتداءً من 2019، يظهر فارق وحيد في انبعاثات N2O من الفئة 1.B.2 (الانبعاثات المتسربة من النفط والغاز الطبيعي)، وينتقل إلى مجمّعاتها.
+
+```{python}
+#| label: ecarts-detail
+comparaisons.filter(pl.col("ecart").abs() > 0.01).select("annee", "crt", "gaz", pl.col("ecart").round(3))
+```
+
+```{python}
+#| label: cellule-1b2bii
+crt.filter(
+    pl.col("crt") == "1.B.2.b.ii", pl.col("gaz") == "N2O", pl.col("parametre") == "emission", pl.col("valeur") != 0
+).select("annee", "crt", "combustible", "valeur")
+```
+
+::: {.callout-note}
+## مسألة مفتوحة
+تظهر انبعاثات N2O من الفئة 1.B.2.b.ii في الورقة `Data` ابتداءً من 2019، لكنها لا تُحتسب في `Summary2`. الفارق أقل من كيلوطن واحد من مكافئ ثاني أكسيد الكربون. يتعين توضيح ذلك مع فريق الجرد في الوكالة الوطنية للتحكم في الطاقة.
+:::
+
+## الحفظ
+
+```{python}
+#| label: enregistrement
+ec.SORTIE.parent.mkdir(parents=True, exist_ok=True)
+crt.write_parquet(ec.SORTIE, compression="zstd")
+print(f"{ec.SORTIE} : {crt.height} lignes, {crt['annee'].n_unique()} années")
+```

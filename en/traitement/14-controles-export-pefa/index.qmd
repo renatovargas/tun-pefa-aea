@@ -1,0 +1,288 @@
+---
+title: "Checks, indicators and export of the PEFA"
+subtitle: "Balance of the tables, comparison with the SUT, energy intensities and workbooks in three languages"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: IMF Consultant
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+  eval: false
+---
+
+::: {.callout-note}
+This page shows the code of the [French reference page](../../../fr/traitement/14-controles-export-pefa/index.qmd) without running it. Results and outputs are in the French page. Code comments stay in French.
+:::
+
+## Purpose
+
+This page checks the PEFA computed on the previous page, compares them with the SUT for plausibility, computes energy intensities by industry and exports everything to an Excel workbook in French, English and Arabic.
+
+```{python}
+#| label: parametres
+from pathlib import Path
+
+import polars as pl
+import xlsxwriter
+
+CODES = {"code": pl.String, "activite": pl.String}
+KTEP_EN_TJ = 41.868
+PRODUITS = Path("data/produits")
+NOM = "comptes_pefa"
+
+pefa = pl.read_parquet("data/intermediaires/pefa.parquet")
+modele = pl.read_parquet("data/intermediaires/bilan_modele_fmi.parquet")
+tre = pl.read_parquet("data/intermediaires/tre.parquet")
+activites = pl.read_csv("data/nomenclatures/activites.csv", schema_overrides=CODES)
+lignes = pl.read_csv("data/nomenclatures/pefa_lignes.csv")
+libelles = pl.read_csv("data/nomenclatures/libelles.csv")
+ANNEES = sorted(pefa["annee"].unique().to_list())
+
+# Codes d'activité de l'outil et codes du site
+PSEUDO = ["RDM", "ACC", "ENV", "ECART"]
+CODE_SITE = dict(activites.filter(pl.col("code").is_in(PSEUDO)).select("section_fmi", "code").iter_rows())
+pefa = pefa.with_columns(pl.col("activite").replace(CODE_SITE))
+CODE_SITE
+```
+
+## Balance of supply and use
+
+In a PEFA table, each category of flows is balanced. The natural inputs supplied by the environment equal those used by industries, and the residuals generated equal the residuals absorbed by the environment or accumulated. For energy products, supply equals use apart from the rounding of the balance.
+
+```{python}
+#| label: equilibre-categories
+par_categorie = (
+    pefa.group_by("annee", "niveau1")
+    .agg(
+        pl.col("tj").filter(pl.col("quadrant") == "Supply").sum().alias("ressources_tj"),
+        pl.col("tj").filter(pl.col("quadrant") == "Use").sum().alias("emplois_tj"),
+    )
+    .with_columns(ecart_ktep=((pl.col("ressources_tj") - pl.col("emplois_tj")) / KTEP_EN_TJ).round(2))
+)
+par_categorie.pivot("niveau1", index="annee", values="ecart_ktep").sort("annee")
+```
+
+```{python}
+#| label: controle-categories
+residus = par_categorie.filter(pl.col("niveau1") != "Energy products:")
+assert residus["ecart_ktep"].abs().max() < 1e-6, "Ressources naturelles ou résidus déséquilibrés"
+```
+
+For energy products, the check is done product by product. The tool records all non-energy uses on a single row, whatever the product. In Tunisia, these uses concern only petroleum products, as the balance confirms. This row is therefore attached to oil for the check.
+
+```{python}
+#| label: equilibre-produits
+non_energetique = modele.filter(pl.col("flux_modele").str.starts_with("Non-energy use"))
+petroliers = pl.read_csv("data/nomenclatures/bilan_produits.csv").filter(pl.col("parent") == "PP")["code"]
+assert non_energetique["code_produit"].is_in(petroliers.implode()).all()
+
+produits_energie = (
+    pefa.filter(pl.col("niveau1") == "Energy products:")
+    .with_columns(
+        produit=pl.when(pl.col("produit") == "End-use of energy products for non-energy purposes").then(pl.lit("Oil")).otherwise("produit")
+    )
+    .group_by("annee", "produit")
+    .agg(
+        pl.col("tj").filter(pl.col("quadrant") == "Supply").sum().alias("ressources_tj"),
+        pl.col("tj").filter(pl.col("quadrant") == "Use").sum().alias("emplois_tj"),
+    )
+    .with_columns(ecart_ktep=((pl.col("ressources_tj") - pl.col("emplois_tj")) / KTEP_EN_TJ).round(2))
+)
+assert produits_energie["ecart_ktep"].abs().max() <= 5, "Écart supérieur à l'arrondi du bilan"
+produits_energie.pivot("produit", index="annee", values="ecart_ktep").sort("annee")
+```
+
+The remaining differences come from the rounding to the ktoe of the published cells of the balance, already noted on page 10. Oil groups ten balance products, whose rounding adds up; the tolerance is therefore 5 ktoe.
+
+## Plausibility against the SUT
+
+An industry that uses energy must buy, in the SUT, crude oil and natural gas (product 06), refined petroleum products (19) or electricity and gas (35). The SUT are in value, so the comparison looks at sign and order of magnitude. The ratio between the two gives an average implicit price, in dinars per gigajoule, which should stay within a reasonable range across industries.
+
+```{python}
+#| label: vraisemblance
+ANNEE = ANNEES[-1]
+SUT = set(activites.filter(~pl.col("code").is_in(PSEUDO + ["MEN"]))["code"])
+
+energie_finale = (
+    pefa.filter(
+        pl.col("quadrant") == "Use",
+        pl.col("niveau1") == "Energy products:",
+        pl.col("niveau2") == "End-use of energy products by SIEC class:",
+        pl.col("activite").is_in(list(SUT | {"MEN"})),
+    )
+    .group_by("annee", "activite")
+    .agg(pl.col("tj").sum().alias("energie_tj"))
+)
+achats = (
+    tre.filter(pl.col("bloc") == "emplois", pl.col("ligne").is_in(["06", "19", "35"]), ~pl.col("agregat"), pl.col("annee").is_in(ANNEES))
+    .with_columns(activite=pl.when(pl.col("colonne") == "P3_MEN").then(pl.lit("MEN")).otherwise(pl.col("colonne")))
+    .filter(pl.col("activite").is_in(list(SUT | {"MEN"})))
+    .group_by("annee", "activite")
+    .agg(pl.col("valeur").sum().alias("achats_mdt"))
+)
+vraisemblance = (
+    energie_finale.join(achats, on=["annee", "activite"], how="full", coalesce=True)
+    .with_columns(pl.col("energie_tj", "achats_mdt").fill_null(0))
+    .with_columns(prix_tnd_gj=(pl.col("achats_mdt") * 1e6 / (pl.col("energie_tj") * 1e3)).round(1))
+    .join(activites.select(pl.col("code").alias("activite"), "fr"), on="activite")
+)
+vraisemblance.filter(pl.col("annee") == ANNEE).sort("energie_tj", descending=True).with_columns(
+    pl.col("energie_tj", "achats_mdt").round(0)
+)
+```
+
+Refining (19) and electricity (35) have a high implicit price, because their purchases of energy products are mostly transformation inputs, which are excluded here from end use. Industries that consume energy without buying any in the SUT, or the reverse, need to be examined; the following table lists them.
+
+```{python}
+#| label: incoherences
+vraisemblance.filter(
+    ((pl.col("energie_tj") > 0) & (pl.col("achats_mdt") <= 0)) | ((pl.col("energie_tj") <= 0) & (pl.col("achats_mdt") > 0))
+).select("annee", "activite", "fr", "energie_tj", "achats_mdt").sort("activite", "annee")
+```
+
+::: {.callout-note}
+## Open question
+Very high or very low implicit prices point to an allocation that needs review. Service industries receive the services energy according to their purchases of electricity and gas; their implicit price mostly reflects this key. Industries that buy petroleum products without receiving energy from the balance (for example for their vehicles) depend on the road transport key. These points are to be discussed with INS during the mission.
+:::
+
+## Energy intensities
+
+The energy intensity of an industry relates its energy end use (excluding transformation inputs) to its output or value added, in terajoules per million current dinars. These indicators follow the SUT at current prices, so their changes combine volumes and prices.
+
+```{python}
+#| label: intensites
+comptes_production = (
+    tre.filter(pl.col("bloc") == "valeur_ajoutee", pl.col("ligne").is_in(["P1", "B1G"]))
+    .pivot("ligne", index=["annee", "colonne"], values="valeur")
+    .rename({"colonne": "activite", "P1": "production_mdt", "B1G": "valeur_ajoutee_mdt"})
+)
+indicateurs = (
+    energie_finale.filter(pl.col("activite") != "MEN")
+    .join(comptes_production, on=["annee", "activite"], how="left")
+    .with_columns(
+        intensite_production=pl.col("energie_tj") / pl.col("production_mdt"),
+        intensite_va=pl.col("energie_tj") / pl.col("valeur_ajoutee_mdt"),
+    )
+    .rename({"energie_tj": "energie_finale_tj"})
+    .sort("annee", "activite")
+)
+(
+    indicateurs.filter(pl.col("annee") == ANNEE)
+    .join(activites.select(pl.col("code").alias("activite"), "fr"), on="activite")
+    .select("activite", "fr", pl.col("energie_finale_tj").round(0), pl.col("intensite_va").round(2))
+    .sort("intensite_va", descending=True)
+)
+```
+
+## Export
+
+The workbook contains a notes sheet, the long table for all years, one supply sheet and one use sheet per year, and the indicators. Row labels come from `data/nomenclatures/pefa_lignes.csv`, activity labels from `data/nomenclatures/activites.csv`, and headers from `data/nomenclatures/libelles.csv`. The Arabic sheets run from right to left.
+
+```{python}
+#| label: export
+ORDRE_ACTIVITES = activites["code"].to_list()
+ORDRE_LIGNES = {(t, c): o for t, c, o in lignes.select("type", "cle", "ordre").iter_rows()}
+
+
+def traduire(langue: str) -> tuple[dict, dict, dict]:
+    t = dict(zip(libelles["cle"], libelles[langue]))
+    l = dict(zip(lignes["cle"], lignes[langue]))
+    a = dict(zip(activites["code"], activites[langue]))
+    return t, l, a
+
+
+def matrice(annee: int, quadrant: str, langue: str) -> pl.DataFrame:
+    """Tableau des ressources ou des emplois d'une année : produits en lignes, activités en colonnes."""
+    t, l, a = traduire(langue)
+    donnees = pefa.filter(pl.col("annee") == annee, pl.col("quadrant") == quadrant)
+    presentes = [c for c in ORDRE_ACTIVITES if c in set(donnees["activite"])]
+    tableau = (
+        donnees.with_columns(
+            o1=pl.col("niveau1").replace_strict({c: o for (ty, c), o in ORDRE_LIGNES.items() if ty == "niveau1"}),
+            o2=pl.col("niveau2").replace_strict({c: o for (ty, c), o in ORDRE_LIGNES.items() if ty == "niveau2"}, default=0),
+            o3=pl.col("produit").replace_strict({c: o for (ty, c), o in ORDRE_LIGNES.items() if ty == "produit"}),
+        )
+        .pivot("activite", index=["o1", "o2", "o3", "niveau1", "niveau2", "produit"], values="tj", aggregate_function="sum")
+        .sort("o1", "o2", "o3")
+    )
+    tableau = tableau.with_columns(pl.col(presentes).fill_null(0)).with_columns(
+        pl.sum_horizontal(presentes).alias("total")
+    )
+    return tableau.select(
+        pl.col("niveau1").replace_strict(l).alias(t["niveau1"]),
+        pl.col("niveau2").replace_strict(l, default=None).alias(t["niveau2"]),
+        pl.col("produit").replace_strict(l).alias(t["produit"]),
+        *[pl.col(c).alias(f"{c} {a[c]}") for c in presentes],
+        pl.col("total").alias(t["total"]),
+    )
+
+
+def donnees_longues(langue: str) -> pl.DataFrame:
+    t, l, a = traduire(langue)
+    return pefa.select(
+        pl.col("annee").alias(t["annee"]),
+        pl.col("quadrant").replace_strict({"Supply": t["Supply"], "Use": t["Use"]}).alias(t["quadrant"]),
+        pl.col("niveau1").replace_strict(l).alias(t["niveau1"]),
+        pl.col("niveau2").replace_strict(l, default=None).alias(t["niveau2"]),
+        pl.col("produit").replace_strict(l).alias(t["produit"]),
+        pl.col("activite").alias(t["code_activite"]),
+        pl.col("activite").replace_strict(a).alias(t["activite"]),
+        pl.col("tj").alias(t["tj"]),
+    )
+
+
+def indicateurs_traduits(langue: str) -> pl.DataFrame:
+    t, l, a = traduire(langue)
+    return indicateurs.select(
+        pl.col("annee").alias(t["annee"]),
+        pl.col("activite").alias(t["code_activite"]),
+        pl.col("activite").replace_strict(a).alias(t["activite"]),
+        *[pl.col(c).alias(t[c]) for c in ["energie_finale_tj", "production_mdt", "valeur_ajoutee_mdt", "intensite_production", "intensite_va"]],
+    )
+
+
+def exporter(langue: str) -> Path:
+    t, _, _ = traduire(langue)
+    dossier = PRODUITS / langue
+    dossier.mkdir(parents=True, exist_ok=True)
+    chemin = dossier / f"{NOM}.xlsx"
+    with xlsxwriter.Workbook(chemin) as classeur:
+        notes = classeur.add_worksheet(t["feuille_notes"])
+        for i, cle in enumerate(["titre_pefa", "unite_tj", "note_source", "note_methode", "note_provisoire", "note_site"]):
+            notes.write(i, 0, t[cle])
+        feuilles = [(t["feuille_donnees"], donnees_longues(langue), 1)]
+        for annee in ANNEES:
+            feuilles.append((f"{t['feuille_ressources']} {annee}", matrice(annee, "Supply", langue), 1))
+            feuilles.append((f"{t['feuille_emplois']} {annee}", matrice(annee, "Use", langue), 1))
+        feuilles.append((t["feuille_indicateurs"], indicateurs_traduits(langue), 3))
+        for nom, tableau, decimales in feuilles:
+            tableau.write_excel(workbook=classeur, worksheet=nom, autofit=True, float_precision=decimales)
+        if langue == "ar":
+            for feuille in classeur.worksheets():
+                feuille.right_to_left()
+    return chemin
+
+
+for langue in ["fr", "en", "ar"]:
+    print(exporter(langue))
+```
+
+The following buttons download the workbooks.
+
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/en/comptes_pefa.xlsx){.btn .btn-primary download="comptes_pefa.xlsx"}
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/fr/comptes_pefa.xlsx){.btn .btn-primary download="comptes_pefa.xlsx"}
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/ar/comptes_pefa.xlsx){.btn .btn-primary download="comptes_pefa.xlsx"}
+
+## References
+
+::: {#refs}
+:::
