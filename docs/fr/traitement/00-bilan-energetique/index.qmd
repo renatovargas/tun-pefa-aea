@@ -1,0 +1,177 @@
+---
+title: "Lecture du bilan énergétique"
+subtitle: "Page d'exemple : du classeur de l'ONEM à un tableau long en térajoules"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: Consultant du FMI
+lang: fr-FR
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+---
+
+## Objet
+
+Cette page sert de modèle aux pages de traitement. Elle lit le bilan énergétique de 2022, le met en format long, convertit les kilotonnes équivalent pétrole (ktep) en térajoules (TJ) et exporte le résultat. Le tableau Parquet sert aux pages suivantes, et les classeurs Excel en trois langues sont publiés dans la page de téléchargements.
+
+Les chemins sont relatifs à la racine du projet, car `_quarto.yml` fixe `execute-dir: project`.
+
+## Bibliothèques et paramètres
+
+```{python}
+#| label: parametres
+from pathlib import Path
+
+import polars as pl
+import xlsxwriter
+
+ANNEE = 2022
+SOURCE = Path("data/sources/bilan-energetique/balance2022.xlsx")
+INTERMEDIAIRES = Path("data/intermediaires")
+PRODUITS = Path("data/produits")
+
+# Facteur de conversion : 1 tep = 41,868 GJ, donc 1 ktep = 41,868 TJ
+KTEP_EN_TJ = 41.868
+```
+
+## Lecture du classeur
+
+Le classeur de l'ONEM place les noms des produits sur deux lignes d'en-tête et les flux dans la première colonne. La bibliothèque `polars` lit la feuille sans en-tête ; les lignes vides du haut de la feuille sont ignorées à la lecture.
+
+```{python}
+#| label: lecture
+brut = pl.read_excel(SOURCE, has_header=False, engine="calamine", infer_schema_length=0)
+
+# Les deux lignes d'en-tête des produits commencent par « en 1000 tep »
+ligne_entete = brut.with_row_index().filter(
+    pl.col("column_0").str.starts_with("en 1000 tep")
+)["index"][0]
+
+
+def nom_produit(haut: str | None, bas: str | None) -> str:
+    """Réunit les deux lignes d'en-tête d'un produit en un seul libellé."""
+    morceaux = [m.strip() for m in (haut, bas) if m is not None and m.strip()]
+    return " ".join(" ".join(morceaux).split())
+
+
+produits = [
+    nom_produit(brut[ligne_entete, j], brut[ligne_entete + 1, j])
+    for j in range(1, brut.width)
+]
+produits[:6]
+```
+
+Les flux commencent à la ligne « Production primaire ». Certains libellés se répètent : « Raffineries » apparaît dans les entrées et dans les sorties de transformation. La colonne `section` garde le titre du bloc auquel appartient chaque ligne, et la colonne `ordre` garde sa position dans le bilan.
+
+```{python}
+#| label: flux
+SECTIONS = {
+    "Entrées en transformation",
+    "Sortie de transformation",
+    "Echanges, transfer, restitutions",
+    "Consommation finale non énergétique",
+    "Consommation finale énergétique",
+    "Industrie",
+    "Transport",
+    "Foyers domestiques, commerce, adm, etc.",
+}
+
+debut = brut.with_row_index().filter(pl.col("column_0") == "Production primaire")["index"][0]
+corps = brut[debut:].rename(
+    {f"column_{j}": produits[j - 1] for j in range(1, brut.width)} | {"column_0": "flux"}
+)
+
+
+def attribuer_sections(flux: list[str]) -> list[str]:
+    """Associe chaque ligne au dernier titre de bloc rencontré au-dessus d'elle."""
+    courante, resultat = "Approvisionnement", []
+    for libelle in flux:
+        if libelle in SECTIONS:
+            courante = libelle
+        resultat.append(courante)
+    return resultat
+
+
+corps = corps.with_columns(
+    pl.Series("section", attribuer_sections(corps["flux"].to_list())),
+    pl.Series("ordre", range(1, corps.height + 1)),
+)
+corps.select("ordre", "section", "flux").head(12)
+```
+
+## Format long et conversion
+
+Le format long a une ligne par flux et par produit. Les cellules vides du bilan sont des zéros et sont retirées.
+
+```{python}
+#| label: format-long
+bilan = (
+    corps.unpivot(index=["ordre", "section", "flux"], variable_name="produit", value_name="ktep")
+    .with_columns(pl.col("ktep").cast(pl.Float64, strict=False))
+    .filter(pl.col("ktep").is_not_null() & (pl.col("ktep") != 0))
+    .with_columns(
+        pl.lit(ANNEE).alias("annee"),
+        (pl.col("ktep") * KTEP_EN_TJ).alias("tj"),
+    )
+    .select("annee", "ordre", "section", "flux", "produit", "ktep", "tj")
+)
+bilan.head(8)
+```
+
+## Contrôle
+
+La production primaire de la colonne « Total tous produits » doit égaler la somme des colonnes de produits, sans les colonnes de sous-totaux. Ce contrôle vérifie que la lecture n'a pas décalé de colonne. L'écart toléré est d'une ktep, car le bilan publie des valeurs arrondies.
+
+```{python}
+#| label: controle
+production = bilan.filter(pl.col("flux") == "Production primaire")
+total = production.filter(pl.col("produit") == "Total tous produits")["ktep"][0]
+somme = production.filter(~pl.col("produit").str.starts_with("Total"))["ktep"].sum()
+assert abs(total - somme) < 1, f"Écart de {total - somme:.1f} ktep : vérifier les colonnes"
+print(f"Production primaire : total {total:,.0f} ktep, somme des produits {somme:,.1f} ktep")
+print(f"Soit {total * KTEP_EN_TJ:,.0f} TJ")
+```
+
+## Export
+
+Le tableau intermédiaire est enregistré en Parquet, compressé avec zstd. Les classeurs Excel reprennent le même tableau avec les en-têtes traduits à partir de `data/nomenclatures/libelles.csv`. La feuille arabe est orientée de droite à gauche. Les libellés des flux et des produits restent en français dans cette page d'exemple ; leur traduction relève des nomenclatures à construire.
+
+```{python}
+#| label: export
+INTERMEDIAIRES.mkdir(parents=True, exist_ok=True)
+bilan.write_parquet(INTERMEDIAIRES / f"bilan_energetique_{ANNEE}.parquet", compression="zstd")
+
+libelles = pl.read_csv("data/nomenclatures/libelles.csv")
+
+
+def exporter_excel(tableau: pl.DataFrame, langue: str, nom: str) -> Path:
+    """Écrit un classeur Excel avec les en-têtes dans la langue demandée."""
+    traduction = dict(zip(libelles["cle"], libelles[langue]))
+    dossier = PRODUITS / langue
+    dossier.mkdir(parents=True, exist_ok=True)
+    chemin = dossier / f"{nom}.xlsx"
+    feuille = f"{traduction['feuille_bilan']} {ANNEE}"
+    with xlsxwriter.Workbook(chemin) as classeur:
+        tableau.rename({c: traduction.get(c, c) for c in tableau.columns}).write_excel(
+            workbook=classeur, worksheet=feuille, autofit=True, float_precision=1
+        )
+        if langue == "ar":
+            classeur.get_worksheet_by_name(feuille).right_to_left()
+    return chemin
+
+
+for langue in ["fr", "en", "ar"]:
+    print(exporter_excel(bilan, langue, f"bilan_energetique_{ANNEE}"))
+```
+
+Les boutons suivants téléchargent les classeurs produits.
+
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/fr/bilan_energetique_2022.xlsx){.btn .btn-primary download="bilan_energetique_2022.xlsx"}
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/en/bilan_energetique_2022.xlsx){.btn .btn-primary download="bilan_energetique_2022.xlsx"}
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/ar/bilan_energetique_2022.xlsx){.btn .btn-primary download="bilan_energetique_2022.xlsx"}

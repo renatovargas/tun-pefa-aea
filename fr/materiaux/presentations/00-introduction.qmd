@@ -1,0 +1,18 @@
+---
+title: "Introduction aux comptes de l'énergie et des émissions"
+subtitle: "Le SCEE, les PEFA et les AEA en Tunisie"
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../../diapositives/00-introduction/index.html" title="Introduction aux comptes de l'énergie et des émissions" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Plein écran](../../diapositives/00-introduction/index.html){target="_blank"}
+::::
+
+## Objectifs
+
+- Situer les comptes de l'énergie et des émissions dans le cadre central du SCEE.
+- Présenter les sources de données disponibles en Tunisie.
+- Décrire les étapes de compilation qui seront abordées pendant la mission.

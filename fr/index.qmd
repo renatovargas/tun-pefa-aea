@@ -1,0 +1,22 @@
+---
+title: "Comptes de l'énergie et des émissions de la Tunisie"
+---
+
+Ce site réunit les matériaux d'appui à l'élaboration des comptes physiques des flux d'énergie (PEFA) et des comptes des émissions atmosphériques (AEA) de la Tunisie. Ce travail est mené par l'Institut national de la statistique (INS) et les institutions partenaires, avec l'assistance technique du Fonds monétaire international (FMI). Les matériaux sont publiés au fur et à mesure de l'avancement de la mission.
+
+Le site est disponible en français, en anglais et en arabe. Le menu « Langue » ouvre la même page dans une autre langue.
+
+# Contenu
+
+**Matériaux.** Les [documents et présentations](materiaux/index.qmd) exposent le contexte de la mission, le cadre du SCEE et les méthodes de compilation.
+
+**Traitement.** Les [pages de traitement](traitement/index.qmd) décrivent pas à pas, avec le code Python, la transformation des données sources en comptes. Chaque page se termine par l'export de ses tableaux.
+
+**Téléchargements.** La [page de téléchargements](telechargements.qmd) rassemble les tableaux finaux au format Excel, en français, en anglais et en arabe.
+
+# Objectifs
+
+- Passer du bilan énergétique national aux tableaux physiques des ressources et des emplois d'énergie.
+- Passer de l'inventaire national des gaz à effet de serre aux comptes des émissions atmosphériques par activité économique.
+- Garder une trace complète et reproductible des données, des méthodes et du code.
+- Préparer un plan de travail pour la diffusion des comptes.

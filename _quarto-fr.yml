@@ -1,0 +1,60 @@
+# Profil français (langue principale). Rendu : quarto render --profile fr
+project:
+  render:
+    - index.qmd
+    - fr/**/*.qmd
+
+lang: fr-FR
+csl: assets/apa-fr.csl
+
+website:
+  title: "Tunisie : comptes de l'énergie et des émissions"
+  description: "Comptes physiques des flux d'énergie (PEFA) et comptes des émissions atmosphériques (AEA) de la Tunisie"
+  navbar:
+    left:
+      - href: fr/index.qmd
+        text: Accueil
+      - href: fr/materiaux/index.qmd
+        text: Matériaux
+      - href: fr/traitement/index.qmd
+        text: Traitement
+      - href: fr/telechargements.qmd
+        text: Téléchargements
+      - href: fr/a-propos.qmd
+        text: À propos
+    right:
+      - text: "Langue"
+        menu:
+          - text: "Français"
+            href: "#lang-fr"
+          - text: "English"
+            href: "#lang-en"
+          - text: "العربية"
+            href: "#lang-ar"
+  sidebar:
+    - title: Matériaux
+      style: docked
+      contents:
+        - href: fr/materiaux/index.qmd
+          text: Matériaux
+        - section: Documents
+          contents:
+            - href: fr/materiaux/documents/contexte-mission/index.qmd
+              text: Contexte de la mission
+        - section: Présentations
+          contents:
+            - href: fr/materiaux/presentations/00-introduction.qmd
+              text: Introduction
+    - title: Traitement
+      style: docked
+      contents:
+        - href: fr/traitement/index.qmd
+          text: Traitement des données
+        - href: fr/traitement/00-bilan-energetique/index.qmd
+          text: Lecture du bilan énergétique
+
+format:
+  html:
+    theme:
+      - yeti
+      - assets/styles.scss

@@ -1,0 +1,13 @@
+---
+title: "Data processing"
+subtitle: "From source data to energy and air emissions accounts"
+toc: false
+---
+
+The pages in this section describe step by step how the data provided by the authorities become accounts. Each page combines explanations with the Python code that carries them out. The pages are read in the order of their number, because each one uses tables produced by the previous ones.
+
+The French pages run the code. This English version shows the same code without running it; results and tables are in the French pages and on the [downloads page](../telechargements.qmd). Code comments stay in French, as in the reference version.
+
+| Page | Contents |
+|:-----|:---------|
+| [00. Reading the energy balance](00-bilan-energetique/index.qmd) | Reading the 2022 balance, long format and conversion to terajoules |

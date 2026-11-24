@@ -1,0 +1,20 @@
+<script>
+// Sélecteur de langue. Les arborescences fr/, en/ et ar/ sont des miroirs :
+// la même page existe au même chemin dans chaque langue. Les liens du menu
+// pointent vers "#lang-xx" et ce script les remplace par la page équivalente.
+document.addEventListener("DOMContentLoaded", function () {
+  var segment = /\/(fr|en|ar)\/(?!.*\/(fr|en|ar)\/)/;
+  var path = window.location.pathname;
+  document.querySelectorAll('a[href$="#lang-fr"], a[href$="#lang-en"], a[href$="#lang-ar"]').forEach(function (a) {
+    var target = a.getAttribute("href").slice(-2);
+    var dest;
+    if (segment.test(path)) {
+      dest = path.replace(segment, "/" + target + "/");
+    } else {
+      // Page racine (sélecteur de langue) : aller à l'accueil de la langue
+      dest = path.replace(/[^\/]*$/, "") + target + "/index.html";
+    }
+    a.setAttribute("href", dest);
+  });
+});
+</script>

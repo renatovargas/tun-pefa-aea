@@ -1,0 +1,37 @@
+---
+title: "Introduction aux comptes de l'énergie et des émissions"
+subtitle: "Le SCEE, les PEFA et les AEA en Tunisie"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: Consultant du FMI
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+## Sujets {.theme-content}
+
+1. Le cadre central du SCEE.
+2. Les comptes physiques des flux d'énergie (PEFA).
+3. Les comptes des émissions atmosphériques (AEA).
+4. Les données disponibles en Tunisie.
+
+## Le cadre central du SCEE
+
+Le Système de comptabilité environnementale et économique (SCEE) enregistre les flux entre l'environnement et l'économie dans des tableaux des ressources et des emplois compatibles avec le Système de comptabilité nationale [@seea2014].
+
+- Les PEFA décrivent les flux d'énergie en térajoules [@seeaenergy2019].
+- Les AEA rattachent les émissions aux branches d'activité et aux ménages résidents [@eurostat2015aea].
+
+## Références
+
+::: {#refs}
+:::

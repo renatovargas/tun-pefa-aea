@@ -1,0 +1,13 @@
+---
+title: "Traitement des données"
+subtitle: "Des données sources aux comptes de l'énergie et des émissions"
+toc: false
+---
+
+Les pages de cette section décrivent pas à pas la transformation des données transmises par les autorités en comptes. Chaque page combine les explications et le code Python qui les exécute. Les pages se lisent dans l'ordre de leur numéro, car chacune utilise les tableaux produits par les précédentes.
+
+Les tableaux intermédiaires sont enregistrés au format Parquet dans `data/intermediaires/`. Les tableaux finaux sont exportés en Excel dans `data/produits/`, en français, en anglais et en arabe, et sont rassemblés dans la [page de téléchargements](../telechargements.qmd).
+
+| Page | Contenu |
+|:-----|:--------|
+| [00. Lecture du bilan énergétique](00-bilan-energetique/index.qmd) | Lecture du bilan de 2022, mise en format long et conversion en térajoules |

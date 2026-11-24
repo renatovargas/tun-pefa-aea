@@ -1,0 +1,33 @@
+---
+title: "المواد"
+subtitle: "وثائق وعروض تقديمية داعمة لحسابات الطاقة والانبعاثات"
+toc: false
+---
+
+:::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### الوثائق
+
+مذكرات مكتوبة للرجوع إليها وللقراءة المفصلة. يمكن تنزيل كل مذكرة بصيغة PDF.
+
+[عرض الوثائق](documents/contexte-mission/index.qmd){.btn .btn-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### العروض التقديمية
+
+شرائح يمكن مشاهدتها داخل الصفحة أو بملء الشاشة.
+
+[عرض العروض التقديمية](presentations/00-introduction.qmd){.btn .btn-primary}
+:::
+:::
+:::
+
+::::

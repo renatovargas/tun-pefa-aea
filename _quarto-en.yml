@@ -1,0 +1,62 @@
+# English profile. Render: quarto render en --profile en
+project:
+  render:
+    - en/**/*.qmd
+
+lang: en-US
+csl: assets/apa-en.csl
+
+website:
+  title: "Tunisia: energy and air emissions accounts"
+  description: "Physical energy flow accounts (PEFA) and air emissions accounts (AEA) for Tunisia"
+  navbar:
+    left:
+      - href: en/index.qmd
+        text: Home
+      - href: en/materiaux/index.qmd
+        text: Materials
+      - href: en/traitement/index.qmd
+        text: Processing
+      - href: en/telechargements.qmd
+        text: Downloads
+      - href: en/a-propos.qmd
+        text: About
+    right:
+      - text: "Language"
+        menu:
+          - text: "Français"
+            href: "#lang-fr"
+          - text: "English"
+            href: "#lang-en"
+          - text: "العربية"
+            href: "#lang-ar"
+  sidebar:
+    - title: Materials
+      style: docked
+      contents:
+        - href: en/materiaux/index.qmd
+          text: Materials
+        - section: Documents
+          contents:
+            - href: en/materiaux/documents/contexte-mission/index.qmd
+              text: Mission context
+        - section: Presentations
+          contents:
+            - href: en/materiaux/presentations/00-introduction.qmd
+              text: Introduction
+    - title: Processing
+      style: docked
+      contents:
+        - href: en/traitement/index.qmd
+          text: Data processing
+        - href: en/traitement/00-bilan-energetique/index.qmd
+          text: Reading the energy balance
+
+format:
+  html:
+    theme:
+      - yeti
+      - assets/styles.scss
+
+execute:
+  eval: false

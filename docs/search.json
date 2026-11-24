@@ -1,0 +1,716 @@
+[
+  {
+    "objectID": "fr/traitement/index.html",
+    "href": "fr/traitement/index.html",
+    "title": "Traitement des données",
+    "section": "",
+    "text": "Les pages de cette section décrivent pas à pas la transformation des données transmises par les autorités en comptes. Chaque page combine les explications et le code Python qui les exécute. Les pages se lisent dans l’ordre de leur numéro, car chacune utilise les tableaux produits par les précédentes.\nLes tableaux intermédiaires sont enregistrés au format Parquet dans data/intermediaires/. Les tableaux finaux sont exportés en Excel dans data/produits/, en français, en anglais et en arabe, et sont rassemblés dans la page de téléchargements.\n\n\n\nPage\nContenu\n\n\n\n\n00. Lecture du bilan énergétique\nLecture du bilan de 2022, mise en format long et conversion en térajoules",
+    "crumbs": [
+      "Traitement",
+      "Traitement des données"
+    ]
+  },
+  {
+    "objectID": "fr/telechargements.html",
+    "href": "fr/telechargements.html",
+    "title": "Téléchargements",
+    "section": "",
+    "text": "Chaque tableau est produit par une page de traitement, qui décrit son contenu et le code qui le génère. Les trois versions linguistiques d’un même tableau contiennent les mêmes chiffres.\n\n\n\n\nBilan énergétique 2022\nBilan de l’ONEM en format long, en milliers de tep et en térajoules. Tableau d’exemple qui illustre la structure des produits à venir.\nFrançais English العربية\nPage de traitement"
+  },
+  {
+    "objectID": "fr/materiaux/index.html",
+    "href": "fr/materiaux/index.html",
+    "title": "Matériaux",
+    "section": "",
+    "text": "Documents\nNotes écrites pour la consultation et la lecture détaillée. Chaque note peut se télécharger en PDF.\nVoir les documents\n\n\n\n\n\n\nPrésentations\nDiapositives consultables dans la page ou en plein écran.\nVoir les présentations",
+    "crumbs": [
+      "Matériaux"
+    ]
+  },
+  {
+    "objectID": "fr/index.html",
+    "href": "fr/index.html",
+    "title": "Comptes de l’énergie et des émissions de la Tunisie",
+    "section": "",
+    "text": "Ce site réunit les matériaux d’appui à l’élaboration des comptes physiques des flux d’énergie (PEFA) et des comptes des émissions atmosphériques (AEA) de la Tunisie. Ce travail est mené par l’Institut national de la statistique (INS) et les institutions partenaires, avec l’assistance technique du Fonds monétaire international (FMI). Les matériaux sont publiés au fur et à mesure de l’avancement de la mission.\nLe site est disponible en français, en anglais et en arabe. Le menu « Langue » ouvre la même page dans une autre langue.\n\nContenu\nMatériaux. Les documents et présentations exposent le contexte de la mission, le cadre du SCEE et les méthodes de compilation.\nTraitement. Les pages de traitement décrivent pas à pas, avec le code Python, la transformation des données sources en comptes. Chaque page se termine par l’export de ses tableaux.\nTéléchargements. La page de téléchargements rassemble les tableaux finaux au format Excel, en français, en anglais et en arabe.\n\n\nObjectifs\n\nPasser du bilan énergétique national aux tableaux physiques des ressources et des emplois d’énergie.\nPasser de l’inventaire national des gaz à effet de serre aux comptes des émissions atmosphériques par activité économique.\nGarder une trace complète et reproductible des données, des méthodes et du code.\nPréparer un plan de travail pour la diffusion des comptes."
+  },
+  {
+    "objectID": "fr/a-propos.html",
+    "href": "fr/a-propos.html",
+    "title": "À propos",
+    "section": "",
+    "text": "Ce site\nCe site fait partie de l’assistance technique que le Fonds monétaire international (FMI) apporte aux instituts nationaux de statistique pour la compilation de statistiques environnementales et économiques. En Tunisie, le travail avec l’Institut national de la statistique (INS) porte sur les comptes de l’énergie et des émissions atmosphériques du Système de comptabilité environnementale et économique (SCEE).\nLes matériaux documentent le processus et laissent des ressources que les institutions peuvent consulter et adapter à leur propre contexte. Ils sont mis à jour au fil du travail, et leur contenu peut donc changer.\n\n\nReproductibilité\nTout le traitement est écrit en Python dans des documents Quarto qui alternent texte et code. L’environnement est décrit par le fichier pyproject.toml et figé par uv.lock, de sorte que n’importe qui peut reproduire les résultats avec uv sync. Le code source est disponible dans le dépôt GitHub.\nLes pages de traitement en français exécutent le code. Les versions anglaise et arabe montrent le même code sans l’exécuter, afin de ne pas refaire les calculs.\n\n\nAuteur\nLe contenu a été préparé par Renato Vargas, économiste et consultant du FMI.\n\n\nAvertissement\nLes opinions, interprétations et conclusions présentées sur ce site sont celles de leurs auteurs. Elles ne représentent pas nécessairement les opinions du Fonds monétaire international, de son conseil d’administration ou de sa direction, et ne doivent pas leur être attribuées.\nLes matériaux ont une vocation informative et pédagogique. Ils présentent des options de mise en œuvre des méthodes traitées et ne constituent pas une instruction, une recommandation formelle, une directive ou une politique du FMI. Leur publication n’implique pas que le FMI approuve les méthodes, les données ou les résultats présentés.\nAucune partie de ce site n’oblige l’INS ou une autre institution à adopter les méthodes décrites. Les décisions sur la méthodologie, les données et la publication des statistiques officielles relèvent de chaque institution, dans le cadre de ses propres compétences.\nLes auteurs ont veillé à l’exactitude des contenus, sans garantie quant à leur exhaustivité ou leur adéquation à un usage particulier. Toute erreur ou omission relève de la responsabilité des auteurs."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Tunisie · Tunisia · تونس",
+    "section": "",
+    "text": "Français\nComptes physiques des flux d’énergie et comptes des émissions atmosphériques de la Tunisie.\nEntrer\n\n\n\n\n\n\nEnglish\nPhysical energy flow accounts and air emissions accounts for Tunisia.\nEnter\n\n\n\n\n\n\nالعربية\nحسابات التدفقات المادية للطاقة وحسابات انبعاثات الهواء في تونس.\nدخول"
+  },
+  {
+    "objectID": "fr/diapositives/00-introduction/index.html#sujets",
+    "href": "fr/diapositives/00-introduction/index.html#sujets",
+    "title": "Introduction aux comptes de l’énergie et des émissions",
+    "section": "Sujets",
+    "text": "Sujets\n\nLe cadre central du SCEE.\nLes comptes physiques des flux d’énergie (PEFA).\nLes comptes des émissions atmosphériques (AEA).\nLes données disponibles en Tunisie."
+  },
+  {
+    "objectID": "fr/diapositives/00-introduction/index.html#le-cadre-central-du-scee",
+    "href": "fr/diapositives/00-introduction/index.html#le-cadre-central-du-scee",
+    "title": "Introduction aux comptes de l’énergie et des émissions",
+    "section": "Le cadre central du SCEE",
+    "text": "Le cadre central du SCEE\nLe Système de comptabilité environnementale et économique (SCEE) enregistre les flux entre l’environnement et l’économie dans des tableaux des ressources et des emplois compatibles avec le Système de comptabilité nationale (United Nations et al., 2014).\n\nLes PEFA décrivent les flux d’énergie en térajoules (United Nations, 2019).\nLes AEA rattachent les émissions aux branches d’activité et aux ménages résidents (Eurostat, 2015)."
+  },
+  {
+    "objectID": "fr/diapositives/00-introduction/index.html#références",
+    "href": "fr/diapositives/00-introduction/index.html#références",
+    "title": "Introduction aux comptes de l’énergie et des émissions",
+    "section": "Références",
+    "text": "Références\n\n\nEurostat. (2015). Manual for Air Emissions Accounts: 2015 Edition. Luxembourg: Publications Office of the European Union.\n\n\nUnited Nations. (2019). System of Environmental-Economic Accounting for Energy: SEEA-Energy. New York: United Nations.\n\n\nUnited Nations, European Commission, Food and Agriculture Organization of the United Nations, International Monetary Fund, Organisation for Economic Co-operation and Development, & World Bank. (2014). System of Environmental-Economic Accounting 2012: Central Framework. New York: United Nations."
+  },
+  {
+    "objectID": "fr/materiaux/documents/contexte-mission/index.html",
+    "href": "fr/materiaux/documents/contexte-mission/index.html",
+    "title": "Contexte de la mission",
+    "section": "",
+    "text": "L’assistance technique répond à une demande des autorités tunisiennes d’appui à la compilation des comptes des émissions atmosphériques. Elle s’inscrit dans le programme de statistiques du climat du Département des statistiques du FMI et associe l’Institut national de la statistique (INS) et les ministères concernés.\nEn juin 2026, des représentants tunisiens ont participé à un atelier virtuel de trois jours sur les comptes de l’énergie et des émissions. L’atelier a couvert le cadre du Système de comptabilité environnementale et économique (SCEE), les bilans énergétiques et les comptes de l’énergie, les inventaires et les comptes des émissions atmosphériques, les besoins en données et les questions de compilation (Eurostat, 2015; United Nations et al., 2014; United Nations, 2019). Les participants tunisiens y ont présenté leurs travaux et leurs données (Besbes, 2026; Bouazizi, 2026).",
+    "crumbs": [
+      "Matériaux",
+      "Documents",
+      "Contexte de la mission"
+    ]
+  },
+  {
+    "objectID": "fr/materiaux/documents/contexte-mission/index.html#antécédents",
+    "href": "fr/materiaux/documents/contexte-mission/index.html#antécédents",
+    "title": "Contexte de la mission",
+    "section": "",
+    "text": "L’assistance technique répond à une demande des autorités tunisiennes d’appui à la compilation des comptes des émissions atmosphériques. Elle s’inscrit dans le programme de statistiques du climat du Département des statistiques du FMI et associe l’Institut national de la statistique (INS) et les ministères concernés.\nEn juin 2026, des représentants tunisiens ont participé à un atelier virtuel de trois jours sur les comptes de l’énergie et des émissions. L’atelier a couvert le cadre du Système de comptabilité environnementale et économique (SCEE), les bilans énergétiques et les comptes de l’énergie, les inventaires et les comptes des émissions atmosphériques, les besoins en données et les questions de compilation (Eurostat, 2015; United Nations et al., 2014; United Nations, 2019). Les participants tunisiens y ont présenté leurs travaux et leurs données (Besbes, 2026; Bouazizi, 2026).",
+    "crumbs": [
+      "Matériaux",
+      "Documents",
+      "Contexte de la mission"
+    ]
+  },
+  {
+    "objectID": "fr/materiaux/documents/contexte-mission/index.html#le-système-statistique-de-lénergie-et-des-émissions",
+    "href": "fr/materiaux/documents/contexte-mission/index.html#le-système-statistique-de-lénergie-et-des-émissions",
+    "title": "Contexte de la mission",
+    "section": "2 Le système statistique de l’énergie et des émissions",
+    "text": "2 Le système statistique de l’énergie et des émissions\nL’Observatoire national de l’énergie et des mines (ONEM), rattaché au ministère chargé de l’énergie, produit le bilan énergétique national. La Tunisie élabore un bilan depuis les années 1980 et le publie chaque année au format d’Eurostat et de l’Agence internationale de l’énergie depuis 2010 (Bouazizi, 2026). L’INS compile et diffuse les statistiques officielles, dont les indicateurs énergétiques et les comptes nationaux.\nL’Agence nationale pour la maîtrise de l’énergie (ANME) coordonne l’inventaire national des gaz à effet de serre pour les secteurs de l’énergie et des procédés industriels. Le ministère de l’Agriculture coordonne l’agriculture et l’utilisation des terres, et l’Office national de l’assainissement (ONAS) coordonne les déchets. L’inventaire couvre la période 1990 à 2022, avec une estimation pour 2023, suit les lignes directrices du GIEC de 2006 et utilise les potentiels de réchauffement global du cinquième rapport d’évaluation (Besbes, 2026; Intergovernmental Panel on Climate Change, 2006).\nL’INS a signalé trois difficultés lors de l’atelier (Bouazizi, 2026). Les nomenclatures du bilan énergétique et des activités économiques ne sont pas toujours harmonisées. La consommation d’énergie par produit et par secteur comporte des lacunes et repose sur des estimations. Les comptes nationaux tiennent compte du secteur informel, contrairement au bilan.",
+    "crumbs": [
+      "Matériaux",
+      "Documents",
+      "Contexte de la mission"
+    ]
+  },
+  {
+    "objectID": "fr/materiaux/documents/contexte-mission/index.html#données-transmises",
+    "href": "fr/materiaux/documents/contexte-mission/index.html#données-transmises",
+    "title": "Contexte de la mission",
+    "section": "3 Données transmises",
+    "text": "3 Données transmises\nLes autorités ont transmis les fichiers résumés dans le Tableau 1. Ils sont conservés sans modification dans le dossier data/sources/ du dépôt.\n\n\n\nTable 1: Données transmises par les autorités tunisiennes\n\n\n\n\n\n\n\n\n\n\n\nSource\nContenu\nAnnées\nUnité\n\n\n\n\nBilan énergétique\nBilan national de l’énergie, une feuille par année\n2015 à 2022\nktep\n\n\nInventaire des GES\nTableaux communs de notification (CRT), potentiels de réchauffement du cinquième rapport du GIEC\n2015 à 2022\nkt et kt éq. CO2\n\n\nInventaire des GES\nExtraction de la base de la CCNUCC pour la Tunisie\n2015 à 2022\nkt\n\n\nComptes nationaux\nTableaux des ressources et des emplois aux prix courants\n2015 à 2023\nmillions de dinars",
+    "crumbs": [
+      "Matériaux",
+      "Documents",
+      "Contexte de la mission"
+    ]
+  },
+  {
+    "objectID": "fr/materiaux/documents/contexte-mission/index.html#outils-du-fmi",
+    "href": "fr/materiaux/documents/contexte-mission/index.html#outils-du-fmi",
+    "title": "Contexte de la mission",
+    "section": "4 Outils du FMI",
+    "text": "4 Outils du FMI\nLe FMI a mis au point deux outils pour ces comptes. Le convertisseur PEFA transforme un bilan énergétique en tableaux physiques des ressources et des emplois d’énergie à l’aide d’une matrice de concordance entre les flux du bilan et les branches d’activité (International Monetary Fund, 2024). Le convertisseur I2A transforme un inventaire d’émissions en comptes des émissions atmosphériques par activité économique, avec un ajustement pour le principe de résidence dans les transports aériens et maritimes. Les deux outils combinent un classeur Excel et des fonctions Python.\nLes pages de traitement de ce site reprennent les mêmes étapes dans des documents qui décrivent chaque opération et son code.",
+    "crumbs": [
+      "Matériaux",
+      "Documents",
+      "Contexte de la mission"
+    ]
+  },
+  {
+    "objectID": "fr/materiaux/documents/contexte-mission/index.html#programme-de-la-mission",
+    "href": "fr/materiaux/documents/contexte-mission/index.html#programme-de-la-mission",
+    "title": "Contexte de la mission",
+    "section": "5 Programme de la mission",
+    "text": "5 Programme de la mission\nLa mission se déroule à Tunis du 7 au 11 décembre 2026. Le Tableau 2 présente les thèmes prévus pour chaque journée.\n\n\n\nTable 2: Programme de la mission\n\n\n\n\n\n\n\n\n\nJour\nThèmes\n\n\n\n\nLundi 7 décembre\nRéunion d’ouverture avec la direction générale de l’INS. Objectifs, portée et produits attendus. Système statistique national et état de mise en œuvre du SCEE. Dispositif institutionnel des statistiques de l’énergie. Démonstration des outils PEFA et AEA.\n\n\nMardi 8 décembre\nCadre des comptes de l’énergie : nomenclatures d’activités et de produits, matrice d’allocation, ajustement entre territoire et résidence, contrôles de cohérence. Compilation et diffusion des comptes de l’énergie.\n\n\nMercredi 9 décembre\nDispositif institutionnel et sources de données des comptes des émissions. Cadre des comptes des émissions : nomenclatures d’activités et de sources, matrice d’allocation, ajustement entre territoire et résidence, contrôles de cohérence. Compilation et diffusion.\n\n\nJeudi 10 décembre\nFormats de diffusion et indicateurs. Plan de travail de l’INS sur les comptes de l’énergie et des émissions. Préparation du rapport d’assistance technique et rencontres avec les partenaires.\n\n\nVendredi 11 décembre\nDiscussion du projet de rapport, des recommandations et de la feuille de route. Présentation des recommandations. Questions en suspens.",
+    "crumbs": [
+      "Matériaux",
+      "Documents",
+      "Contexte de la mission"
+    ]
+  },
+  {
+    "objectID": "fr/materiaux/documents/contexte-mission/index.html#références",
+    "href": "fr/materiaux/documents/contexte-mission/index.html#références",
+    "title": "Contexte de la mission",
+    "section": "6 Références",
+    "text": "6 Références\n\n\nBesbes, M. (2026, juin). Tunisian GHG Inventory and Climate Policy. Presentation at the virtual workshop on energy and air emissions accounts, National Agency for Energy Conservation, Tunisia.\n\n\nBouazizi, O. (2026, juin). Energy Statistics in Tunisia. Presentation at the Virtual Workshop on Environment and Climate Change Statistics, National Institute of Statistics, Tunisia.\n\n\nEurostat. (2015). Manual for Air Emissions Accounts: 2015 Edition. Luxembourg: Publications Office of the European Union.\n\n\nIntergovernmental Panel on Climate Change. (2006). 2006 IPCC Guidelines for National Greenhouse Gas Inventories. Hayama: Institute for Global Environmental Strategies.\n\n\nInternational Monetary Fund. (2024). PEFA Converter: A Framework for Converting Energy Balance into Physical Supply and Use Tables. User Manual (Version 0.0). (S.l.): Statistics Department, Real Sector Division.\n\n\nUnited Nations. (2019). System of Environmental-Economic Accounting for Energy: SEEA-Energy. New York: United Nations.\n\n\nUnited Nations, European Commission, Food and Agriculture Organization of the United Nations, International Monetary Fund, Organisation for Economic Co-operation and Development, & World Bank. (2014). System of Environmental-Economic Accounting 2012: Central Framework. New York: United Nations.",
+    "crumbs": [
+      "Matériaux",
+      "Documents",
+      "Contexte de la mission"
+    ]
+  },
+  {
+    "objectID": "fr/materiaux/presentations/00-introduction.html#objectifs",
+    "href": "fr/materiaux/presentations/00-introduction.html#objectifs",
+    "title": "Introduction aux comptes de l’énergie et des émissions",
+    "section": "Objectifs",
+    "text": "Objectifs\n\nSituer les comptes de l’énergie et des émissions dans le cadre central du SCEE.\nPrésenter les sources de données disponibles en Tunisie.\nDécrire les étapes de compilation qui seront abordées pendant la mission.",
+    "crumbs": [
+      "Matériaux",
+      "Présentations",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/00-bilan-energetique/index.html",
+    "href": "fr/traitement/00-bilan-energetique/index.html",
+    "title": "Lecture du bilan énergétique",
+    "section": "",
+    "text": "Cette page sert de modèle aux pages de traitement. Elle lit le bilan énergétique de 2022, le met en format long, convertit les kilotonnes équivalent pétrole (ktep) en térajoules (TJ) et exporte le résultat. Le tableau Parquet sert aux pages suivantes, et les classeurs Excel en trois langues sont publiés dans la page de téléchargements.\nLes chemins sont relatifs à la racine du projet, car _quarto.yml fixe execute-dir: project.",
+    "crumbs": [
+      "Traitement",
+      "Lecture du bilan énergétique"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/00-bilan-energetique/index.html#objet",
+    "href": "fr/traitement/00-bilan-energetique/index.html#objet",
+    "title": "Lecture du bilan énergétique",
+    "section": "",
+    "text": "Cette page sert de modèle aux pages de traitement. Elle lit le bilan énergétique de 2022, le met en format long, convertit les kilotonnes équivalent pétrole (ktep) en térajoules (TJ) et exporte le résultat. Le tableau Parquet sert aux pages suivantes, et les classeurs Excel en trois langues sont publiés dans la page de téléchargements.\nLes chemins sont relatifs à la racine du projet, car _quarto.yml fixe execute-dir: project.",
+    "crumbs": [
+      "Traitement",
+      "Lecture du bilan énergétique"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/00-bilan-energetique/index.html#bibliothèques-et-paramètres",
+    "href": "fr/traitement/00-bilan-energetique/index.html#bibliothèques-et-paramètres",
+    "title": "Lecture du bilan énergétique",
+    "section": "2 Bibliothèques et paramètres",
+    "text": "2 Bibliothèques et paramètres\n\nfrom pathlib import Path\n\nimport polars as pl\nimport xlsxwriter\n\nANNEE = 2022\nSOURCE = Path(\"data/sources/bilan-energetique/balance2022.xlsx\")\nINTERMEDIAIRES = Path(\"data/intermediaires\")\nPRODUITS = Path(\"data/produits\")\n\n# Facteur de conversion : 1 tep = 41,868 GJ, donc 1 ktep = 41,868 TJ\nKTEP_EN_TJ = 41.868",
+    "crumbs": [
+      "Traitement",
+      "Lecture du bilan énergétique"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/00-bilan-energetique/index.html#lecture-du-classeur",
+    "href": "fr/traitement/00-bilan-energetique/index.html#lecture-du-classeur",
+    "title": "Lecture du bilan énergétique",
+    "section": "3 Lecture du classeur",
+    "text": "3 Lecture du classeur\nLe classeur de l’ONEM place les noms des produits sur deux lignes d’en-tête et les flux dans la première colonne. La bibliothèque polars lit la feuille sans en-tête ; les lignes vides du haut de la feuille sont ignorées à la lecture.\n\nbrut = pl.read_excel(SOURCE, has_header=False, engine=\"calamine\", infer_schema_length=0)\n\n# Les deux lignes d'en-tête des produits commencent par « en 1000 tep »\nligne_entete = brut.with_row_index().filter(\n    pl.col(\"column_0\").str.starts_with(\"en 1000 tep\")\n)[\"index\"][0]\n\n\ndef nom_produit(haut: str | None, bas: str | None) -&gt; str:\n    \"\"\"Réunit les deux lignes d'en-tête d'un produit en un seul libellé.\"\"\"\n    morceaux = [m.strip() for m in (haut, bas) if m is not None and m.strip()]\n    return \" \".join(\" \".join(morceaux).split())\n\n\nproduits = [\n    nom_produit(brut[ligne_entete, j], brut[ligne_entete + 1, j])\n    for j in range(1, brut.width)\n]\nproduits[:6]\n\n['Total tous produits',\n 'Pétrole brut',\n 'Liquides de gaz',\n 'Total Produits Pétroliers',\n 'Gaz de raffinage',\n 'GPL']\n\n\nLes flux commencent à la ligne « Production primaire ». Certains libellés se répètent : « Raffineries » apparaît dans les entrées et dans les sorties de transformation. La colonne section garde le titre du bloc auquel appartient chaque ligne, et la colonne ordre garde sa position dans le bilan.\n\nSECTIONS = {\n    \"Entrées en transformation\",\n    \"Sortie de transformation\",\n    \"Echanges, transfer, restitutions\",\n    \"Consommation finale non énergétique\",\n    \"Consommation finale énergétique\",\n    \"Industrie\",\n    \"Transport\",\n    \"Foyers domestiques, commerce, adm, etc.\",\n}\n\ndebut = brut.with_row_index().filter(pl.col(\"column_0\") == \"Production primaire\")[\"index\"][0]\ncorps = brut[debut:].rename(\n    {f\"column_{j}\": produits[j - 1] for j in range(1, brut.width)} | {\"column_0\": \"flux\"}\n)\n\n\ndef attribuer_sections(flux: list[str]) -&gt; list[str]:\n    \"\"\"Associe chaque ligne au dernier titre de bloc rencontré au-dessus d'elle.\"\"\"\n    courante, resultat = \"Approvisionnement\", []\n    for libelle in flux:\n        if libelle in SECTIONS:\n            courante = libelle\n        resultat.append(courante)\n    return resultat\n\n\ncorps = corps.with_columns(\n    pl.Series(\"section\", attribuer_sections(corps[\"flux\"].to_list())),\n    pl.Series(\"ordre\", range(1, corps.height + 1)),\n)\ncorps.select(\"ordre\", \"section\", \"flux\").head(12)\n\n\nshape: (12, 3)\n\n\n\nordre\nsection\nflux\n\n\ni64\nstr\nstr\n\n\n\n\n1\n\"Approvisionnement\"\n\"Production primaire\"\n\n\n2\n\"Approvisionnement\"\n\"Importation\"\n\n\n3\n\"Approvisionnement\"\n\"Variation des stocks\"\n\n\n4\n\"Approvisionnement\"\n\"Exportations\"\n\n\n5\n\"Approvisionnement\"\n\"Soutes internationales\"\n\n\n…\n…\n…\n\n\n8\n\"Entrées en transformation\"\n\"Centrales thermiques: activité…\n\n\n9\n\"Entrées en transformation\"\n\"Centrales thermiques: autoprod…\n\n\n10\n\"Entrées en transformation\"\n\"Raffineries\"\n\n\n11\n\"Entrées en transformation\"\n\"production de charbon de bois\"\n\n\n12\n\"Sortie de transformation\"\n\"Sortie de transformation\"",
+    "crumbs": [
+      "Traitement",
+      "Lecture du bilan énergétique"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/00-bilan-energetique/index.html#format-long-et-conversion",
+    "href": "fr/traitement/00-bilan-energetique/index.html#format-long-et-conversion",
+    "title": "Lecture du bilan énergétique",
+    "section": "4 Format long et conversion",
+    "text": "4 Format long et conversion\nLe format long a une ligne par flux et par produit. Les cellules vides du bilan sont des zéros et sont retirées.\n\nbilan = (\n    corps.unpivot(index=[\"ordre\", \"section\", \"flux\"], variable_name=\"produit\", value_name=\"ktep\")\n    .with_columns(pl.col(\"ktep\").cast(pl.Float64, strict=False))\n    .filter(pl.col(\"ktep\").is_not_null() & (pl.col(\"ktep\") != 0))\n    .with_columns(\n        pl.lit(ANNEE).alias(\"annee\"),\n        (pl.col(\"ktep\") * KTEP_EN_TJ).alias(\"tj\"),\n    )\n    .select(\"annee\", \"ordre\", \"section\", \"flux\", \"produit\", \"ktep\", \"tj\")\n)\nbilan.head(8)\n\n\nshape: (8, 7)\n\n\n\nannee\nordre\nsection\nflux\nproduit\nktep\ntj\n\n\ni32\ni64\nstr\nstr\nstr\nf64\nf64\n\n\n\n\n2022\n1\n\"Approvisionnement\"\n\"Production primaire\"\n\"Total tous produits\"\n5238.0\n219304.584\n\n\n2022\n2\n\"Approvisionnement\"\n\"Importation\"\n\"Total tous produits\"\n8114.0\n339716.952\n\n\n2022\n3\n\"Approvisionnement\"\n\"Variation des stocks\"\n\"Total tous produits\"\n452.0\n18924.336\n\n\n2022\n4\n\"Approvisionnement\"\n\"Exportations\"\n\"Total tous produits\"\n1948.0\n81558.864\n\n\n2022\n5\n\"Approvisionnement\"\n\"Soutes internationales\"\n\"Total tous produits\"\n227.0\n9504.036\n\n\n2022\n6\n\"Approvisionnement\"\n\"Consommation intérieure brute\"\n\"Total tous produits\"\n11629.0\n486882.972\n\n\n2022\n7\n\"Entrées en transformation\"\n\"Entrées en transformation\"\n\"Total tous produits\"\n5644.0\n236302.992\n\n\n2022\n8\n\"Entrées en transformation\"\n\"Centrales thermiques: activité…\n\"Total tous produits\"\n3440.0\n144025.92",
+    "crumbs": [
+      "Traitement",
+      "Lecture du bilan énergétique"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/00-bilan-energetique/index.html#contrôle",
+    "href": "fr/traitement/00-bilan-energetique/index.html#contrôle",
+    "title": "Lecture du bilan énergétique",
+    "section": "5 Contrôle",
+    "text": "5 Contrôle\nLa production primaire de la colonne « Total tous produits » doit égaler la somme des colonnes de produits, sans les colonnes de sous-totaux. Ce contrôle vérifie que la lecture n’a pas décalé de colonne. L’écart toléré est d’une ktep, car le bilan publie des valeurs arrondies.\n\nproduction = bilan.filter(pl.col(\"flux\") == \"Production primaire\")\ntotal = production.filter(pl.col(\"produit\") == \"Total tous produits\")[\"ktep\"][0]\nsomme = production.filter(~pl.col(\"produit\").str.starts_with(\"Total\"))[\"ktep\"].sum()\nassert abs(total - somme) &lt; 1, f\"Écart de {total - somme:.1f} ktep : vérifier les colonnes\"\nprint(f\"Production primaire : total {total:,.0f} ktep, somme des produits {somme:,.1f} ktep\")\nprint(f\"Soit {total * KTEP_EN_TJ:,.0f} TJ\")\n\nProduction primaire : total 5,238 ktep, somme des produits 5,238.7 ktep\nSoit 219,305 TJ",
+    "crumbs": [
+      "Traitement",
+      "Lecture du bilan énergétique"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/00-bilan-energetique/index.html#export",
+    "href": "fr/traitement/00-bilan-energetique/index.html#export",
+    "title": "Lecture du bilan énergétique",
+    "section": "6 Export",
+    "text": "6 Export\nLe tableau intermédiaire est enregistré en Parquet, compressé avec zstd. Les classeurs Excel reprennent le même tableau avec les en-têtes traduits à partir de data/nomenclatures/libelles.csv. La feuille arabe est orientée de droite à gauche. Les libellés des flux et des produits restent en français dans cette page d’exemple ; leur traduction relève des nomenclatures à construire.\n\nINTERMEDIAIRES.mkdir(parents=True, exist_ok=True)\nbilan.write_parquet(INTERMEDIAIRES / f\"bilan_energetique_{ANNEE}.parquet\", compression=\"zstd\")\n\nlibelles = pl.read_csv(\"data/nomenclatures/libelles.csv\")\n\n\ndef exporter_excel(tableau: pl.DataFrame, langue: str, nom: str) -&gt; Path:\n    \"\"\"Écrit un classeur Excel avec les en-têtes dans la langue demandée.\"\"\"\n    traduction = dict(zip(libelles[\"cle\"], libelles[langue]))\n    dossier = PRODUITS / langue\n    dossier.mkdir(parents=True, exist_ok=True)\n    chemin = dossier / f\"{nom}.xlsx\"\n    feuille = f\"{traduction['feuille_bilan']} {ANNEE}\"\n    with xlsxwriter.Workbook(chemin) as classeur:\n        tableau.rename({c: traduction.get(c, c) for c in tableau.columns}).write_excel(\n            workbook=classeur, worksheet=feuille, autofit=True, float_precision=1\n        )\n        if langue == \"ar\":\n            classeur.get_worksheet_by_name(feuille).right_to_left()\n    return chemin\n\n\nfor langue in [\"fr\", \"en\", \"ar\"]:\n    print(exporter_excel(bilan, langue, f\"bilan_energetique_{ANNEE}\"))\n\ndata/produits/fr/bilan_energetique_2022.xlsx\ndata/produits/en/bilan_energetique_2022.xlsx\ndata/produits/ar/bilan_energetique_2022.xlsx\n\n\nLes boutons suivants téléchargent les classeurs produits.\nFrançais English العربية",
+    "crumbs": [
+      "Traitement",
+      "Lecture du bilan énergétique"
+    ]
+  },
+  {
+    "objectID": "en/traitement/index.html",
+    "href": "en/traitement/index.html",
+    "title": "Data processing",
+    "section": "",
+    "text": "The pages in this section describe step by step how the data provided by the authorities become accounts. Each page combines explanations with the Python code that carries them out. The pages are read in the order of their number, because each one uses tables produced by the previous ones.\nThe French pages run the code. This English version shows the same code without running it; results and tables are in the French pages and on the downloads page. Code comments stay in French, as in the reference version.\n\n\n\nPage\nContents\n\n\n\n\n00. Reading the energy balance\nReading the 2022 balance, long format and conversion to terajoules",
+    "crumbs": [
+      "Processing",
+      "Data processing"
+    ]
+  },
+  {
+    "objectID": "en/telechargements.html",
+    "href": "en/telechargements.html",
+    "title": "Downloads",
+    "section": "",
+    "text": "Each table is produced by a processing page, which describes its content and the code that generates it. The three language versions of a table contain the same figures.\n\n\n\n\nEnergy balance 2022\nONEM energy balance in long format, in thousand toe and terajoules. Example table that shows the structure of the products to come.\nEnglish Français العربية\nProcessing page"
+  },
+  {
+    "objectID": "en/materiaux/index.html",
+    "href": "en/materiaux/index.html",
+    "title": "Materials",
+    "section": "",
+    "text": "Documents\nWritten notes for reference and detailed reading. Each note can be downloaded as a PDF.\nSee documents\n\n\n\n\n\n\nPresentations\nSlides that can be viewed in the page or in full screen.\nSee presentations",
+    "crumbs": [
+      "Materials"
+    ]
+  },
+  {
+    "objectID": "en/index.html",
+    "href": "en/index.html",
+    "title": "Energy and air emissions accounts for Tunisia",
+    "section": "",
+    "text": "This site gathers the materials that support the compilation of physical energy flow accounts (PEFA) and air emissions accounts (AEA) for Tunisia. The work is carried out by the National Institute of Statistics (INS) and partner institutions, with technical assistance from the International Monetary Fund (IMF). Materials are published as the mission progresses.\nThe site is available in French, English and Arabic. The French version is the reference version. The “Language” menu opens the same page in another language.\n\nContents\nMaterials. The documents and presentations cover the mission context, the SEEA framework and the compilation methods.\nProcessing. The processing pages describe step by step, with Python code, how the source data become accounts. Each page ends with the export of its tables.\nDownloads. The downloads page collects the final tables in Excel format, in French, English and Arabic.\n\n\nObjectives\n\nMove from the national energy balance to physical energy supply and use tables.\nMove from the national greenhouse gas inventory to air emissions accounts by economic activity.\nKeep a complete and reproducible record of data, methods and code.\nPrepare a workplan for the dissemination of the accounts."
+  },
+  {
+    "objectID": "en/a-propos.html",
+    "href": "en/a-propos.html",
+    "title": "About",
+    "section": "",
+    "text": "This site\nThis site is part of the technical assistance that the International Monetary Fund (IMF) provides to national statistical offices on the compilation of environmental and economic statistics. In Tunisia, the work with the National Institute of Statistics (INS) covers the energy and air emissions accounts of the System of Environmental-Economic Accounting (SEEA).\nThe materials document the process and leave resources that institutions can consult and adapt to their own context. They are updated as the work progresses, so their content may change.\n\n\nReproducibility\nAll processing is written in Python in Quarto documents that interleave text and code. The environment is described in pyproject.toml and locked by uv.lock, so anyone can reproduce the results with uv sync. The source code is available in the GitHub repository.\nThe French processing pages run the code. The English and Arabic versions show the same code without running it, so that calculations are not repeated.\n\n\nAuthor\nThe content was prepared by Renato Vargas, economist and IMF consultant.\n\n\nDisclaimer\nThe opinions, interpretations and conclusions on this site are those of the authors. They do not necessarily represent the views of the International Monetary Fund, its Executive Board or its management, and should not be attributed to them.\nThe materials are for information and training. They present implementation options for the methods discussed and do not constitute an instruction, formal recommendation, guideline or policy of the IMF. Their publication does not imply that the IMF endorses the methods, data or results shown.\nNo part of this site obliges the INS or any other institution to adopt the methods described. Decisions on methodology, data and the publication of official statistics rest with each institution, within its own mandate.\nThe authors have sought to ensure the accuracy of the content but offer no guarantee of its completeness or fitness for a particular purpose. Any errors or omissions are the responsibility of the authors."
+  },
+  {
+    "objectID": "en/diapositives/00-introduction/index.html#topics",
+    "href": "en/diapositives/00-introduction/index.html#topics",
+    "title": "Introduction to energy and air emissions accounts",
+    "section": "Topics",
+    "text": "Topics\n\nThe SEEA Central Framework.\nPhysical energy flow accounts (PEFA).\nAir emissions accounts (AEA).\nData available in Tunisia."
+  },
+  {
+    "objectID": "en/diapositives/00-introduction/index.html#the-seea-central-framework",
+    "href": "en/diapositives/00-introduction/index.html#the-seea-central-framework",
+    "title": "Introduction to energy and air emissions accounts",
+    "section": "The SEEA Central Framework",
+    "text": "The SEEA Central Framework\nThe System of Environmental-Economic Accounting (SEEA) records flows between the environment and the economy in supply and use tables consistent with the System of National Accounts (United Nations et al., 2014).\n\nPEFA describe energy flows in terajoules (United Nations, 2019).\nAEA attribute emissions to resident industries and households (Eurostat, 2015)."
+  },
+  {
+    "objectID": "en/diapositives/00-introduction/index.html#references",
+    "href": "en/diapositives/00-introduction/index.html#references",
+    "title": "Introduction to energy and air emissions accounts",
+    "section": "References",
+    "text": "References\n\n\nEurostat. (2015). Manual for air emissions accounts: 2015 edition. Publications Office of the European Union.\n\n\nUnited Nations. (2019). System of environmental-economic accounting for energy: SEEA-Energy. United Nations.\n\n\nUnited Nations, European Commission, Food and Agriculture Organization of the United Nations, International Monetary Fund, Organisation for Economic Co-operation and Development, & World Bank. (2014). System of environmental-economic accounting 2012: Central framework. United Nations."
+  },
+  {
+    "objectID": "en/materiaux/documents/contexte-mission/index.html",
+    "href": "en/materiaux/documents/contexte-mission/index.html",
+    "title": "Mission context",
+    "section": "",
+    "text": "The technical assistance responds to a request from the Tunisian authorities for support on the compilation of air emissions accounts. It is part of the climate statistics programme of the IMF Statistics Department and involves the National Institute of Statistics (INS) and the relevant ministries.\nIn June 2026, Tunisian representatives took part in a three-day virtual workshop on energy and air emissions accounts. The workshop covered the System of Environmental-Economic Accounting (SEEA) framework, energy balances and energy accounts, air emissions inventories and accounts, data requirements and compilation issues (Eurostat, 2015; United Nations et al., 2014; United Nations, 2019). The Tunisian participants presented their work and data (Besbes, 2026; Bouazizi, 2026).",
+    "crumbs": [
+      "Materials",
+      "Documents",
+      "Mission context"
+    ]
+  },
+  {
+    "objectID": "en/materiaux/documents/contexte-mission/index.html#background",
+    "href": "en/materiaux/documents/contexte-mission/index.html#background",
+    "title": "Mission context",
+    "section": "",
+    "text": "The technical assistance responds to a request from the Tunisian authorities for support on the compilation of air emissions accounts. It is part of the climate statistics programme of the IMF Statistics Department and involves the National Institute of Statistics (INS) and the relevant ministries.\nIn June 2026, Tunisian representatives took part in a three-day virtual workshop on energy and air emissions accounts. The workshop covered the System of Environmental-Economic Accounting (SEEA) framework, energy balances and energy accounts, air emissions inventories and accounts, data requirements and compilation issues (Eurostat, 2015; United Nations et al., 2014; United Nations, 2019). The Tunisian participants presented their work and data (Besbes, 2026; Bouazizi, 2026).",
+    "crumbs": [
+      "Materials",
+      "Documents",
+      "Mission context"
+    ]
+  },
+  {
+    "objectID": "en/materiaux/documents/contexte-mission/index.html#the-energy-and-emissions-statistical-system",
+    "href": "en/materiaux/documents/contexte-mission/index.html#the-energy-and-emissions-statistical-system",
+    "title": "Mission context",
+    "section": "2 The energy and emissions statistical system",
+    "text": "2 The energy and emissions statistical system\nThe National Observatory of Energy and Mines (ONEM), under the ministry in charge of energy, produces the national energy balance. Tunisia has compiled a balance since the 1980s and has published it every year in the Eurostat and International Energy Agency format since 2010 (Bouazizi, 2026). The INS compiles and disseminates official statistics, including energy indicators and the national accounts.\nThe National Agency for Energy Conservation (ANME) coordinates the national greenhouse gas inventory for the energy and industrial processes sectors. The Ministry of Agriculture coordinates agriculture and land use, and the National Sanitation Office (ONAS) coordinates waste. The inventory covers 1990 to 2022, with an estimate for 2023, follows the 2006 IPCC Guidelines and uses the global warming potentials of the Fifth Assessment Report (Besbes, 2026; Intergovernmental Panel on Climate Change, 2006).\nThe INS reported three difficulties at the workshop (Bouazizi, 2026). The classifications of the energy balance and of economic activities are not always harmonised. Energy consumption by product and by sector has gaps and relies on estimates. The national accounts cover the informal sector, while the balance does not.",
+    "crumbs": [
+      "Materials",
+      "Documents",
+      "Mission context"
+    ]
+  },
+  {
+    "objectID": "en/materiaux/documents/contexte-mission/index.html#data-provided",
+    "href": "en/materiaux/documents/contexte-mission/index.html#data-provided",
+    "title": "Mission context",
+    "section": "3 Data provided",
+    "text": "3 Data provided\nThe authorities provided the files summarised in Table 1. They are kept unchanged in the data/sources/ folder of the repository.\n\n\n\nTable 1: Data provided by the Tunisian authorities\n\n\n\n\n\n\n\n\n\n\n\nSource\nContent\nYears\nUnit\n\n\n\n\nEnergy balance\nNational energy balance, one sheet per year\n2015 to 2022\nktoe\n\n\nGHG inventory\nCommon reporting tables (CRT), Fifth Assessment Report global warming potentials\n2015 to 2022\nkt and kt CO2 eq.\n\n\nGHG inventory\nExtract of the UNFCCC database for Tunisia\n2015 to 2022\nkt\n\n\nNational accounts\nSupply and use tables at current prices\n2015 to 2023\nmillion dinars",
+    "crumbs": [
+      "Materials",
+      "Documents",
+      "Mission context"
+    ]
+  },
+  {
+    "objectID": "en/materiaux/documents/contexte-mission/index.html#imf-tools",
+    "href": "en/materiaux/documents/contexte-mission/index.html#imf-tools",
+    "title": "Mission context",
+    "section": "4 IMF tools",
+    "text": "4 IMF tools\nThe IMF has developed two tools for these accounts. The PEFA Converter transforms an energy balance into physical energy supply and use tables using a concordance matrix between balance flows and industries (International Monetary Fund, 2024). The I2A converter transforms an emissions inventory into air emissions accounts by economic activity, with a residence adjustment for air and water transport. Both tools combine an Excel workbook with Python functions.\nThe processing pages of this site follow the same steps in documents that describe each operation and its code.",
+    "crumbs": [
+      "Materials",
+      "Documents",
+      "Mission context"
+    ]
+  },
+  {
+    "objectID": "en/materiaux/documents/contexte-mission/index.html#mission-programme",
+    "href": "en/materiaux/documents/contexte-mission/index.html#mission-programme",
+    "title": "Mission context",
+    "section": "5 Mission programme",
+    "text": "5 Mission programme\nThe mission takes place in Tunis from 7 to 11 December 2026. Table 2 lists the topics planned for each day.\n\n\n\nTable 2: Mission programme\n\n\n\n\n\n\n\n\n\nDay\nTopics\n\n\n\n\nMonday 7 December\nOpening meeting with the INS Director General. Objectives, scope and expected deliverables. National statistical system and progress in implementing the SEEA. Institutional arrangements for energy statistics. Demonstration of the PEFA and AEA tools.\n\n\nTuesday 8 December\nEnergy accounts framework: activity and product classifications, allocation matrix, residence and territory adjustment, consistency checks. Compilation and dissemination of energy accounts.\n\n\nWednesday 9 December\nInstitutional arrangements and data sources for air emissions accounts. Air emissions accounts framework: activity and source classifications, allocation matrix, residence and territory adjustment, consistency checks. Compilation and dissemination.\n\n\nThursday 10 December\nDissemination formats and indicators. INS workplan on energy and air emissions accounts. Drafting of the technical assistance report and meetings with partners.\n\n\nFriday 11 December\nDiscussion of the draft report, recommendations and roadmap. Presentation of the recommendations. Pending discussions.",
+    "crumbs": [
+      "Materials",
+      "Documents",
+      "Mission context"
+    ]
+  },
+  {
+    "objectID": "en/materiaux/documents/contexte-mission/index.html#references",
+    "href": "en/materiaux/documents/contexte-mission/index.html#references",
+    "title": "Mission context",
+    "section": "6 References",
+    "text": "6 References\n\n\nBesbes, M. (2026). Tunisian GHG inventory and climate policy. Presentation at the virtual workshop on energy and air emissions accounts, National Agency for Energy Conservation, Tunisia.\n\n\nBouazizi, O. (2026). Energy statistics in Tunisia. Presentation at the Virtual Workshop on Environment and Climate Change Statistics, National Institute of Statistics, Tunisia.\n\n\nEurostat. (2015). Manual for air emissions accounts: 2015 edition. Publications Office of the European Union.\n\n\nIntergovernmental Panel on Climate Change. (2006). 2006 IPCC guidelines for national greenhouse gas inventories (H. S. Eggleston, L. Buendia, K. Miwa, T. Ngara, & K. Tanabe, Eds.). Institute for Global Environmental Strategies.\n\n\nInternational Monetary Fund. (2024). PEFA converter: A framework for converting energy balance into physical supply and use tables. User manual (Version 0.0). Statistics Department, Real Sector Division.\n\n\nUnited Nations. (2019). System of environmental-economic accounting for energy: SEEA-Energy. United Nations.\n\n\nUnited Nations, European Commission, Food and Agriculture Organization of the United Nations, International Monetary Fund, Organisation for Economic Co-operation and Development, & World Bank. (2014). System of environmental-economic accounting 2012: Central framework. United Nations.",
+    "crumbs": [
+      "Materials",
+      "Documents",
+      "Mission context"
+    ]
+  },
+  {
+    "objectID": "en/materiaux/presentations/00-introduction.html#objectives",
+    "href": "en/materiaux/presentations/00-introduction.html#objectives",
+    "title": "Introduction to energy and air emissions accounts",
+    "section": "Objectives",
+    "text": "Objectives\n\nPlace the energy and emissions accounts in the SEEA Central Framework.\nPresent the data sources available in Tunisia.\nDescribe the compilation steps that the mission will cover.",
+    "crumbs": [
+      "Materials",
+      "Presentations",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "en/traitement/00-bilan-energetique/index.html",
+    "href": "en/traitement/00-bilan-energetique/index.html",
+    "title": "Reading the energy balance",
+    "section": "",
+    "text": "Note\n\n\n\nThis page shows the code of the French reference page without running it. Results and outputs are in the French page. Code comments stay in French.",
+    "crumbs": [
+      "Processing",
+      "Reading the energy balance"
+    ]
+  },
+  {
+    "objectID": "en/traitement/00-bilan-energetique/index.html#purpose",
+    "href": "en/traitement/00-bilan-energetique/index.html#purpose",
+    "title": "Reading the energy balance",
+    "section": "1 Purpose",
+    "text": "1 Purpose\nThis page is the template for the processing pages. It reads the 2022 energy balance, converts it to long format, converts thousand tonnes of oil equivalent (ktoe) to terajoules (TJ) and exports the result. The Parquet table feeds the following pages, and the Excel workbooks in three languages are published on the downloads page.\nPaths are relative to the project root, because _quarto.yml sets execute-dir: project.",
+    "crumbs": [
+      "Processing",
+      "Reading the energy balance"
+    ]
+  },
+  {
+    "objectID": "en/traitement/00-bilan-energetique/index.html#libraries-and-parameters",
+    "href": "en/traitement/00-bilan-energetique/index.html#libraries-and-parameters",
+    "title": "Reading the energy balance",
+    "section": "2 Libraries and parameters",
+    "text": "2 Libraries and parameters\n\nfrom pathlib import Path\n\nimport polars as pl\nimport xlsxwriter\n\nANNEE = 2022\nSOURCE = Path(\"data/sources/bilan-energetique/balance2022.xlsx\")\nINTERMEDIAIRES = Path(\"data/intermediaires\")\nPRODUITS = Path(\"data/produits\")\n\n# Facteur de conversion : 1 tep = 41,868 GJ, donc 1 ktep = 41,868 TJ\nKTEP_EN_TJ = 41.868",
+    "crumbs": [
+      "Processing",
+      "Reading the energy balance"
+    ]
+  },
+  {
+    "objectID": "en/traitement/00-bilan-energetique/index.html#reading-the-workbook",
+    "href": "en/traitement/00-bilan-energetique/index.html#reading-the-workbook",
+    "title": "Reading the energy balance",
+    "section": "3 Reading the workbook",
+    "text": "3 Reading the workbook\nThe ONEM workbook places product names on two header rows and flows in the first column. The polars library reads the sheet without a header; empty rows at the top of the sheet are skipped on reading.\n\nbrut = pl.read_excel(SOURCE, has_header=False, engine=\"calamine\", infer_schema_length=0)\n\n# Les deux lignes d'en-tête des produits commencent par « en 1000 tep »\nligne_entete = brut.with_row_index().filter(\n    pl.col(\"column_0\").str.starts_with(\"en 1000 tep\")\n)[\"index\"][0]\n\n\ndef nom_produit(haut: str | None, bas: str | None) -&gt; str:\n    \"\"\"Réunit les deux lignes d'en-tête d'un produit en un seul libellé.\"\"\"\n    morceaux = [m.strip() for m in (haut, bas) if m is not None and m.strip()]\n    return \" \".join(\" \".join(morceaux).split())\n\n\nproduits = [\n    nom_produit(brut[ligne_entete, j], brut[ligne_entete + 1, j])\n    for j in range(1, brut.width)\n]\nproduits[:6]\n\nFlows start at the “Production primaire” row. Some labels repeat: “Raffineries” appears in both transformation inputs and transformation outputs. The section column keeps the title of the block each row belongs to, and the ordre column keeps its position in the balance.\n\nSECTIONS = {\n    \"Entrées en transformation\",\n    \"Sortie de transformation\",\n    \"Echanges, transfer, restitutions\",\n    \"Consommation finale non énergétique\",\n    \"Consommation finale énergétique\",\n    \"Industrie\",\n    \"Transport\",\n    \"Foyers domestiques, commerce, adm, etc.\",\n}\n\ndebut = brut.with_row_index().filter(pl.col(\"column_0\") == \"Production primaire\")[\"index\"][0]\ncorps = brut[debut:].rename(\n    {f\"column_{j}\": produits[j - 1] for j in range(1, brut.width)} | {\"column_0\": \"flux\"}\n)\n\n\ndef attribuer_sections(flux: list[str]) -&gt; list[str]:\n    \"\"\"Associe chaque ligne au dernier titre de bloc rencontré au-dessus d'elle.\"\"\"\n    courante, resultat = \"Approvisionnement\", []\n    for libelle in flux:\n        if libelle in SECTIONS:\n            courante = libelle\n        resultat.append(courante)\n    return resultat\n\n\ncorps = corps.with_columns(\n    pl.Series(\"section\", attribuer_sections(corps[\"flux\"].to_list())),\n    pl.Series(\"ordre\", range(1, corps.height + 1)),\n)\ncorps.select(\"ordre\", \"section\", \"flux\").head(12)",
+    "crumbs": [
+      "Processing",
+      "Reading the energy balance"
+    ]
+  },
+  {
+    "objectID": "en/traitement/00-bilan-energetique/index.html#long-format-and-conversion",
+    "href": "en/traitement/00-bilan-energetique/index.html#long-format-and-conversion",
+    "title": "Reading the energy balance",
+    "section": "4 Long format and conversion",
+    "text": "4 Long format and conversion\nThe long format has one row per flow and product. Empty cells in the balance are zeros and are dropped.\n\nbilan = (\n    corps.unpivot(index=[\"ordre\", \"section\", \"flux\"], variable_name=\"produit\", value_name=\"ktep\")\n    .with_columns(pl.col(\"ktep\").cast(pl.Float64, strict=False))\n    .filter(pl.col(\"ktep\").is_not_null() & (pl.col(\"ktep\") != 0))\n    .with_columns(\n        pl.lit(ANNEE).alias(\"annee\"),\n        (pl.col(\"ktep\") * KTEP_EN_TJ).alias(\"tj\"),\n    )\n    .select(\"annee\", \"ordre\", \"section\", \"flux\", \"produit\", \"ktep\", \"tj\")\n)\nbilan.head(8)",
+    "crumbs": [
+      "Processing",
+      "Reading the energy balance"
+    ]
+  },
+  {
+    "objectID": "en/traitement/00-bilan-energetique/index.html#check",
+    "href": "en/traitement/00-bilan-energetique/index.html#check",
+    "title": "Reading the energy balance",
+    "section": "5 Check",
+    "text": "5 Check\nPrimary production in the “Total tous produits” column must equal the sum of the product columns, excluding subtotal columns. This check confirms that reading did not shift any column. The tolerance is one ktoe, because the balance publishes rounded values.\n\nproduction = bilan.filter(pl.col(\"flux\") == \"Production primaire\")\ntotal = production.filter(pl.col(\"produit\") == \"Total tous produits\")[\"ktep\"][0]\nsomme = production.filter(~pl.col(\"produit\").str.starts_with(\"Total\"))[\"ktep\"].sum()\nassert abs(total - somme) &lt; 1, f\"Écart de {total - somme:.1f} ktep : vérifier les colonnes\"\nprint(f\"Production primaire : total {total:,.0f} ktep, somme des produits {somme:,.1f} ktep\")\nprint(f\"Soit {total * KTEP_EN_TJ:,.0f} TJ\")",
+    "crumbs": [
+      "Processing",
+      "Reading the energy balance"
+    ]
+  },
+  {
+    "objectID": "en/traitement/00-bilan-energetique/index.html#export",
+    "href": "en/traitement/00-bilan-energetique/index.html#export",
+    "title": "Reading the energy balance",
+    "section": "6 Export",
+    "text": "6 Export\nThe intermediate table is saved as Parquet with zstd compression. The Excel workbooks contain the same table with headers translated from data/nomenclatures/libelles.csv. The Arabic sheet runs right to left. Flow and product labels stay in French on this example page; their translation belongs to the classifications still to be built.\n\nINTERMEDIAIRES.mkdir(parents=True, exist_ok=True)\nbilan.write_parquet(INTERMEDIAIRES / f\"bilan_energetique_{ANNEE}.parquet\", compression=\"zstd\")\n\nlibelles = pl.read_csv(\"data/nomenclatures/libelles.csv\")\n\n\ndef exporter_excel(tableau: pl.DataFrame, langue: str, nom: str) -&gt; Path:\n    \"\"\"Écrit un classeur Excel avec les en-têtes dans la langue demandée.\"\"\"\n    traduction = dict(zip(libelles[\"cle\"], libelles[langue]))\n    dossier = PRODUITS / langue\n    dossier.mkdir(parents=True, exist_ok=True)\n    chemin = dossier / f\"{nom}.xlsx\"\n    feuille = f\"{traduction['feuille_bilan']} {ANNEE}\"\n    with xlsxwriter.Workbook(chemin) as classeur:\n        tableau.rename({c: traduction.get(c, c) for c in tableau.columns}).write_excel(\n            workbook=classeur, worksheet=feuille, autofit=True, float_precision=1\n        )\n        if langue == \"ar\":\n            classeur.get_worksheet_by_name(feuille).right_to_left()\n    return chemin\n\n\nfor langue in [\"fr\", \"en\", \"ar\"]:\n    print(exporter_excel(bilan, langue, f\"bilan_energetique_{ANNEE}\"))\n\nThe following buttons download the workbooks.\nEnglish Français العربية",
+    "crumbs": [
+      "Processing",
+      "Reading the energy balance"
+    ]
+  },
+  {
+    "objectID": "ar/traitement/index.html",
+    "href": "ar/traitement/index.html",
+    "title": "معالجة البيانات",
+    "section": "",
+    "text": "تصف صفحات هذا القسم خطوة بخطوة كيف تتحول البيانات التي قدمتها السلطات إلى حسابات. تجمع كل صفحة بين الشرح وشيفرة بايثون التي تنفذه. تُقرأ الصفحات حسب ترتيب أرقامها، لأن كل صفحة تستخدم الجداول التي أنتجتها الصفحات السابقة.\nتنفذ الصفحات الفرنسية الشيفرة. تعرض هذه النسخة العربية الشيفرة نفسها دون تنفيذها؛ النتائج والجداول موجودة في الصفحات الفرنسية وفي صفحة التنزيلات. تبقى التعليقات داخل الشيفرة بالفرنسية كما في النسخة المرجعية.\n\n\n\nالصفحة\nالمحتوى\n\n\n\n\n00. قراءة ميزان الطاقة\nقراءة ميزان 2022 وتحويله إلى صيغة طويلة وإلى التيراجول",
+    "crumbs": [
+      "معالجة البيانات"
+    ]
+  },
+  {
+    "objectID": "ar/telechargements.html",
+    "href": "ar/telechargements.html",
+    "title": "التنزيلات",
+    "section": "",
+    "text": "يُنتَج كل جدول في صفحة معالجة تصف محتواه والشيفرة التي تولّده. تحتوي النسخ اللغوية الثلاث للجدول نفسه على الأرقام نفسها.\n\n\n\n\nميزان الطاقة 2022\nميزان المرصد الوطني للطاقة والمناجم بصيغة طويلة، بآلاف الأطنان المكافئة نفطًا وبالتيراجول. جدول توضيحي يبين بنية المنتجات القادمة.\nالعربية Français English\nصفحة المعالجة"
+  },
+  {
+    "objectID": "ar/materiaux/index.html",
+    "href": "ar/materiaux/index.html",
+    "title": "المواد",
+    "section": "",
+    "text": "الوثائق\nمذكرات مكتوبة للرجوع إليها وللقراءة المفصلة. يمكن تنزيل كل مذكرة بصيغة PDF.\nعرض الوثائق\n\n\n\n\n\n\nالعروض التقديمية\nشرائح يمكن مشاهدتها داخل الصفحة أو بملء الشاشة.\nعرض العروض التقديمية",
+    "crumbs": [
+      "المواد"
+    ]
+  },
+  {
+    "objectID": "ar/index.html",
+    "href": "ar/index.html",
+    "title": "حسابات الطاقة والانبعاثات في تونس",
+    "section": "",
+    "text": "يجمع هذا الموقع المواد الداعمة لإعداد حسابات التدفقات المادية للطاقة (PEFA) وحسابات انبعاثات الهواء (AEA) في تونس. ينجز هذا العمل المعهد الوطني للإحصاء والمؤسسات الشريكة، بمساعدة فنية من صندوق النقد الدولي. تُنشر المواد تباعًا مع تقدم البعثة.\nالموقع متاح باللغات الفرنسية والإنجليزية والعربية. النسخة الفرنسية هي النسخة المرجعية. تفتح قائمة «اللغة» الصفحة نفسها بلغة أخرى.\n\nالمحتوى\nالمواد. تعرض الوثائق والعروض التقديمية سياق البعثة وإطار نظام المحاسبة البيئية والاقتصادية وطرق الإعداد.\nمعالجة البيانات. تصف صفحات المعالجة خطوة بخطوة، مع شيفرة بايثون، كيف تتحول بيانات المصدر إلى حسابات. تنتهي كل صفحة بتصدير جداولها.\nالتنزيلات. تجمع صفحة التنزيلات الجداول النهائية بصيغة إكسل، بالفرنسية والإنجليزية والعربية.\n\n\nالأهداف\n\nالانتقال من ميزان الطاقة الوطني إلى جداول العرض والاستخدام المادية للطاقة.\nالانتقال من الجرد الوطني لغازات الدفيئة إلى حسابات انبعاثات الهواء حسب النشاط الاقتصادي.\nالاحتفاظ بسجل كامل وقابل لإعادة الإنتاج للبيانات والطرق والشيفرة.\nإعداد خطة عمل لنشر الحسابات."
+  },
+  {
+    "objectID": "ar/a-propos.html",
+    "href": "ar/a-propos.html",
+    "title": "حول الموقع",
+    "section": "",
+    "text": "هذا الموقع\nيندرج هذا الموقع ضمن المساعدة الفنية التي يقدمها صندوق النقد الدولي إلى المعاهد الوطنية للإحصاء في إعداد الإحصاءات البيئية والاقتصادية. في تونس، يتناول العمل مع المعهد الوطني للإحصاء حسابات الطاقة وانبعاثات الهواء ضمن نظام المحاسبة البيئية والاقتصادية.\nتوثق المواد مسار العمل وتترك موارد يمكن للمؤسسات الرجوع إليها وتكييفها مع سياقها. تُحدَّث المواد مع تقدم العمل، لذا قد يتغير محتواها.\n\n\nقابلية إعادة الإنتاج\nكل المعالجة مكتوبة بلغة بايثون في وثائق كوارتو تجمع بين النص والشيفرة. يصف الملف pyproject.toml بيئة العمل ويثبتها الملف uv.lock، فيستطيع أي شخص إعادة إنتاج النتائج بالأمر uv sync. الشيفرة المصدرية متاحة في مستودع غيت هاب.\nتنفذ صفحات المعالجة الفرنسية الشيفرة. تعرض النسختان الإنجليزية والعربية الشيفرة نفسها دون تنفيذها، تجنبًا لتكرار الحسابات.\n\n\nالمؤلف\nأعدّ المحتوى ريناتو فارغاس، خبير اقتصادي ومستشار لدى صندوق النقد الدولي.\n\n\nإخلاء المسؤولية\nالآراء والتفسيرات والاستنتاجات الواردة في هذا الموقع هي آراء مؤلفيه. لا تمثل بالضرورة آراء صندوق النقد الدولي أو مجلسه التنفيذي أو إدارته، ولا ينبغي نسبتها إليهم.\nللمواد غرض إعلامي وتدريبي. تعرض خيارات لتطبيق الطرق المتناولة، ولا تشكل تعليمات أو توصية رسمية أو مبدأً توجيهيًا أو سياسة لصندوق النقد الدولي. ولا يعني نشرها أن الصندوق يعتمد الطرق أو البيانات أو النتائج المعروضة.\nلا يُلزم أي جزء من هذا الموقع المعهد الوطني للإحصاء أو أي مؤسسة أخرى باعتماد الطرق الموصوفة. تعود القرارات المتعلقة بالمنهجية والبيانات ونشر الإحصاءات الرسمية إلى كل مؤسسة في حدود اختصاصها.\nحرص المؤلفون على دقة المحتوى دون ضمان اكتماله أو ملاءمته لاستخدام معين. يتحمل المؤلفون مسؤولية أي خطأ أو سهو."
+  },
+  {
+    "objectID": "ar/diapositives/00-introduction/index.html#المواضيع",
+    "href": "ar/diapositives/00-introduction/index.html#المواضيع",
+    "title": "مقدمة إلى حسابات الطاقة والانبعاثات",
+    "section": "المواضيع",
+    "text": "المواضيع\n\nالإطار المركزي لنظام المحاسبة البيئية والاقتصادية.\nحسابات التدفقات المادية للطاقة (PEFA).\nحسابات انبعاثات الهواء (AEA).\nالبيانات المتاحة في تونس."
+  },
+  {
+    "objectID": "ar/diapositives/00-introduction/index.html#الإطار-المركزي",
+    "href": "ar/diapositives/00-introduction/index.html#الإطار-المركزي",
+    "title": "مقدمة إلى حسابات الطاقة والانبعاثات",
+    "section": "الإطار المركزي",
+    "text": "الإطار المركزي\nيسجل نظام المحاسبة البيئية والاقتصادية التدفقات بين البيئة والاقتصاد في جداول عرض واستخدام متسقة مع نظام الحسابات القومية (United Nations وآخرون, 2014).\n\nتصف حسابات PEFA تدفقات الطاقة بالتيراجول (United Nations, 2019).\nتنسب حسابات AEA الانبعاثات إلى فروع النشاط والأسر المقيمة (Eurostat, 2015)."
+  },
+  {
+    "objectID": "ar/diapositives/00-introduction/index.html#المراجع",
+    "href": "ar/diapositives/00-introduction/index.html#المراجع",
+    "title": "مقدمة إلى حسابات الطاقة والانبعاثات",
+    "section": "المراجع",
+    "text": "المراجع\n\n\nEurostat. (2015). Manual for Air Emissions Accounts: 2015 Edition. Publications Office of the European Union.\n\n\nUnited Nations. (2019). System of Environmental-Economic Accounting for Energy: SEEA-Energy. United Nations.\n\n\nUnited Nations, European Commission, Food and Agriculture Organization of the United Nations, International Monetary Fund, Organisation for Economic Co-operation and Development, & World Bank. (2014). System of Environmental-Economic Accounting 2012: Central Framework. United Nations."
+  },
+  {
+    "objectID": "ar/materiaux/documents/contexte-mission/index.html",
+    "href": "ar/materiaux/documents/contexte-mission/index.html",
+    "title": "سياق البعثة",
+    "section": "",
+    "text": "تستجيب المساعدة الفنية لطلب من السلطات التونسية للدعم في إعداد حسابات انبعاثات الهواء. وتندرج ضمن برنامج إحصاءات المناخ لإدارة الإحصاءات في صندوق النقد الدولي، وتشمل المعهد الوطني للإحصاء والوزارات المعنية.\nفي يونيو 2026، شارك ممثلون تونسيون في ورشة عمل افتراضية لمدة ثلاثة أيام حول حسابات الطاقة والانبعاثات. تناولت الورشة إطار نظام المحاسبة البيئية والاقتصادية، وموازين الطاقة وحسابات الطاقة، وجرد الانبعاثات وحسابات انبعاثات الهواء، واحتياجات البيانات، ومسائل الإعداد (Eurostat, 2015; United Nations وآخرون, 2014; United Nations, 2019). وقدم المشاركون التونسيون أعمالهم وبياناتهم (Besbes, 2026; Bouazizi, 2026).",
+    "crumbs": [
+      "المواد",
+      "الوثائق",
+      "سياق البعثة"
+    ]
+  },
+  {
+    "objectID": "ar/materiaux/documents/contexte-mission/index.html#الخلفية",
+    "href": "ar/materiaux/documents/contexte-mission/index.html#الخلفية",
+    "title": "سياق البعثة",
+    "section": "",
+    "text": "تستجيب المساعدة الفنية لطلب من السلطات التونسية للدعم في إعداد حسابات انبعاثات الهواء. وتندرج ضمن برنامج إحصاءات المناخ لإدارة الإحصاءات في صندوق النقد الدولي، وتشمل المعهد الوطني للإحصاء والوزارات المعنية.\nفي يونيو 2026، شارك ممثلون تونسيون في ورشة عمل افتراضية لمدة ثلاثة أيام حول حسابات الطاقة والانبعاثات. تناولت الورشة إطار نظام المحاسبة البيئية والاقتصادية، وموازين الطاقة وحسابات الطاقة، وجرد الانبعاثات وحسابات انبعاثات الهواء، واحتياجات البيانات، ومسائل الإعداد (Eurostat, 2015; United Nations وآخرون, 2014; United Nations, 2019). وقدم المشاركون التونسيون أعمالهم وبياناتهم (Besbes, 2026; Bouazizi, 2026).",
+    "crumbs": [
+      "المواد",
+      "الوثائق",
+      "سياق البعثة"
+    ]
+  },
+  {
+    "objectID": "ar/materiaux/documents/contexte-mission/index.html#المنظومة-الإحصائية-للطاقة-والانبعاثات",
+    "href": "ar/materiaux/documents/contexte-mission/index.html#المنظومة-الإحصائية-للطاقة-والانبعاثات",
+    "title": "سياق البعثة",
+    "section": "2 المنظومة الإحصائية للطاقة والانبعاثات",
+    "text": "2 المنظومة الإحصائية للطاقة والانبعاثات\nيعدّ المرصد الوطني للطاقة والمناجم، التابع للوزارة المكلفة بالطاقة، ميزان الطاقة الوطني. تعدّ تونس ميزانًا للطاقة منذ ثمانينيات القرن الماضي، وتنشره سنويًا وفق صيغة يوروستات والوكالة الدولية للطاقة منذ 2010 (Bouazizi, 2026). ويعدّ المعهد الوطني للإحصاء الإحصاءات الرسمية وينشرها، ومنها مؤشرات الطاقة والحسابات القومية.\nتنسق الوكالة الوطنية للتحكم في الطاقة الجرد الوطني لغازات الدفيئة لقطاعي الطاقة والعمليات الصناعية. وتنسق وزارة الفلاحة قطاعي الفلاحة واستخدام الأراضي، ويتولى الديوان الوطني للتطهير تنسيق قطاع النفايات. يغطي الجرد الفترة من 1990 إلى 2022 مع تقدير لسنة 2023، ويتبع المبادئ التوجيهية للهيئة الحكومية الدولية المعنية بتغير المناخ لسنة 2006، ويستخدم إمكانات الاحترار العالمي الواردة في تقرير التقييم الخامس (Besbes, 2026; Intergovernmental Panel on Climate Change, 2006).\nأشار المعهد الوطني للإحصاء خلال الورشة إلى ثلاث صعوبات (Bouazizi, 2026). لا تتوافق تصنيفات ميزان الطاقة وتصنيفات الأنشطة الاقتصادية دائمًا. ويعاني استهلاك الطاقة حسب المنتج والقطاع من نقص في البيانات ويعتمد على التقديرات. وتأخذ الحسابات القومية القطاع غير المنظم في الحسبان، خلافًا للميزان.",
+    "crumbs": [
+      "المواد",
+      "الوثائق",
+      "سياق البعثة"
+    ]
+  },
+  {
+    "objectID": "ar/materiaux/documents/contexte-mission/index.html#البيانات-المقدمة",
+    "href": "ar/materiaux/documents/contexte-mission/index.html#البيانات-المقدمة",
+    "title": "سياق البعثة",
+    "section": "3 البيانات المقدمة",
+    "text": "3 البيانات المقدمة\nقدمت السلطات الملفات الملخصة في الجدول 1. وهي محفوظة دون تعديل في المجلد data/sources/ من المستودع.\n\n\n\nالجدول 1: البيانات المقدمة من السلطات التونسية\n\n\n\n\n\n\n\n\n\n\n\nالمصدر\nالمحتوى\nالسنوات\nالوحدة\n\n\n\n\nميزان الطاقة\nميزان الطاقة الوطني، ورقة لكل سنة\n2015 إلى 2022\nألف طن مكافئ نفط\n\n\nجرد غازات الدفيئة\nجداول الإبلاغ المشتركة (CRT)، إمكانات الاحترار العالمي لتقرير التقييم الخامس\n2015 إلى 2022\nكيلوطن وكيلوطن مكافئ ثاني أكسيد الكربون\n\n\nجرد غازات الدفيئة\nمستخرج من قاعدة بيانات اتفاقية الأمم المتحدة الإطارية بشأن تغير المناخ لتونس\n2015 إلى 2022\nكيلوطن\n\n\nالحسابات القومية\nجداول العرض والاستخدام بالأسعار الجارية\n2015 إلى 2023\nمليون دينار",
+    "crumbs": [
+      "المواد",
+      "الوثائق",
+      "سياق البعثة"
+    ]
+  },
+  {
+    "objectID": "ar/materiaux/documents/contexte-mission/index.html#أدوات-صندوق-النقد-الدولي",
+    "href": "ar/materiaux/documents/contexte-mission/index.html#أدوات-صندوق-النقد-الدولي",
+    "title": "سياق البعثة",
+    "section": "4 أدوات صندوق النقد الدولي",
+    "text": "4 أدوات صندوق النقد الدولي\nطوّر صندوق النقد الدولي أداتين لهذه الحسابات. يحوّل محوّل PEFA ميزان الطاقة إلى جداول عرض واستخدام مادية للطاقة باستخدام مصفوفة توافق بين تدفقات الميزان وفروع النشاط (International Monetary Fund, 2024). ويحوّل محوّل I2A جرد الانبعاثات إلى حسابات انبعاثات الهواء حسب النشاط الاقتصادي، مع تعديل وفق مبدأ الإقامة في النقل الجوي والبحري. تجمع الأداتان بين مصنف إكسل ودوال بايثون.\nتتبع صفحات المعالجة في هذا الموقع الخطوات نفسها في وثائق تصف كل عملية وشيفرتها.",
+    "crumbs": [
+      "المواد",
+      "الوثائق",
+      "سياق البعثة"
+    ]
+  },
+  {
+    "objectID": "ar/materiaux/documents/contexte-mission/index.html#برنامج-البعثة",
+    "href": "ar/materiaux/documents/contexte-mission/index.html#برنامج-البعثة",
+    "title": "سياق البعثة",
+    "section": "5 برنامج البعثة",
+    "text": "5 برنامج البعثة\nتجري البعثة في تونس العاصمة من 7 إلى 11 ديسمبر 2026. يعرض الجدول 2 المواضيع المقررة لكل يوم.\n\n\n\nالجدول 2: برنامج البعثة\n\n\n\n\n\n\n\n\n\nاليوم\nالمواضيع\n\n\n\n\nالاثنين 7 ديسمبر\nاجتماع افتتاحي مع الإدارة العامة للمعهد الوطني للإحصاء. الأهداف والنطاق والمخرجات المنتظرة. المنظومة الإحصائية الوطنية وتقدم تطبيق نظام المحاسبة البيئية والاقتصادية. الترتيبات المؤسسية لإحصاءات الطاقة. عرض أداتي PEFA وAEA.\n\n\nالثلاثاء 8 ديسمبر\nإطار حسابات الطاقة: تصنيفات الأنشطة والمنتجات، مصفوفة التوزيع، التعديل بين مبدأ الإقليم ومبدأ الإقامة، فحوص الاتساق. إعداد حسابات الطاقة ونشرها.\n\n\nالأربعاء 9 ديسمبر\nالترتيبات المؤسسية ومصادر البيانات لحسابات الانبعاثات. إطار حسابات الانبعاثات: تصنيفات الأنشطة والمصادر، مصفوفة التوزيع، التعديل بين مبدأ الإقليم ومبدأ الإقامة، فحوص الاتساق. الإعداد والنشر.\n\n\nالخميس 10 ديسمبر\nصيغ النشر والمؤشرات. خطة عمل المعهد الوطني للإحصاء بشأن حسابات الطاقة والانبعاثات. إعداد تقرير المساعدة الفنية ولقاءات مع الشركاء.\n\n\nالجمعة 11 ديسمبر\nمناقشة مشروع التقرير والتوصيات وخارطة الطريق. عرض التوصيات. المسائل المعلقة.",
+    "crumbs": [
+      "المواد",
+      "الوثائق",
+      "سياق البعثة"
+    ]
+  },
+  {
+    "objectID": "ar/materiaux/documents/contexte-mission/index.html#المراجع",
+    "href": "ar/materiaux/documents/contexte-mission/index.html#المراجع",
+    "title": "سياق البعثة",
+    "section": "6 المراجع",
+    "text": "6 المراجع\n\n\nBesbes, M. (2026). Tunisian GHG Inventory and Climate Policy. Presentation at the virtual workshop on energy and air emissions accounts, National Agency for Energy Conservation, Tunisia.\n\n\nBouazizi, O. (2026). Energy Statistics in Tunisia. Presentation at the Virtual Workshop on Environment and Climate Change Statistics, National Institute of Statistics, Tunisia.\n\n\nEurostat. (2015). Manual for Air Emissions Accounts: 2015 Edition. Publications Office of the European Union.\n\n\nIntergovernmental Panel on Climate Change. (2006). 2006 IPCC Guidelines for National Greenhouse Gas Inventories (H. S. Eggleston, L. Buendia, K. Miwa, T. Ngara, & K. Tanabe, تحقيق). Institute for Global Environmental Strategies.\n\n\nInternational Monetary Fund. (2024). PEFA Converter: A Framework for Converting Energy Balance into Physical Supply and Use Tables. User Manual (Version 0.0). Statistics Department, Real Sector Division.\n\n\nUnited Nations. (2019). System of Environmental-Economic Accounting for Energy: SEEA-Energy. United Nations.\n\n\nUnited Nations, European Commission, Food and Agriculture Organization of the United Nations, International Monetary Fund, Organisation for Economic Co-operation and Development, & World Bank. (2014). System of Environmental-Economic Accounting 2012: Central Framework. United Nations.",
+    "crumbs": [
+      "المواد",
+      "الوثائق",
+      "سياق البعثة"
+    ]
+  },
+  {
+    "objectID": "ar/materiaux/presentations/00-introduction.html#الأهداف",
+    "href": "ar/materiaux/presentations/00-introduction.html#الأهداف",
+    "title": "مقدمة إلى حسابات الطاقة والانبعاثات",
+    "section": "الأهداف",
+    "text": "الأهداف\n\nوضع حسابات الطاقة والانبعاثات في الإطار المركزي لنظام المحاسبة البيئية والاقتصادية.\nعرض مصادر البيانات المتاحة في تونس.\nوصف مراحل الإعداد التي ستتناولها البعثة.",
+    "crumbs": [
+      "المواد",
+      "العروض التقديمية",
+      "مقدمة"
+    ]
+  },
+  {
+    "objectID": "ar/traitement/00-bilan-energetique/index.html",
+    "href": "ar/traitement/00-bilan-energetique/index.html",
+    "title": "قراءة ميزان الطاقة",
+    "section": "",
+    "text": "ملاحظة\n\n\n\nتعرض هذه الصفحة شيفرة الصفحة المرجعية بالفرنسية دون تنفيذها. النتائج والمخرجات موجودة في الصفحة الفرنسية. تبقى التعليقات داخل الشيفرة بالفرنسية.",
+    "crumbs": [
+      "معالجة البيانات",
+      "قراءة ميزان الطاقة"
+    ]
+  },
+  {
+    "objectID": "ar/traitement/00-bilan-energetique/index.html#الغرض",
+    "href": "ar/traitement/00-bilan-energetique/index.html#الغرض",
+    "title": "قراءة ميزان الطاقة",
+    "section": "1 الغرض",
+    "text": "1 الغرض\nهذه الصفحة نموذج لصفحات المعالجة. تقرأ ميزان الطاقة لسنة 2022، وتحوّله إلى صيغة طويلة، وتحوّل آلاف الأطنان المكافئة نفطًا إلى تيراجول، ثم تصدّر النتيجة. يغذي جدول Parquet الصفحات اللاحقة، وتُنشر مصنفات إكسل باللغات الثلاث في صفحة التنزيلات.\nالمسارات نسبية إلى جذر المشروع، لأن الملف _quarto.yml يحدد execute-dir: project.",
+    "crumbs": [
+      "معالجة البيانات",
+      "قراءة ميزان الطاقة"
+    ]
+  },
+  {
+    "objectID": "ar/traitement/00-bilan-energetique/index.html#المكتبات-والمعلمات",
+    "href": "ar/traitement/00-bilan-energetique/index.html#المكتبات-والمعلمات",
+    "title": "قراءة ميزان الطاقة",
+    "section": "2 المكتبات والمعلمات",
+    "text": "2 المكتبات والمعلمات\n\nfrom pathlib import Path\n\nimport polars as pl\nimport xlsxwriter\n\nANNEE = 2022\nSOURCE = Path(\"data/sources/bilan-energetique/balance2022.xlsx\")\nINTERMEDIAIRES = Path(\"data/intermediaires\")\nPRODUITS = Path(\"data/produits\")\n\n# Facteur de conversion : 1 tep = 41,868 GJ, donc 1 ktep = 41,868 TJ\nKTEP_EN_TJ = 41.868",
+    "crumbs": [
+      "معالجة البيانات",
+      "قراءة ميزان الطاقة"
+    ]
+  },
+  {
+    "objectID": "ar/traitement/00-bilan-energetique/index.html#قراءة-المصنف",
+    "href": "ar/traitement/00-bilan-energetique/index.html#قراءة-المصنف",
+    "title": "قراءة ميزان الطاقة",
+    "section": "3 قراءة المصنف",
+    "text": "3 قراءة المصنف\nيضع مصنف المرصد أسماء المنتجات في سطرين للعناوين والتدفقات في العمود الأول. تقرأ مكتبة polars الورقة دون عناوين، وتتجاهل الأسطر الفارغة في أعلى الورقة.\n\nbrut = pl.read_excel(SOURCE, has_header=False, engine=\"calamine\", infer_schema_length=0)\n\n# Les deux lignes d'en-tête des produits commencent par « en 1000 tep »\nligne_entete = brut.with_row_index().filter(\n    pl.col(\"column_0\").str.starts_with(\"en 1000 tep\")\n)[\"index\"][0]\n\n\ndef nom_produit(haut: str | None, bas: str | None) -&gt; str:\n    \"\"\"Réunit les deux lignes d'en-tête d'un produit en un seul libellé.\"\"\"\n    morceaux = [m.strip() for m in (haut, bas) if m is not None and m.strip()]\n    return \" \".join(\" \".join(morceaux).split())\n\n\nproduits = [\n    nom_produit(brut[ligne_entete, j], brut[ligne_entete + 1, j])\n    for j in range(1, brut.width)\n]\nproduits[:6]\n\nتبدأ التدفقات عند سطر «Production primaire». تتكرر بعض التسميات: تظهر «Raffineries» في مدخلات التحويل وفي مخرجاته. يحتفظ العمود section بعنوان الكتلة التي ينتمي إليها كل سطر، ويحتفظ العمود ordre بموقعه في الميزان.\n\nSECTIONS = {\n    \"Entrées en transformation\",\n    \"Sortie de transformation\",\n    \"Echanges, transfer, restitutions\",\n    \"Consommation finale non énergétique\",\n    \"Consommation finale énergétique\",\n    \"Industrie\",\n    \"Transport\",\n    \"Foyers domestiques, commerce, adm, etc.\",\n}\n\ndebut = brut.with_row_index().filter(pl.col(\"column_0\") == \"Production primaire\")[\"index\"][0]\ncorps = brut[debut:].rename(\n    {f\"column_{j}\": produits[j - 1] for j in range(1, brut.width)} | {\"column_0\": \"flux\"}\n)\n\n\ndef attribuer_sections(flux: list[str]) -&gt; list[str]:\n    \"\"\"Associe chaque ligne au dernier titre de bloc rencontré au-dessus d'elle.\"\"\"\n    courante, resultat = \"Approvisionnement\", []\n    for libelle in flux:\n        if libelle in SECTIONS:\n            courante = libelle\n        resultat.append(courante)\n    return resultat\n\n\ncorps = corps.with_columns(\n    pl.Series(\"section\", attribuer_sections(corps[\"flux\"].to_list())),\n    pl.Series(\"ordre\", range(1, corps.height + 1)),\n)\ncorps.select(\"ordre\", \"section\", \"flux\").head(12)",
+    "crumbs": [
+      "معالجة البيانات",
+      "قراءة ميزان الطاقة"
+    ]
+  },
+  {
+    "objectID": "ar/traitement/00-bilan-energetique/index.html#الصيغة-الطويلة-والتحويل",
+    "href": "ar/traitement/00-bilan-energetique/index.html#الصيغة-الطويلة-والتحويل",
+    "title": "قراءة ميزان الطاقة",
+    "section": "4 الصيغة الطويلة والتحويل",
+    "text": "4 الصيغة الطويلة والتحويل\nتضم الصيغة الطويلة سطرًا لكل تدفق ومنتج. الخلايا الفارغة في الميزان أصفار وتُحذف.\n\nbilan = (\n    corps.unpivot(index=[\"ordre\", \"section\", \"flux\"], variable_name=\"produit\", value_name=\"ktep\")\n    .with_columns(pl.col(\"ktep\").cast(pl.Float64, strict=False))\n    .filter(pl.col(\"ktep\").is_not_null() & (pl.col(\"ktep\") != 0))\n    .with_columns(\n        pl.lit(ANNEE).alias(\"annee\"),\n        (pl.col(\"ktep\") * KTEP_EN_TJ).alias(\"tj\"),\n    )\n    .select(\"annee\", \"ordre\", \"section\", \"flux\", \"produit\", \"ktep\", \"tj\")\n)\nbilan.head(8)",
+    "crumbs": [
+      "معالجة البيانات",
+      "قراءة ميزان الطاقة"
+    ]
+  },
+  {
+    "objectID": "ar/traitement/00-bilan-energetique/index.html#الفحص",
+    "href": "ar/traitement/00-bilan-energetique/index.html#الفحص",
+    "title": "قراءة ميزان الطاقة",
+    "section": "5 الفحص",
+    "text": "5 الفحص\nيجب أن يساوي الإنتاج الأولي في عمود «Total tous produits» مجموع أعمدة المنتجات دون أعمدة المجاميع الفرعية. يتحقق هذا الفحص من أن القراءة لم تُزِح أي عمود. الفارق المسموح به ألف طن مكافئ نفط واحد، لأن الميزان ينشر قيمًا مقربة.\n\nproduction = bilan.filter(pl.col(\"flux\") == \"Production primaire\")\ntotal = production.filter(pl.col(\"produit\") == \"Total tous produits\")[\"ktep\"][0]\nsomme = production.filter(~pl.col(\"produit\").str.starts_with(\"Total\"))[\"ktep\"].sum()\nassert abs(total - somme) &lt; 1, f\"Écart de {total - somme:.1f} ktep : vérifier les colonnes\"\nprint(f\"Production primaire : total {total:,.0f} ktep, somme des produits {somme:,.1f} ktep\")\nprint(f\"Soit {total * KTEP_EN_TJ:,.0f} TJ\")",
+    "crumbs": [
+      "معالجة البيانات",
+      "قراءة ميزان الطاقة"
+    ]
+  },
+  {
+    "objectID": "ar/traitement/00-bilan-energetique/index.html#التصدير",
+    "href": "ar/traitement/00-bilan-energetique/index.html#التصدير",
+    "title": "قراءة ميزان الطاقة",
+    "section": "6 التصدير",
+    "text": "6 التصدير\nيُحفظ الجدول الوسيط بصيغة Parquet مضغوطًا بخوارزمية zstd. تحتوي مصنفات إكسل على الجدول نفسه مع عناوين مترجمة من الملف data/nomenclatures/libelles.csv. تُعرض الورقة العربية من اليمين إلى اليسار. تبقى تسميات التدفقات والمنتجات بالفرنسية في هذه الصفحة النموذجية، وترجمتها من مهام التصنيفات التي ستُبنى لاحقًا.\n\nINTERMEDIAIRES.mkdir(parents=True, exist_ok=True)\nbilan.write_parquet(INTERMEDIAIRES / f\"bilan_energetique_{ANNEE}.parquet\", compression=\"zstd\")\n\nlibelles = pl.read_csv(\"data/nomenclatures/libelles.csv\")\n\n\ndef exporter_excel(tableau: pl.DataFrame, langue: str, nom: str) -&gt; Path:\n    \"\"\"Écrit un classeur Excel avec les en-têtes dans la langue demandée.\"\"\"\n    traduction = dict(zip(libelles[\"cle\"], libelles[langue]))\n    dossier = PRODUITS / langue\n    dossier.mkdir(parents=True, exist_ok=True)\n    chemin = dossier / f\"{nom}.xlsx\"\n    feuille = f\"{traduction['feuille_bilan']} {ANNEE}\"\n    with xlsxwriter.Workbook(chemin) as classeur:\n        tableau.rename({c: traduction.get(c, c) for c in tableau.columns}).write_excel(\n            workbook=classeur, worksheet=feuille, autofit=True, float_precision=1\n        )\n        if langue == \"ar\":\n            classeur.get_worksheet_by_name(feuille).right_to_left()\n    return chemin\n\n\nfor langue in [\"fr\", \"en\", \"ar\"]:\n    print(exporter_excel(bilan, langue, f\"bilan_energetique_{ANNEE}\"))\n\nتتيح الأزرار التالية تنزيل المصنفات.\nالعربية Français English",
+    "crumbs": [
+      "معالجة البيانات",
+      "قراءة ميزان الطاقة"
+    ]
+  }
+]

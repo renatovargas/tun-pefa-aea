@@ -1,0 +1,98 @@
+# الملف الشخصي العربي. Rendu : quarto render ar --profile ar
+project:
+  render:
+    - ar/**/*.qmd
+
+lang: ar-TN
+dir: rtl
+csl: assets/apa-ar.csl
+
+# Quarto n'a pas de traduction arabe de ses libellés ; on les fixe ici.
+language:
+  toc-title-document: "المحتويات"
+  toc-title-website: "في هذه الصفحة"
+  section-title-abstract: "الملخص"
+  section-title-references: "المراجع"
+  section-title-footnotes: "الحواشي"
+  title-block-author-single: "المؤلف"
+  title-block-author-plural: "المؤلفون"
+  title-block-affiliation-single: "الانتماء"
+  title-block-affiliation-plural: "الانتماءات"
+  title-block-published: "تاريخ النشر"
+  title-block-modified: "تاريخ التعديل"
+  callout-note-title: "ملاحظة"
+  callout-warning-title: "تحذير"
+  callout-important-title: "مهم"
+  callout-tip-title: "نصيحة"
+  callout-caution-title: "تنبيه"
+  code-tools-menu-caption: "الشيفرة"
+  code-tools-show-all-code: "إظهار كل الشيفرة"
+  code-tools-hide-all-code: "إخفاء كل الشيفرة"
+  code-tools-view-source: "عرض المصدر"
+  copy-button-tooltip: "نسخ"
+  copy-button-tooltip-success: "تم النسخ"
+  crossref-tbl-title: "الجدول"
+  crossref-fig-title: "الشكل"
+  crossref-tbl-prefix: "الجدول"
+  crossref-fig-prefix: "الشكل"
+  crossref-sec-prefix: "القسم"
+  other-links-title: "روابط أخرى"
+  other-formats-title: "صيغ أخرى"
+  repo-action-links-source: "عرض المصدر"
+  search-no-results-text: "لا توجد نتائج"
+
+website:
+  title: "تونس: حسابات الطاقة والانبعاثات"
+  description: "حسابات التدفقات المادية للطاقة وحسابات انبعاثات الهواء في تونس"
+  navbar:
+    left:
+      - href: ar/index.qmd
+        text: الرئيسية
+      - href: ar/materiaux/index.qmd
+        text: المواد
+      - href: ar/traitement/index.qmd
+        text: معالجة البيانات
+      - href: ar/telechargements.qmd
+        text: التنزيلات
+      - href: ar/a-propos.qmd
+        text: حول الموقع
+    right:
+      - text: "اللغة"
+        menu:
+          - text: "Français"
+            href: "#lang-fr"
+          - text: "English"
+            href: "#lang-en"
+          - text: "العربية"
+            href: "#lang-ar"
+  sidebar:
+    - title: المواد
+      style: docked
+      contents:
+        - href: ar/materiaux/index.qmd
+          text: المواد
+        - section: الوثائق
+          contents:
+            - href: ar/materiaux/documents/contexte-mission/index.qmd
+              text: سياق البعثة
+        - section: العروض التقديمية
+          contents:
+            - href: ar/materiaux/presentations/00-introduction.qmd
+              text: مقدمة
+    - title: معالجة البيانات
+      style: docked
+      contents:
+        - href: ar/traitement/index.qmd
+          text: معالجة البيانات
+        - href: ar/traitement/00-bilan-energetique/index.qmd
+          text: قراءة ميزان الطاقة
+
+format:
+  html:
+    theme:
+      - yeti
+      - assets/styles.scss
+      - assets/styles-ar.scss
+
+execute:
+  eval: false

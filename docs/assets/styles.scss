@@ -1,0 +1,34 @@
+/*-- scss:defaults --*/
+
+// Bleu du FMI, le même que dans assets/slides.scss
+$theme-IMFblue: #204B92;
+
+$primary: $theme-IMFblue;
+$link-color: $theme-IMFblue;
+
+/*-- scss:rules --*/
+
+// Présentations intégrées dans une page
+.slide-embed {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  margin-bottom: 0.5rem;
+}
+
+.slide-embed .slide-deck {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.slide-links {
+  text-align: end;
+  margin-bottom: 1.5rem;
+}
+
+// Cartes de la page de téléchargements
+.download-card .btn {
+  margin-inline-end: 0.4rem;
+  margin-bottom: 0.4rem;
+}

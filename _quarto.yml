@@ -1,0 +1,36 @@
+# Configuration commune aux trois langues.
+# Chaque langue a son profil (_quarto-fr.yml, _quarto-en.yml, _quarto-ar.yml)
+# qui fixe la langue, la barre de navigation et les fichiers à rendre.
+# Rendu complet : `bash scripts/render.sh` (voir STRUCTURE.md).
+project:
+  type: website
+  output-dir: docs
+  execute-dir: project
+  # data/produits/ n'est pas copié dans docs/ : les boutons de téléchargement
+  # pointent vers les fichiers bruts sur GitHub, pour ne pas publier deux fois.
+  resources:
+    - assets/
+  # Chaque profil ajoute ses dossiers à cette liste (Quarto concatène les listes).
+  # research/ et refs/ ne sont jamais rendus.
+  render:
+    - "!research/"
+    - "!refs/"
+
+website:
+  title: "Tunisie PEFA-AEA"
+  site-url: https://renatovargas.github.io/tun-pefa-aea/
+  repo-url: https://github.com/renatovargas/tun-pefa-aea
+  repo-branch: main
+  repo-actions: [source]
+  page-navigation: true
+  search: false
+
+format:
+  html:
+    css: assets/styles.css
+    toc: true
+    include-after-body: assets/lang-switch.html
+
+execute:
+  freeze: auto
+  warning: false

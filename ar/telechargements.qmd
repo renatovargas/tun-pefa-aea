@@ -1,0 +1,27 @@
+---
+title: "التنزيلات"
+subtitle: "الجداول النهائية بصيغة إكسل بالفرنسية والإنجليزية والعربية"
+toc: false
+---
+
+يُنتَج كل جدول في صفحة معالجة تصف محتواه والشيفرة التي تولّده. تحتوي النسخ اللغوية الثلاث للجدول نفسه على الأرقام نفسها.
+
+:::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### ميزان الطاقة 2022
+
+ميزان المرصد الوطني للطاقة والمناجم بصيغة طويلة، بآلاف الأطنان المكافئة نفطًا وبالتيراجول. جدول توضيحي يبين بنية المنتجات القادمة.
+
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/ar/bilan_energetique_2022.xlsx){.btn .btn-primary download="bilan_energetique_2022.xlsx"}
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/fr/bilan_energetique_2022.xlsx){.btn .btn-outline-primary download="bilan_energetique_2022.xlsx"}
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/en/bilan_energetique_2022.xlsx){.btn .btn-outline-primary download="bilan_energetique_2022.xlsx"}
+
+[صفحة المعالجة](traitement/00-bilan-energetique/index.qmd)
+:::
+:::
+:::
+
+::::

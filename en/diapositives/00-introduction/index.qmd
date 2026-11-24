@@ -1,0 +1,37 @@
+---
+title: "Introduction to energy and air emissions accounts"
+subtitle: "SEEA, PEFA and AEA in Tunisia"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: IMF Consultant
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and air emissions accounts for Tunisia"
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+## Topics {.theme-content}
+
+1. The SEEA Central Framework.
+2. Physical energy flow accounts (PEFA).
+3. Air emissions accounts (AEA).
+4. Data available in Tunisia.
+
+## The SEEA Central Framework
+
+The System of Environmental-Economic Accounting (SEEA) records flows between the environment and the economy in supply and use tables consistent with the System of National Accounts [@seea2014].
+
+- PEFA describe energy flows in terajoules [@seeaenergy2019].
+- AEA attribute emissions to resident industries and households [@eurostat2015aea].
+
+## References
+
+::: {#refs}
+:::
