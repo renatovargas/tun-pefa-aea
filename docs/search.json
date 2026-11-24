@@ -4,7 +4,7 @@
     "href": "fr/traitement/index.html",
     "title": "Traitement des données",
     "section": "",
-    "text": "Les pages de cette section décrivent pas à pas la transformation des données transmises par les autorités en comptes. Chaque page combine les explications et le code Python qui les exécute. Les pages se lisent dans l’ordre de leur numéro, car chacune utilise les tableaux produits par les précédentes.\nLes tableaux intermédiaires sont enregistrés au format Parquet dans data/intermediaires/. Les tableaux finaux sont exportés en Excel dans data/produits/, en français, en anglais et en arabe, et sont rassemblés dans la page de téléchargements.\n\n\n\nPage\nContenu\n\n\n\n\n00. Lecture du bilan énergétique\nLecture du bilan de 2022, mise en format long et conversion en térajoules",
+    "text": "Les pages de cette section décrivent pas à pas la transformation des données transmises par les autorités en comptes. Chaque page combine les explications et le code Python qui les exécute. Les pages se lisent dans l’ordre de leur numéro, car chacune utilise les tableaux produits par les précédentes.\nLes tableaux intermédiaires sont enregistrés au format Parquet dans data/intermediaires/. Les tableaux finaux sont exportés en Excel dans data/produits/, en français, en anglais et en arabe, et sont rassemblés dans la page de téléchargements.\n\n\n\nPage\nContenu\n\n\n\n\n00. Lecture du bilan énergétique\nLecture du bilan de 2022, mise en format long et conversion en térajoules\n\n\n01. Extraction des bilans énergétiques\nBilans de l’ONEM de 2015 à 2022 en format long, codes stables des flux et des produits, ktep et TJ\n\n\n02. Extraction de l’inventaire des GES\nFeuilles Data des tableaux CRT de 2015 à 2022, contrôle avec Summary2\n\n\n03. Extraction des tableaux des ressources et des emplois\nTRE de l’INS de 2015 à 2023 en format long, contrôles d’équilibre",
     "crumbs": [
       "Traitement",
       "Traitement des données"
@@ -711,6 +711,244 @@
     "crumbs": [
       "معالجة البيانات",
       "قراءة ميزان الطاقة"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html",
+    "href": "fr/traitement/01-extraction-bilans/index.html",
+    "title": "Extraction des bilans énergétiques",
+    "section": "",
+    "text": "L’Observatoire national de l’énergie et des mines (ONEM) publie un bilan énergétique par an, en milliers de tonnes équivalent pétrole (ktep). Les huit classeurs de 2015 à 2022 ont la même logique, mais leur présentation varie d’une année à l’autre. Cette page les réunit en un seul tableau long, avec un code stable pour chaque flux et chaque produit. Ce tableau, data/intermediaires/bilans_energetiques.parquet, est le point de départ des comptes physiques des flux d’énergie (PEFA).\nLes fonctions sont dans le script scripts/extraire_bilans.py1, que cette page importe et exécute étape par étape. Le même script peut être lancé seul avec uv run python scripts/extraire_bilans.py.\n\nimport sys\n\nimport polars as pl\n\nsys.path.insert(0, \"scripts\")\nimport extraire_bilans as eb\n\nfichiers = eb.fichiers_bilans()\n{annee: chemin.name for annee, chemin in fichiers.items()}\n\n{2015: 'balance2015.xltx',\n 2016: 'balance2016.xltx',\n 2017: 'balance2017.xltx',\n 2018: 'balance2018.xltx',\n 2019: 'balance2019.xltx',\n 2020: 'balance2020.xlsx',\n 2021: 'balance2021.xlsx',\n 2022: 'balance2022.xlsx'}"
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#objet",
+    "href": "fr/traitement/01-extraction-bilans/index.html#objet",
+    "title": "Extraction des bilans énergétiques",
+    "section": "",
+    "text": "L’Observatoire national de l’énergie et des mines (ONEM) publie un bilan énergétique par an, en milliers de tonnes équivalent pétrole (ktep). Les huit classeurs de 2015 à 2022 ont la même logique, mais leur présentation varie d’une année à l’autre. Cette page les réunit en un seul tableau long, avec un code stable pour chaque flux et chaque produit. Ce tableau, data/intermediaires/bilans_energetiques.parquet, est le point de départ des comptes physiques des flux d’énergie (PEFA).\nLes fonctions sont dans le script scripts/extraire_bilans.py1, que cette page importe et exécute étape par étape. Le même script peut être lancé seul avec uv run python scripts/extraire_bilans.py.\n\nimport sys\n\nimport polars as pl\n\nsys.path.insert(0, \"scripts\")\nimport extraire_bilans as eb\n\nfichiers = eb.fichiers_bilans()\n{annee: chemin.name for annee, chemin in fichiers.items()}\n\n{2015: 'balance2015.xltx',\n 2016: 'balance2016.xltx',\n 2017: 'balance2017.xltx',\n 2018: 'balance2018.xltx',\n 2019: 'balance2019.xltx',\n 2020: 'balance2020.xlsx',\n 2021: 'balance2021.xlsx',\n 2022: 'balance2022.xlsx'}"
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#lecture-dun-bilan",
+    "href": "fr/traitement/01-extraction-bilans/index.html#lecture-dun-bilan",
+    "title": "Extraction des bilans énergétiques",
+    "section": "2 Lecture d’un bilan",
+    "text": "2 Lecture d’un bilan\nChaque classeur a une seule feuille. Les noms des produits occupent deux lignes d’en-tête, à partir de la ligne dont la première cellule commence par « en 1000 tep ». La fonction lire_bilan réunit ces deux lignes en un libellé, lit les flux à partir de « Production primaire » et met le tableau en format long. Les cellules vides sont des zéros et sont retirées. Une cellule de 2015 contient « 0 * », avec un renvoi ; l’astérisque est retiré.\nCertains libellés de flux se répètent. « Raffineries » figure dans les entrées et dans les sorties de transformation, et « Chimie » dans la consommation non énergétique et dans l’industrie. La colonne bloc garde le dernier titre de bloc rencontré au-dessus de chaque ligne, ce qui lève l’ambiguïté.\n\nexemple = eb.lire_bilan(fichiers[2022], 2022)\nexemple.filter(pl.col(\"flux_source\") == \"Raffineries\", pl.col(\"produit_source\") == \"Pétrole brut\")\n\n\nshape: (1, 6)\n\n\n\nordre_source\nbloc\nflux_source\nproduit_source\nktep\nannee\n\n\ni64\nstr\nstr\nstr\nf64\ni16\n\n\n\n\n10\n\"entrees\"\n\"Raffineries\"\n\"Pétrole brut\"\n1501.0\n2022"
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#dérive-de-la-présentation-entre-les-années",
+    "href": "fr/traitement/01-extraction-bilans/index.html#dérive-de-la-présentation-entre-les-années",
+    "title": "Extraction des bilans énergétiques",
+    "section": "3 Dérive de la présentation entre les années",
+    "text": "3 Dérive de la présentation entre les années\nLes classeurs ne présentent pas tous les mêmes colonnes ni les mêmes lignes. Le tableau suivant compte les libellés distincts de chaque année.\n\nlus = pl.concat([eb.lire_bilan(chemin, annee) for annee, chemin in fichiers.items()])\nlus.group_by(\"annee\").agg(\n    pl.col(\"produit_source\").n_unique().alias(\"colonnes de produits\"),\n    pl.col(\"flux_source\").n_unique().alias(\"libellés de flux\"),\n).sort(\"annee\")\n\n\nshape: (8, 3)\n\n\n\nannee\ncolonnes de produits\nlibellés de flux\n\n\ni16\nu32\nu32\n\n\n\n\n2015\n22\n41\n\n\n2016\n23\n40\n\n\n2017\n23\n40\n\n\n2018\n23\n40\n\n\n2019\n22\n41\n\n\n2020\n23\n41\n\n\n2021\n23\n41\n\n\n2022\n23\n41\n\n\n\n\n\n\nLes principales différences sont les suivantes.\n\nEn 2015, la colonne des liquides de gaz naturel s’intitule « GPL primaire », et la colonne « Gaz de raffinage » n’existe pas.\nEn 2016, une colonne « géothermie » s’ajoute aux énergies renouvelables. C’est la colonne supplémentaire de cette année.\nDans plusieurs années, l’en-tête de l’énergie éolienne et celui de l’énergie hydraulique sont décalés sur les deux lignes. La lecture donne « Energie éolienne hydraulique » pour l’éolien et « Energie » pour l’hydraulique ; les valeurs de production primaire confirment cette lecture.\nEn 2015, l’industrie compte trois lignes, « Sidérurgie », « Métaux non ferreux » et « Fabrications métalliques ». Les années suivantes ont une seule ligne « Fabrications métalliques y compris sidérurgie ». La ligne « Fabrications mécaniques et électriques » n’a de valeurs qu’à partir de 2019.\nPlusieurs libellés changent d’orthographe (« Soutess internationales », « Consommation intérieur brute », « Agriculture » puis « Agriculture et pêche »)."
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#attribution-des-codes",
+    "href": "fr/traitement/01-extraction-bilans/index.html#attribution-des-codes",
+    "title": "Extraction des bilans énergétiques",
+    "section": "4 Attribution des codes",
+    "text": "4 Attribution des codes\nLes libellés ne servent pas d’identifiants. Deux tables de correspondance, éditées à la main, associent chaque libellé d’origine à un code.\n\ndata/nomenclatures/bilan_flux_sources.csv associe un couple (bloc, libellé) à un code de flux.\ndata/nomenclatures/bilan_produits_sources.csv associe un libellé de produit à un code de produit.\n\nLes codes sont décrits dans data/nomenclatures/bilan_flux.csv et data/nomenclatures/bilan_produits.csv, avec leur libellé en français, en anglais et en arabe, leur agrégat parent et, pour les flux, le signe de leur contribution à cet agrégat. La colonne a_verifier signale les traductions à faire relire par les homologues tunisiens.\n\npl.read_csv(\"data/nomenclatures/bilan_flux.csv\").select(\"code\", \"parent\", \"signe\", \"fr\", \"en\")\n\n\nshape: (47, 5)\n\n\n\ncode\nparent\nsigne\nfr\nen\n\n\nstr\nstr\ni64\nstr\nstr\n\n\n\n\n\"PROD\"\n\"CIB\"\n1\n\"Production primaire\"\n\"Primary production\"\n\n\n\"IMP\"\n\"CIB\"\n1\n\"Importations\"\n\"Imports\"\n\n\n\"VSTOCK\"\n\"CIB\"\n1\n\"Variation des stocks\"\n\"Stock changes\"\n\n\n\"EXP\"\n\"CIB\"\n-1\n\"Exportations\"\n\"Exports\"\n\n\n\"SOUTES\"\n\"CIB\"\n-1\n\"Soutes internationales\"\n\"International bunkers\"\n\n\n…\n…\n…\n…\n…\n\n\n\"AUT\"\n\"CFE\"\n1\n\"Foyers domestiques, commerce, …\n\"Households, commerce, public a…\n\n\n\"AUT_RES\"\n\"AUT\"\n1\n\"Foyers domestiques\"\n\"Households\"\n\n\n\"AUT_COM\"\n\"AUT\"\n1\n\"Commerce, administration, hôte…\n\"Commerce, public administratio…\n\n\n\"AUT_AGR\"\n\"AUT\"\n1\n\"Agriculture et pêche\"\n\"Agriculture and fishing\"\n\n\n\"ECART\"\n\"DISPO\"\n1\n\"Écart statistique\"\n\"Statistical difference\"\n\n\n\n\n\n\n\npl.read_csv(\"data/nomenclatures/bilan_produits.csv\").select(\"code\", \"parent\", \"fr\", \"en\")\n\n\nshape: (24, 4)\n\n\n\ncode\nparent\nfr\nen\n\n\nstr\nstr\nstr\nstr\n\n\n\n\n\"TOTAL\"\nnull\n\"Total tous produits\"\n\"Total all products\"\n\n\n\"PETBRUT\"\n\"TOTAL\"\n\"Pétrole brut\"\n\"Crude oil\"\n\n\n\"LGN\"\n\"TOTAL\"\n\"Liquides de gaz naturel\"\n\"Natural gas liquids\"\n\n\n\"PP\"\n\"TOTAL\"\n\"Produits pétroliers\"\n\"Oil products\"\n\n\n\"GAZRAF\"\n\"PP\"\n\"Gaz de raffinerie\"\n\"Refinery gas\"\n\n\n…\n…\n…\n…\n\n\n\"BIOM\"\n\"ENR\"\n\"Biomasse\"\n\"Biomass\"\n\n\n\"EOL\"\n\"ENR\"\n\"Énergie éolienne\"\n\"Wind energy\"\n\n\n\"HYDRO\"\n\"ENR\"\n\"Énergie hydraulique\"\n\"Hydropower\"\n\n\n\"CHAL\"\n\"TOTAL\"\n\"Chaleur\"\n\"Heat\"\n\n\n\"ELEC\"\n\"TOTAL\"\n\"Électricité\"\n\"Electricity\"\n\n\n\n\n\n\nLa fonction coder joint les deux tables et s’arrête si un libellé n’a pas de code. Un nouveau bilan dont la présentation change encore produit donc une erreur explicite, au lieu d’un décalage silencieux.\nEn 2015, « Sidérurgie », « Métaux non ferreux » et « Fabrications métalliques » reçoivent tous le code IND_MET. La fonction agreger additionne les lignes qui partagent un code et garde les libellés d’origine. La somme de 2015 est du même ordre que la ligne unique des années suivantes, ce qui appuie ce choix.\n\nbilans = eb.extraire()\n(\n    bilans.filter(pl.col(\"code_flux\").is_in([\"IND_MET\", \"IND_MEC\"]), pl.col(\"code_produit\") == \"TOTAL\")\n    .pivot(\"code_flux\", index=\"annee\", values=\"ktep\")\n    .sort(\"annee\")\n)\n\n\nshape: (8, 3)\n\n\n\nannee\nIND_MET\nIND_MEC\n\n\ni16\nf64\nf64\n\n\n\n\n2015\n31.0\nnull\n\n\n2016\n34.0\nnull\n\n\n2017\n33.0\nnull\n\n\n2018\n35.0\nnull\n\n\n2019\n32.0\n40.0\n\n\n2020\n30.0\n36.0\n\n\n2021\n33.0\n35.0\n\n\n2022\n35.0\n39.0\n\n\n\n\n\n\n\n\n\n\n\n\nNoteQuestion ouverte\n\n\n\nLa ligne « Fabrications métalliques » de 2015 pourrait correspondre aux fabrications mécaniques et électriques, comme sa position dans le tableau le laisse penser. Elle est classée ici avec la sidérurgie, car les fabrications mécaniques et électriques n’ont pas de valeur avant 2019. À confirmer avec l’ONEM."
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#conversion-en-térajoules",
+    "href": "fr/traitement/01-extraction-bilans/index.html#conversion-en-térajoules",
+    "title": "Extraction des bilans énergétiques",
+    "section": "5 Conversion en térajoules",
+    "text": "5 Conversion en térajoules\nLes comptes PEFA s’expriment en térajoules (TJ). Une tonne équivalent pétrole vaut 41,868 GJ, donc une ktep vaut 41,868 TJ (United Nations, 2019).\n\nbilans.head(6)\n\n\nshape: (6, 8)\n\n\n\nannee\nordre\ncode_flux\ncode_produit\nflux_source\nproduit_source\nktep\ntj\n\n\ni16\ni16\nstr\nstr\nstr\nstr\nf64\nf64\n\n\n\n\n2015\n0\n\"PROD\"\n\"BIOM\"\n\"Production primaire\"\n\"Biomasse\"\n1076.0\n45049.968\n\n\n2015\n0\n\"PROD\"\n\"CHAL\"\n\"Production primaire\"\n\"Chaleur\"\n74.0\n3098.232\n\n\n2015\n0\n\"PROD\"\n\"ENR\"\n\"Production primaire\"\n\"Total Energie Renouvelable s k…\n1171.0\n49027.428\n\n\n2015\n0\n\"PROD\"\n\"EOL\"\n\"Production primaire\"\n\"Energie éolienne\"\n39.0\n1632.852\n\n\n2015\n0\n\"PROD\"\n\"GN\"\n\"Production primaire\"\n\"Gaz Naturel\"\n2517.0\n105381.756\n\n\n2015\n0\n\"PROD\"\n\"HYDRO\"\n\"Production primaire\"\n\"Energie hydraulique\"\n6.0\n251.208"
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#contrôles",
+    "href": "fr/traitement/01-extraction-bilans/index.html#contrôles",
+    "title": "Extraction des bilans énergétiques",
+    "section": "6 Contrôles",
+    "text": "6 Contrôles\nLe bilan publie des valeurs arrondies à la ktep, parfois à la décimale. Les contrôles tolèrent donc un écart de 2 ktep.\nAgrégats de flux. Chaque agrégat (industrie, transport, entrées en transformation, consommation intérieure brute, etc.) doit égaler la somme signée de ses composantes, pour chaque produit et chaque année. Par exemple, la consommation intérieure brute est égale à la production primaire, plus les importations et la variation des stocks, moins les exportations et les soutes internationales.\nAgrégats de produits. La colonne « Total tous produits » doit égaler la somme des produits de premier niveau, et les colonnes des produits pétroliers et des énergies renouvelables la somme de leurs produits.\nDisponible pour la consommation finale. Pour chaque produit, il doit égaler la consommation intérieure brute, moins les entrées en transformation, plus les sorties de transformation et les échanges, moins la consommation de la branche énergie et les pertes.\n\nTOLERANCE = 2.0\ncontroles = {\n    \"Agrégats de flux\": eb.ecarts_hierarchie(bilans, \"flux\"),\n    \"Agrégats de produits\": eb.ecarts_hierarchie(bilans, \"produit\"),\n    \"Disponible pour la consommation finale\": eb.ecarts_identites(bilans),\n}\nresume = pl.DataFrame(\n    {\n        \"controle\": list(controles),\n        \"cellules\": [t.height for t in controles.values()],\n        \"ecart_max_ktep\": [t[\"ecart\"].abs().max() for t in controles.values()],\n        \"ecarts_sup_1_ktep\": [t.filter(pl.col(\"ecart\").abs() &gt; 1).height for t in controles.values()],\n    }\n)\nassert (resume[\"ecart_max_ktep\"] &lt;= TOLERANCE).all(), \"Écart supérieur à la tolérance : vérifier la lecture\"\nresume\n\n\nshape: (3, 4)\n\n\n\ncontrole\ncellules\necart_max_ktep\necarts_sup_1_ktep\n\n\nstr\ni64\nf64\ni64\n\n\n\n\n\"Agrégats de flux\"\n961\n2.0\n2\n\n\n\"Agrégats de produits\"\n717\n2.0\n14\n\n\n\"Disponible pour la consommatio…\n182\n1.5\n1\n\n\n\n\n\n\nLes quelques écarts supérieurs à une ktep sont listés ci-dessous. Ils viennent de l’arrondi des valeurs publiées.\n\npl.concat(\n    [t.rename({c: \"element\" for c in t.columns if c.startswith(\"code_\")}).select(\n        pl.lit(nom).alias(\"controle\"), \"annee\", pl.col(\"element\"), pl.col(\"ecart\").round(2)\n    ) for nom, t in controles.items()]\n).filter(pl.col(\"ecart\").abs() &gt; 1).sort(\"annee\")\n\n\nshape: (17, 4)\n\n\n\ncontrole\nannee\nelement\necart\n\n\nstr\ni16\nstr\nf64\n\n\n\n\n\"Agrégats de produits\"\n2017\n\"ECH\"\n1.3\n\n\n\"Agrégats de produits\"\n2017\n\"ECH_PROD\"\n1.3\n\n\n\"Agrégats de produits\"\n2017\n\"PROD\"\n-1.3\n\n\n\"Agrégats de produits\"\n2018\n\"ECART\"\n-2.0\n\n\n\"Agrégats de produits\"\n2018\n\"VSTOCK\"\n-1.1\n\n\n…\n…\n…\n…\n\n\n\"Agrégats de flux\"\n2021\n\"ENR\"\n-1.17\n\n\n\"Agrégats de produits\"\n2021\n\"TRS_RAFF\"\n1.1\n\n\n\"Agrégats de produits\"\n2021\n\"AUT\"\n-1.17\n\n\n\"Agrégats de produits\"\n2022\n\"IND\"\n1.1\n\n\n\"Disponible pour la consommatio…\n2022\n\"GASOIL\"\n-1.5"
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#enregistrement",
+    "href": "fr/traitement/01-extraction-bilans/index.html#enregistrement",
+    "title": "Extraction des bilans énergétiques",
+    "section": "7 Enregistrement",
+    "text": "7 Enregistrement\nLe tableau est enregistré en Parquet, compressé avec zstd. Il garde les libellés d’origine à côté des codes, pour la traçabilité.\n\neb.SORTIE.parent.mkdir(parents=True, exist_ok=True)\nbilans.write_parquet(eb.SORTIE, compression=\"zstd\")\nprint(f\"{eb.SORTIE} : {bilans.height} lignes, {bilans['annee'].n_unique()} années\")\n\ndata/intermediaires/bilans_energetiques.parquet : 2502 lignes, 8 années"
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#références",
+    "href": "fr/traitement/01-extraction-bilans/index.html#références",
+    "title": "Extraction des bilans énergétiques",
+    "section": "8 Références",
+    "text": "8 Références\n\n\nUnited Nations. (2019). System of Environmental-Economic Accounting for Energy: SEEA-Energy. New York: United Nations."
+  },
+  {
+    "objectID": "fr/traitement/01-extraction-bilans/index.html#footnotes",
+    "href": "fr/traitement/01-extraction-bilans/index.html#footnotes",
+    "title": "Extraction des bilans énergétiques",
+    "section": "Notes de bas de page",
+    "text": "Notes de bas de page\n\n\nCode source : https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extraire_bilans.py.↩︎"
+  },
+  {
+    "objectID": "fr/traitement/02-extraction-crt/index.html",
+    "href": "fr/traitement/02-extraction-crt/index.html",
+    "title": "Extraction de l’inventaire des gaz à effet de serre",
+    "section": "",
+    "text": "La Tunisie déclare son inventaire des gaz à effet de serre à la Convention-cadre des Nations unies sur les changements climatiques (CCNUCC) dans le format commun de déclaration (CRT, Common Reporting Tables). Il y a un classeur par année, de 2015 à 2022. La feuille Data de chaque classeur contient déjà toutes les valeurs en format long : une ligne par catégorie CRT, paramètre, type, combustible et gaz. Cette page empile les huit feuilles dans data/intermediaires/crt.parquet, qui servira aux comptes des émissions atmosphériques (AEA).\nLes fonctions sont dans le script scripts/extraire_crt.py1, que cette page importe et exécute.\n\nimport sys\n\nimport polars as pl\n\nsys.path.insert(0, \"scripts\")\nimport extraire_crt as ec\n\n{annee: chemin.name for annee, chemin in ec.fichiers_crt().items()}\n\n{2015: '2015_Tables_CRT_AR5.xlsm',\n 2016: '2016_Tables_CRT_AR5.xlsm',\n 2017: '2017_Tables_CRT_AR5.xlsm',\n 2018: '2018_Tables_CRT_AR5.xlsm',\n 2019: '2019_Tables_CRT_AR5.xlsm',\n 2020: '2020_Tables_CRT_AR5.xlsm',\n 2021: '2021_Tables_CRT_AR5.xlsm',\n 2022: '2022_Tables_CRT_AR5.xlsm'}",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Inventaire des GES (CRT)"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/02-extraction-crt/index.html#objet",
+    "href": "fr/traitement/02-extraction-crt/index.html#objet",
+    "title": "Extraction de l’inventaire des gaz à effet de serre",
+    "section": "",
+    "text": "La Tunisie déclare son inventaire des gaz à effet de serre à la Convention-cadre des Nations unies sur les changements climatiques (CCNUCC) dans le format commun de déclaration (CRT, Common Reporting Tables). Il y a un classeur par année, de 2015 à 2022. La feuille Data de chaque classeur contient déjà toutes les valeurs en format long : une ligne par catégorie CRT, paramètre, type, combustible et gaz. Cette page empile les huit feuilles dans data/intermediaires/crt.parquet, qui servira aux comptes des émissions atmosphériques (AEA).\nLes fonctions sont dans le script scripts/extraire_crt.py1, que cette page importe et exécute.\n\nimport sys\n\nimport polars as pl\n\nsys.path.insert(0, \"scripts\")\nimport extraire_crt as ec\n\n{annee: chemin.name for annee, chemin in ec.fichiers_crt().items()}\n\n{2015: '2015_Tables_CRT_AR5.xlsm',\n 2016: '2016_Tables_CRT_AR5.xlsm',\n 2017: '2017_Tables_CRT_AR5.xlsm',\n 2018: '2018_Tables_CRT_AR5.xlsm',\n 2019: '2019_Tables_CRT_AR5.xlsm',\n 2020: '2020_Tables_CRT_AR5.xlsm',\n 2021: '2021_Tables_CRT_AR5.xlsm',\n 2022: '2022_Tables_CRT_AR5.xlsm'}",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Inventaire des GES (CRT)"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/02-extraction-crt/index.html#structure-de-la-feuille-data",
+    "href": "fr/traitement/02-extraction-crt/index.html#structure-de-la-feuille-data",
+    "title": "Extraction de l’inventaire des gaz à effet de serre",
+    "section": "2 Structure de la feuille Data",
+    "text": "2 Structure de la feuille Data\nLa feuille a huit colonnes. Elles sont renommées en français. La colonne valeur est lue comme du texte puis convertie en nombre.\n\npl.DataFrame({\"colonne CRT\": list(ec.COLONNES), \"nom retenu\": list(ec.COLONNES.values())})\n\n\nshape: (8, 2)\n\n\n\ncolonne CRT\nnom retenu\n\n\nstr\nstr\n\n\n\n\n\"Record_Key\"\n\"cle\"\n\n\n\"CRT\"\n\"crt\"\n\n\n\"Parameter\"\n\"parametre\"\n\n\n\"Type\"\n\"type\"\n\n\n\"Fuel\"\n\"combustible\"\n\n\n\"Gas\"\n\"gaz\"\n\n\n\"Unit\"\n\"unite\"\n\n\n\"Value\"\n\"valeur\"\n\n\n\n\n\n\nLe paramètre distingue trois sortes de lignes. Les lignes activity donnent les données d’activité, par exemple la consommation de combustible en TJ. Les lignes emission donnent les émissions, en kilotonnes (kt) de chaque gaz. Les lignes information donnent des facteurs d’émission et d’autres données de contexte.\n\ncrt, doublons = ec.extraire()\ncrt.filter(pl.col(\"annee\") == 2022).group_by(\"parametre\", \"unite\").len().sort(\"len\", descending=True).head(8)\n\n\nshape: (8, 3)\n\n\n\nparametre\nunite\nlen\n\n\nstr\nstr\nu32\n\n\n\n\n\"emission\"\n\"kt\"\n5603\n\n\n\"activity\"\n\"kt\"\n1967\n\n\n\"information\"\n\"kt\"\n1416\n\n\n\"activity\"\n\"kg N/yr\"\n386\n\n\n\"information\"\n\"%\"\n356\n\n\n\"activity\"\n\"kt C\"\n340\n\n\n\"activity\"\n\"TJ\"\n289\n\n\n\"activity\"\n\"t N/year\"\n265",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Inventaire des GES (CRT)"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/02-extraction-crt/index.html#lignes-en-double",
+    "href": "fr/traitement/02-extraction-crt/index.html#lignes-en-double",
+    "title": "Extraction de l’inventaire des gaz à effet de serre",
+    "section": "3 Lignes en double",
+    "text": "3 Lignes en double\nChaque feuille Data contient des lignes strictement identiques, répétées. Elles sont retirées, car une somme les compterait deux fois. Le tableau suivant donne le nombre de lignes retirées par année.\n\npl.DataFrame({\"annee\": list(doublons), \"lignes_retirees\": list(doublons.values())})\n\n\nshape: (8, 2)\n\n\n\nannee\nlignes_retirees\n\n\ni64\ni64\n\n\n\n\n2015\n489\n\n\n2016\n489\n\n\n2017\n489\n\n\n2018\n489\n\n\n2019\n489\n\n\n2020\n489\n\n\n2021\n489\n\n\n2022\n489",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Inventaire des GES (CRT)"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/02-extraction-crt/index.html#contrôle-avec-le-tableau-summary2",
+    "href": "fr/traitement/02-extraction-crt/index.html#contrôle-avec-le-tableau-summary2",
+    "title": "Extraction de l’inventaire des gaz à effet de serre",
+    "section": "4 Contrôle avec le tableau Summary2",
+    "text": "4 Contrôle avec le tableau Summary2\nLa feuille Summary2 de chaque classeur donne les émissions par catégorie et par gaz, en kt d’équivalent CO2. Le contrôle somme les émissions de Data de chaque catégorie, gaz par gaz, et les convertit en équivalent CO2 avec les potentiels de réchauffement global à 100 ans du cinquième rapport du GIEC, que l’inventaire tunisien utilise (CH4 : 28, N2O : 265). Les éléments pour mémoire (catégorie 1.D, soutes internationales) sont exclus des totaux de l’énergie, comme dans Summary2.\n\ncomparaisons = pl.concat([ec.comparer_summary2(crt, a).with_columns(annee=pl.lit(a)) for a in sorted(doublons)])\nresume = comparaisons.group_by(\"annee\").agg(\n    pl.len().alias(\"cellules\"),\n    pl.col(\"ecart\").abs().max().round(4).alias(\"ecart_max\"),\n    (pl.col(\"ecart\").abs() &gt; 0.01).sum().alias(\"ecarts_sup_0_01\"),\n).sort(\"annee\")\nassert resume[\"ecart_max\"].max() &lt; 1, \"Écart important avec Summary2 : vérifier la lecture\"\nresume\n\n\nshape: (8, 4)\n\n\n\nannee\ncellules\necart_max\necarts_sup_0_01\n\n\ni32\nu32\nf64\nu32\n\n\n\n\n2015\n104\n0.0\n0\n\n\n2016\n104\n0.0\n0\n\n\n2017\n104\n0.0\n0\n\n\n2018\n104\n0.0\n0\n\n\n2019\n104\n0.2364\n3\n\n\n2020\n104\n0.2353\n3\n\n\n2021\n104\n0.2123\n3\n\n\n2022\n104\n0.2258\n3\n\n\n\n\n\n\nLes données de Data reproduisent Summary2 pour toutes les catégories de 2015 à 2018. À partir de 2019, un seul écart apparaît, dans les émissions de N2O de la catégorie 1.B.2 (émissions fugitives du pétrole et du gaz naturel), et il se propage à ses agrégats.\n\ncomparaisons.filter(pl.col(\"ecart\").abs() &gt; 0.01).select(\"annee\", \"crt\", \"gaz\", pl.col(\"ecart\").round(3))\n\n\nshape: (12, 4)\n\n\n\nannee\ncrt\ngaz\necart\n\n\ni32\nstr\nstr\nf64\n\n\n\n\n2019\n\"1\"\n\"N2O\"\n-0.236\n\n\n2019\n\"1.B\"\n\"N2O\"\n-0.236\n\n\n2019\n\"1.B.2\"\n\"N2O\"\n-0.236\n\n\n2020\n\"1\"\n\"N2O\"\n-0.235\n\n\n2020\n\"1.B\"\n\"N2O\"\n-0.235\n\n\n…\n…\n…\n…\n\n\n2021\n\"1.B\"\n\"N2O\"\n-0.212\n\n\n2021\n\"1.B.2\"\n\"N2O\"\n-0.212\n\n\n2022\n\"1\"\n\"N2O\"\n-0.226\n\n\n2022\n\"1.B\"\n\"N2O\"\n-0.226\n\n\n2022\n\"1.B.2\"\n\"N2O\"\n-0.226\n\n\n\n\n\n\n\ncrt.filter(\n    pl.col(\"crt\") == \"1.B.2.b.ii\", pl.col(\"gaz\") == \"N2O\", pl.col(\"parametre\") == \"emission\", pl.col(\"valeur\") != 0\n).select(\"annee\", \"crt\", \"combustible\", \"valeur\")\n\n\nshape: (4, 4)\n\n\n\nannee\ncrt\ncombustible\nvaleur\n\n\ni16\nstr\nstr\nf64\n\n\n\n\n2019\n\"1.B.2.b.ii\"\n\"no fuel\"\n0.000892\n\n\n2020\n\"1.B.2.b.ii\"\n\"no fuel\"\n0.000888\n\n\n2021\n\"1.B.2.b.ii\"\n\"no fuel\"\n0.000801\n\n\n2022\n\"1.B.2.b.ii\"\n\"no fuel\"\n0.000852\n\n\n\n\n\n\n\n\n\n\n\n\nNoteQuestion ouverte\n\n\n\nLes émissions de N2O de la catégorie 1.B.2.b.ii figurent dans la feuille Data à partir de 2019, mais ne sont pas comptées dans Summary2. L’écart est inférieur à une kilotonne d’équivalent CO2. À clarifier avec l’équipe de l’inventaire (ANME).",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Inventaire des GES (CRT)"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/02-extraction-crt/index.html#enregistrement",
+    "href": "fr/traitement/02-extraction-crt/index.html#enregistrement",
+    "title": "Extraction de l’inventaire des gaz à effet de serre",
+    "section": "5 Enregistrement",
+    "text": "5 Enregistrement\n\nec.SORTIE.parent.mkdir(parents=True, exist_ok=True)\ncrt.write_parquet(ec.SORTIE, compression=\"zstd\")\nprint(f\"{ec.SORTIE} : {crt.height} lignes, {crt['annee'].n_unique()} années\")\n\ndata/intermediaires/crt.parquet : 92424 lignes, 8 années",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Inventaire des GES (CRT)"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/02-extraction-crt/index.html#footnotes",
+    "href": "fr/traitement/02-extraction-crt/index.html#footnotes",
+    "title": "Extraction de l’inventaire des gaz à effet de serre",
+    "section": "Notes de bas de page",
+    "text": "Notes de bas de page\n\n\nCode source : https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extraire_crt.py.↩︎",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Inventaire des GES (CRT)"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/03-extraction-tre/index.html",
+    "href": "fr/traitement/03-extraction-tre/index.html",
+    "title": "Extraction des tableaux des ressources et des emplois",
+    "section": "",
+    "text": "L’Institut national de la statistique (INS) a transmis les tableaux des ressources et des emplois (TRE) de 2015 à 2023, aux prix courants, en millions de dinars (MDT). Il y a une feuille par année. Les TRE fournissent aux comptes de l’énergie et des émissions la liste des 24 branches d’activité. Les emplois des produits 06, 19 et 35 donnent des clés de répartition de l’énergie entre les branches. La production et la valeur ajoutée par branche servent aux indicateurs d’intensité. Cette page réunit les neuf feuilles dans data/intermediaires/tre.parquet.\nLes fonctions sont dans le script scripts/extraire_tre.py1, que cette page importe et exécute.\n\nimport sys\n\nimport polars as pl\n\nsys.path.insert(0, \"scripts\")\nimport extraire_tre as et\n\net.feuilles()\n\n{2015: '2015 C',\n 2016: '2016 C',\n 2017: '2017 C',\n 2018: '2018 C',\n 2019: '2019 C',\n 2020: '2020 C',\n 2021: '2021 C',\n 2022: '2022 C',\n 2023: '2023 C'}",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Ressources et emplois"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/03-extraction-tre/index.html#objet",
+    "href": "fr/traitement/03-extraction-tre/index.html#objet",
+    "title": "Extraction des tableaux des ressources et des emplois",
+    "section": "",
+    "text": "L’Institut national de la statistique (INS) a transmis les tableaux des ressources et des emplois (TRE) de 2015 à 2023, aux prix courants, en millions de dinars (MDT). Il y a une feuille par année. Les TRE fournissent aux comptes de l’énergie et des émissions la liste des 24 branches d’activité. Les emplois des produits 06, 19 et 35 donnent des clés de répartition de l’énergie entre les branches. La production et la valeur ajoutée par branche servent aux indicateurs d’intensité. Cette page réunit les neuf feuilles dans data/intermediaires/tre.parquet.\nLes fonctions sont dans le script scripts/extraire_tre.py1, que cette page importe et exécute.\n\nimport sys\n\nimport polars as pl\n\nsys.path.insert(0, \"scripts\")\nimport extraire_tre as et\n\net.feuilles()\n\n{2015: '2015 C',\n 2016: '2016 C',\n 2017: '2017 C',\n 2018: '2018 C',\n 2019: '2019 C',\n 2020: '2020 C',\n 2021: '2021 C',\n 2022: '2022 C',\n 2023: '2023 C'}",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Ressources et emplois"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/03-extraction-tre/index.html#structure-dune-feuille",
+    "href": "fr/traitement/03-extraction-tre/index.html#structure-dune-feuille",
+    "title": "Extraction des tableaux des ressources et des emplois",
+    "section": "2 Structure d’une feuille",
+    "text": "2 Structure d’une feuille\nChaque feuille juxtapose trois blocs sur les mêmes lignes de produits.\n\nLe tableau des ressources : production, importations, impôts et subventions sur les produits, marges, correction CAF/FOB, total des ressources.\nLa matrice de consommation intermédiaire : une colonne par branche, avec le code de la branche en en-tête. Les codes des branches sont ceux des produits.\nLes emplois finals : consommation finale des ménages et des administrations publiques, formation brute de capital fixe, variation des stocks, exportations.\n\nSous la matrice, cinq lignes donnent les comptes de production des branches : production, valeur ajoutée, rémunération des salariés, impôts nets sur la production, excédent brut d’exploitation.\nLes feuilles de 2015 à 2018 et celles de 2019 à 2023 n’ont pas les mêmes colonnes. Les secondes ont une colonne de libellés de plus et une colonne « Somme des Emplois ». Le script repère donc chaque colonne par le texte de son en-tête, jamais par sa position. La table data/nomenclatures/tre_colonnes.csv associe chaque en-tête à un code du Système de comptabilité nationale et indique les colonnes de sous-total. Un en-tête inconnu arrête la lecture.\n\npl.read_csv(\"data/nomenclatures/tre_colonnes.csv\").select(\"libelle_source\", \"code\", \"bloc\", \"agregat\")\n\n\nshape: (24, 4)\n\n\n\nlibelle_source\ncode\nbloc\nagregat\n\n\nstr\nstr\nstr\nstr\n\n\n\n\n\"Production\"\n\"P1\"\n\"ressources\"\n\"non\"\n\n\n\"Importation\"\n\"P7\"\n\"ressources\"\n\"non\"\n\n\n\"Droits de douane\"\n\"D212\"\n\"ressources\"\n\"non\"\n\n\n\"T.V.A non déductible\"\n\"D211\"\n\"ressources\"\n\"non\"\n\n\n\"Autres impôts sur les produits\"\n\"D214\"\n\"ressources\"\n\"non\"\n\n\n…\n…\n…\n…\n\n\n\"Production secteur\"\n\"P1\"\n\"valeur_ajoutee\"\n\"non\"\n\n\n\"Valeur Ajoutée\"\n\"B1G\"\n\"valeur_ajoutee\"\n\"non\"\n\n\n\"Rémunération des salariés\"\n\"D1\"\n\"valeur_ajoutee\"\n\"non\"\n\n\n\"Impôts et taxes indirectes net…\n\"D29_D39\"\n\"valeur_ajoutee\"\n\"non\"\n\n\n\"Excédent Brut d'Exploitation\"\n\"B2G\"\n\"valeur_ajoutee\"\n\"non\"\n\n\n\n\n\n\nLes produits et les branches sont décrits dans data/nomenclatures/tre_produits.csv. Les lignes CR2 et CR3 sont des lignes d’ajustement : correction territoriale et correction CAF/FOB.\n\npl.read_csv(\"data/nomenclatures/tre_produits.csv\", schema_overrides={\"code\": pl.String}).select(\"code\", \"fr\", \"en\")\n\n\nshape: (26, 3)\n\n\n\ncode\nfr\nen\n\n\nstr\nstr\nstr\n\n\n\n\n\"01\"\n\"Produits de l'agriculture, de …\n\"Agriculture, forestry and fish…\n\n\n\"06\"\n\"Pétrole et gaz naturel\"\n\"Crude petroleum and natural ga…\n\n\n\"07\"\n\"Produits miniers\"\n\"Mining products\"\n\n\n\"10\"\n\"Produits agro-alimentaires\"\n\"Food products\"\n\n\n\"13\"\n\"Produits du textile, de l'habi…\n\"Textiles, clothing and leather…\n\n\n…\n…\n…\n\n\n\"77\"\n\"Autres services marchands\"\n\"Other market services\"\n\n\n\"97\"\n\"Services domestiques\"\n\"Domestic services\"\n\n\n\"94\"\n\"Activités des organisations as…\n\"Activities of membership organ…\n\n\n\"CR2\"\n\"Correction territoriale (CT)\"\n\"Territorial adjustment\"\n\n\n\"CR3\"\n\"Correction CAF/FOB\"\n\"CIF/FOB adjustment\"",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Ressources et emplois"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/03-extraction-tre/index.html#format-long",
+    "href": "fr/traitement/03-extraction-tre/index.html#format-long",
+    "title": "Extraction des tableaux des ressources et des emplois",
+    "section": "3 Format long",
+    "text": "3 Format long\nLe tableau long a une ligne par année, bloc, ligne et colonne. La colonne ligne contient le code du produit, ou le code de l’agrégat pour les lignes de valeur ajoutée. La colonne colonne contient le code de la branche pour la matrice de consommation intermédiaire et pour les lignes de valeur ajoutée, et le code de l’opération pour les autres colonnes. La colonne agregat signale les sous-totaux publiés, qui servent aux contrôles et ne doivent pas être additionnés aux détails.\n\ntre = et.extraire()\ntre.filter(pl.col(\"annee\") == 2022, pl.col(\"ligne\") == \"35\", ~pl.col(\"agregat\")).sort(\"valeur\", descending=True).head(8)\n\n\nshape: (8, 6)\n\n\n\nannee\nbloc\nligne\ncolonne\nagregat\nvaleur\n\n\ni16\nstr\nstr\nstr\nbool\nf64\n\n\n\n\n2022\n\"ressources\"\n\"35\"\n\"P1\"\nfalse\n8603.754\n\n\n2022\n\"emplois\"\n\"35\"\n\"P3_MEN\"\nfalse\n2701.461\n\n\n2022\n\"ressources\"\n\"35\"\n\"D211\"\nfalse\n645.673\n\n\n2022\n\"ressources\"\n\"35\"\n\"P7\"\nfalse\n567.144\n\n\n2022\n\"emplois\"\n\"35\"\n\"23\"\nfalse\n483.470531\n\n\n2022\n\"emplois\"\n\"35\"\n\"10\"\nfalse\n368.112059\n\n\n2022\n\"emplois\"\n\"35\"\n\"55\"\nfalse\n305.370881\n\n\n2022\n\"emplois\"\n\"35\"\n\"16\"\nfalse\n234.425462",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Ressources et emplois"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/03-extraction-tre/index.html#contrôles",
+    "href": "fr/traitement/03-extraction-tre/index.html#contrôles",
+    "title": "Extraction des tableaux des ressources et des emplois",
+    "section": "4 Contrôles",
+    "text": "4 Contrôles\nÉquilibre des ressources et des emplois. Pour chaque produit et chaque année, le total des ressources publié doit égaler la somme des ressources détaillées et la somme des emplois détaillés.\n\nequilibre = et.ecarts_equilibre(tre)\nresume = equilibre.group_by(\"annee\").agg(\n    pl.col(\"ecart_ressources\").abs().max().round(3),\n    pl.col(\"ecart_emplois\").abs().max().round(3),\n).sort(\"annee\")\nassert resume[\"ecart_ressources\"].max() &lt; 1 and resume[\"ecart_emplois\"].max() &lt; 1, \"TRE déséquilibré\"\nresume\n\n\nshape: (9, 3)\n\n\n\nannee\necart_ressources\necart_emplois\n\n\ni16\nf64\nf64\n\n\n\n\n2015\n0.686\n0.028\n\n\n2016\n0.045\n0.03\n\n\n2017\n0.022\n0.032\n\n\n2018\n0.028\n0.036\n\n\n2019\n0.037\n0.077\n\n\n2020\n0.0\n0.001\n\n\n2021\n0.0\n0.002\n\n\n2022\n0.0\n0.001\n\n\n2023\n0.0\n0.001\n\n\n\n\n\n\nComptes de production. Pour chaque branche, la production doit égaler la consommation intermédiaire plus la valeur ajoutée.\n\nproduction = et.ecarts_production(tre)\nassert production[\"ecart\"].abs().max() &lt; 1, \"Compte de production déséquilibré\"\nproduction.group_by(\"annee\").agg(pl.col(\"ecart\").abs().max().round(3).alias(\"ecart_max_mdt\")).sort(\"annee\")\n\n\nshape: (9, 2)\n\n\n\nannee\necart_max_mdt\n\n\ni16\nf64\n\n\n\n\n2015\n0.029\n\n\n2016\n0.031\n\n\n2017\n0.033\n\n\n2018\n0.036\n\n\n2019\n0.039\n\n\n2020\n0.0\n\n\n2021\n0.0\n\n\n2022\n0.0\n\n\n2023\n0.0\n\n\n\n\n\n\nLes écarts sont inférieurs à un million de dinars et viennent de l’arrondi des valeurs.",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Ressources et emplois"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/03-extraction-tre/index.html#enregistrement",
+    "href": "fr/traitement/03-extraction-tre/index.html#enregistrement",
+    "title": "Extraction des tableaux des ressources et des emplois",
+    "section": "5 Enregistrement",
+    "text": "5 Enregistrement\n\net.SORTIE.parent.mkdir(parents=True, exist_ok=True)\ntre.write_parquet(et.SORTIE, compression=\"zstd\")\nprint(f\"{et.SORTIE} : {tre.height} lignes, {tre['annee'].n_unique()} années\")\n\ndata/intermediaires/tre.parquet : 7502 lignes, 9 années",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Ressources et emplois"
+    ]
+  },
+  {
+    "objectID": "fr/traitement/03-extraction-tre/index.html#footnotes",
+    "href": "fr/traitement/03-extraction-tre/index.html#footnotes",
+    "title": "Extraction des tableaux des ressources et des emplois",
+    "section": "Notes de bas de page",
+    "text": "Notes de bas de page\n\n\nCode source : https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extraire_tre.py.↩︎",
+    "crumbs": [
+      "Traitement",
+      "Extraction des sources",
+      "Ressources et emplois"
     ]
   }
 ]

@@ -52,6 +52,14 @@ website:
           text: Traitement des données
         - href: fr/traitement/00-bilan-energetique/index.qmd
           text: Lecture du bilan énergétique
+        - section: Extraction des sources
+          contents:
+            - href: fr/traitement/01-extraction-bilans/index.qmd
+              text: Bilans énergétiques
+            - href: fr/traitement/02-extraction-crt/index.qmd
+              text: Inventaire des GES (CRT)
+            - href: fr/traitement/03-extraction-tre/index.qmd
+              text: Ressources et emplois
 
 format:
   html:

@@ -1,0 +1,177 @@
+---
+title: "Extraction des bilans énergétiques"
+subtitle: "Les bilans de l'ONEM de 2015 à 2022 en un seul tableau long, avec des codes stables"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: Consultant du FMI
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+---
+
+## Objet
+
+L'Observatoire national de l'énergie et des mines (ONEM) publie un bilan énergétique par an, en milliers de tonnes équivalent pétrole (ktep). Les huit classeurs de 2015 à 2022 ont la même logique, mais leur présentation varie d'une année à l'autre. Cette page les réunit en un seul tableau long, avec un code stable pour chaque flux et chaque produit. Ce tableau, `data/intermediaires/bilans_energetiques.parquet`, est le point de départ des comptes physiques des flux d'énergie (PEFA).
+
+Les fonctions sont dans le script `scripts/extraire_bilans.py`[^script], que cette page importe et exécute étape par étape. Le même script peut être lancé seul avec `uv run python scripts/extraire_bilans.py`.
+
+[^script]: Code source : <https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extraire_bilans.py>.
+
+```{python}
+#| label: parametres
+import sys
+
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import extraire_bilans as eb
+
+fichiers = eb.fichiers_bilans()
+{annee: chemin.name for annee, chemin in fichiers.items()}
+```
+
+## Lecture d'un bilan
+
+Chaque classeur a une seule feuille. Les noms des produits occupent deux lignes d'en-tête, à partir de la ligne dont la première cellule commence par « en 1000 tep ». La fonction `lire_bilan` réunit ces deux lignes en un libellé, lit les flux à partir de « Production primaire » et met le tableau en format long. Les cellules vides sont des zéros et sont retirées. Une cellule de 2015 contient « 0 * », avec un renvoi ; l'astérisque est retiré.
+
+Certains libellés de flux se répètent. « Raffineries » figure dans les entrées et dans les sorties de transformation, et « Chimie » dans la consommation non énergétique et dans l'industrie. La colonne `bloc` garde le dernier titre de bloc rencontré au-dessus de chaque ligne, ce qui lève l'ambiguïté.
+
+```{python}
+#| label: lecture-2022
+exemple = eb.lire_bilan(fichiers[2022], 2022)
+exemple.filter(pl.col("flux_source") == "Raffineries", pl.col("produit_source") == "Pétrole brut")
+```
+
+## Dérive de la présentation entre les années
+
+Les classeurs ne présentent pas tous les mêmes colonnes ni les mêmes lignes. Le tableau suivant compte les libellés distincts de chaque année.
+
+```{python}
+#| label: derive
+lus = pl.concat([eb.lire_bilan(chemin, annee) for annee, chemin in fichiers.items()])
+lus.group_by("annee").agg(
+    pl.col("produit_source").n_unique().alias("colonnes de produits"),
+    pl.col("flux_source").n_unique().alias("libellés de flux"),
+).sort("annee")
+```
+
+Les principales différences sont les suivantes.
+
+- En 2015, la colonne des liquides de gaz naturel s'intitule « GPL primaire », et la colonne « Gaz de raffinage » n'existe pas.
+- En 2016, une colonne « géothermie » s'ajoute aux énergies renouvelables. C'est la colonne supplémentaire de cette année.
+- Dans plusieurs années, l'en-tête de l'énergie éolienne et celui de l'énergie hydraulique sont décalés sur les deux lignes. La lecture donne « Energie éolienne hydraulique » pour l'éolien et « Energie » pour l'hydraulique ; les valeurs de production primaire confirment cette lecture.
+- En 2015, l'industrie compte trois lignes, « Sidérurgie », « Métaux non ferreux » et « Fabrications métalliques ». Les années suivantes ont une seule ligne « Fabrications métalliques y compris sidérurgie ». La ligne « Fabrications mécaniques et électriques » n'a de valeurs qu'à partir de 2019.
+- Plusieurs libellés changent d'orthographe (« Soutess internationales », « Consommation intérieur brute », « Agriculture » puis « Agriculture et pêche »).
+
+## Attribution des codes
+
+Les libellés ne servent pas d'identifiants. Deux tables de correspondance, éditées à la main, associent chaque libellé d'origine à un code.
+
+- `data/nomenclatures/bilan_flux_sources.csv` associe un couple (bloc, libellé) à un code de flux.
+- `data/nomenclatures/bilan_produits_sources.csv` associe un libellé de produit à un code de produit.
+
+Les codes sont décrits dans `data/nomenclatures/bilan_flux.csv` et `data/nomenclatures/bilan_produits.csv`, avec leur libellé en français, en anglais et en arabe, leur agrégat parent et, pour les flux, le signe de leur contribution à cet agrégat. La colonne `a_verifier` signale les traductions à faire relire par les homologues tunisiens.
+
+```{python}
+#| label: nomenclature-flux
+pl.read_csv("data/nomenclatures/bilan_flux.csv").select("code", "parent", "signe", "fr", "en")
+```
+
+```{python}
+#| label: nomenclature-produits
+pl.read_csv("data/nomenclatures/bilan_produits.csv").select("code", "parent", "fr", "en")
+```
+
+La fonction `coder` joint les deux tables et s'arrête si un libellé n'a pas de code. Un nouveau bilan dont la présentation change encore produit donc une erreur explicite, au lieu d'un décalage silencieux.
+
+En 2015, « Sidérurgie », « Métaux non ferreux » et « Fabrications métalliques » reçoivent tous le code `IND_MET`. La fonction `agreger` additionne les lignes qui partagent un code et garde les libellés d'origine. La somme de 2015 est du même ordre que la ligne unique des années suivantes, ce qui appuie ce choix.
+
+```{python}
+#| label: metaux
+bilans = eb.extraire()
+(
+    bilans.filter(pl.col("code_flux").is_in(["IND_MET", "IND_MEC"]), pl.col("code_produit") == "TOTAL")
+    .pivot("code_flux", index="annee", values="ktep")
+    .sort("annee")
+)
+```
+
+::: {.callout-note}
+## Question ouverte
+La ligne « Fabrications métalliques » de 2015 pourrait correspondre aux fabrications mécaniques et électriques, comme sa position dans le tableau le laisse penser. Elle est classée ici avec la sidérurgie, car les fabrications mécaniques et électriques n'ont pas de valeur avant 2019. À confirmer avec l'ONEM.
+:::
+
+## Conversion en térajoules
+
+Les comptes PEFA s'expriment en térajoules (TJ). Une tonne équivalent pétrole vaut 41,868 GJ, donc une ktep vaut 41,868 TJ [@seeaenergy2019].
+
+```{python}
+#| label: apercu
+bilans.head(6)
+```
+
+## Contrôles
+
+Le bilan publie des valeurs arrondies à la ktep, parfois à la décimale. Les contrôles tolèrent donc un écart de 2 ktep.
+
+**Agrégats de flux.** Chaque agrégat (industrie, transport, entrées en transformation, consommation intérieure brute, etc.) doit égaler la somme signée de ses composantes, pour chaque produit et chaque année. Par exemple, la consommation intérieure brute est égale à la production primaire, plus les importations et la variation des stocks, moins les exportations et les soutes internationales.
+
+**Agrégats de produits.** La colonne « Total tous produits » doit égaler la somme des produits de premier niveau, et les colonnes des produits pétroliers et des énergies renouvelables la somme de leurs produits.
+
+**Disponible pour la consommation finale.** Pour chaque produit, il doit égaler la consommation intérieure brute, moins les entrées en transformation, plus les sorties de transformation et les échanges, moins la consommation de la branche énergie et les pertes.
+
+```{python}
+#| label: controles
+TOLERANCE = 2.0
+controles = {
+    "Agrégats de flux": eb.ecarts_hierarchie(bilans, "flux"),
+    "Agrégats de produits": eb.ecarts_hierarchie(bilans, "produit"),
+    "Disponible pour la consommation finale": eb.ecarts_identites(bilans),
+}
+resume = pl.DataFrame(
+    {
+        "controle": list(controles),
+        "cellules": [t.height for t in controles.values()],
+        "ecart_max_ktep": [t["ecart"].abs().max() for t in controles.values()],
+        "ecarts_sup_1_ktep": [t.filter(pl.col("ecart").abs() > 1).height for t in controles.values()],
+    }
+)
+assert (resume["ecart_max_ktep"] <= TOLERANCE).all(), "Écart supérieur à la tolérance : vérifier la lecture"
+resume
+```
+
+Les quelques écarts supérieurs à une ktep sont listés ci-dessous. Ils viennent de l'arrondi des valeurs publiées.
+
+```{python}
+#| label: ecarts-detail
+pl.concat(
+    [t.rename({c: "element" for c in t.columns if c.startswith("code_")}).select(
+        pl.lit(nom).alias("controle"), "annee", pl.col("element"), pl.col("ecart").round(2)
+    ) for nom, t in controles.items()]
+).filter(pl.col("ecart").abs() > 1).sort("annee")
+```
+
+## Enregistrement
+
+Le tableau est enregistré en Parquet, compressé avec zstd. Il garde les libellés d'origine à côté des codes, pour la traçabilité.
+
+```{python}
+#| label: enregistrement
+eb.SORTIE.parent.mkdir(parents=True, exist_ok=True)
+bilans.write_parquet(eb.SORTIE, compression="zstd")
+print(f"{eb.SORTIE} : {bilans.height} lignes, {bilans['annee'].n_unique()} années")
+```
+
+## Références
+
+::: {#refs}
+:::

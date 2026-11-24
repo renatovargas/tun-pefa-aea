@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/index.html</loc>
-    <lastmod>2026-11-24T19:57:23.223Z</lastmod>
+    <lastmod>2026-11-24T20:53:17.679Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/telechargements.html</loc>
@@ -111,5 +111,17 @@
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/00-bilan-energetique/index.html</loc>
     <lastmod>2026-11-24T20:34:11.837Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/01-extraction-bilans/index.html</loc>
+    <lastmod>2026-11-24T20:52:28.656Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/02-extraction-crt/index.html</loc>
+    <lastmod>2026-11-24T20:52:54.033Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/03-extraction-tre/index.html</loc>
+    <lastmod>2026-11-24T20:53:40.439Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,62 @@
+bloc,libelle_source,code
+approvisionnement,Production primaire,PROD
+approvisionnement,Importation,IMP
+approvisionnement,Variation des stocks,VSTOCK
+approvisionnement,Exportations,EXP
+approvisionnement,Soutess internationales,SOUTES
+approvisionnement,Soutes internationales,SOUTES
+approvisionnement,Consommation intérieur brute,CIB
+approvisionnement,Consommation intérieure brute,CIB
+entrees,Entrées en transformation,TRE
+entrees,Centrales thermiques publiques,TRE_CPUB
+entrees,Centrales thermiques: activité principale,TRE_CPUB
+entrees,"Centrales thermiques, activité principale",TRE_CPUB
+entrees,Centrales thermiques des autoproducteurs,TRE_CAUTO
+entrees,Centrales thermiques: autoproduction,TRE_CAUTO
+entrees,Raffineries,TRE_RAFF
+entrees,production de charbon de bois,TRE_CHARB
+sorties,Sortie de transformation,TRS
+sorties,Centrales thermiques publiques,TRS_CPUB
+sorties,Centrales thermiques: activité principale,TRS_CPUB
+sorties,"Centrales thermiques, activité principale",TRS_CPUB
+sorties,Centrales thermiques des autoproducteurs,TRS_CAUTO
+sorties,Centrales thermiques: autoproduction,TRS_CAUTO
+sorties,Raffineries,TRS_RAFF
+sorties,production de charbon de bois,TRS_CHARB
+echanges,"Echanges, transfer, restitutions",ECH
+echanges,Echanges entre produits,ECH_PROD
+echanges,Produits transférés,ECH_TRANSF
+echanges,Restitutions de la pétrochimie,ECH_PETCHIM
+echanges,Consommantion de la branche énergie,BRENERG
+echanges,Consommation de la branche Energie,BRENERG
+echanges,Pertes,PERTES
+echanges,Disponible pour consom. Finale,DISPO
+non_energetique,Consommation finale non énergétique,CFNE
+non_energetique,chimie,CFNE_CHIM
+non_energetique,Chimie,CFNE_CHIM
+non_energetique,Autres,CFNE_AUT
+energetique,Consommation finale énergétique,CFE
+energetique,Industrie,IND
+energetique,Sidérurgie,IND_MET
+energetique,Métaux non ferreux,IND_MET
+energetique,Fabrications métalliques,IND_MET
+energetique,Fabrications métalliques y compris sidérurgie,IND_MET
+energetique,Chimie,IND_CHIM
+energetique,Produits minéraux non métalliques,IND_MIN
+energetique,Extraction,IND_EXTR
+energetique,"Alimentation, boisson, tabac",IND_ALIM
+energetique,"Textiles, cuir, habillement",IND_TEXT
+energetique,Papier et imprimerie,IND_PAP
+energetique,Fabrications mécaniques et électriques,IND_MEC
+energetique,Autres industries,IND_AUT
+energetique,Transport,TRA
+energetique,Ferorviaires,TRA_FER
+energetique,Routes,TRA_ROUTE
+energetique,Aériens,TRA_AIR
+energetique,pipeline,TRA_PIPE
+energetique,"Foyers domestiques, commerce, adm, etc.",AUT
+energetique,Foyers domestiques,AUT_RES
+energetique,"commerce, adm, Hotels, etc,",AUT_COM
+energetique,Agriculture,AUT_AGR
+energetique,Agriculture et pêche,AUT_AGR
+energetique,Ecart statistique,ECART

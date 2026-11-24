@@ -11,3 +11,6 @@ Les tableaux intermédiaires sont enregistrés au format Parquet dans `data/inte
 | Page | Contenu |
 |:-----|:--------|
 | [00. Lecture du bilan énergétique](00-bilan-energetique/index.qmd) | Lecture du bilan de 2022, mise en format long et conversion en térajoules |
+| [01. Extraction des bilans énergétiques](01-extraction-bilans/index.qmd) | Bilans de l'ONEM de 2015 à 2022 en format long, codes stables des flux et des produits, ktep et TJ |
+| [02. Extraction de l'inventaire des GES](02-extraction-crt/index.qmd) | Feuilles `Data` des tableaux CRT de 2015 à 2022, contrôle avec `Summary2` |
+| [03. Extraction des tableaux des ressources et des emplois](03-extraction-tre/index.qmd) | TRE de l'INS de 2015 à 2023 en format long, contrôles d'équilibre |

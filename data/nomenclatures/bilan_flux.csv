@@ -1,0 +1,48 @@
+code,parent,signe,niveau,fr,en,ar,a_verifier
+PROD,CIB,1,1,Production primaire,Primary production,الإنتاج الأولي,oui
+IMP,CIB,1,1,Importations,Imports,الواردات,oui
+VSTOCK,CIB,1,1,Variation des stocks,Stock changes,التغير في المخزون,oui
+EXP,CIB,-1,1,Exportations,Exports,الصادرات,oui
+SOUTES,CIB,-1,1,Soutes internationales,International bunkers,وقود السفن والطائرات الدولية,oui
+CIB,,1,0,Consommation intérieure brute,Gross inland consumption,الاستهلاك الداخلي الخام,oui
+TRE,,1,0,Entrées en transformation,Transformation inputs,مدخلات التحويل,oui
+TRE_CPUB,TRE,1,1,Centrales thermiques : activité principale,Main activity thermal power plants,محطات حرارية: نشاط رئيسي,oui
+TRE_CAUTO,TRE,1,1,Centrales thermiques : autoproduction,Autoproducer thermal power plants,محطات حرارية: إنتاج ذاتي,oui
+TRE_RAFF,TRE,1,1,Raffineries,Refineries,المصافي,oui
+TRE_CHARB,TRE,1,1,Production de charbon de bois,Charcoal production,إنتاج الفحم الخشبي,oui
+TRS,,1,0,Sorties de transformation,Transformation outputs,مخرجات التحويل,oui
+TRS_CPUB,TRS,1,1,Centrales thermiques : activité principale,Main activity thermal power plants,محطات حرارية: نشاط رئيسي,oui
+TRS_CAUTO,TRS,1,1,Centrales thermiques : autoproduction,Autoproducer thermal power plants,محطات حرارية: إنتاج ذاتي,oui
+TRS_RAFF,TRS,1,1,Raffineries,Refineries,المصافي,oui
+TRS_CHARB,TRS,1,1,Production de charbon de bois,Charcoal production,إنتاج الفحم الخشبي,oui
+ECH,,1,0,"Échanges, transferts, restitutions","Exchanges, transfers, returns",التبادلات والتحويلات والمرتجعات,oui
+ECH_PROD,ECH,1,1,Échanges entre produits,Interproduct transfers,التبادلات بين المنتجات,oui
+ECH_TRANSF,ECH,1,1,Produits transférés,Products transferred,المنتجات المحولة,oui
+ECH_PETCHIM,ECH,1,1,Restitutions de la pétrochimie,Returns from petrochemical industry,مرتجعات البتروكيمياء,oui
+BRENERG,,1,0,Consommation de la branche énergie,Energy industry own use,استهلاك قطاع الطاقة,oui
+PERTES,,1,0,Pertes,Losses,الخسائر,oui
+DISPO,,1,0,Disponible pour la consommation finale,Available for final consumption,المتاح للاستهلاك النهائي,oui
+CFNE,DISPO,1,1,Consommation finale non énergétique,Non-energy final consumption,الاستهلاك النهائي غير الطاقوي,oui
+CFNE_CHIM,CFNE,1,2,Chimie,Chemicals,الكيمياء,oui
+CFNE_AUT,CFNE,1,2,Autres,Other,أخرى,oui
+CFE,DISPO,1,1,Consommation finale énergétique,Final energy consumption,الاستهلاك النهائي للطاقة,oui
+IND,CFE,1,2,Industrie,Industry,الصناعة,oui
+IND_MET,IND,1,3,Fabrications métalliques y compris sidérurgie,Basic metals including iron and steel,الصناعات المعدنية بما فيها الحديد والصلب,oui
+IND_CHIM,IND,1,3,Chimie,Chemicals,الكيمياء,oui
+IND_MIN,IND,1,3,Produits minéraux non métalliques,Non-metallic minerals,المنتجات المعدنية غير الفلزية,oui
+IND_EXTR,IND,1,3,Extraction,Mining and quarrying,الاستخراج,oui
+IND_ALIM,IND,1,3,"Alimentation, boissons, tabac","Food, beverages and tobacco",الأغذية والمشروبات والتبغ,oui
+IND_TEXT,IND,1,3,"Textiles, cuir, habillement","Textiles, leather and clothing",النسيج والجلود والملابس,oui
+IND_PAP,IND,1,3,Papier et imprimerie,Paper and printing,الورق والطباعة,oui
+IND_MEC,IND,1,3,Fabrications mécaniques et électriques,Machinery and electrical equipment,الصناعات الميكانيكية والكهربائية,oui
+IND_AUT,IND,1,3,Autres industries,Other industries,صناعات أخرى,oui
+TRA,CFE,1,2,Transport,Transport,النقل,oui
+TRA_FER,TRA,1,3,Transport ferroviaire,Rail,النقل بالسكك الحديدية,oui
+TRA_ROUTE,TRA,1,3,Transport routier,Road,النقل البري,oui
+TRA_AIR,TRA,1,3,Transport aérien,Domestic aviation,النقل الجوي,oui
+TRA_PIPE,TRA,1,3,Transport par conduites,Pipeline transport,النقل عبر الأنابيب,oui
+AUT,CFE,1,2,"Foyers domestiques, commerce, administration, etc.","Households, commerce, public administration, etc.",الأسر والتجارة والإدارة وغيرها,oui
+AUT_RES,AUT,1,3,Foyers domestiques,Households,الأسر,oui
+AUT_COM,AUT,1,3,"Commerce, administration, hôtels, etc.","Commerce, public administration, hotels, etc.",التجارة والإدارة والفنادق وغيرها,oui
+AUT_AGR,AUT,1,3,Agriculture et pêche,Agriculture and fishing,الفلاحة والصيد البحري,oui
+ECART,DISPO,1,1,Écart statistique,Statistical difference,الفارق الإحصائي,oui
