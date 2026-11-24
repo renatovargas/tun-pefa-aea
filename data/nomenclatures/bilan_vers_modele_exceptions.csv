@@ -1,0 +1,10 @@
+code_flux,code_produit,flux_modele,produit_modele,signe_modele,justification
+SOUTES,JET,International aviation bunkers,,-1,Le carburéacteur des soutes alimente l'aviation internationale ; les autres produits des soutes vont à la navigation internationale.
+ECH_PROD,EOL,Main activity producer electricity plants (transf.),,1,"L'ONEM transfère la production éolienne vers l'électricité par la ligne des échanges entre produits. Dans le format de l'AIE, c'est une entrée des centrales électriques."
+ECH_PROD,SOLPV,Main activity producer electricity plants (transf.),,1,Même traitement que l'éolien pour le solaire photovoltaïque.
+ECH_PROD,HYDRO,Main activity producer electricity plants (transf.),,1,Même traitement que l'éolien pour l'hydraulique.
+ECH_PROD,ELEC,Main activity producer electricity plants (transf.),,1,"Électricité produite à partir de l'éolien, du solaire photovoltaïque et de l'hydraulique : sortie des centrales électriques."
+TRS_CHARB,BIOM,,Charcoal,1,La sortie des charbonnières est du charbon de bois. Le bilan de l'ONEM la range dans la colonne de la biomasse.
+BRENERG,ELEC,"Own use in electricity, CHP and heat plants (energy)",,-1,Électricité consommée par les centrales.
+BRENERG,GAZRAF,Oil refineries (energy),,-1,Gaz de raffinerie consommé par la raffinerie qui le produit.
+BRENERG,FUEL,Oil refineries (energy),,-1,Fioul consommé par la raffinerie (hypothèse).

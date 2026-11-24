@@ -60,6 +60,10 @@ website:
               text: Inventaire des GES (CRT)
             - href: fr/traitement/03-extraction-tre/index.qmd
               text: Ressources et emplois
+        - section: Comptes de l'énergie (PEFA)
+          contents:
+            - href: fr/traitement/10-bilan-format-aie/index.qmd
+              text: Bilan au format de l'AIE
 
 format:
   html:
