@@ -70,6 +70,8 @@ website:
               text: Matrice de concordance
             - href: fr/traitement/13-tableaux-pefa/index.qmd
               text: Tableaux PEFA
+            - href: fr/traitement/14-controles-export-pefa/index.qmd
+              text: Contrôles et export
 
 format:
   html:

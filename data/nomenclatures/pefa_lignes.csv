@@ -1,0 +1,26 @@
+cle,type,ordre,fr,en,ar,a_verifier
+Energy from natural inputs:,niveau1,1,Énergie issue des ressources naturelles,Energy from natural inputs,الطاقة المستمدة من الموارد الطبيعية,oui
+Energy products:,niveau1,2,Produits énergétiques,Energy products,المنتجات الطاقوية,oui
+Energy residuals:,niveau1,3,Résidus d'énergie,Energy residuals,بقايا الطاقة,oui
+Other residual flows:,niveau1,4,Autres flux de résidus,Other residual flows,تدفقات بقايا أخرى,oui
+Production of energy products by SIEC class:,niveau2,1,Production de produits énergétiques par classe de la CIPE,Production of energy products by SIEC class,إنتاج المنتجات الطاقوية حسب فئات التصنيف الدولي الموحد لمنتجات الطاقة,oui
+Transformation of energy products by SIEC class:,niveau2,2,Transformation de produits énergétiques par classe de la CIPE,Transformation of energy products by SIEC class,تحويل المنتجات الطاقوية حسب فئات التصنيف الدولي الموحد لمنتجات الطاقة,oui
+End-use of energy products by SIEC class:,niveau2,3,Utilisation finale de produits énergétiques par classe de la CIPE,End-use of energy products by SIEC class,الاستخدام النهائي للمنتجات الطاقوية حسب فئات التصنيف الدولي الموحد لمنتجات الطاقة,oui
+Natural resource inputs,produit,1,Intrants de ressources naturelles,Natural resource inputs,مدخلات الموارد الطبيعية,oui
+Inputs of energy from renewable sources,produit,2,Intrants d'énergie de sources renouvelables,Inputs of energy from renewable sources,مدخلات الطاقة من المصادر المتجددة,oui
+Other natural inputs,produit,3,Autres intrants naturels,Other natural inputs,مدخلات طبيعية أخرى,oui
+Coal,produit,4,Charbon,Coal,الفحم,oui
+Peat and peat products,produit,5,Tourbe et produits de la tourbe,Peat and peat products,الخث ومنتجاته,oui
+Oil shale / oil sands,produit,6,Schistes et sables bitumineux,Oil shale / oil sands,الصخر الزيتي والرمال النفطية,oui
+Natural gas,produit,7,Gaz naturel,Natural gas,الغاز الطبيعي,oui
+Oil,produit,8,Pétrole et produits pétroliers,Oil,النفط والمنتجات النفطية,oui
+Biofuels,produit,9,Biocombustibles,Biofuels,الوقود الحيوي,oui
+Waste,produit,10,Déchets,Waste,النفايات,oui
+Electricity,produit,11,Électricité,Electricity,الكهرباء,oui
+Heat,produit,12,Chaleur,Heat,الحرارة,oui
+Nuclear fuels and other fuels,produit,13,Combustibles nucléaires et autres combustibles,Nuclear fuels and other fuels,الوقود النووي وأنواع الوقود الأخرى,oui
+End-use of energy products for non-energy purposes,produit,14,Utilisation de produits énergétiques à des fins non énergétiques,End-use of energy products for non-energy purposes,استخدام المنتجات الطاقوية لأغراض غير طاقوية,oui
+Energy residuals from end-use,produit,15,Résidus d'énergie de l'utilisation finale,Energy residuals from end-use,بقايا الطاقة من الاستخدام النهائي,oui
+Energy residuals from losses,produit,16,Résidus d'énergie des pertes,Energy residuals from losses,بقايا الطاقة من الخسائر,oui
+Residuals from end-use for non-energy purposes,produit,17,Résidus de l'utilisation à des fins non énergétiques,Residuals from end-use for non-energy purposes,بقايا الاستخدام لأغراض غير طاقوية,oui
+Energy from solid waste,produit,18,Énergie issue des déchets solides,Energy from solid waste,الطاقة المستمدة من النفايات الصلبة,oui

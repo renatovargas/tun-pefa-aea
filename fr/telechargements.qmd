@@ -24,4 +24,20 @@ Bilan de l'ONEM en format long, en milliers de tep et en térajoules. Tableau d'
 :::
 :::
 
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### Comptes physiques des flux d'énergie (PEFA), 2015 à 2022
+
+Tableaux des ressources et des emplois d'énergie par branche du TRE et pour les ménages, en térajoules, tableau long de toutes les années et intensités énergétiques par branche. Version provisoire.
+
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/fr/comptes_pefa.xlsx){.btn .btn-primary download="comptes_pefa.xlsx"}
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/en/comptes_pefa.xlsx){.btn .btn-outline-primary download="comptes_pefa.xlsx"}
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/ar/comptes_pefa.xlsx){.btn .btn-outline-primary download="comptes_pefa.xlsx"}
+
+[Page de traitement](traitement/14-controles-export-pefa/index.qmd)
+:::
+:::
+:::
+
 ::::

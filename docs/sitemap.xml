@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/index.html</loc>
-    <lastmod>2026-11-24T20:53:17.679Z</lastmod>
+    <lastmod>2026-11-24T21:11:35.527Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/telechargements.html</loc>
-    <lastmod>2026-11-24T20:34:11.837Z</lastmod>
+    <lastmod>2026-11-24T21:11:35.527Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/materiaux/index.html</loc>
@@ -139,5 +139,9 @@
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/13-tableaux-pefa/index.html</loc>
     <lastmod>2026-11-24T21:08:46.626Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/14-controles-export-pefa/index.html</loc>
+    <lastmod>2026-11-24T21:11:21.608Z</lastmod>
   </url>
 </urlset>

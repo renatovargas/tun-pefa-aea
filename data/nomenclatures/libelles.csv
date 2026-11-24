@@ -7,3 +7,27 @@ produit,Produit,Product,المنتج
 ktep,Milliers de tep,Thousand toe,ألف طن مكافئ نفط
 tj,Térajoules,Terajoules,تيراجول
 feuille_bilan,Bilan,Balance,الميزان
+quadrant,Quadrant,Quadrant,الربع
+niveau1,Catégorie,Category,الفئة
+niveau2,Sous-catégorie,Subcategory,الفئة الفرعية
+activite,Activité,Activity,النشاط
+code_activite,Code de l'activité,Activity code,رمز النشاط
+Supply,Ressources,Supply,الموارد
+Use,Emplois,Use,الاستخدامات
+total,Total,Total,المجموع
+feuille_donnees,Données,Data,البيانات
+feuille_ressources,Ressources,Supply,الموارد
+feuille_emplois,Emplois,Use,الاستخدامات
+feuille_indicateurs,Indicateurs,Indicators,المؤشرات
+feuille_notes,Notes,Notes,ملاحظات
+energie_finale_tj,Utilisation finale d'énergie (TJ),Energy end-use (TJ),الاستخدام النهائي للطاقة (تيراجول)
+production_mdt,Production (millions de TND),Output (million TND),الإنتاج (مليون دينار)
+valeur_ajoutee_mdt,Valeur ajoutée (millions de TND),Value added (million TND),القيمة المضافة (مليون دينار)
+intensite_production,Intensité énergétique de la production (TJ par million de TND),Energy intensity of output (TJ per million TND),كثافة الطاقة في الإنتاج (تيراجول لكل مليون دينار)
+intensite_va,Intensité énergétique de la valeur ajoutée (TJ par million de TND),Energy intensity of value added (TJ per million TND),كثافة الطاقة في القيمة المضافة (تيراجول لكل مليون دينار)
+titre_pefa,Comptes physiques des flux d'énergie (PEFA) de la Tunisie,Physical energy flow accounts (PEFA) of Tunisia,حسابات التدفقات المادية للطاقة لتونس
+unite_tj,Unité : térajoules (TJ),Unit: terajoules (TJ),الوحدة: تيراجول
+note_source,Sources : bilans énergétiques de l'ONEM (2015-2022) et tableaux des ressources et des emplois de l'INS.,Sources: ONEM energy balances (2015-2022) and INS supply and use tables.,المصادر: موازين الطاقة للمرصد الوطني للطاقة والمناجم (2015-2022) وجداول الموارد والاستخدامات للمعهد الوطني للإحصاء.
+note_methode,"Méthode : PEFA Converter du FMI (Achille Pegoue), repris en polars, avec une matrice de concordance tunisienne par branche.","Method: IMF PEFA Converter (Achille Pegoue), re-implemented in polars, with a Tunisian concordance matrix by industry.",المنهجية: أداة PEFA Converter لصندوق النقد الدولي (أشيل بيغوي)، أعيد تنفيذها بلغة polars، مع مصفوفة توافق تونسية حسب الفروع.
+note_provisoire,"Version provisoire, préparée pour la mission de décembre 2026. Les hypothèses de répartition sont documentées sur le site.",Provisional version prepared for the December 2026 mission. Allocation assumptions are documented on the website.,نسخة مؤقتة أعدت لبعثة ديسمبر 2026. فرضيات التوزيع موثقة في الموقع.
+note_site,Documentation : https://renatovargas.github.io/tun-pefa-aea/,Documentation: https://renatovargas.github.io/tun-pefa-aea/,التوثيق: https://renatovargas.github.io/tun-pefa-aea/
