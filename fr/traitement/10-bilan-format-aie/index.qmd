@@ -145,7 +145,7 @@ assert conservation["ecart"].abs().max() < 1e-6
 conservation
 ```
 
-**Identité de l'AIE.** Pour chaque produit de l'ONEM, la somme de tous les flux signés hors consommation finale doit égaler la consommation finale : approvisionnement, transferts, écart statistique, transformation, consommation de la branche énergie et pertes. Le contrôle se fait par produit de l'ONEM, car la biomasse alimente deux produits du modèle (bois et charbon de bois). Le contrôle additionne une quarantaine de cellules arrondies à la ktep, et non des agrégats publiés comme lors de l'extraction. La tolérance est donc de 3 ktep, soit environ 126 TJ. Elle n'est atteinte que pour le gaz naturel en 2017 et en 2018.
+**Identité de l'AIE.** Pour chaque produit de l'ONEM, l'approvisionnement, les transferts, l'écart statistique, la transformation, la consommation de la branche énergie et les pertes, avec leurs signes, doivent avoir pour somme la consommation finale. Le contrôle se fait par produit de l'ONEM, car la biomasse alimente deux produits du modèle (bois et charbon de bois). Le contrôle additionne une quarantaine de cellules arrondies à la ktep, et non des agrégats publiés comme lors de l'extraction. La tolérance est donc de 3 ktep, soit environ 126 TJ. Elle n'est atteinte que pour le gaz naturel en 2017 et en 2018.
 
 ```{python}
 #| label: controle-identite

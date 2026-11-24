@@ -20,7 +20,7 @@ execute:
 
 ## Objet
 
-Les comptes PEFA enregistrent l'énergie par unité économique, classée par branche d'activité comme dans les comptes nationaux [@seeaenergy2019]. Le bilan énergétique classe la consommation par secteur d'usage : branches industrielles, modes de transport, ménages, tertiaire, agriculture. Cette page associe chaque flux du bilan, dans le modèle de l'AIE, à une ou plusieurs des 24 branches du tableau des ressources et des emplois (TRE) de l'INS, ou aux ménages.
+Les comptes PEFA enregistrent l'énergie par unité économique, classée par branche d'activité comme dans les comptes nationaux [@seeaenergy2019]. Le bilan énergétique classe la consommation par secteur d'usage, c'est-à-dire par branche industrielle, par mode de transport et pour les ménages, le tertiaire et l'agriculture. Cette page associe chaque flux du bilan, dans le modèle de l'AIE, à une ou plusieurs des 24 branches du tableau des ressources et des emplois (TRE) de l'INS, ou aux ménages.
 
 Le PEFA Converter du FMI [@pegoue2026pefa] travaille au niveau des sections de la CITI (A, B, C, D, E, F, H, une section « Other » et les ménages). Les branches tunisiennes sont plus fines. Chaque branche porte donc aussi sa section, ce qui permet de comparer les résultats avec ceux de l'outil.
 
@@ -38,7 +38,7 @@ modele = pl.read_parquet("data/intermediaires/bilan_modele_fmi.parquet")
 
 ## Nomenclature des activités
 
-La table `data/nomenclatures/activites.csv` reprend les 24 branches du TRE. Elle ajoute les ménages et les quatre pseudo-activités de l'outil : le reste du monde (importations et exportations), l'accumulation (variation des stocks), l'environnement (ressources naturelles et résidus) et l'écart statistique. La colonne `section_fmi` donne le code d'activité correspondant dans l'outil.
+La table `data/nomenclatures/activites.csv` reprend les 24 branches du TRE. Elle ajoute les ménages et les quatre pseudo-activités de l'outil. Le reste du monde reçoit les importations et les exportations, l'accumulation la variation des stocks, l'environnement les ressources naturelles et les résidus ; la quatrième est l'écart statistique. La colonne `section_fmi` donne le code d'activité correspondant dans l'outil.
 
 ```{python}
 #| label: activites
@@ -69,9 +69,9 @@ print(f"{len(set(modele['flux_modele']) - PSEUDO)} flux du bilan, tous couverts"
 
 ## Clés de répartition
 
-Deux flux du bilan regroupent plusieurs branches. Le transport routier est donné par mode et non par utilisateur ; il est consommé par les transporteurs, par toutes les autres branches et par les ménages. La ligne « commerce, administration, hôtels » couvre une dizaine de branches de services. Leur répartition suit la structure des emplois du TRE, en valeur, pour un produit clé.
+Deux flux du bilan regroupent plusieurs branches. Le bilan donne le transport routier par mode ; ce transport est le fait des transporteurs, de toutes les autres branches et des ménages. La ligne « commerce, administration, hôtels » couvre une dizaine de branches de services. Leur répartition suit la structure des emplois du TRE, en valeur, pour un produit clé.
 
-- Le transport routier est réparti selon les emplois de produits pétroliers raffinés (produit 19) : consommation intermédiaire des branches et consommation finale des ménages. Le raffinage et l'électricité sont exclus, car leurs emplois de produit 19 sont surtout des entrées de transformation.
+- Le transport routier est réparti selon les emplois de produits pétroliers raffinés (produit 19), dans la consommation intermédiaire des branches et dans la consommation finale des ménages. Le raffinage et l'électricité sont exclus, car leurs emplois de produit 19 sont surtout des entrées de transformation.
 - Le tertiaire est réparti selon les emplois d'électricité et de gaz (produit 35) des branches de services.
 
 La clé d'une activité est sa part dans les emplois du produit clé, parmi les activités candidates, pour l'année considérée. Les ménages prennent la colonne de dépense de consommation finale des ménages.

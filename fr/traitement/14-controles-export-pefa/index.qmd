@@ -100,7 +100,7 @@ Les écarts restants viennent de l'arrondi à la ktep des cellules publiées du 
 
 ## Vraisemblance par rapport au TRE
 
-Une branche qui utilise de l'énergie doit acheter des produits énergétiques dans le TRE : pétrole et gaz naturel (produit 06), produits pétroliers raffinés (19), électricité et gaz (35). La comparaison porte sur le signe et l'ordre de grandeur, pas sur les niveaux, car le TRE est en valeur. Le rapport entre les deux donne un prix implicite moyen, en dinars par gigajoule, qui doit rester dans une plage raisonnable d'une branche à l'autre.
+Une branche qui utilise de l'énergie doit acheter dans le TRE du pétrole et du gaz naturel (produit 06), des produits pétroliers raffinés (19) ou de l'électricité et du gaz (35). Le TRE est en valeur ; la comparaison porte donc sur le signe et l'ordre de grandeur. Le rapport entre les deux donne un prix implicite moyen, en dinars par gigajoule, qui doit rester dans une plage raisonnable d'une branche à l'autre.
 
 ```{python}
 #| label: vraisemblance

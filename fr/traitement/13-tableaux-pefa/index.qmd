@@ -323,7 +323,7 @@ print(f"Couche explicite : {ecarts.height} cellules, écart maximal avec l'outil
 
 ::: {.callout-note}
 ## Question ouverte
-Le double compte des usages non énergétiques avec la colonne « Total » est à signaler à l'auteur de l'outil. Deux corrections sont possibles : retirer les lignes « Total » de la matrice par défaut, ou exclure la colonne « Total » de la plage `Energy_Balance`.
+Le double compte des usages non énergétiques avec la colonne « Total » est à signaler à l'auteur de l'outil. La correction peut porter sur la matrice par défaut, en retirant ses lignes « Total », ou sur la plage `Energy_Balance`, en excluant sa colonne « Total ».
 :::
 
 ## Comptes de la Tunisie
@@ -406,7 +406,7 @@ pefa = pl.concat([explicite for _, explicite in resultats.values()]).with_column
 ).drop("PEFA_Energy").rename({
     "PEFA_Target_Product_Level1": "niveau1", "PEFA_Target_Product_Level2": "niveau2",
     "PEFA_Target_Product": "produit", "PEFA_Target_Activity": "activite", "PEFA_Quadrant": "quadrant",
-}).filter(pl.col("tj") != 0).select("annee", "quadrant", "niveau1", "niveau2", "produit", "activite", "tj").sort("annee", "quadrant", "niveau1", "produit", "activite")
+}).filter(pl.col("tj") != 0).select("annee", "quadrant", "niveau1", "niveau2", "produit", "activite", "tj").sort("annee", "quadrant", "niveau1", "niveau2", "produit", "activite", nulls_last=True)
 pefa.write_parquet(SORTIE, compression="zstd")
 print(f"{SORTIE} : {pefa.height} lignes, années {ANNEES[0]} à {ANNEES[-1]}")
 ```
