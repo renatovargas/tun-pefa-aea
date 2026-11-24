@@ -72,6 +72,16 @@ website:
               text: Tableaux PEFA
             - href: fr/traitement/14-controles-export-pefa/index.qmd
               text: Contrôles et export
+        - section: Comptes des émissions (AEA)
+          contents:
+            - href: fr/traitement/20-inventaire-aea/index.qmd
+              text: Inventaire des GES
+            - href: fr/traitement/21-correspondance-aea/index.qmd
+              text: Catégories et branches
+            - href: fr/traitement/22-comptes-aea/index.qmd
+              text: Comptes AEA
+            - href: fr/traitement/23-passage-export-aea/index.qmd
+              text: Passage et export
 
 format:
   html:

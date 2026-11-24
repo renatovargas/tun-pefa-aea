@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/index.html</loc>
-    <lastmod>2026-11-24T21:11:35.527Z</lastmod>
+    <lastmod>2026-11-24T21:53:00.104Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/13-tableaux-pefa/index.html</loc>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/telechargements.html</loc>
-    <lastmod>2026-11-24T21:11:35.527Z</lastmod>
+    <lastmod>2026-11-24T21:53:00.105Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/materiaux/index.html</loc>
@@ -207,5 +207,21 @@
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/14-controles-export-pefa/index.html</loc>
     <lastmod>2026-11-24T21:29:26.790Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/20-inventaire-aea/index.html</loc>
+    <lastmod>2026-11-24T21:48:57.876Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/22-comptes-aea/index.html</loc>
+    <lastmod>2026-11-24T21:53:41.887Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/21-correspondance-aea/index.html</loc>
+    <lastmod>2026-11-24T21:54:13.644Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/traitement/23-passage-export-aea/index.html</loc>
+    <lastmod>2026-11-24T21:54:13.649Z</lastmod>
   </url>
 </urlset>

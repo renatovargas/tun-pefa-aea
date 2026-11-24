@@ -1,0 +1,289 @@
+---
+title: "L'inventaire des gaz à effet de serre pour les comptes AEA"
+subtitle: "Émissions par catégorie CRT et par gaz, en équivalent CO2, de 2015 à 2022"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: Consultant du FMI
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+---
+
+## Objet
+
+Les comptes des émissions atmosphériques (AEA) partent de l'inventaire national des gaz à effet de serre et réattribuent ses émissions aux branches d'activité et aux ménages qui les produisent [@eurostat2015aea; @seea2014]. Cette page prépare l'inventaire tunisien pour ce travail. Elle part des tableaux CRT extraits à la page 02, calcule les émissions en équivalent CO2 par catégorie et par gaz, et sépare ce qui entre dans les comptes de ce qui en est exclu ou donné pour mémoire. Le résultat, `data/intermediaires/inventaire_ges.parquet`, alimente les deux calculs des comptes AEA : l'appel de l'outil I2A du FMI et sa reprise explicite en polars.
+
+```{python}
+#| label: parametres
+import sys
+
+import openpyxl
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import extraire_crt as ec
+import outils_fmi as of
+
+PRG = ec.PRG_AR5
+F_GAZ = ["HFCs", "PFCs", "Unspecified mix of HFCs and PFCs", "SF6", "NF3"]
+POLLUANTS_ATMOSPHERIQUES = ["CO", "NOx", "NMVOC", "SO2"]
+SORTIE = "data/intermediaires/inventaire_ges.parquet"
+
+crt = pl.read_parquet("data/intermediaires/crt.parquet").filter(pl.col("parametre") == "emission")
+ANNEES = sorted(crt["annee"].unique().to_list())
+PRG
+```
+
+## Émissions de CO2, de CH4 et de N2O
+
+La feuille `Data` des tableaux CRT donne les émissions en kilotonnes de chaque gaz, pour chaque catégorie détaillée. Les émissions de CH4 et de N2O sont converties en équivalent CO2 avec les potentiels de réchauffement global à 100 ans du cinquième rapport du GIEC, que l'inventaire tunisien utilise [@ipcc2006]. Les mêmes coefficients ont servi au contrôle de la page 02.
+
+Les codes des émissions fugitives par évacuation et torchage s'écrivent `1.b.2.c…` dans la feuille `Data`, avec un « b » minuscule. Ils sont réécrits `1.B.2.c…`, comme dans la nomenclature CRT.
+
+```{python}
+#| label: emissions
+def code_crt(colonne: str) -> pl.Expr:
+    """Code CRT avec la majuscule de la nomenclature (1.b.2.c… devient 1.B.2.c…)."""
+    return pl.col(colonne).str.replace(r"^1\.b\.", "1.B.")
+
+
+emissions = (
+    crt.filter(pl.col("gaz").is_in(list(PRG)))
+    .with_columns(crt=code_crt("crt"))
+    .group_by("annee", "crt", "gaz")
+    .agg(kt=pl.col("valeur").sum())
+    .with_columns(kt_eq_co2=pl.col("kt") * pl.col("gaz").replace_strict(PRG, return_dtype=pl.Float64))
+)
+# Total par gaz, en kt d'équivalent CO2, toutes catégories (UTCATF et éléments pour mémoire compris)
+emissions.group_by("annee", "gaz").agg(pl.col("kt_eq_co2").sum().round(1)).pivot("gaz", index="annee", values="kt_eq_co2").sort("annee")
+```
+
+## Gaz fluorés
+
+La feuille `Data` donne les gaz fluorés espèce par espèce (HFC-134a, HFC-125, SF6, etc.), en kilotonnes. Chaque espèce a son propre potentiel de réchauffement. Plutôt que de saisir ces coefficients, la page reprend les émissions en équivalent CO2 publiées dans la feuille `Summary2` du même classeur, par catégorie de l'industrie (2.A à 2.H) et par famille de gaz.
+
+Pour attribuer ces émissions à une catégorie détaillée, la page cherche dans `Data` les catégories qui émettent des gaz fluorés. En Tunisie, il n'y en a qu'une par catégorie de `Summary2` : la réfrigération commerciale (2.F.1.a) pour les HFC et les équipements électriques (2.G.1) pour le SF6. Le code s'arrête si une catégorie de `Summary2` en compte plusieurs, car il faudrait alors une règle de répartition.
+
+```{python}
+#| label: fgaz
+def fgaz_summary2(annee: int) -> pl.DataFrame:
+    """Gaz fluorés en kt d'équivalent CO2 par catégorie de l'industrie (2.A à 2.H), feuille Summary2."""
+    brut = pl.read_excel(ec.fichiers_crt()[annee], sheet_name="Summary2", engine="calamine", has_header=False, infer_schema_length=0)
+    ligne = brut.with_row_index().filter(pl.col("column_0").str.starts_with("GREENHOUSE GAS SOURCE"))["index"][0]
+    entetes = {f"column_{j}": " ".join((brut[ligne, j] or "").split()) for j in range(1, brut.width)}
+    colonnes = [c for c, nom in entetes.items() if nom in F_GAZ]
+    return (
+        brut[ligne + 2 :]
+        .with_columns(categorie=pl.col("column_0").str.extract(r"^\s*(2\.[A-H])\.?\s"))
+        .filter(pl.col("categorie").is_not_null())
+        .select("categorie", kt_eq_co2=pl.sum_horizontal(pl.col(colonnes).cast(pl.Float64, strict=False).fill_null(0)))
+        .filter(pl.col("kt_eq_co2") != 0)
+        .with_columns(annee=pl.lit(annee, dtype=pl.Int16))
+    )
+
+
+especes = (
+    crt.filter(~pl.col("gaz").is_in([*PRG, *POLLUANTS_ATMOSPHERIQUES, "CO2bio"]), pl.col("valeur") != 0)
+    .with_columns(categorie=pl.col("crt").str.slice(0, 3))
+    .group_by("annee", "categorie")
+    .agg(pl.col("crt").unique().sort(), pl.col("gaz").unique().sort().alias("especes"))
+)
+fgaz = pl.concat([fgaz_summary2(a) for a in ANNEES]).join(especes, on=["annee", "categorie"], how="left")
+assert (fgaz["crt"].list.len() == 1).all(), "Une catégorie de Summary2 a plusieurs sources de gaz fluorés"
+fgaz = fgaz.with_columns(pl.col("crt").list.first(), gaz=pl.lit("F-gases"), kt=pl.lit(None, dtype=pl.Float64))
+fgaz.select("annee", "categorie", "crt", "especes", pl.col("kt_eq_co2").round(1)).sort("annee", "crt")
+```
+
+## Périmètre
+
+Toutes les émissions de l'inventaire n'entrent pas dans les comptes AEA.
+
+- Les émissions et absorptions de l'utilisation des terres, du changement d'affectation des terres et de la foresterie (UTCATF, catégorie 4) sont exclues des comptes AEA. Elles figurent dans le tableau de passage entre l'inventaire et les comptes.
+- Les éléments pour mémoire de la catégorie 1.D (soutes internationales aériennes et maritimes) ne font pas partie du total national de l'inventaire. Ils servent à vérifier l'ajustement de résidence.
+- Le CO2 issu de la biomasse est aussi un élément pour mémoire. Il n'est compté ni dans l'inventaire ni dans les comptes AEA.
+
+```{python}
+#| label: perimetre
+co2_biomasse = (
+    crt.filter(pl.col("gaz") == "CO2bio")
+    .with_columns(crt=code_crt("crt"))
+    .group_by("annee", "crt", "gaz")
+    .agg(kt=pl.col("valeur").sum())
+    .with_columns(kt_eq_co2=pl.col("kt"))
+)
+inventaire = (
+    pl.concat([emissions, fgaz.select(emissions.columns), co2_biomasse.select(emissions.columns)])
+    .filter(pl.col("kt_eq_co2") != 0)
+    .with_columns(
+        perimetre=pl.when(pl.col("crt").str.starts_with("1.D") | (pl.col("gaz") == "CO2bio"))
+        .then(pl.lit("pour_memoire"))
+        .when(pl.col("crt").str.starts_with("4."))
+        .then(pl.lit("utcatf"))
+        .otherwise(pl.lit("inventaire"))
+    )
+    .sort("annee", "crt", "gaz")
+)
+(
+    inventaire.group_by("annee", "perimetre")
+    .agg(pl.col("kt_eq_co2").sum().round(1))
+    .pivot("perimetre", index="annee", values="kt_eq_co2")
+    .sort("annee")
+)
+```
+
+## Contrôle avec le total de Summary2
+
+Le total de l'inventaire, UTCATF compris et éléments pour mémoire exclus, doit égaler le total des émissions nettes de la feuille `Summary2`, pour chaque année. Le seul écart connu vient des émissions de N2O de la catégorie 1.B.2.b.ii. La page 02 a montré qu'elles figurent dans `Data` à partir de 2019 mais pas dans `Summary2`. L'inventaire garde les valeurs de `Data`, et le contrôle vérifie que l'écart égale exactement ces émissions.
+
+```{python}
+#| label: controle-summary2
+def total_summary2(annee: int) -> float:
+    """Total des émissions nettes (kt éq. CO2), dernière colonne de la ligne « Total (net emissions) »."""
+    brut = pl.read_excel(ec.fichiers_crt()[annee], sheet_name="Summary2", engine="calamine", has_header=False, infer_schema_length=0)
+    ligne = brut.filter(pl.col("column_0").str.starts_with("Total (net emissions)")).row(0)
+    return float([x for x in ligne if x not in (None, "")][-1])
+
+
+controle = (
+    inventaire.filter(pl.col("perimetre") != "pour_memoire")
+    .group_by("annee")
+    .agg(inventaire=pl.col("kt_eq_co2").sum())
+    .with_columns(summary2=pl.col("annee").map_elements(total_summary2, return_dtype=pl.Float64))
+    .join(
+        emissions.filter(pl.col("crt") == "1.B.2.b.ii", pl.col("gaz") == "N2O").select("annee", n2o_1b2bii="kt_eq_co2"),
+        on="annee",
+        how="left",
+    )
+    .with_columns(pl.col("n2o_1b2bii").fill_null(0), ecart=pl.col("inventaire") - pl.col("summary2"))
+    .sort("annee")
+)
+assert (controle["ecart"] - controle["n2o_1b2bii"]).abs().max() < 0.01, "Écart inexpliqué avec le total de Summary2"
+controle.with_columns(pl.col("inventaire", "summary2").round(1), pl.col("ecart", "n2o_1b2bii").round(3))
+```
+
+## Le fichier préparé pour l'outil I2A
+
+Le dossier des sources contient aussi `Tunisia_UNFCCC.xlsx`, préparé dans la présentation du fichier `Tool_UNFCCC.csv` de l'outil I2A. Ce fichier ne sert pas aux comptes, pour trois raisons que le code suivant établit.
+
+D'abord, ses valeurs sont en kilotonnes de chaque gaz. Elles égalent les sommes de la feuille `Data` en kilotonnes, et non en équivalent CO2. Or l'outil attend un inventaire en milliers de tonnes d'équivalent CO2 [@imf2026i2a].
+
+```{python}
+#| label: fichier-unite
+classeur = openpyxl.load_workbook("data/sources/inventaire-ges/Tunisia_UNFCCC.xlsx", read_only=True, data_only=True)
+lignes = list(classeur.worksheets[0].iter_rows(values_only=True))
+classeur.close()
+fichier = (
+    pl.DataFrame(lignes[1:], schema=[str(c) for c in lignes[0]], orient="row", infer_schema_length=None)
+    .unpivot(index=["POLLUTANT", "IPCC", "IPCCDesc"], on=[str(a) for a in ANNEES], variable_name="annee", value_name="fichier")
+    .with_columns(pl.col("annee").cast(pl.Int16), code=pl.col("IPCC").cast(pl.String), fichier=pl.col("fichier").cast(pl.Float64))
+)
+
+
+def somme_crt(code: str, gaz: str, annee: int, colonne: str) -> float:
+    """Somme des émissions détaillées d'une catégorie, hors éléments pour mémoire."""
+    lignes = emissions.filter(
+        pl.col("annee") == annee, pl.col("gaz") == gaz, (pl.col("crt") + ".").str.starts_with(code + "."), ~pl.col("crt").str.starts_with("1.D")
+    )
+    return lignes[colonne].sum()
+
+
+comparaison = (
+    fichier.filter(pl.col("annee") == 2022, pl.col("code").is_in(["1", "2", "3", "5"]), pl.col("POLLUTANT").is_in(["CO2", "CH4", "N20"]))
+    .with_columns(gaz=pl.col("POLLUTANT").replace({"N20": "N2O"}))
+    .sort("code", "gaz")
+)
+comparaison = comparaison.with_columns(
+    crt_kt=pl.Series([somme_crt(c, g, 2022, "kt") for c, g in zip(comparaison["code"], comparaison["gaz"])]),
+    crt_kt_eq_co2=pl.Series([somme_crt(c, g, 2022, "kt_eq_co2") for c, g in zip(comparaison["code"], comparaison["gaz"])]),
+)
+assert (comparaison["fichier"] - comparaison["crt_kt"]).abs().max() < 0.01
+comparaison.select("code", "IPCCDesc", "POLLUTANT", pl.col("fichier", "crt_kt", "crt_kt_eq_co2").round(1))
+```
+
+Ensuite, le N2O y est écrit « N20 », avec un zéro. L'outil ne reconnaît que « N2O » et laisserait ces émissions sans activité. Enfin, le fichier ne contient ni les gaz fluorés, ni toutes les sous-catégories. L'outil ne traite que les composantes les plus détaillées d'un inventaire. Quand une catégorie n'a qu'une partie de ses sous-catégories dans le fichier, les autres sont perdues. Le tableau suivant le montre pour 2022, en kilotonnes de chaque gaz.
+
+```{python}
+#| label: fichier-detail
+codes = fichier["code"].unique().to_list()
+
+
+def enfants(code: str) -> list[str]:
+    """Sous-catégories directes d'un code présentes dans le fichier."""
+    prefixe = code.rstrip(".") + "."
+    return [c for c in codes if c.startswith(prefixe) and "." not in c[len(prefixe):]]
+
+
+detail = []
+for code in sorted(codes):
+    if code in ("1", "4") or not enfants(code):
+        continue
+    for gaz in ["CO2", "CH4", "N20"]:
+        valeurs = fichier.filter(pl.col("annee") == 2022, pl.col("POLLUTANT") == gaz)
+        parent = valeurs.filter(pl.col("code") == code)["fichier"].sum()
+        sous_categories = valeurs.filter(pl.col("code").is_in(enfants(code)))["fichier"].sum()
+        if abs(parent - sous_categories) > 0.01:
+            detail.append((code, gaz, ", ".join(enfants(code)), round(parent, 1), round(sous_categories, 1), round(parent - sous_categories, 1)))
+pl.DataFrame(detail, schema=["code", "gaz", "sous_categories_presentes", "categorie", "somme_sous_categories", "non_detaille"], orient="row")
+```
+
+L'inventaire de cette page part donc de la feuille `Data`, déjà contrôlée à la page 02, au niveau le plus détaillé et en équivalent CO2.
+
+::: {.callout-note}
+## Question ouverte
+Le fichier `Tunisia_UNFCCC.xlsx` est à reprendre avec l'équipe de l'inventaire (ANME) s'il doit servir à d'autres usages : unité en équivalent CO2, code du N2O, sous-catégories complètes et gaz fluorés.
+:::
+
+## Codes de l'outil I2A
+
+L'outil I2A joint l'inventaire à sa matrice de conversion par le code exact de la catégorie [@pegoue2026i2a]. Sa liste de codes descend au cinquième niveau de la nomenclature CRT. La feuille `Data` va parfois plus loin, par exemple pour les sous-catégories d'animaux (3.A.1.a.iv.1) ou de mines de charbon (1.B.1.a.i.1). Chaque catégorie reçoit donc le code le plus détaillé de la liste de l'outil dont elle relève, dans la colonne `code_outil`. Ce code doit figurer à la fois dans la matrice de conversion et dans la table des catégories CRT de l'outil. L'outil regroupe en effet ses lignes par code et par libellé de la catégorie (lignes 257 et 559 de `I2A.py`). Une catégorie sans libellé disparaît de ces regroupements, sans message. Quelques codes de la matrice manquent dans la table des catégories, comme le montre le code suivant. Les éléments pour mémoire n'en reçoivent pas, car ils ne passent pas par l'outil.
+
+```{python}
+#| label: codes-outil
+plages_outil = of.plages_i2a()
+codes_matrice = {ligne[2] for ligne in plages_outil["Conversion_Matrix"][1:]}
+codes_crt = {ligne[1] for ligne in plages_outil["CRT"][1:]}
+CODES_OUTIL = codes_matrice & codes_crt
+print(f"{len(codes_matrice)} codes dans la matrice, {len(codes_crt)} dans la table CRT, {len(CODES_OUTIL)} dans les deux")
+print("Codes de la matrice absents de la table CRT :", sorted(codes_matrice - codes_crt))
+
+
+def code_outil(code: str) -> str | None:
+    """Code le plus détaillé de la liste de l'outil dont relève une catégorie CRT (« 3 » s'écrit « 3. »)."""
+    parties = code.split(".")
+    for k in range(len(parties), 0, -1):
+        candidat = ".".join(parties[:k]) + ("." if k == 1 else "")
+        if candidat in CODES_OUTIL:
+            return candidat
+    return None
+
+
+inventaire = inventaire.with_columns(
+    code_outil=pl.when(pl.col("perimetre") != "pour_memoire").then(
+        pl.col("crt").map_elements(code_outil, return_dtype=pl.String)
+    )
+)
+assert inventaire.filter(pl.col("perimetre") != "pour_memoire")["code_outil"].null_count() == 0, "Catégorie sans code de l'outil"
+inventaire.filter(pl.col("code_outil") != pl.col("crt")).select("crt", "code_outil").unique().sort("crt")
+```
+
+## Enregistrement
+
+```{python}
+#| label: enregistrement
+inventaire.write_parquet(SORTIE, compression="zstd")
+print(f"{SORTIE} : {inventaire.height} lignes, {inventaire['crt'].n_unique()} catégories, années {ANNEES[0]} à {ANNEES[-1]}")
+```
+
+## Références
+
+::: {#refs}
+:::

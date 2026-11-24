@@ -143,3 +143,99 @@ def bilan_vers_plage(bilan: pl.DataFrame, flux: list[str], produits: list[str]) 
     valeurs = {(f, p): v for f, p, v in somme.iter_rows()}
     entete = [None] + list(produits)
     return [entete] + [[f] + [float(valeurs.get((f, p), 0.0)) for p in produits] for f in flux]
+
+
+# ---------------------------------------------------------------------------
+# I2A (outil des comptes des émissions atmosphériques, Achille Pegoue, FMI)
+# ---------------------------------------------------------------------------
+
+DOSSIER_I2A = Path("outils-fmi/i2a")
+CLASSEUR_I2A = DOSSIER_I2A / "I2A.xlsm"
+
+# Valeurs des cellules de paramètres de la feuille Output_Source_Activity
+OECD_UTILISER = "Use OECD International Transport Emissions"
+OECD_NE_PAS_UTILISER = "Do Not Use OECD International Transport Emissions"
+UNITE_KT = "Thousand tonnes CO2Eq"
+
+
+def charger_i2a() -> types.ModuleType:
+    """Importe outils-fmi/i2a/I2A.py tel quel."""
+    _xlwings_minimal()
+    spec = importlib.util.spec_from_file_location("I2A", DOSSIER_I2A / "I2A.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def plages_i2a(chemin: Path = CLASSEUR_I2A) -> dict:
+    """Reconstruit les plages de l'outil I2A pour l'inventaire CRT, selon les définitions OFFSET/COUNTA.
+
+    Les feuilles « _Def » contiennent les tables par défaut de l'outil ; les feuilles
+    actives du classeur d'exemple portent des facteurs de démonstration. Les plages
+    sont construites sur les feuilles « _Def » avec les mêmes définitions que les
+    plages nommées :
+    Conversion_Matrix_CRT  OFFSET($A$1,,,COUNTA($C:$C),COUNTA($1:$1))
+    Activity               OFFSET($A$1,,,COUNTA($A:$A),COUNTA($1:$1))
+    CRT                    OFFSET($A$1,,,COUNTA($A:$A),COUNTA($1:$1))
+    """
+    classeur = openpyxl.load_workbook(chemin, data_only=True, read_only=True)
+    feuilles = {
+        nom: list(classeur[nom].iter_rows(values_only=True))
+        for nom in ["Conversion_Matrix_CRT_Def", "Activity_Def", "CRT_Def", "NFR"]
+    }
+    classeur.close()
+    cm, act, crt, nfr = (feuilles[n] for n in ["Conversion_Matrix_CRT_Def", "Activity_Def", "CRT_Def", "NFR"])
+    return {
+        "Conversion_Matrix": _offset(cm, 0, 0, _counta(cm, colonne=2), _counta(cm, ligne=0)),
+        "Activity": _offset(act, 0, 0, _counta(act, colonne=0), _counta(act, ligne=0)),
+        "CRT": _offset(crt, 0, 0, _counta(crt, colonne=0), _counta(crt, ligne=0)),
+        "NFR": _offset(nfr, 0, 0, _counta(nfr, colonne=0), _counta(nfr, ligne=0)),
+    }
+
+
+def oecd_i2a(pays: str = "TUN") -> dict:
+    """Données de l'OCDE sur le transport aérien et maritime, filtrées comme le fait Read_OECD.
+
+    Les fichiers de outils-fmi/i2a/I2A_Data/ sont les lignes du pays extraites des
+    fichiers DSD_AIR_TRANSPORT.csv et DSD_MARITIME_TRANSPORT.csv livrés avec l'outil
+    (valeurs en tonnes). Read_OECD garde les données annuelles, tous vols confondus,
+    pour les émissions des résidents ; et tous les navires pour le maritime.
+    """
+    air = pd.read_csv(DOSSIER_I2A / "I2A_Data" / f"DSD_AIR_TRANSPORT_{pays}.csv")
+    air = air[
+        (air["REF_AREA"] == pays) & (air["FREQ"] == "A") & (air["FLIGHT_TYPE"] == "_T")
+        & air["EMISSIONS_SOURCE"].isin(["RES_DOM_IN", "RES_DOM_OUT", "RES_INT_FROM", "RES_INT_TO", "RES_INT_OUT"])
+    ]
+    mer = pd.read_csv(DOSSIER_I2A / "I2A_Data" / f"DSD_MARITIME_TRANSPORT_{pays}.csv")
+    mer = mer[(mer["REF_AREA"] == pays) & (mer["FREQ"] == "A") & (mer["VESSEL"] == "ALL_VESSELS")]
+
+    def plage(d: pd.DataFrame) -> list[list]:
+        d = d.astype(object).where(d.notna(), None)
+        return [list(d.columns)] + d.values.tolist()
+
+    return {"OECD_Air": plage(air), "OECD_Sea": plage(mer)}
+
+
+def i2a(inventaire: list[list], matrice: list[list], crt: list[list], nfr: list[list], activite: list[list],
+        oecd: dict | None = None, utiliser_oecd: str = OECD_NE_PAS_UTILISER, unite: str = UNITE_KT) -> pl.DataFrame:
+    """Appelle I2A comme la formule de Output_Source_Activity!B3 et renvoie un tableau long (polars).
+
+    Arguments dans l'ordre de la formule : Inventory_2, Conversion_Matrix, CRT, NFR,
+    Activity, type d'inventaire (« UNFCCC »), niveaux CRT et activité (cellules vides),
+    OECD_Air, OECD_Sea, choix OCDE et unité.
+    """
+    module = charger_i2a()
+    oecd = oecd or {"OECD_Air": [], "OECD_Sea": []}
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        sortie = module.I2A(inventaire, matrice, crt, nfr, activite, "UNFCCC", None, None,
+                            oecd["OECD_Air"], oecd["OECD_Sea"], utiliser_oecd, unite)
+    cles = ["POLLUTANT", "Source_Code", "Source_Description", "Activity", "Description"]
+    annees = [c for c in sortie.columns if c not in cles + ["REF_AREA", "CountryName"]]
+    longue = sortie.melt(id_vars=cles, value_vars=annees, var_name="annee", value_name="valeur")
+    longue = longue[longue["valeur"].notna()]
+    return pl.DataFrame({
+        **{c: [x if isinstance(x, str) else None for x in longue[c]] for c in cles},
+        "annee": [int(a) for a in longue["annee"]],
+        "valeur": [float(v) for v in longue["valeur"]],
+    })

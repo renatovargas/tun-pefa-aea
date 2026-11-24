@@ -40,4 +40,20 @@ Tableaux des ressources et des emplois d'énergie par branche du TRE et pour les
 :::
 :::
 
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### Comptes des émissions atmosphériques (AEA), gaz à effet de serre, 2015 à 2022
+
+Émissions de CO2, de CH4, de N2O et de gaz fluorés par branche du TRE et pour les ménages, en kilotonnes d'équivalent CO2, tableau de passage avec l'inventaire national et intensités d'émission par branche. Version provisoire.
+
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/fr/comptes_aea.xlsx){.btn .btn-primary download="comptes_aea.xlsx"}
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/en/comptes_aea.xlsx){.btn .btn-outline-primary download="comptes_aea.xlsx"}
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/produits/ar/comptes_aea.xlsx){.btn .btn-outline-primary download="comptes_aea.xlsx"}
+
+[Page de traitement](traitement/23-passage-export-aea/index.qmd)
+:::
+:::
+:::
+
 ::::
