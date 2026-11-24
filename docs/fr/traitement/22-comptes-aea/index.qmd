@@ -1,0 +1,396 @@
+---
+title: "Comptes des émissions atmosphériques"
+subtitle: "Reprise explicite de l'outil I2A en polars, comparaison avec l'outil, comptes AEA de 2015 à 2022"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: Consultant du FMI
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+---
+
+## Objet
+
+Cette page calcule les comptes des émissions atmosphériques (AEA) de la Tunisie pour les gaz à effet de serre, de 2015 à 2022 [@eurostat2015aea; @seea2014]. Comme pour les comptes PEFA, elle le fait de deux façons.
+
+La **couche de référence** appelle la fonction `I2A` de l'outil du FMI [@pegoue2026i2a; @imf2026i2a], sans la modifier, par le module `scripts/outils_fmi.py`[^outils]. Les arguments sont ceux de la formule de la feuille `Output_Source_Activity` du classeur.
+
+La **couche explicite** refait chaque étape de `I2A` en polars, dans cette page. Le code de cette couche est adapté de `I2A` (Achille Pegoue, FMI) ; chaque étape renvoie aux lignes correspondantes de `I2A.py`. C'est elle qui produit les comptes.
+
+Les deux couches reçoivent le même inventaire (page 20) et sont comparées sur trois jeux de paramètres : la matrice par défaut sans les données de l'OCDE, la matrice par défaut avec ces données, et la matrice tunisienne (page 21) avec ces données.
+
+[^outils]: Code source : <https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/outils_fmi.py>. Outil : <https://github.com/renatovargas/tun-pefa-aea/tree/main/outils-fmi/i2a>.
+
+```{python}
+#| label: parametres
+import sys
+
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import outils_fmi as of
+
+SORTIE = "data/intermediaires/aea.parquet"
+CLES = ["POLLUTANT", "Source_Code", "Activity", "annee"]
+TOLERANCE_KT = 1e-9
+CODES = {"code": pl.String, "activite": pl.String}
+
+inventaire = pl.read_parquet("data/intermediaires/inventaire_ges.parquet").filter(pl.col("perimetre") != "pour_memoire")
+matrice_tunisie = pl.read_parquet("data/intermediaires/matrice_aea_tunisie.parquet")
+activites = pl.read_csv("data/nomenclatures/activites.csv", schema_overrides=CODES)
+plages = of.plages_i2a()
+oecd = of.oecd_i2a()
+ANNEES = sorted(inventaire["annee"].unique().to_list())
+```
+
+## L'inventaire au format de l'outil
+
+L'outil lit l'inventaire dans la feuille `Inventory_2`, avec une ligne par gaz et par catégorie et une colonne par année. La colonne `Info` signale les composantes les plus détaillées, seules utilisées. Ici, toutes les lignes le sont, car la page 20 a déjà ramené chaque catégorie au code le plus détaillé de l'outil. Les valeurs sont en kilotonnes d'équivalent CO2, comme l'outil l'attend.
+
+```{python}
+#| label: plages
+DESCRIPTIONS = {ligne[1]: ligne[2] for ligne in plages["CRT"][1:]}
+ENTETE_INVENTAIRE = ["Info", "Data_Source", "IPCC_annex", "CountryRegion", "REF_AREA", "CountryName",
+                     "POLLUTANT", "Source_Code", "Source_Description", "FossilType"]
+
+
+def plage_inventaire(inventaire: pl.DataFrame, annees: list[int]) -> list[list]:
+    """Plage Inventory_2 : une ligne par gaz et code de l'outil, une colonne par année (kt éq. CO2)."""
+    large = (
+        inventaire.filter(pl.col("annee").is_in(annees))
+        .group_by("gaz", "code_outil", "annee")
+        .agg(pl.col("kt_eq_co2").sum())
+        .pivot("annee", index=["gaz", "code_outil"], values="kt_eq_co2")
+        .sort("gaz", "code_outil")
+    )
+    lignes = [ENTETE_INVENTAIRE + list(annees)]
+    for r in large.iter_rows(named=True):
+        lignes.append(
+            ["Most detailed Component", "UNFCCC", "Non-Annex_I", "Africa", "TUN", "Tunisia", r["gaz"], r["code_outil"],
+             DESCRIPTIONS.get(r["code_outil"]), "fossil"]
+            + [float(r.get(str(a)) or 0.0) for a in annees]
+        )
+    return lignes
+
+
+assert set(inventaire["code_outil"]) <= set(DESCRIPTIONS), "Code de l'inventaire absent de la table CRT de l'outil"
+inventaire_outil = plage_inventaire(inventaire, ANNEES)
+print(f"{len(inventaire_outil) - 1} lignes, {len(inventaire_outil[0]) - len(ENTETE_INVENTAIRE)} années")
+for ligne in inventaire_outil[:3]:
+    print(ligne)
+```
+
+## La couche explicite
+
+### Entrées
+
+L'outil garde les composantes les plus détaillées et d'origine fossile, puis met l'inventaire en format long. Avec les données de l'OCDE, il y ajoute deux séries, en tonnes de CO2. Pour l'aérien, ce sont les émissions des transporteurs résidents. Les vols intérieurs (`RES_DOM_IN`) sont gardés à part ; les vols intérieurs hors du pays et les vols internationaux sont réunis sous `RES_ABROAD`. Pour le maritime, ce sont les émissions de tous les navires exploités par des résidents (`ALL_VESSELS`). Les deux séries reçoivent le code de l'aviation intérieure et celui de la navigation intérieure, lus dans la colonne `Comment` de la table des catégories CRT.
+
+La matrice est ramenée à une somme de 1 par gaz et par catégorie. Une ligne sans gaz vaut pour les quatre gaz de l'outil. Une ligne dont tous les facteurs sont nuls reste nulle.
+
+```{python}
+#| label: explicite-entrees
+GAZ_OUTIL = ["CH4", "CO2", "N2O", "F-gases"]
+CODE_AIR = next(l[1] for l in plages["CRT"][1:] if l[11] == "Domestic Aviation")
+CODE_MER = next(l[1] for l in plages["CRT"][1:] if l[11] == "Domestic Navigation")
+RESIDENTS_ETRANGER = ["RES_DOM_OUT", "RES_INT_FROM", "RES_INT_TO", "RES_INT_OUT"]
+
+
+def plage_en_table(plage: list[list]) -> pl.DataFrame:
+    return pl.DataFrame(plage[1:], schema=[str(c) for c in plage[0]], orient="row", infer_schema_length=None)
+
+
+def inventaire_long(plage: list[list]) -> pl.DataFrame:
+    """Lignes les plus détaillées et fossiles, en format long (lignes 87 à 118 et 237 à 261 de I2A.py)."""
+    table = plage_en_table(plage)
+    annees = [c for c in table.columns if c not in ENTETE_INVENTAIRE]
+    return (
+        table.filter(pl.col("Info") == "Most detailed Component", (pl.col("FossilType") == "fossil") | pl.col("FossilType").is_null())
+        .unpivot(index=["POLLUTANT", "Source_Code"], on=annees, variable_name="annee", value_name="valeur")
+        .with_columns(pl.col("annee").cast(pl.Int16), pl.col("valeur").cast(pl.Float64), source=pl.lit("INV"))
+    )
+
+
+def oecd_long(oecd: dict, annees: list[int]) -> pl.DataFrame:
+    """Émissions de l'OCDE en kt (lignes 144 à 232) : résidents à l'étranger (aérien) et tous navires (maritime)."""
+    air = plage_en_table(oecd["OECD_Air"]).select(
+        "POLLUTANT", "TIME_PERIOD", "OBS_VALUE",
+        source=pl.col("EMISSIONS_SOURCE").replace(dict.fromkeys(RESIDENTS_ETRANGER, "RES_ABROAD")),
+        Source_Code=pl.lit(CODE_AIR),
+    )
+    mer = plage_en_table(oecd["OECD_Sea"]).select(
+        "POLLUTANT", "TIME_PERIOD", "OBS_VALUE", source=pl.col("VESSEL"), Source_Code=pl.lit(CODE_MER)
+    )
+    return (
+        pl.concat([air, mer])
+        .with_columns(annee=pl.col("TIME_PERIOD").cast(pl.Int16), valeur=pl.col("OBS_VALUE").cast(pl.Float64).fill_null(0) / 1000)
+        .filter(pl.col("annee").is_in(annees))
+        .select("POLLUTANT", "Source_Code", "annee", "valeur", "source")
+    )
+
+
+def matrice_longue(plage: list[list]) -> pl.DataFrame:
+    """Facteurs normalisés à 1 par gaz et code (lignes 271 à 293) ; un gaz vide vaut pour tous les gaz."""
+    table = plage_en_table(plage).drop("Level", strict=False).with_columns(pl.col("POLLUTANT").cast(pl.String))
+    colonnes = [c for c in table.columns if c not in ("POLLUTANT", "Source_Code", "Source_Description", "Check")]
+    longue = (
+        table.unpivot(index=["POLLUTANT", "Source_Code"], on=colonnes, variable_name="Activity", value_name="facteur")
+        .with_columns(pl.col("facteur").cast(pl.Float64).fill_null(0))
+        .with_columns(somme=pl.col("facteur").sum().over("POLLUTANT", "Source_Code"))
+        .with_columns(facteur=pl.when(pl.col("somme") == 0).then(0.0).otherwise(pl.col("facteur") / pl.col("somme")))
+    )
+    vides = longue.filter(pl.col("POLLUTANT").is_null() | (pl.col("POLLUTANT") == ""))
+    if vides.height:
+        longue = pl.concat([
+            longue.filter(pl.col("POLLUTANT").is_not_null() & (pl.col("POLLUTANT") != "")),
+            *[vides.with_columns(POLLUTANT=pl.lit(g)) for g in GAZ_OUTIL],
+        ])
+    return longue.select("POLLUTANT", "Source_Code", "Activity", "facteur")
+
+
+print(f"Code de l'aviation intérieure : {CODE_AIR} ; code de la navigation intérieure : {CODE_MER}")
+```
+
+### Ajustements de résidence
+
+Les données de l'OCDE passent par la matrice avec les facteurs de leur code, comme l'inventaire. L'outil les compare ensuite, activité par activité, aux émissions de l'inventaire pour le même code.
+
+- **Vols intérieurs.** Si les résidents émettent plus que l'inventaire, l'écart s'ajoute à l'activité et, en sens inverse, aux autres ajustements (`OTHER`). S'ils émettent moins, l'écart est retiré de l'activité et attribué aux non-résidents sur le territoire (`NRT-AIR`). L'OCDE ne donne que le CO2. Le CH4 et le N2O de l'aviation intérieure passent donc entièrement aux non-résidents.
+- **Vols des résidents à l'étranger.** Ces émissions s'ajoutent à l'activité et figurent aussi dans l'élément de passage `NRA-AIR`.
+- **Navires.** Si les navires des résidents émettent plus que l'inventaire, l'écart s'ajoute à l'activité. L'outil prévoit de l'inscrire aussi dans l'élément de passage `NRA-WATER`, mais son test (ligne 425) cherche ce code parmi les numéros de ligne de la table des activités et non parmi ses codes. L'élément de passage reste donc vide. S'ils émettent moins, l'écart va aux non-résidents (`NRT-WATER`).
+
+```{python}
+#| label: explicite-residence
+def ajustements_residence(attribue: pl.DataFrame, codes_activite: list[str]) -> pl.DataFrame:
+    """Ajustements de résidence de l'outil (lignes 395 à 514), par gaz, code, activité et année.
+
+    INV est l'inventaire attribué ; les autres colonnes sont les données de l'OCDE attribuées
+    avec les mêmes facteurs.
+    """
+    large = (
+        attribue.filter(pl.col("Source_Code").is_in([CODE_AIR, CODE_MER]))
+        .pivot("source", index=["POLLUTANT", "Source_Code", "Activity", "annee"], values="valeur", aggregate_function="sum")
+    )
+    sources = [c for c in large.columns if c not in ("POLLUTANT", "Source_Code", "Activity", "annee")]
+    large = large.with_columns(pl.col(sources).fill_null(0))
+    if "INV" not in large.columns:
+        large = large.with_columns(INV=pl.lit(0.0))
+    lignes = []
+
+    def ajouter(table: pl.DataFrame, source: pl.Expr, activite: pl.Expr, valeur: pl.Expr) -> None:
+        lignes.append(table.select("POLLUTANT", "annee", Source_Code=source, Activity=activite, valeur=valeur))
+
+    if "ALL_VESSELS" in sources:
+        mer = large.filter(pl.col("Source_Code") == CODE_MER).with_columns(d=pl.col("ALL_VESSELS") - pl.col("INV"))
+        positif, negatif = mer.filter(pl.col("d") > 0), mer.filter(pl.col("d") < 0)
+        # Écart positif : ajouté à l'activité, sans élément de passage (ligne 425)
+        ajouter(positif, pl.lit("ALL_VESSELS"), pl.col("Activity"), pl.col("d"))
+        # Écart négatif : retiré de l'activité et attribué aux non-résidents sur le territoire
+        ajouter(negatif, pl.col("Source_Code"), pl.col("Activity"), pl.col("d"))
+        if "NRT-WATER" in codes_activite:
+            ajouter(negatif, pl.col("Source_Code"), pl.lit("NRT-WATER"), -pl.col("d"))
+    if "RES_DOM_IN" in sources:
+        air = large.filter(pl.col("Source_Code") == CODE_AIR).with_columns(d=pl.col("RES_DOM_IN") - pl.col("INV"))
+        positif, negatif = air.filter(pl.col("d") > 0), air.filter(pl.col("d") < 0)
+        ajouter(positif, pl.lit("RES_DOM_IN"), pl.col("Activity"), pl.col("d"))
+        if "OTHER" in codes_activite:
+            ajouter(positif, pl.lit("RES_DOM_IN"), pl.lit("OTHER"), -pl.col("d"))
+        ajouter(negatif, pl.col("Source_Code"), pl.col("Activity"), pl.col("d"))
+        if "NRT-AIR" in codes_activite:
+            ajouter(negatif, pl.col("Source_Code"), pl.lit("NRT-AIR"), -pl.col("d"))
+    if "RES_ABROAD" in sources:
+        air = large.filter(pl.col("Source_Code") == CODE_AIR)
+        ajouter(air, pl.lit("RES_ABROAD"), pl.col("Activity"), pl.col("RES_ABROAD"))
+        if "NRA-AIR" in codes_activite:
+            ajouter(air, pl.lit("RES_ABROAD"), pl.lit("NRA-AIR"), pl.col("RES_ABROAD"))
+    return pl.concat(lignes) if lignes else attribue.head(0).select("POLLUTANT", "annee", "Source_Code", "Activity", "valeur")
+```
+
+### Assemblage
+
+La fonction complète enchaîne les étapes. Elle ajoute deux totaux. `AEA-TOTAL` additionne les activités placées avant cette ligne dans la table des activités, c'est-à-dire les branches et les ménages. `INV-TOTAL` additionne les lignes placées entre `AEA-TOTAL` et `INV-TOTAL` : le total des comptes, les éléments de passage et l'UTCATF. Enfin, la fonction ajoute le total des gaz à effet de serre (`GHG`).
+
+```{python}
+#| label: explicite-assemblage
+def i2a_explicite(plage_inv: list[list], plage_matrice: list[list], plage_activite: list[list], oecd: dict | None = None) -> pl.DataFrame:
+    """Reprise de la fonction I2A en polars, résultat en kt d'équivalent CO2."""
+    inv = inventaire_long(plage_inv)
+    annees = sorted(inv["annee"].unique().to_list())
+    entrees = pl.concat([inv, oecd_long(oecd, annees)]) if oecd else inv
+    entrees = entrees.group_by("POLLUTANT", "Source_Code", "annee", "source").agg(pl.col("valeur").sum())
+
+    # Attribution aux activités (lignes 313 à 335) ; un code sans facteur ne reçoit rien
+    attribue = (
+        entrees.join(matrice_longue(plage_matrice), on=["POLLUTANT", "Source_Code"], how="inner")
+        .with_columns(valeur=pl.col("valeur") * pl.col("facteur"))
+        .filter(pl.col("valeur") != 0)
+    )
+    codes_activite = [l[0] for l in plage_activite[1:]]
+    if oecd and attribue["source"].n_unique() > 2:
+        resultat = pl.concat([
+            attribue.filter(pl.col("source") == "INV").select("POLLUTANT", "annee", "Source_Code", "Activity", "valeur"),
+            ajustements_residence(attribue, codes_activite),
+        ])
+    else:
+        resultat = attribue.select("POLLUTANT", "annee", "Source_Code", "Activity", "valeur")
+    resultat = resultat.filter(pl.col("valeur") != 0)
+
+    # Totaux (lignes 528 à 557) : les activités avant AEA-TOTAL, puis de AEA-TOTAL à INV-TOTAL
+    i_aea, i_inv = codes_activite.index("AEA-TOTAL"), codes_activite.index("INV-TOTAL")
+    aea = resultat.filter(pl.col("Activity").is_in(codes_activite[:i_aea])).with_columns(
+        Source_Code=pl.lit("Total AEA"), Activity=pl.lit("AEA-TOTAL")
+    )
+    resultat = pl.concat([resultat, aea])
+    total_inventaire = resultat.filter(pl.col("Activity").is_in(codes_activite[i_aea:i_inv])).with_columns(
+        Source_Code=pl.lit("Total Inventories"), Activity=pl.lit("INV-TOTAL")
+    )
+    resultat = pl.concat([resultat, total_inventaire]).group_by(CLES).agg(pl.col("valeur").sum())
+
+    # Total des gaz à effet de serre (lignes 563 à 571)
+    ges = resultat.group_by("Source_Code", "Activity", "annee").agg(pl.col("valeur").sum()).with_columns(POLLUTANT=pl.lit("GHG"))
+    return pl.concat([resultat, ges.select(resultat.columns)])
+
+
+def comparer(outil: pl.DataFrame, explicite: pl.DataFrame) -> pl.DataFrame:
+    a = outil.group_by(CLES).agg(pl.col("valeur").sum().alias("outil"))
+    b = explicite.group_by(CLES).agg(pl.col("valeur").sum().alias("explicite"))
+    return (
+        a.join(b, on=CLES, how="full", coalesce=True)
+        .with_columns(pl.col("outil", "explicite").fill_null(0))
+        .with_columns(ecart=pl.col("outil") - pl.col("explicite"))
+    )
+```
+
+## Vérification avec la matrice par défaut
+
+```{python}
+#| label: defaut
+resultats_defaut = {}
+for nom, options in [("sans OCDE", None), ("avec OCDE", oecd)]:
+    choix = of.OECD_UTILISER if options else of.OECD_NE_PAS_UTILISER
+    outil = of.i2a(inventaire_outil, plages["Conversion_Matrix"], plages["CRT"], plages["NFR"], plages["Activity"], oecd, choix)
+    explicite = i2a_explicite(inventaire_outil, plages["Conversion_Matrix"], plages["Activity"], options)
+    ecarts = comparer(outil, explicite)
+    assert ecarts["ecart"].abs().max() < TOLERANCE_KT, f"Les deux couches diffèrent ({nom})"
+    resultats_defaut[nom] = explicite
+    print(f"Matrice par défaut, {nom} : {ecarts.height} cellules, écart maximal {ecarts['ecart'].abs().max():.2e} kt")
+```
+
+## Comptes de la Tunisie
+
+### Plages de la matrice tunisienne
+
+La matrice tunisienne passe à l'outil dans le format de sa feuille `Conversion_Matrix`, une année à la fois, car les clés de répartition changent chaque année. Ses colonnes sont les 24 branches du TRE, les ménages et l'UTCATF. La colonne des gaz est vide : la matrice vaut pour tous les gaz. La table des activités commence par les branches et les ménages, puis reprend les lignes de l'outil à partir de `AEA-TOTAL`. Les totaux de l'outil restent ainsi définis de la même façon.
+
+```{python}
+#| label: tunisie-plages
+ACTIVITES_TUNISIE = [c for c in activites["code"] if c not in ("RDM", "ACC", "ENV", "ECART")]
+COLONNES_MATRICE = ACTIVITES_TUNISIE + ["LULUCF"]
+
+
+def plage_matrice_tunisie(annee: int) -> list[list]:
+    """Plage Conversion_Matrix de la matrice tunisienne d'une année (gaz vide : tous les gaz)."""
+    large = (
+        matrice_tunisie.filter(pl.col("annee") == annee)
+        .pivot("activite", index="code_outil", values="facteur", aggregate_function="sum")
+        .fill_null(0)
+        .sort("code_outil")
+    )
+    lignes = [["POLLUTANT", "Level", "Source_Code", "Source_Description", "Check"] + COLONNES_MATRICE]
+    for r in large.iter_rows(named=True):
+        lignes.append([None, None, r["code_outil"], DESCRIPTIONS.get(r["code_outil"]), 100.0]
+                      + [100.0 * float(r.get(c) or 0.0) for c in COLONNES_MATRICE])
+    return lignes
+
+
+def plage_activite_tunisie() -> list[list]:
+    """Plage Activity : branches du TRE et ménages, puis les lignes de l'outil à partir de AEA-TOTAL."""
+    entete, *defaut = plages["Activity"]
+    debut = next(i for i, l in enumerate(defaut) if l[0] == "AEA-TOTAL")
+    libelles = dict(activites.select("code", "fr").iter_rows())
+    propres = [[c, libelles[c]] + [None] * (len(entete) - 2) for c in ACTIVITES_TUNISIE]
+    return [entete] + propres + defaut[debut:]
+
+
+activite_tunisie = plage_activite_tunisie()
+[l[:2] for l in activite_tunisie[-17:]]
+```
+
+### Résultats
+
+```{python}
+#| label: tunisie
+resultats, comparaisons = [], []
+for annee in ANNEES:
+    inv_annee = plage_inventaire(inventaire, [annee])
+    matrice_annee = plage_matrice_tunisie(annee)
+    outil = of.i2a(inv_annee, matrice_annee, plages["CRT"], plages["NFR"], activite_tunisie, oecd, of.OECD_UTILISER)
+    explicite = i2a_explicite(inv_annee, matrice_annee, activite_tunisie, oecd)
+    comparaisons.append(comparer(outil, explicite))
+    resultats.append(explicite)
+ecarts = pl.concat(comparaisons)
+assert ecarts["ecart"].abs().max() < TOLERANCE_KT, "Les deux couches diffèrent (matrice tunisienne)"
+aea_outil = pl.concat(resultats)
+print(f"Matrice tunisienne, avec OCDE : {ecarts.height} cellules, écart maximal {ecarts['ecart'].abs().max():.2e} kt")
+```
+
+Le tableau suivant donne les émissions de gaz à effet de serre par branche et pour les ménages, en kilotonnes d'équivalent CO2, ajustements de résidence compris.
+
+```{python}
+#| label: resultat
+libelles = dict(activites.select("code", "fr").iter_rows())
+(
+    aea_outil.filter(pl.col("POLLUTANT") == "GHG", pl.col("Activity").is_in(ACTIVITES_TUNISIE))
+    .group_by("Activity", "annee")
+    .agg(pl.col("valeur").sum().round(1))
+    .sort("annee")
+    .pivot("annee", index="Activity", values="valeur")
+    .with_columns(libelle=pl.col("Activity").replace_strict(libelles))
+    .sort("Activity")
+    .select("Activity", "libelle", pl.exclude("Activity", "libelle"))
+)
+```
+
+Les totaux et les éléments de passage de l'outil suivent. La page suivante les examine et construit le tableau de passage entre l'inventaire et les comptes.
+
+```{python}
+#| label: elements
+ELEMENTS = ["AEA-TOTAL", "NRA-AIR", "NRA-WATER", "NRT-AIR", "NRT-WATER", "OTHER", "LULUCF", "INV-TOTAL"]
+(
+    aea_outil.filter(pl.col("POLLUTANT") == "GHG", pl.col("Activity").is_in(ELEMENTS))
+    .group_by("Activity", "annee")
+    .agg(pl.col("valeur").sum().round(1))
+    .sort("annee")
+    .pivot("annee", index="Activity", values="valeur")
+    .with_columns(ordre=pl.col("Activity").replace_strict({e: i for i, e in enumerate(ELEMENTS)}, return_dtype=pl.Int8))
+    .sort("ordre")
+    .drop("ordre")
+)
+```
+
+## Enregistrement
+
+Les comptes retenus sont ceux de la couche explicite avec la matrice tunisienne et les données de l'OCDE. Le tableau long garde la catégorie d'origine (`source`) de chaque émission.
+
+```{python}
+#| label: enregistrement
+aea = aea_outil.select(
+    "annee", gaz="POLLUTANT", source="Source_Code", activite="Activity", kt_eq_co2="valeur"
+).sort("annee", "gaz", "activite", "source")
+aea.write_parquet(SORTIE, compression="zstd")
+print(f"{SORTIE} : {aea.height} lignes")
+```
+
+## Références
+
+::: {#refs}
+:::
