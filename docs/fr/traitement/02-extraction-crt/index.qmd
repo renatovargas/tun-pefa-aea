@@ -1,0 +1,109 @@
+---
+title: "Extraction de l'inventaire des gaz à effet de serre"
+subtitle: "Les tableaux CRT de 2015 à 2022 en un seul tableau long"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: Consultant du FMI
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+---
+
+## Objet
+
+La Tunisie déclare son inventaire des gaz à effet de serre à la Convention-cadre des Nations unies sur les changements climatiques (CCNUCC) dans le format commun de déclaration (CRT, *Common Reporting Tables*). Il y a un classeur par année, de 2015 à 2022. La feuille `Data` de chaque classeur contient déjà toutes les valeurs en format long : une ligne par catégorie CRT, paramètre, type, combustible et gaz. Cette page empile les huit feuilles dans `data/intermediaires/crt.parquet`, qui servira aux comptes des émissions atmosphériques (AEA).
+
+Les fonctions sont dans le script `scripts/extraire_crt.py`[^script], que cette page importe et exécute.
+
+[^script]: Code source : <https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extraire_crt.py>.
+
+```{python}
+#| label: parametres
+import sys
+
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import extraire_crt as ec
+
+{annee: chemin.name for annee, chemin in ec.fichiers_crt().items()}
+```
+
+## Structure de la feuille Data
+
+La feuille a huit colonnes. Elles sont renommées en français. La colonne `valeur` est lue comme du texte puis convertie en nombre.
+
+```{python}
+#| label: colonnes
+pl.DataFrame({"colonne CRT": list(ec.COLONNES), "nom retenu": list(ec.COLONNES.values())})
+```
+
+Le paramètre distingue trois sortes de lignes. Les lignes `activity` donnent les données d'activité, par exemple la consommation de combustible en TJ. Les lignes `emission` donnent les émissions, en kilotonnes (kt) de chaque gaz. Les lignes `information` donnent des facteurs d'émission et d'autres données de contexte.
+
+```{python}
+#| label: extraction
+crt, doublons = ec.extraire()
+crt.filter(pl.col("annee") == 2022).group_by("parametre", "unite").len().sort("len", descending=True).head(8)
+```
+
+## Lignes en double
+
+Chaque feuille `Data` contient des lignes strictement identiques, répétées. Elles sont retirées, car une somme les compterait deux fois. Le tableau suivant donne le nombre de lignes retirées par année.
+
+```{python}
+#| label: doublons
+pl.DataFrame({"annee": list(doublons), "lignes_retirees": list(doublons.values())})
+```
+
+## Contrôle avec le tableau Summary2
+
+La feuille `Summary2` de chaque classeur donne les émissions par catégorie et par gaz, en kt d'équivalent CO2. Le contrôle somme les émissions de `Data` de chaque catégorie, gaz par gaz, et les convertit en équivalent CO2 avec les potentiels de réchauffement global à 100 ans du cinquième rapport du GIEC, que l'inventaire tunisien utilise (CH4 : 28, N2O : 265). Les éléments pour mémoire (catégorie 1.D, soutes internationales) sont exclus des totaux de l'énergie, comme dans `Summary2`.
+
+```{python}
+#| label: controle-summary2
+comparaisons = pl.concat([ec.comparer_summary2(crt, a).with_columns(annee=pl.lit(a)) for a in sorted(doublons)])
+resume = comparaisons.group_by("annee").agg(
+    pl.len().alias("cellules"),
+    pl.col("ecart").abs().max().round(4).alias("ecart_max"),
+    (pl.col("ecart").abs() > 0.01).sum().alias("ecarts_sup_0_01"),
+).sort("annee")
+assert resume["ecart_max"].max() < 1, "Écart important avec Summary2 : vérifier la lecture"
+resume
+```
+
+Les données de `Data` reproduisent `Summary2` pour toutes les catégories de 2015 à 2018. À partir de 2019, un seul écart apparaît, dans les émissions de N2O de la catégorie 1.B.2 (émissions fugitives du pétrole et du gaz naturel), et il se propage à ses agrégats.
+
+```{python}
+#| label: ecarts-detail
+comparaisons.filter(pl.col("ecart").abs() > 0.01).select("annee", "crt", "gaz", pl.col("ecart").round(3))
+```
+
+```{python}
+#| label: cellule-1b2bii
+crt.filter(
+    pl.col("crt") == "1.B.2.b.ii", pl.col("gaz") == "N2O", pl.col("parametre") == "emission", pl.col("valeur") != 0
+).select("annee", "crt", "combustible", "valeur")
+```
+
+::: {.callout-note}
+## Question ouverte
+Les émissions de N2O de la catégorie 1.B.2.b.ii figurent dans la feuille `Data` à partir de 2019, mais ne sont pas comptées dans `Summary2`. L'écart est inférieur à une kilotonne d'équivalent CO2. À clarifier avec l'équipe de l'inventaire (ANME).
+:::
+
+## Enregistrement
+
+```{python}
+#| label: enregistrement
+ec.SORTIE.parent.mkdir(parents=True, exist_ok=True)
+crt.write_parquet(ec.SORTIE, compression="zstd")
+print(f"{ec.SORTIE} : {crt.height} lignes, {crt['annee'].n_unique()} années")
+```

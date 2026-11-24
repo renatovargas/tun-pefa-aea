@@ -1,0 +1,198 @@
+---
+title: "Le bilan de l'ONEM dans le modèle du PEFA Converter"
+subtitle: "Flux et produits du bilan tunisien dans la présentation de l'AIE, en térajoules"
+author:
+  - name: "Renato Vargas"
+    affiliations:
+      - name: Consultant du FMI
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-fold: false
+    code-tools: true
+execute:
+  echo: true
+---
+
+## Objet
+
+Le PEFA Converter du FMI [@pegoue2026pefa; @imf2024pefa] lit un bilan énergétique présenté comme ceux de l'Agence internationale de l'énergie (AIE) : 95 flux dans un ordre fixe, 63 produits, des valeurs en térajoules (TJ) et les signes de l'AIE. Cette page transpose les bilans de l'ONEM de 2015 à 2022 dans ce modèle. Le résultat, `data/intermediaires/bilan_modele_fmi.parquet`, alimente les deux calculs des comptes PEFA : l'appel de l'outil du FMI et sa reprise explicite en polars.
+
+```{python}
+#| label: parametres
+import sys
+
+import polars as pl
+
+sys.path.insert(0, "scripts")
+import outils_fmi as of
+
+NOMENCLATURES = "data/nomenclatures"
+SORTIE = "data/intermediaires/bilan_modele_fmi.parquet"
+
+bilans = pl.read_parquet("data/intermediaires/bilans_energetiques.parquet")
+```
+
+Le module `scripts/outils_fmi.py`[^outils] lit les listes de flux et de produits dans la feuille `Energy_Balance_Template` du classeur de l'outil.
+
+[^outils]: Code source : <https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/outils_fmi.py>. Le classeur et la fonction de l'outil sont dans <https://github.com/renatovargas/tun-pefa-aea/tree/main/outils-fmi/pefa-converter>.
+
+```{python}
+#| label: modele
+FLUX_MODELE = of.lignes_flux_modele()
+PRODUITS_MODELE = [p for p in of.produits_modele() if p != "Total"]
+print(f"{len(FLUX_MODELE)} flux et {len(PRODUITS_MODELE)} produits dans le modèle")
+FLUX_MODELE[:12]
+```
+
+## Conventions de signe
+
+Le bilan de l'ONEM publie tous les flux en valeur positive et les combine par addition ou soustraction. Le modèle de l'AIE porte le signe dans la valeur. Les exportations, les soutes internationales, les entrées en transformation, la consommation de la branche énergie et les pertes y sont négatives. La variation des stocks garde le signe de l'ONEM, car les deux bilans l'ajoutent aux ressources.
+
+L'écart statistique change de signe. Dans le bilan de l'ONEM, le disponible pour la consommation finale égale la consommation finale plus l'écart statistique. Dans le modèle de l'AIE, l'écart statistique s'ajoute aux ressources pour égaler la consommation finale. L'écart de l'AIE est donc l'opposé de celui de l'ONEM.
+
+## Correspondances
+
+Chaque flux élémentaire du bilan reçoit un flux du modèle et un signe, dans les colonnes `flux_modele` et `signe_modele` de `data/nomenclatures/bilan_flux.csv`. Chaque produit élémentaire reçoit un produit du modèle dans la colonne `produit_modele` de `data/nomenclatures/bilan_produits.csv`. Les agrégats du bilan (consommation intérieure brute, total des produits pétroliers, etc.) n'ont pas de correspondance, car le modèle les recalcule.
+
+```{python}
+#| label: correspondance-flux
+flux = pl.read_csv(f"{NOMENCLATURES}/bilan_flux.csv")
+flux.filter(pl.col("flux_modele").is_not_null()).select("code", "fr", "flux_modele", "signe_modele")
+```
+
+```{python}
+#| label: correspondance-produits
+produits = pl.read_csv(f"{NOMENCLATURES}/bilan_produits.csv")
+produits.filter(pl.col("produit_modele").is_not_null()).select("code", "fr", "produit_modele")
+```
+
+Certaines cellules du bilan demandent un traitement particulier. Elles sont listées, avec leur justification, dans `data/nomenclatures/bilan_vers_modele_exceptions.csv`. Une exception remplace le flux, le produit ou le signe par défaut pour un couple (flux, produit) précis.
+
+```{python}
+#| label: exceptions
+exceptions = pl.read_csv(f"{NOMENCLATURES}/bilan_vers_modele_exceptions.csv")
+exceptions
+```
+
+Deux points méritent une explication. Le bilan de l'ONEM enregistre la production d'électricité éolienne, solaire et hydraulique comme un échange entre produits : la production primaire de chaque source passe à l'électricité. Le modèle de l'AIE traite ces sources comme des entrées des centrales électriques, et l'électricité produite comme une sortie. Les exceptions déplacent donc ces échanges vers la ligne des centrales électriques. Le bilan de l'ONEM range aussi la production de charbon de bois dans la colonne de la biomasse ; sa sortie devient le produit « Charcoal » du modèle.
+
+::: {.callout-note}
+## Question ouverte
+La consommation de la branche énergie n'est pas détaillée par branche dans le bilan. Le gaz naturel, le gasoil et les liquides de gaz naturel sont attribués à l'extraction de pétrole et de gaz, le fioul et le gaz de raffinerie à la raffinerie, l'électricité aux centrales. Cette répartition est à confirmer avec l'ONEM.
+:::
+
+## Transposition
+
+La fonction suivante applique les correspondances par défaut, puis les exceptions, et change les signes. Les valeurs en TJ viennent de l'extraction des bilans. Les cellules agrégées sont laissées de côté. Le contrôle de conservation, plus bas, vérifie qu'aucune cellule élémentaire n'est perdue.
+
+```{python}
+#| label: transposition
+def transposer(bilans: pl.DataFrame) -> pl.DataFrame:
+    """Transpose le bilan long de l'ONEM dans les flux et produits du modèle de l'AIE (TJ, signes de l'AIE)."""
+    defaut = (
+        bilans.join(
+            flux.select(pl.col("code").alias("code_flux"), "flux_modele", "signe_modele"), on="code_flux"
+        )
+        .join(produits.select(pl.col("code").alias("code_produit"), "produit_modele"), on="code_produit")
+        # Seules les cellules élémentaires (flux et produit non agrégés) sont transposées.
+        .filter(pl.col("flux_modele").is_not_null() & pl.col("produit_modele").is_not_null())
+    )
+
+    regles = exceptions.select(
+        "code_flux", "code_produit",
+        pl.col("flux_modele").alias("flux_exc"),
+        pl.col("produit_modele").alias("produit_exc"),
+        pl.col("signe_modele").cast(pl.Int8).alias("signe_exc"),
+    )
+    return (
+        defaut.join(regles, on=["code_flux", "code_produit"], how="left")
+        .with_columns(
+            flux_modele=pl.coalesce("flux_exc", "flux_modele"),
+            produit_modele=pl.coalesce("produit_exc", "produit_modele"),
+            signe_modele=pl.coalesce("signe_exc", "signe_modele"),
+        )
+        .with_columns(tj=pl.col("tj") * pl.col("signe_modele"))
+        .select("annee", "code_flux", "code_produit", "flux_modele", "produit_modele", "tj")
+    )
+
+
+modele = transposer(bilans)
+inconnus = set(modele["flux_modele"]) - set(FLUX_MODELE) | set(modele["produit_modele"]) - set(PRODUITS_MODELE)
+assert not inconnus, f"Libellés absents du modèle : {inconnus}"
+modele.filter(pl.col("annee") == 2022, pl.col("code_produit") == "GN").head(8)
+```
+
+## Contrôles
+
+**Conservation.** Chaque cellule élémentaire du bilan se retrouve dans le modèle, à la conversion d'unité près. La somme des valeurs absolues est donc la même avant et après la transposition.
+
+```{python}
+#| label: controle-conservation
+KTEP_EN_TJ = 41.868
+elementaires = bilans.filter(
+    pl.col("code_flux").is_in(flux.filter(pl.col("flux_modele").is_not_null())["code"].implode()),
+    pl.col("code_produit").is_in(produits.filter(pl.col("produit_modele").is_not_null())["code"].implode()),
+)
+avant = elementaires.group_by("annee").agg((pl.col("ktep").abs().sum() * KTEP_EN_TJ).alias("avant_tj"))
+apres = modele.group_by("annee").agg(pl.col("tj").abs().sum().alias("apres_tj"))
+conservation = avant.join(apres, on="annee").with_columns(ecart=pl.col("avant_tj") - pl.col("apres_tj")).sort("annee")
+assert conservation["ecart"].abs().max() < 1e-6
+conservation
+```
+
+**Identité de l'AIE.** Pour chaque produit de l'ONEM, l'approvisionnement, les transferts, l'écart statistique, la transformation, la consommation de la branche énergie et les pertes, avec leurs signes, doivent avoir pour somme la consommation finale. Le contrôle se fait par produit de l'ONEM, car la biomasse alimente deux produits du modèle (bois et charbon de bois). Le contrôle additionne une quarantaine de cellules arrondies à la ktep, et non des agrégats publiés comme lors de l'extraction. La tolérance est donc de 3 ktep, soit environ 126 TJ. Elle n'est atteinte que pour le gaz naturel en 2017 et en 2018.
+
+```{python}
+#| label: controle-identite
+CONSOMMATION_FINALE = flux.filter(
+    pl.col("code").str.starts_with("IND_") | pl.col("code").str.starts_with("TRA_")
+    | pl.col("code").str.starts_with("AUT_") | pl.col("code").str.starts_with("CFNE_")
+)["code"].to_list()
+identite = (
+    modele.with_columns(finale=pl.col("code_flux").is_in(CONSOMMATION_FINALE))
+    .group_by("annee", "code_produit")
+    .agg(
+        pl.col("tj").filter(~pl.col("finale")).sum().alias("ressources_nettes"),
+        pl.col("tj").filter(pl.col("finale")).sum().alias("consommation_finale"),
+    )
+    .with_columns(ecart_tj=pl.col("ressources_nettes") - pl.col("consommation_finale"))
+)
+assert identite["ecart_tj"].abs().max() < 3 * KTEP_EN_TJ + 1e-6, "Identité de l'AIE non vérifiée"
+identite.group_by("annee").agg(pl.col("ecart_tj").abs().max().round(1).alias("ecart_max_tj")).sort("annee")
+```
+
+## Le bilan de 2022 dans le modèle
+
+Le tableau suivant présente le bilan de 2022 dans le modèle, en milliers de TJ (PJ), pour les produits présents. Les lignes d'agrégats du modèle ne sont pas remplies, car l'outil ne les utilise pas.
+
+```{python}
+#| label: apercu-2022
+apercu = (
+    modele.filter(pl.col("annee") == 2022)
+    .group_by("flux_modele", "produit_modele")
+    .agg((pl.col("tj").sum() / 1000).round(1).alias("pj"))
+    .pivot("produit_modele", index="flux_modele", values="pj")
+)
+ordre = {f: i for i, f in enumerate(FLUX_MODELE)}
+apercu.sort(pl.col("flux_modele").replace_strict(ordre, return_dtype=pl.Int32))
+```
+
+## Enregistrement
+
+Le tableau long garde les codes de l'ONEM à côté des libellés du modèle. Plusieurs cellules de l'ONEM peuvent aboutir à la même cellule du modèle (par exemple les trois lignes d'échanges), et la fonction `outils_fmi.bilan_vers_plage` les additionne au moment de construire la plage de l'outil.
+
+```{python}
+#| label: enregistrement
+modele.write_parquet(SORTIE, compression="zstd")
+print(f"{SORTIE} : {modele.height} lignes")
+```
+
+## Références
+
+::: {#refs}
+:::

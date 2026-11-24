@@ -74,11 +74,27 @@
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/index.html</loc>
-    <lastmod>2026-11-24T19:58:45.945Z</lastmod>
+    <lastmod>2026-11-24T21:29:50.825Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/13-tableaux-pefa/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.552Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/11-activites/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.498Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/03-extraction-tre/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.446Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/01-extraction-bilans/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.391Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/en/telechargements.html</loc>
-    <lastmod>2026-11-24T20:34:11.837Z</lastmod>
+    <lastmod>2026-11-24T21:29:56.070Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/en/materiaux/index.html</loc>
@@ -109,12 +125,44 @@
     <lastmod>2026-11-24T20:34:11.837Z</lastmod>
   </url>
   <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/02-extraction-crt/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.419Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/10-bilan-format-aie/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.472Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/12-matrice-concordance/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.525Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/traitement/14-controles-export-pefa/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.578Z</lastmod>
+  </url>
+  <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/index.html</loc>
-    <lastmod>2026-11-24T19:59:48.829Z</lastmod>
+    <lastmod>2026-11-24T21:29:50.825Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/13-tableaux-pefa/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.764Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/11-activites/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.710Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/03-extraction-tre/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.657Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/01-extraction-bilans/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.604Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/ar/telechargements.html</loc>
-    <lastmod>2026-11-24T20:34:11.836Z</lastmod>
+    <lastmod>2026-11-24T21:29:56.075Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/ar/materiaux/index.html</loc>
@@ -143,5 +191,21 @@
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/00-bilan-energetique/index.html</loc>
     <lastmod>2026-11-24T20:34:11.837Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/02-extraction-crt/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.630Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/10-bilan-format-aie/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.683Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/12-matrice-concordance/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.737Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/traitement/14-controles-export-pefa/index.html</loc>
+    <lastmod>2026-11-24T21:29:26.790Z</lastmod>
   </url>
 </urlset>
