@@ -68,6 +68,8 @@ website:
               text: Branches d'activité
             - href: fr/traitement/12-matrice-concordance/index.qmd
               text: Matrice de concordance
+            - href: fr/traitement/13-tableaux-pefa/index.qmd
+              text: Tableaux PEFA
 
 format:
   html:
