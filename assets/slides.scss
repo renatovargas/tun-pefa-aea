@@ -103,14 +103,12 @@ $code-block-font-size: 0.5em;
     width: 52%;
     text-align: left;
   }
-  // Auteurs en colonne : le collaborateur passe sous l'auteur principal
+  // Authors side by side, with the same size and style.
+  // Auteurs côte à côte, avec la même taille et le même style.
   .reveal & .quarto-title-authors {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .reveal & .quarto-title-authors .quarto-title-author:nth-child(n + 2) .quarto-title-author-name {
-    font-size: 0.65em;
-    font-style: italic;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
   }
   // Plus spécifique que les règles de Quarto, qui centrent les auteurs et leur ajoutent du remplissage
   .reveal & .quarto-title-authors,
@@ -365,5 +363,12 @@ $code-block-font-size: 0.5em;
 .reveal.rtl .theme-title {
   h1, h2, h3, h4, p.subtitle {
     text-align: right;
+  }
+  // Authors aligned with the title, on the right.
+  // Auteurs alignés sur le titre, à droite.
+  .quarto-title-authors .quarto-title-author {
+    text-align: right;
+    padding-right: 0;
+    padding-left: 2em;
   }
 }
