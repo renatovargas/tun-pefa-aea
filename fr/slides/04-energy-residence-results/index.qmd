@@ -1,0 +1,195 @@
+---
+title: "Comptes de l'énergie : résidence, contrôles et résultats"
+subtitle: "Du territoire du bilan aux résidents des comptes, et ce que montrent les comptes"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+ind = read("pefa_indicators").filter(pl.col("year") == LAST)
+hh = ind.filter(pl.col("activity") == "HH")["end_use_energy"].sum()
+industries = ind.filter(pl.col("activity") != "HH")
+intensity = industries["end_use_energy"].sum() / industries["value_added_mtnd"].sum()
+gic = read("energy_balance").filter(pl.col("year") == LAST, pl.col("flow") == "GIC", pl.col("product") == "TOTAL")["tj"].sum()
+bunk = read("pefa_bunkers_check").filter(pl.col("year") == LAST)["balance_tj"].sum()
+top = industries.sort("end_use_energy", descending=True)
+c23 = ind.filter(pl.col("activity") == "23")["intensity_value_added"][0]
+```
+
+## Contenu de cette présentation {.theme-content}
+
+1. Territoire, résidence et passage entre les comptes et le bilan.
+2. Les contrôles que chaque compilation doit réussir.
+3. Les premiers résultats de `{python} FIRST` à `{python} LAST`, et leur diffusion.
+
+# Résidence
+
+## Territoire et résidence
+
+- Le bilan énergétique enregistre ce qui se passe **sur le territoire** ; les comptes enregistrent ce que font les **unités résidentes**, où qu'elles se trouvent [@eurostat2014pefa, § 41 à 48].
+- La différence tient surtout au **transport international** :
+  - le carburant acheté à l'étranger par les compagnies aériennes et maritimes tunisiennes appartient aux comptes ;
+  - le carburant acheté en Tunisie par les transporteurs étrangers appartient au bilan, pas aux comptes.
+- Le transport routier peut aussi franchir les frontières : camions étrangers, achats transfrontaliers.
+
+## Le tableau de passage
+
+| | |
+|:--|:--|
+| Utilisation intérieure nette d'énergie des comptes | principe de résidence |
+| − énergie utilisée par les résidents à l'étranger | |
+| + énergie utilisée par les non-résidents sur le territoire | |
+| ± autres différences | |
+| = Consommation intérieure brute du bilan | principe territorial |
+
+[@eurostat2014pefa, § 109 à 111]
+
+## Soutes internationales
+
+```{python}
+b = read("pefa_bunkers_check").filter(pl.col("iea_flow") == "International aviation bunkers")
+gt(b.select(pl.col("year").cast(pl.String).alias("Année"), pl.col("balance_tj").alias("Bilan (TJ)"),
+            pl.col("inventory_tj").alias("Inventaire 1.D.1.a (TJ)"), pl.col("gap_pct").alias("Écart (%)")),
+   decimals={"Bilan (TJ)": 0, "Inventaire 1.D.1.a (TJ)": 0, "Écart (%)": 2})
+```
+
+Les soutes aériennes du bilan et de l'inventaire concordent de près chaque année.
+
+## Utilisation intérieure nette et consommation intérieure brute
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.6
+charts.ndeu_vs_gic(figsize=(9, 3.6))
+```
+
+En `{python} LAST` : `{python} pj(ind["net_domestic_energy_use"].sum())` PJ contre `{python} pj(gic)` PJ.
+
+## Pourquoi les deux diffèrent
+
+- L'utilisation intérieure nette additionne les résidus des résidents et l'énergie incorporée dans des produits comme le bitume [@eurostat2014pefa, § 103 à 106].
+- La consommation intérieure brute exclut les soutes internationales (`{python} pj(bunk)` PJ en `{python} LAST`).
+- En attendant des données de résidence, les comptes attribuent les soutes aux transporteurs résidents, comme l'outil par défaut.
+- Un passage complet demande le carburant acheté à l'étranger par les résidents et celui acheté en Tunisie par les non-résidents.
+
+# Contrôles
+
+## Trois sortes de contrôles {.theme-content}
+
+- **Identités** : les ressources égalent les emplois, ligne par ligne.
+- **Concordance avec les outils** : la couche explicite reproduit les fonctions du FMI.
+- **Vraisemblance** : les comptes physiques ont un sens au regard des comptes en valeur.
+
+## Les ressources égalent les emplois
+
+- Les ressources naturelles et les résidus s'équilibrent **exactement**, car le convertisseur écrit les deux côtés de chaque flux.
+- Les produits énergétiques s'équilibrent à `{python} num(check("14_check_pefa_and_indicators", "energy_products_balance")["value"], 1)` ktep près, l'arrondi et l'écart statistique du bilan publié.
+- La couche explicite reproduit l'outil à `{python} f"{read('pefa_tool_agreement')['max_gap_pj'].drop_nulls().max():.0e}"` PJ près.
+
+## Vraisemblance : les prix implicites
+
+- Pour chaque branche, on divise ses **achats d'énergie** dans le TRE (pétrole brut et gaz, produits raffinés, électricité et gaz) par son **utilisation d'énergie** dans les comptes.
+- Le résultat est un prix implicite en dinars par gigajoule.
+- Une branche qui achète de l'énergie sans en utiliser, ou l'inverse, révélerait une erreur de répartition. Aucun cas n'apparaît.
+
+## Prix implicites en `{python} LAST`
+
+```{python}
+#| fig-width: 9
+#| fig-height: 4.2
+charts.implied_prices(LAST, figsize=(9, 4.2))
+```
+
+## Lecture des prix
+
+- Prix les plus bas : industries diverses, agriculture, matériaux de construction, qui achètent du fioul lourd, du coke de pétrole ou du gaz, peu chers par unité d'énergie.
+- Prix les plus élevés : les services, dont l'énergie est surtout de l'électricité.
+- Le raffinage et l'électricité sont exclus : leurs achats sont surtout des entrées de transformation.
+
+# Résultats
+
+## Chiffres clés de `{python} LAST` {.theme-content}
+
+- Utilisation intérieure nette d'énergie : **`{python} pj(ind["net_domestic_energy_use"].sum())` PJ**.
+- Ménages : **`{python} pct(hh / ind["end_use_energy"].sum())`** de l'utilisation finale d'énergie.
+- Intensité énergétique de l'économie : **`{python} num(intensity, 2)` TJ** par million de TND de valeur ajoutée.
+
+## Qui utilise l'énergie
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.energy_users(LAST, n=10, figsize=(10, 4.2))
+```
+
+## Lecture du graphique
+
+- Les ménages viennent en tête : cuisson, chauffage, appareils et leur part du carburant routier.
+- Viennent ensuite la branche « `{python} activity(top["activity"][0]).lower()` » et la branche « `{python} activity(top["activity"][1]).lower()` ».
+- Le pétrole domine l'utilisation finale ; le gaz naturel compte pour l'industrie ; les biocombustibles pour les ménages.
+
+## Intensité énergétique
+
+- L'intensité énergétique rapporte l'énergie qu'une branche utilise à la **valeur qu'elle ajoute**.
+- Elle montre où l'énergie se concentre dans la production, et où les politiques d'efficacité comptent le plus.
+- Aux prix courants, son évolution mêle efficacité et prix : à utiliser avec prudence dans le temps.
+
+## Intensité énergétique par branche
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.energy_intensity(LAST, figsize=(10, 4.2))
+```
+
+Les matériaux de construction utilisent environ `{python} num(c23, 0)` TJ par million de TND de valeur ajoutée.
+
+## Emplois de produits énergétiques, `{python} LAST`
+
+```{python}
+pefa = read("pefa_supply_use")
+sections = dict(lookup("activities").select("code", "imf_section").iter_rows())
+t = (pefa.filter(pl.col("year") == LAST, pl.col("level1") == "Energy products:", pl.col("quadrant") == "Use")
+     .with_columns(section=pl.col("activity").replace_strict(sections, default=pl.col("activity")),
+                   product=pl.col("product").replace_strict(lab("pefa_rows"), default=pl.col("product")))
+     .group_by("product", "section").agg(pl.col("tj").sum() / 1000).pivot("section", index="product", values="tj").fill_null(0))
+cols = [c for c in ["A", "B", "C", "D", "E", "F", "H", "Other", "HH", "ROW"] if c in t.columns]
+gt(t.select("product", *cols).rename({"product": "Emplois (PJ)", "HH": "Ménages", "ROW": "Exportations", "Other": "Autres"}), decimals=0)
+```
+
+## Diffusion
+
+- Des classeurs Excel en trois langues : tableaux des ressources et des emplois par année, sections de la CITI, indicateurs.
+- Un document méthodologique dont chaque chiffre est lu dans les données.
+- Un explorateur de données sur le site.
+
+## Points à discuter
+
+- Carburant acheté à l'étranger par les compagnies aériennes et maritimes tunisiennes : quelle source ?
+- Carburant acheté en Tunisie par les non-résidents : camions, navires, avions ?
+- Quels tableaux et indicateurs publier en premier, et à quelle fréquence ?
+- Comment signaler les résultats provisoires, et quels utilisateurs consulter ?
+
+## Références
+
+::: {#refs}
+:::

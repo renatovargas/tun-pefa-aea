@@ -7,7 +7,7 @@ lang: fr-FR
 csl: assets/apa-fr.csl
 
 website:
-  title: "Tunisie : comptes de l'énergie et des émissions"
+  title: "TUN: PEFA AEA"
   description: "Comptes physiques des flux d'énergie (PEFA) et comptes des émissions atmosphériques (AEA) de la Tunisie"
   navbar:
     left:
@@ -33,15 +33,33 @@ website:
           - text: "العربية"
             href: "#lang-ar"
   sidebar:
-    - title: Documents
+    - title: "Matériaux"
       style: docked
       contents:
-        - href: fr/documents/index.qmd
-          text: Documents
-        - href: fr/documents/energy-accounts/index.qmd
-          text: Comptes de l'énergie (PEFA)
-        - href: fr/documents/emissions-accounts/index.qmd
-          text: Comptes des émissions (AEA)
+        - section: "Documents"
+          href: fr/documents/index.qmd
+          contents:
+            - href: fr/documents/energy-accounts/index.qmd
+              text: "Comptes de l'énergie (PEFA)"
+            - href: fr/documents/emissions-accounts/index.qmd
+              text: "Comptes des émissions (AEA)"
+        - section: "Présentations"
+          href: fr/presentations/index.qmd
+          contents:
+            - href: fr/presentations/01-framework-and-sources.qmd
+              text: "Cadre et sources"
+            - href: fr/presentations/02-tools-and-pipeline.qmd
+              text: "Outils et pipeline"
+            - href: fr/presentations/03-energy-classifications-allocation.qmd
+              text: "Énergie : nomenclatures et répartition"
+            - href: fr/presentations/04-energy-residence-results.qmd
+              text: "Énergie : résidence, contrôles et résultats"
+            - href: fr/presentations/05-emissions-sources-classifications.qmd
+              text: "Émissions : sources et nomenclatures"
+            - href: fr/presentations/06-emissions-allocation-results.qmd
+              text: "Émissions : répartition et résultats"
+            - href: fr/presentations/07-indicators-way-forward.qmd
+              text: "Indicateurs et perspectives"
 
 format:
   html:

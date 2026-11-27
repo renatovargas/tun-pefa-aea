@@ -1,0 +1,25 @@
+---
+title: "Energy and emissions accounts: framework and sources"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/01-framework-and-sources/index.html" title="Energy and emissions accounts: framework and sources" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Full screen](../slides/01-framework-and-sources/index.html){target="_blank"}
+::::
+
+Click inside the slides and use the arrow keys to move. Press `F` for full screen, `S` for the speaker view and `Esc` for an overview.
+
+## In this presentation
+
+- Why energy and emissions statistics need accounts
+- The SEEA: energy flows, supply and use tables, territory and residence
+- The energy balance, the supply and use tables and the inventory
+
+## Related document
+
+- [Physical energy flow accounts](../documents/energy-accounts/index.qmd)
+- [Air emissions accounts](../documents/emissions-accounts/index.qmd)

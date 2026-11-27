@@ -27,7 +27,7 @@ Concepts, compilation methods and results of the energy accounts and the air emi
 ::: {.card-body}
 ### Presentations
 
-Slides for each session of the technical workshop, from the SEEA framework to dissemination and a work plan.
+Seven presentations, from the SEEA framework and the sources to the energy accounts, the emissions accounts and their dissemination.
 
 [See the presentations](presentations/index.qmd){.btn .btn-primary}
 :::

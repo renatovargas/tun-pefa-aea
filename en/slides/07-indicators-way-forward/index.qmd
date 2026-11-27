@@ -1,0 +1,158 @@
+---
+title: "Indicators, dissemination and the way forward"
+subtitle: "Turning the accounts into information, and producing them every year"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+import matplotlib.pyplot as plt
+e = read("pefa_indicators")
+g = read("aea_indicators")
+hh_e = {y: e.filter(pl.col("year") == y, pl.col("activity") == "HH")["end_use_energy"].sum() / e.filter(pl.col("year") == y)["end_use_energy"].sum() for y in YEARS}
+hh_g = {y: g.filter(pl.col("year") == y, pl.col("activity") == "HH")["ghg_kt"].sum() / g.filter(pl.col("year") == y)["ghg_kt"].sum() for y in YEARS}
+```
+
+## What this presentation covers {.theme-content}
+
+1. Who uses energy and emissions accounts, and for what.
+2. Core indicators and dissemination formats.
+3. What it takes to produce the accounts every year.
+
+# Indicators and dissemination
+
+## Who uses the accounts
+
+- **Energy and climate policy**: which industries drive demand and emissions, and where efficiency gains matter.
+- **Economic planning**: the energy and emission content of growth.
+- **Modelling**: input-output and general equilibrium models need energy and emissions by industry.
+- **International reporting**: SEEA, Eurostat and OECD formats, and comparison with other countries.
+
+## Core indicators
+
+| Indicator | Accounts | Unit |
+|:--|:--|:--|
+| Net domestic energy use | PEFA | PJ |
+| Energy intensity of value added | PEFA + SUT | TJ per million TND |
+| Household energy use per unit of spending | PEFA + SUT | TJ per million TND |
+| Emissions by industry and gas | AEA | kt CO2 eq |
+| Emission intensity of value added | AEA + SUT | t CO2 eq per million TND |
+| Household emissions per unit of spending | AEA + SUT | t CO2 eq per million TND |
+
+## Energy and emissions move together
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.4
+d = (e.filter(pl.col("year") == LAST, pl.col("activity") != "HH").select("activity", "intensity_value_added")
+     .join(g.filter(pl.col("year") == LAST, pl.col("activity") != "HH").select("activity", "ghg_intensity_value_added"), on="activity").drop_nulls())
+fig, ax = plt.subplots(figsize=(10, 4.4))
+ax.scatter(d["intensity_value_added"], d["ghg_intensity_value_added"], color=IMF_BLUE, s=36, zorder=3)
+for a, x, y in d.iter_rows():
+    if x > 5 or y > 1000:
+        ax.annotate(activity(a)[:28], (x, y), xytext=(4, 2), textcoords="offset points", fontsize=8, color=INK2)
+ax.set_xscale("log"); ax.set_yscale("log")
+ax.set_xlabel(L("terms", "chart_tj_per_mtnd")); ax.set_ylabel(L("terms", "chart_t_per_mtnd"))
+fig.tight_layout(); plt.close(fig); fig
+```
+
+## Reading the chart
+
+- Industries that use more energy per dinar also emit more per dinar.
+- Industries above the general pattern emit for reasons other than fuel: cement (process CO2), agriculture (methane), waste (landfills).
+- Both scales are logarithmic: the range between industries is very wide.
+
+## The place of households
+
+- Households used `{python} pct(hh_e[LAST])` of energy end use in `{python} LAST` (`{python} pct(hh_e[FIRST])` in `{python} FIRST`).
+- They emitted `{python} pct(hh_g[LAST])` of greenhouse gases in `{python} LAST` (`{python} pct(hh_g[FIRST])` in `{python} FIRST`).
+- Their emissions come from cars and homes; firewood, a large part of their energy, counts as biomass outside the CO2 total.
+
+## Dissemination formats
+
+- **Tables**: supply and use tables, accounts by activity and gas, bridge tables, indicators.
+- **Workbooks** in three languages, produced by the same code.
+- **Documents** whose text reads the data, and **interactive charts** on the web.
+- **Open data**: stable codes and separate label tables.
+
+## A dissemination calendar
+
+- Accounts for year *t* as soon as the balance, the inventory and the supply and use tables for *t* are available.
+- Revisions follow those of the sources; the pipeline recompiles the whole series in a minute.
+- Metadata and revision notes accompany each release.
+
+# The way forward
+
+## What exists now {.theme-content}
+
+- A complete first compilation of both accounts, `{python} FIRST` to `{python} LAST`.
+- An open pipeline that reproduces the IMF tools and runs in under a minute.
+- Documents, Excel products in three languages and a data explorer.
+- A list of assumptions and open questions, each recorded in a lookup table.
+
+## An annual cycle
+
+```{mermaid}
+flowchart LR
+  A["New balance (ONEM),<br/>inventory (ANME),<br/>SUT (INS)"] --> B["Add files to<br/>data/sources/"]
+  B --> C["Run the pipeline<br/>and its checks"]
+  C --> D["Review lookups<br/>with data producers"]
+  D --> C
+  C --> E["Publish workbooks,<br/>documents, explorer"]
+```
+
+## Roles
+
+| Task | Who |
+|:--|:--|
+| Provide the energy balance, in a stable layout | ONEM |
+| Provide the CRT workbooks | ANME and inventory partners |
+| Provide the supply and use tables | INS, national accounts |
+| Run the pipeline, review lookups, publish | INS, environmental accounts |
+| Validate allocation choices | INS with ONEM and ANME |
+
+## Priorities for the coming year
+
+1. Validate the allocation assumptions with ONEM, ANME and the national accounts.
+2. Obtain residence data for international transport.
+3. Train a team at the INS to run and maintain the pipeline.
+4. Agree on a first publication and its calendar.
+5. Extend to air pollutants and energy asset accounts when data allow.
+
+## Skills and tools
+
+- Python with `uv`: one command to install, one to compile.
+- Lookup tables in CSV: edited in Excel, reviewed on GitHub.
+- Quarto for documents and the website.
+- The IMF tools remain the reference for checking.
+
+## Points to discuss
+
+- Which indicators belong in INS publications, and which in a dedicated release?
+- Who leads the accounts at the INS, and with which team?
+- Formal agreements on data transmission with ONEM and ANME?
+- Hosting of the code and the website?
+
+## References
+
+::: {#refs}
+:::

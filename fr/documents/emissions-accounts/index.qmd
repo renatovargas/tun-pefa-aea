@@ -364,7 +364,7 @@ Ce script construit le tableau de passage et vérifie qu'il aboutit à l'inventa
 
 [Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/24_export_aea.py)
 
-Ce script écrit `aea_accounts.xlsx` en anglais, en français et en arabe, avec les libellés des tables de correspondance.
+Ce script écrit `aea-accounts-en.xlsx`, `aea-accounts-fr.xlsx` et `aea-accounts-ar.xlsx`, en anglais, en français et en arabe, avec les libellés des tables de correspondance.
 
 ## 30_publish_tables.py {#script-30 .unnumbered .unlisted}
 

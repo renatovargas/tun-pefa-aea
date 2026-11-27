@@ -10,8 +10,40 @@ csl: assets/apa-ar.csl
 # Quarto has no Arabic UI strings; they are set here.
 language:
   toc-title-document: "المحتويات"
-  toc-title-website:
-  title: "تونس: حسابات الطاقة والانبعاثات"
+  toc-title-website: "في هذه الصفحة"
+  section-title-abstract: "الملخص"
+  section-title-references: "المراجع"
+  section-title-footnotes: "الحواشي"
+  title-block-author-single: "المؤلف"
+  title-block-author-plural: "المؤلفون"
+  title-block-affiliation-single: "الانتماء"
+  title-block-affiliation-plural: "الانتماءات"
+  title-block-published: "تاريخ النشر"
+  title-block-modified: "تاريخ التعديل"
+  callout-note-title: "ملاحظة"
+  callout-warning-title: "تحذير"
+  callout-important-title: "مهم"
+  callout-tip-title: "نصيحة"
+  callout-caution-title: "تنبيه"
+  code-tools-menu-caption: "الشيفرة"
+  code-tools-show-all-code: "إظهار كل الشيفرة"
+  code-tools-hide-all-code: "إخفاء كل الشيفرة"
+  code-tools-view-source: "عرض المصدر"
+  copy-button-tooltip: "نسخ"
+  copy-button-tooltip-success: "تم النسخ"
+  crossref-tbl-title: "الجدول"
+  crossref-fig-title: "الشكل"
+  crossref-tbl-prefix: "الجدول"
+  crossref-fig-prefix: "الشكل"
+  crossref-sec-prefix: "القسم"
+  other-links-title: "روابط أخرى"
+  other-formats-title: "صيغ أخرى"
+  repo-action-links-source: "عرض المصدر"
+  search-no-results-text: "لا توجد نتائج"
+
+
+website:
+  title: "TUN: PEFA AEA"
   description: "حسابات التدفقات المادية للطاقة وحسابات انبعاثات الهواء في تونس"
   navbar:
     left:
@@ -37,15 +69,33 @@ language:
           - text: "العربية"
             href: "#lang-ar"
   sidebar:
-    - title: الوثائق
+    - title: "المواد"
       style: docked
       contents:
-        - href: ar/documents/index.qmd
-          text: الوثائق
-        - href: ar/documents/energy-accounts/index.qmd
-          text: حسابات الطاقة (PEFA)
-        - href: ar/documents/emissions-accounts/index.qmd
-          text: حسابات انبعاثات الهواء (AEA)
+        - section: "الوثائق"
+          href: ar/documents/index.qmd
+          contents:
+            - href: ar/documents/energy-accounts/index.qmd
+              text: "حسابات الطاقة (PEFA)"
+            - href: ar/documents/emissions-accounts/index.qmd
+              text: "حسابات انبعاثات الهواء (AEA)"
+        - section: "العروض"
+          href: ar/presentations/index.qmd
+          contents:
+            - href: ar/presentations/01-framework-and-sources.qmd
+              text: "الإطار والمصادر"
+            - href: ar/presentations/02-tools-and-pipeline.qmd
+              text: "الأدوات وخط المعالجة"
+            - href: ar/presentations/03-energy-classifications-allocation.qmd
+              text: "الطاقة: التصنيفات والتوزيع"
+            - href: ar/presentations/04-energy-residence-results.qmd
+              text: "الطاقة: الإقامة والاختبارات والنتائج"
+            - href: ar/presentations/05-emissions-sources-classifications.qmd
+              text: "الانبعاثات: المصادر والتصنيفات"
+            - href: ar/presentations/06-emissions-allocation-results.qmd
+              text: "الانبعاثات: التوزيع والنتائج"
+            - href: ar/presentations/07-indicators-way-forward.qmd
+              text: "المؤشرات والخطوات القادمة"
 
 format:
   html:

@@ -1,0 +1,24 @@
+---
+title: "Comptes de l'énergie : résidence, contrôles et résultats"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/04-energy-residence-results/index.html" title="Comptes de l'énergie : résidence, contrôles et résultats" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Plein écran](../slides/04-energy-residence-results/index.html){target="_blank"}
+::::
+
+Cliquez dans les diapositives et utilisez les flèches pour avancer. Appuyez sur `F` pour le plein écran, sur `S` pour la vue de l'orateur et sur `Échap` pour une vue d'ensemble.
+
+## Dans cette présentation
+
+- Territoire, résidence et passage au bilan
+- Identités, concordance avec l'outil et vraisemblance
+- Premiers résultats : qui utilise l'énergie, et intensité énergétique
+
+## Document associé
+
+- [Comptes physiques des flux d'énergie](../documents/energy-accounts/index.qmd)

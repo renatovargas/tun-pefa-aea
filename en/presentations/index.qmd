@@ -1,27 +1,19 @@
 ---
 title: "Presentations"
-subtitle: "Slides for the technical workshop on energy and air emissions accounts, Tunis, 7 to 11 December 2026"
+subtitle: "Slides on energy and air emissions accounts, from the framework to regular production"
 toc: false
 ---
 
-Each presentation matches a session of the workshop. The charts and numbers are read from the same tables as the documents, so the slides follow the data. Open a presentation full screen, then press `F` for full screen, `S` for speaker view and `Esc` for an overview of the slides.
+The presentations follow the documents in a didactic sequence, from the framework and the sources to the energy accounts, the emissions accounts and their dissemination. Their charts and numbers are read from the same tables as the documents.
 
-| Day | Time | Session | Presentation |
-|:--|:--|:--|:--|
-| Monday 7 December | 11:15 | Overview of the SEEA framework | [Energy and emissions in the SEEA](../slides/01-seea-framework/index.html){target="_blank"} |
-| | 13:30 | Institutional arrangements for energy statistics | [From energy statistics to energy accounts](../slides/02-data-sources/index.html){target="_blank"} |
-| | 15:15 | Demonstration of the PEFA and AEA tools | [The IMF tools and a reproducible pipeline](../slides/03-tools-and-pipeline/index.html){target="_blank"} |
-| Tuesday 8 December | 09:00 | Energy accounts: activity and product classifications | [Products and activities](../slides/04-pefa-classifications/index.html){target="_blank"} |
-| | 11:15 | Energy accounts: allocation matrix | [The allocation matrix](../slides/05-pefa-allocation/index.html){target="_blank"} |
-| | 13:45 | Energy accounts: residence adjustment and consistency checks | [Residence and consistency checks](../slides/06-pefa-residence-checks/index.html){target="_blank"} |
-| | 15:45 | Energy accounts compilation and dissemination | [Compilation and dissemination](../slides/07-pefa-results/index.html){target="_blank"} |
-| Wednesday 9 December | 09:00 | Institutional arrangements and source data for air emissions accounts | [Institutions and sources](../slides/08-aea-sources/index.html){target="_blank"} |
-| | 11:15 | Air emissions accounts: activity and source classifications | [Sources and activities](../slides/09-aea-classifications/index.html){target="_blank"} |
-| | 13:45 | Air emissions accounts: allocation matrix, residence adjustment and checks | [Matrix, residence and checks](../slides/10-aea-allocation-residence/index.html){target="_blank"} |
-| | 15:45 | Air emissions accounts compilation and dissemination | [Compilation and dissemination](../slides/11-aea-results/index.html){target="_blank"} |
-| Thursday 10 December | 09:00 | Dissemination formats and indicators | [Dissemination formats and indicators](../slides/12-indicators-dissemination/index.html){target="_blank"} |
-| | 11:15 | Work plan for the energy and air emissions accounts | [Towards regular production](../slides/13-workplan/index.html){target="_blank"} |
+| Presentation | Covers |
+|:--------------------|:----------------------------------------------|
+| [Energy and emissions accounts: framework and sources](01-framework-and-sources.qmd) | Why energy and emissions statistics need accounts; The SEEA: energy flows, supply and use tables, territory and residence; The energy balance, the supply and use tables and the inventory |
+| [The IMF tools and a reproducible pipeline](02-tools-and-pipeline.qmd) | What the PEFA Converter and I2A take in and give back; Why the same logic was rewritten as an open pipeline; Two layers that must agree, checks at every step, and how to run it |
+| [Energy accounts: classifications and allocation](03-energy-classifications-allocation.qmd) | Products, flows and activities of the energy accounts; How each line of the balance finds its industry, and the two keys; The concordance matrix and what the converter does with it |
+| [Energy accounts: residence, checks and results](04-energy-residence-results.qmd) | Territory, residence and the bridge to the balance; Identities, agreement with the tool and plausibility; First results: who uses energy, and energy intensity |
+| [Air emissions accounts: sources and classifications](05-emissions-sources-classifications.qmd) | Accounts and inventory: gases, scope and files; From emitting processes to emitting units; The rule table and the keys shared with the energy accounts |
+| [Air emissions accounts: allocation, residence and results](06-emissions-allocation-results.qmd) | The conversion matrix and where Tunisia departs from the default; Residence adjustment with OECD data and the bridge table; Implied emission factors, first results and dissemination |
+| [Indicators, dissemination and the way forward](07-indicators-way-forward.qmd) | Users, core indicators and dissemination formats; Energy and emissions together, and the place of households; An annual production cycle, roles and priorities |
 
-: Presentations by session of the workshop. {tbl-colwidths="[18,8,40,34]"}
-
-The sessions of Thursday afternoon and Friday are devoted to discussion and to the recommendations, and they draw on the presentations above.
+: {tbl-colwidths="[35,65]"}

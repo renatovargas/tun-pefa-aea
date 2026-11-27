@@ -1,3 +1,3 @@
 script,check,value,tolerance,unit,passed,description
-14_check_pefa_and_indicators,natural_inputs_and_residuals_balance,4.170798288439912e-12,1e-6,ktoe,true,Supply minus use of natural inputs and residuals
+14_check_pefa_and_indicators,natural_inputs_and_residuals_balance,2.7805321922932743e-12,1e-6,ktoe,true,Supply minus use of natural inputs and residuals
 14_check_pefa_and_indicators,energy_products_balance,3.300000000001599,5.0,ktoe,true,Supply minus use by energy product (rounding and statistical difference of the balance)

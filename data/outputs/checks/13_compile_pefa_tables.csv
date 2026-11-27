@@ -1,3 +1,3 @@
 script,check,value,tolerance,unit,passed,description
 13_compile_pefa_tables,explicit_equals_tool,4.547473508864641e-13,1e-9,PJ,true,"Largest cell gap between EB2PEFA and the explicit layer, all runs"
-13_compile_pefa_tables,example_balanced,0.001999999996769475,0.01,PJ,true,Supply minus use on the tool example without the Total column
+13_compile_pefa_tables,example_balanced,0.0020000000076834112,0.01,PJ,true,Supply minus use on the tool example without the Total column

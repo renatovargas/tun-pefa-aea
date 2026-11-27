@@ -1,0 +1,25 @@
+---
+title: "Indicators, dissemination and the way forward"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/07-indicators-way-forward/index.html" title="Indicators, dissemination and the way forward" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Full screen](../slides/07-indicators-way-forward/index.html){target="_blank"}
+::::
+
+Click inside the slides and use the arrow keys to move. Press `F` for full screen, `S` for the speaker view and `Esc` for an overview.
+
+## In this presentation
+
+- Users, core indicators and dissemination formats
+- Energy and emissions together, and the place of households
+- An annual production cycle, roles and priorities
+
+## Related document
+
+- [Physical energy flow accounts](../documents/energy-accounts/index.qmd)
+- [Air emissions accounts](../documents/emissions-accounts/index.qmd)

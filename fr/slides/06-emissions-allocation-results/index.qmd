@@ -1,0 +1,182 @@
+---
+title: "Comptes des émissions : répartition, résidence et résultats"
+subtitle: "Matrice de conversion, ajustements de l'OCDE, tableau de passage et premiers résultats"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+dropped = read("aea_categories_without_factor").filter(pl.col("year") == LAST)["kt_co2_eq"].sum()
+b = {r["year"]: r for r in bridge.filter(pl.col("gas") == "GHG").iter_rows(named=True)}
+oe = read("aea_bunkers_vs_oecd").filter(pl.col("year") == LAST).row(0, named=True)
+fi = read("aea_implied_factors_inventory").filter(pl.col("year") == LAST)
+d = aea.filter(pl.col("year") == LAST, pl.col("gas") == "GHG", pl.col("activity").is_in(ACTS)).group_by("activity").agg(pl.col("kt_co2_eq").sum())
+total = d["kt_co2_eq"].sum(); hh = d.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum()
+ind = read("aea_indicators").filter(pl.col("year") == LAST, pl.col("activity") != "HH")
+changes = read("aea_conversion_changes")
+```
+
+## Contenu de cette présentation {.theme-content}
+
+1. La matrice de conversion et les écarts tunisiens au défaut.
+2. L'ajustement de résidence et le tableau de passage.
+3. Les contrôles avec les comptes de l'énergie, les premiers résultats et la diffusion.
+
+# La matrice de conversion
+
+## Matrices par défaut et tunisienne
+
+- L'outil I2A est livré avec une **matrice par défaut** des catégories de l'inventaire vers les sections de la CITI et les ménages, selon la correspondance d'Eurostat [@eurostat2015aea; @imf2026i2a].
+- La **matrice tunisienne** utilise les 24 branches et les ménages, une matrice par année.
+- Les émissions de chaque catégorie sont multipliées par ses facteurs ; une catégorie sans facteur ne reçoit rien.
+
+## Une lacune de la matrice par défaut
+
+- La matrice par défaut n'a **aucun facteur pour les sols agricoles** (3.D).
+- Sans règle tunisienne, `{python} num(dropped, 0)` kt éq. CO2 disparaîtraient en `{python} LAST`, sans message.
+- La matrice tunisienne les attribue à l'agriculture.
+- Le pipeline liste chaque catégorie que la matrice par défaut perdrait.
+
+## Où la Tunisie s'écarte du défaut
+
+```{python}
+ch = changes.filter(pl.col("status") == "changed").sort("kt_co2_eq", descending=True).head(8).with_columns(
+    pl.col("activities").str.replace("key: Road", "clé : routier").str.replace("key: Commercial and public services", "clé : tertiaire"))
+gt(ch.select(pl.col("tool_code").alias("Catégorie"), pl.col("kt_co2_eq").alias("kt éq. CO2"), pl.col("default_sections").alias("Défaut"),
+             pl.col("section").alias("Tunisie"), pl.col("activities").alias("Activités")), decimals=0)
+```
+
+## Trois groupes de changements
+
+- Le transport routier et la combustion résidentielle passent du transport et de la construction aux **ménages**, comme le veulent les comptes.
+- Le transport et la distribution du gaz naturel passent du transport à la branche **électricité et gaz**, qui exploite le réseau.
+- Les gaz de la réfrigération commerciale vont au **commerce**.
+
+# Résidence
+
+## Comment l'outil ajuste pour la résidence {.theme-content}
+
+1. **Aérien** : l'OCDE estime les émissions des compagnies aériennes tunisiennes sur les vols intérieurs et à l'étranger [@oecd2024transport].
+2. Les émissions des compagnies résidentes **à l'étranger** sont ajoutées au transport aérien et inscrites comme élément de passage.
+3. Si l'estimation de l'OCDE pour les vols intérieurs est **inférieure** à l'inventaire, la différence va aux non-résidents sur le territoire.
+4. **Maritime** : si l'estimation de l'OCDE pour les navires résidents **dépasse** la navigation intérieure, la différence est ajoutée au transport par eau.
+
+## L'ajustement en `{python} LAST`
+
+| | kt CO2 |
+|:--|--:|
+| Compagnies aériennes résidentes à l'étranger (OCDE) | `{python} num(oe["oecd_air_residents_kt"], 0)` |
+| Soutes aériennes de l'inventaire | `{python} num(oe["aviation_bunkers_kt"], 0)` |
+| Navires résidents (OCDE) | `{python} num(oe["oecd_sea_residents_kt"], 0)` |
+| Soutes maritimes de l'inventaire | `{python} num(oe["marine_bunkers_kt"], 0)` |
+
+L'estimation maritime de l'OCDE est bien supérieure aux soutes maritimes, et manque avant 2019.
+
+## Le tableau de passage
+
+```{python}
+items = lookup("aea_bridge").sort(pl.col("order").cast(pl.Int32))
+rows = [{"Élément": r["fr"], **{str(y): b[y][r["code"]] for y in YEARS[-4:]}} for r in items.iter_rows(named=True)]
+gt(pl.DataFrame(rows), decimals=0)
+```
+
+## Lecture du tableau de passage
+
+- On part du total des comptes (les résidents, où qu'ils émettent).
+- On retranche les résidents à l'étranger ; on ajoute les non-résidents sur le territoire.
+- Le résultat égale le total de l'inventaire hors utilisation des terres, à 10^-6^ kt près, pour chaque année et chaque gaz.
+- En ajoutant l'utilisation des terres, on obtient le total net de l'inventaire.
+
+# Contrôles
+
+## Concordance avec l'outil
+
+- La couche explicite reproduit la fonction I2A à `{python} f"{read('aea_tool_agreement')['max_gap_kt'].max():.0e}"` kt éq. CO2 près, avec la matrice par défaut et la matrice tunisienne.
+- Deux particularités de l'outil sont traitées explicitement : l'écart maritime positif n'a pas d'élément de passage, et le total propre à l'outil additionne les éléments de passage sans leur signe.
+
+## Vraisemblance : facteurs d'émission implicites
+
+- Pour chaque activité, on divise le **CO2 de la combustion** des comptes des émissions par l'**énergie fossile** qu'elle utilise dans les comptes de l'énergie.
+- Le résultat, en tonnes de CO2 par térajoule, devrait se situer près de l'intervalle des combustibles de l'inventaire : de `{python} num(fi["t_co2_per_tj"].min(), 1)` (gaz naturel) à `{python} num(fi["t_co2_per_tj"].max(), 1)` (combustibles liquides).
+
+## Facteurs implicites en `{python} LAST`
+
+```{python}
+#| fig-width: 9
+#| fig-height: 4.2
+charts.implied_factors(LAST, figsize=(9, 4.2))
+```
+
+## Lecture des facteurs
+
+- La plupart des activités se situent dans la bande : les deux comptes sont cohérents.
+- Les activités hors de la bande signalent des différences de classement entre le bilan et l'inventaire, par exemple pour la consommation propre de la branche énergie et les autoproducteurs d'électricité.
+- Ce sont les points à revoir avec l'ONEM et l'ANME.
+
+# Résultats
+
+## Chiffres clés de `{python} LAST` {.theme-content}
+
+- Émissions des unités résidentes : **`{python} mt(total)` Mt éq. CO2**.
+- Ménages : **`{python} pct(hh / total)`** du total.
+- Intensité de l'économie : **`{python} num(1000 * ind["ghg_kt"].sum() / ind["value_added_mtnd"].sum(), 0)` t éq. CO2** par million de TND de valeur ajoutée.
+
+## Qui émet
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.emitters(LAST, n=10, figsize=(10, 4.2))
+```
+
+## Lecture du graphique
+
+- L'électricité et le gaz viennent en tête, puis les matériaux de construction, où les fours à ciment émettent par leur combustible et par le calcaire.
+- L'agriculture émet surtout du méthane et du protoxyde d'azote, par le bétail et les sols.
+- Les services de l'eau et des déchets doivent leur rang aux décharges.
+
+## Intensité d'émission
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.emission_intensity(LAST, figsize=(10, 4.2))
+```
+
+Quelques branches émettent beaucoup plus par dinar que les autres ; l'évolution de leur production ou de leur technologie compte le plus.
+
+## Diffusion
+
+- Des classeurs Excel en trois langues : comptes par activité et par gaz, tableau de passage, source par activité, indicateurs.
+- La présentation suit le questionnaire d'Eurostat, ce qui facilite la comparaison internationale [@eurostat2015aea].
+
+## Points à discuter
+
+- Quelles données nationales pourraient remplacer l'estimation maritime de l'OCDE ?
+- Activités hors de la bande : reclasser, ou documenter ?
+- Publication conjointe avec l'inventaire, ou avec les comptes nationaux ?
+- Politique de révision lorsque l'inventaire ou les comptes nationaux changent.
+
+## Références
+
+::: {#refs}
+:::

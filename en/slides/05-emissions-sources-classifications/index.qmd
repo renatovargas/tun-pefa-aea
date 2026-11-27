@@ -1,0 +1,151 @@
+---
+title: "Air emissions accounts: sources and classifications"
+subtitle: "From the greenhouse gas inventory to industries and households"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+inv = read("ghg_inventory").filter(pl.col("year") == LAST)
+scope = dict(inv.group_by("scope").agg(pl.col("kt_co2_eq").sum()).iter_rows())
+bio = inv.filter(pl.col("gas") == "CO2bio")["kt"].sum()
+road = aea.filter(pl.col("year") == LAST, pl.col("gas") == "GHG", pl.col("source").str.starts_with("1.A.3.b"), pl.col("activity").is_in(ACTS))
+road_hh = road.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum() / road["kt_co2_eq"].sum()
+```
+
+## What this presentation covers {.theme-content}
+
+1. What air emissions accounts are, and how they relate to the inventory.
+2. The Tunisian inventory: gases, scope and files.
+3. How inventory categories become industries and households.
+
+# Accounts and inventory
+
+## Why air emissions accounts?
+
+- The inventory classifies emissions by **process**: combustion in energy industries, road transport, enteric fermentation, landfills [@ipcc2006].
+- It does not say **which economic units** emit.
+- The accounts reorganise the same emissions by **industry** and **households**, as in the national accounts [@eurostat2015aea].
+- Emissions can then sit beside output, value added, employment and the energy accounts.
+
+## The Tunisian inventory
+
+- Coordinated by ANME (energy, industrial processes), the Ministry of Agriculture (agriculture, land use) and ONAS (waste) [@besbes2026].
+- IPCC 2006 guidelines, reported in the Common Reporting Tables (CRT) of the UNFCCC.
+- In `{python} LAST`: **`{python} mt(scope["inventory"])` Mt CO2 eq** excluding land use; land use is a net sink of `{python} mt(scope["lulucf"])` Mt.
+
+## Greenhouse gases and their common unit
+
+| Gas | Main sources | GWP (AR5) |
+|:--|:--|--:|
+| Carbon dioxide (CO2) | Burning fossil fuels, cement | 1 |
+| Methane (CH4) | Livestock, landfills, gas leaks | 28 |
+| Nitrous oxide (N2O) | Agricultural soils, manure | 265 |
+| Fluorinated gases | Refrigeration, air conditioning, electrical equipment | by species |
+
+Each gas is weighted by its 100-year global warming potential [@ipcc2014ar5].
+
+## Emissions by gas
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.8
+charts.emissions_by_gas(figsize=(9, 3.8))
+```
+
+## Scope of the accounts
+
+- **Inside**: CO2, CH4, N2O and fluorinated gases of energy, industrial processes, agriculture and waste.
+- **Outside, in the bridge table**: land use, land-use change and forestry [@eurostat2015aea, para 269].
+- **Memo items**: international bunkers (1.D) and CO2 from biomass (`{python} mt(bio)` Mt in `{python} LAST`), whose carbon was recently taken from the atmosphere.
+
+## Two input files
+
+| File | Content | Used for |
+|:--|:--|:--|
+| CRT workbooks (`Data`, `Summary2`) | All categories, fuels and gases; kt and TJ | The accounts |
+| `Tunisia_UNFCCC.xlsx` | Main categories, kt of each gas | Cross-check |
+
+Sector totals of the two agree to within `{python} num(check("20_prepare_ghg_inventory", "prepared_file_sectors")["value"], 3)` kt.
+
+## Preparing the inventory
+
+- CO2, CH4 and N2O come from `Data`, weighted by their warming potentials.
+- Fluorinated gases come from `Summary2`, where they are in CO2 equivalent by category.
+- Each category receives the most detailed code of the I2A tool to which it belongs.
+- The total including land use equals the net total of `Summary2`, once a small N2O difference is accounted for.
+
+# From processes to economic units
+
+## Two classifications {.theme-content}
+
+- **Inventory**: what process emits. *Road transport.*
+- **Accounts**: who emits. *Households driving their cars, trucks of the food industry, buses of the transport industry.*
+- Households appear as consumers: their cars and their homes. Households as producers, such as family farms, belong to their industry.
+
+## The rule table
+
+- `crt_to_activities.csv`: a prefix of CRT codes, an activity and a reason.
+- Each category takes the **longest matching prefix**:
+  - "3" covers all of agriculture;
+  - "1.A.4.b" overrides "1.A.4" for homes.
+- A short table covers the whole inventory, and exceptions stay visible.
+
+## Examples of rules
+
+```{python}
+m = lookup("crt_to_activities")
+gt(m.filter(pl.col("prefix").is_in(["1.A.1.a", "1.A.2.f", "1.A.3.b", "1.A.4.b", "2.A", "3", "5"])).select(
+    pl.col("prefix").alias("CRT prefix"), pl.col("activity").fill_null("key").alias("Activity"), pl.col("rationale_en").alias("Reason")))
+```
+
+## Keys shared with the energy accounts
+
+- Road transport (1.A.3.b) is split between industries and households with the **road key** of the energy accounts.
+- Combustion in commerce and public services (1.A.4.a) is split among service industries with the **tertiary key**.
+- Both accounts therefore split these sectors **the same way**.
+- In `{python} LAST`, households receive `{python} pct(road_hh)` of road transport emissions.
+
+## From sectors to activities in `{python} LAST`
+
+```{python}
+charts.emissions_sankey(LAST, height=460)
+```
+
+## Reading the diagram
+
+- Fuel combustion (1.A) spreads over the whole economy.
+- Industrial processes (2) come almost entirely from manufacturing, mainly cement.
+- Agriculture (3) stays in agriculture; waste (5) goes to water and waste services.
+- The residence adjustment adds emissions of Tunisian carriers abroad to transport.
+
+## Points to discuss
+
+- How can the INS receive the CRT workbooks each year, and when?
+- N2O of 1.B.2.b.ii from 2019: in `Data` but not in `Summary2`.
+- Natural gas networks: operated by the electricity and gas industry in Tunisia?
+- Commercial refrigeration gases: trade, or the industries that own the equipment?
+
+## References
+
+::: {#refs}
+:::

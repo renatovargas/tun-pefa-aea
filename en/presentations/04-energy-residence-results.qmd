@@ -1,0 +1,24 @@
+---
+title: "Energy accounts: residence, checks and results"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/04-energy-residence-results/index.html" title="Energy accounts: residence, checks and results" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Full screen](../slides/04-energy-residence-results/index.html){target="_blank"}
+::::
+
+Click inside the slides and use the arrow keys to move. Press `F` for full screen, `S` for the speaker view and `Esc` for an overview.
+
+## In this presentation
+
+- Territory, residence and the bridge to the balance
+- Identities, agreement with the tool and plausibility
+- First results: who uses energy, and energy intensity
+
+## Related document
+
+- [Physical energy flow accounts](../documents/energy-accounts/index.qmd)

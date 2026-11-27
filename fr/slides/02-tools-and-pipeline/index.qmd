@@ -1,0 +1,161 @@
+---
+title: "Les outils du FMI et un pipeline reproductible"
+subtitle: "PEFA Converter, I2A, et la même logique en code ouvert"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+pefa_gap = read("pefa_tool_agreement")["max_gap_pj"].drop_nulls().max()
+aea_gap = read("aea_tool_agreement")["max_gap_kt"].max()
+chk = read("checks")
+```
+
+## Contenu de cette présentation {.theme-content}
+
+1. Les deux outils du FMI : ce qu'ils reçoivent, ce qu'ils font, ce qu'ils produisent.
+2. Pourquoi la même logique a été réécrite sous forme de pipeline ouvert et reproductible.
+3. Comment le pipeline est organisé, comment il se contrôle et comment l'exécuter.
+
+# Les outils du FMI
+
+## Pourquoi des outils ?
+
+- Compiler des comptes à partir d'un bilan et d'un inventaire suppose **des centaines de décisions de correspondance**.
+- Un outil fixe l'enchaînement des étapes et applique les recommandations internationales de la même façon dans chaque pays.
+- Le Département des statistiques du FMI a mis au point deux outils Excel dotés de fonctions Python, écrits par Achille Pegoue [@pegoue2026pefa; @pegoue2026i2a].
+
+## PEFA Converter
+
+- Transforme un **bilan énergétique au format de l'AIE** en tableaux physiques des ressources et des emplois d'énergie [@imf2024pefa].
+- Données d'entrée, sous forme de plages nommées du classeur :
+  - le bilan (flux × produits, en térajoules) ;
+  - la **matrice de concordance** : pour chaque flux et produit, l'activité, le produit PEFA, le tableau et la proportion ;
+  - les éléments de passage pour la résidence ;
+  - une classification des produits (renouvelables, déchets).
+- Résultat : un tableau long par produit PEFA, activité et tableau, en pétajoules.
+
+## Convertisseur des comptes des émissions (I2A)
+
+- Transforme un **inventaire des gaz à effet de serre** en comptes des émissions par activité et pour les ménages [@imf2026i2a].
+- Données d'entrée :
+  - l'inventaire par gaz, catégorie et année ;
+  - la **matrice de conversion** : pour chaque catégorie, la part de chaque activité ;
+  - la liste des activités et des éléments de passage ;
+  - les estimations de l'OCDE des émissions du transport aérien et maritime, pour la résidence.
+- Résultat : émissions par gaz, catégorie et activité, avec totaux et éléments de passage.
+
+## Le fonctionnement des outils
+
+```{mermaid}
+flowchart LR
+  EB["Bilan énergétique<br/>(format AIE, TJ)"] --> CM{{"Matrice de concordance<br/>flux × produit → activité"}}
+  CM --> PSUT["Tableaux des ressources<br/>et des emplois (PJ)"]
+  INV["Inventaire<br/>(CRT, kt éq. CO2)"] --> CVM{{"Matrice de conversion<br/>catégorie → activité"}}
+  OECD["Émissions du transport<br/>(OCDE)"] --> CVM
+  CVM --> AEA["Comptes et tableau<br/>de passage"]
+```
+
+# Du classeur au pipeline
+
+## Pourquoi réécrire la logique ?
+
+- Un classeur cache les décisions dans des cellules ; une **table de correspondance avec une raison par ligne** les montre.
+- Chaque année demande les mêmes étapes : un pipeline les répète **en moins d'une minute**.
+- Les contrôles s'exécutent à chaque fois, et un contrôle en échec **arrête** le traitement.
+- Le même code écrit les comptes en **anglais, français et arabe**.
+- Chacun peut lire, réexécuter et discuter chaque chiffre.
+
+## Deux couches qui doivent concorder
+
+- **Couche explicite** : chaque règle des outils réécrite pas à pas en Python lisible. Elle produit les comptes.
+- **Couche de référence** : les fonctions originales des outils, appelées **sans modification**, sur les mêmes données.
+- Le traitement s'arrête si les deux diffèrent :
+  - comptes de l'énergie : écart maximal de `{python} f"{pefa_gap:.0e}"` PJ, toutes années et matrices ;
+  - comptes des émissions : écart maximal de `{python} f"{aea_gap:.0e}"` kt éq. CO2.
+
+## Les étapes du pipeline
+
+| Étape | Scripts | Ce qu'elle fait |
+|:--|:--|:--|
+| Extraction | 01 à 03 | Lire le bilan, l'inventaire et les tableaux des ressources et des emplois |
+| PEFA | 10 à 15 | Modèle de l'AIE, clés, matrice de concordance, tableaux, contrôles, Excel |
+| AEA | 20 à 24 | Inventaire, matrice de conversion, comptes, passage, Excel |
+| Publication | 30 | Tableaux et libellés pour les documents, les diapositives et l'explorateur |
+
+## Où se trouvent les choses
+
+| Dossier | Contenu | Qui le modifie |
+|:--|:--|:--|
+| `data/sources/` | Fichiers tels que reçus | Personne |
+| `data/lookups/` | Correspondances et libellés, avec leurs raisons | Les comptables |
+| `data/intermediate/` | Tableaux de travail | Le pipeline |
+| `data/outputs/` | Comptes Excel, tableaux, libellés, contrôles | Le pipeline |
+
+## Une table de correspondance
+
+```{python}
+m = lookup("balance_to_activities").filter(pl.col("method") == "direct").select(
+    pl.col("iea_flow").alias("Flux"), pl.col("activity").alias("Branche"), pl.col("rationale_fr").alias("Raison")).head(6)
+gt(m)
+```
+
+Pour changer une répartition, on modifie une ligne et on réexécute le pipeline.
+
+## Des contrôles à chaque étape
+
+```{python}
+c = chk.select(pl.col("script").str.slice(0, 2).alias("Script"), pl.col("check").alias("Contrôle"),
+               pl.col("value").map_elements(lambda x: f"{x:.2g}", return_dtype=pl.String).alias("Valeur"),
+               pl.col("unit").alias("Unité"), pl.col("passed").alias("Réussi"))
+gt(c.head(12))
+```
+
+Les `{python} chk.height` contrôles réussissent dans l'exécution actuelle.
+
+## Ce que produit une exécution
+
+- Des classeurs Excel en trois langues, dans la présentation des feuilles des outils.
+- Des tableaux ordonnés avec des codes stables, et des tables de libellés en trois langues.
+- Des documents méthodologiques et des diapositives dont les chiffres sont lus dans ces tableaux.
+- Un explorateur de données sur le site.
+
+## Exécution
+
+```bash
+uv sync                                  # installer Python et les bibliothèques
+uv run python scripts/run_pipeline.py    # compiler les deux comptes
+bash scripts/render.sh                   # produire le site
+```
+
+La production du site ne fait que lire les résultats : changer une phrase n'oblige jamais à recalculer.
+
+## Points à discuter
+
+- Qui, à l'INS, exécuterait le pipeline, et avec quel appui ?
+- Quelles correspondances revoir en premier avec l'ONEM et l'ANME ?
+- Les classeurs du FMI doivent-ils rester l'outil de démonstration, et le pipeline l'outil de production ?
+
+## Références
+
+::: {#refs}
+:::

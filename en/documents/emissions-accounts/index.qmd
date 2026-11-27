@@ -361,7 +361,7 @@ This script builds the bridge table and checks that it closes on the inventory, 
 
 [View on GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/24_export_aea.py)
 
-This script writes `aea_accounts.xlsx` in English, French and Arabic, with labels from the lookup tables.
+This script writes `aea-accounts-en.xlsx`, `aea-accounts-fr.xlsx` and `aea-accounts-ar.xlsx` in English, French and Arabic, with labels from the lookup tables.
 
 ## 30_publish_tables.py {#script-30 .unnumbered .unlisted}
 

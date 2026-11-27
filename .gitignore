@@ -1,4 +1,4 @@
-# Fichiers gardés hors du dépôt et synchronisés avec OneDrive (voir _remote.md)
+# Files kept outside the repository and synchronised by the maintainer (see _remote.md)
 AGENTS.md
 STRUCTURE.md
 /refs/
@@ -13,6 +13,8 @@ __pycache__/
 **/*.quarto_ipynb
 *.typ
 **/index_files/
+# Rendered figures in docs/ must be published.
+!docs/**/index_files/
 
 # macOS
 .DS_Store
@@ -22,6 +24,6 @@ __pycache__/
 *~
 .directory
 
-# Office (fichiers de verrouillage)
+# Office lock files
 ~$*
 .~lock.*#

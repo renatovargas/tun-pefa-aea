@@ -1,2 +1,2 @@
 script,check,value,tolerance,unit,passed,description
-23_bridge_and_indicators,bridge_closes,7.275957614183426e-12,1e-6,kt CO2 eq,true,Accounts plus bridging items minus the inventory without LULUCF
+23_bridge_and_indicators,bridge_closes,1.4551915228366852e-11,1e-6,kt CO2 eq,true,Accounts plus bridging items minus the inventory without LULUCF

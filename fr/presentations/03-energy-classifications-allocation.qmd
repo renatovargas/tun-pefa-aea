@@ -1,0 +1,24 @@
+---
+title: "Comptes de l'énergie : nomenclatures et répartition"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/03-energy-classifications-allocation/index.html" title="Comptes de l'énergie : nomenclatures et répartition" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Plein écran](../slides/03-energy-classifications-allocation/index.html){target="_blank"}
+::::
+
+Cliquez dans les diapositives et utilisez les flèches pour avancer. Appuyez sur `F` pour le plein écran, sur `S` pour la vue de l'orateur et sur `Échap` pour une vue d'ensemble.
+
+## Dans cette présentation
+
+- Produits, flux et activités des comptes de l'énergie
+- Comment chaque ligne du bilan trouve sa branche, et les deux clés
+- La matrice de concordance et ce qu'en fait le convertisseur
+
+## Document associé
+
+- [Comptes physiques des flux d'énergie](../documents/energy-accounts/index.qmd)

@@ -1,0 +1,24 @@
+---
+title: "Air emissions accounts: sources and classifications"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/05-emissions-sources-classifications/index.html" title="Air emissions accounts: sources and classifications" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Full screen](../slides/05-emissions-sources-classifications/index.html){target="_blank"}
+::::
+
+Click inside the slides and use the arrow keys to move. Press `F` for full screen, `S` for the speaker view and `Esc` for an overview.
+
+## In this presentation
+
+- Accounts and inventory: gases, scope and files
+- From emitting processes to emitting units
+- The rule table and the keys shared with the energy accounts
+
+## Related document
+
+- [Air emissions accounts](../documents/emissions-accounts/index.qmd)

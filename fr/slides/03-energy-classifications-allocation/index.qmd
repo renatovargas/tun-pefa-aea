@@ -1,0 +1,170 @@
+---
+title: "Comptes de l'énergie : nomenclatures et répartition"
+subtitle: "Des lignes du bilan aux branches des comptes nationaux"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+keys = read("pefa_activity_keys").filter(pl.col("method") == "key", pl.col("year") == LAST)
+hh_road = keys.filter(pl.col("iea_flow") == "Road", pl.col("activity") == "HH")["factor"].sum()
+tr_road = keys.filter(pl.col("iea_flow") == "Road", pl.col("activity") == "49")["factor"].sum()
+changes = read("pefa_concordance_changes")
+fr_reason = dict(zip(lookup("balance_to_activities")["rationale_en"], lookup("balance_to_activities")["rationale_fr"]))
+```
+
+## Contenu de cette présentation {.theme-content}
+
+1. Les lignes et les colonnes des comptes de l'énergie : produits, flux et activités.
+2. Comment chaque ligne du bilan trouve sa branche, et les deux lignes qui demandent des clés.
+3. La matrice de concordance, et ce qu'en fait le convertisseur.
+
+# Nomenclatures
+
+## Lignes et colonnes des comptes
+
+- **Lignes** : énergie issue des ressources naturelles, produits énergétiques par groupe de la Classification internationale type des produits énergétiques (SIEC), résidus d'énergie [@ires2018].
+- **Colonnes** : branches, ménages, accumulation, reste du monde, environnement.
+- L'outil du FMI présente les branches par **section de la CITI** (A, B, C, D, E, F, H, autres).
+- La Tunisie utilise les **24 branches** de ses tableaux des ressources et des emplois, qui s'agrègent en ces sections.
+
+## Produits : du bilan aux groupes de la SIEC
+
+```{python}
+p = lookup("balance_products").filter(pl.col("iea_product").is_not_null())
+gt(p.select(pl.col("fr").alias("Produit du bilan"), pl.col("en").alias("Anglais"), pl.col("iea_product").alias("Produit du modèle de l'AIE")).head(12))
+```
+
+## Unités
+
+- Le bilan est en **milliers de tonnes équivalent pétrole** (ktep).
+- Les comptes sont en **térajoules** (TJ) : 1 ktep = 41,868 TJ [@ires2018].
+- L'outil du FMI s'exprime en **pétajoules** (PJ) : 1 PJ = 1 000 TJ.
+- Le joule permet d'additionner l'électricité, le gaz et le pétrole selon leur contenu énergétique.
+
+## Flux : le bilan dans le modèle de l'AIE
+
+- Le convertisseur lit le bilan dans la présentation de l'Agence internationale de l'énergie : une liste fixe de flux, dans un ordre fixe.
+- Chaque flux tunisien va à un flux du modèle ; quelques cellules font exception.
+- Les signes suivent l'AIE : exportations, soutes, entrées en transformation et consommation propre sont négatives.
+
+## Exceptions à la correspondance par défaut
+
+```{python}
+exc = lookup("balance_template_exceptions")
+gt(exc.select(pl.col("flow").alias("Flux"), pl.col("product").alias("Produit"),
+              pl.coalesce("iea_flow", "iea_product").alias("Destination"), pl.col("rationale_fr").alias("Raison")).head(6))
+```
+
+## Activités : la plupart des lignes ont une seule branche
+
+```{python}
+m = lookup("balance_to_activities").filter(pl.col("method") == "direct").select(
+    pl.col("iea_flow").alias("Flux du bilan"), pl.col("activity").alias("Branche"), pl.col("rationale_fr").alias("Raison"))
+gt(m.filter(pl.col("Flux du bilan").is_in(["Iron and steel", "Chemical and petrochemical", "Non-metallic minerals", "Rail", "Residential",
+                                           "Oil refineries (transf.)", "Charcoal production plants (transf.)"])))
+```
+
+## Deux lignes demandent des clés {.theme-content}
+
+- Le **transport routier** est donné par mode, non par utilisateur : camions, autobus, taxis et voitures particulières appartiennent à de nombreuses branches et aux ménages.
+- **Commerce, administration, hôtels** est une seule ligne pour plusieurs branches de services.
+- Les deux sont répartis avec des **clés** tirées des tableaux des ressources et des emplois de la même année :
+  - routier : achats de produits pétroliers raffinés (produit 19) ;
+  - tertiaire : achats d'électricité et de gaz (produit 35).
+
+## Les clés en `{python} LAST`
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.4
+charts.activity_keys(LAST, figsize=(10, 4.4))
+```
+
+## Lecture des clés
+
+- Les ménages reçoivent `{python} pct(hh_road)` du carburant routier, le transport `{python} pct(tr_road)`.
+- Le raffinage et l'électricité sont exclus de la clé routière, car leurs achats de produit 19 sont surtout des entrées de transformation.
+- Les clés changent chaque année avec les comptes nationaux.
+- Elles supposent un prix semblable par unité d'énergie pour chaque utilisateur : la meilleure information disponible, mais une hypothèse.
+
+# La matrice de concordance
+
+## Ce que dit la matrice {.theme-content}
+
+Pour chaque **flux** et chaque **produit** du bilan :
+
+- quel **produit PEFA** reçoit l'énergie,
+- dans quel **tableau** (ressources ou emplois),
+- pour quelle **activité**,
+- dans quelle **proportion** ; les proportions d'un flux somment à un.
+
+## Matrices par défaut et tunisienne
+
+- La matrice par défaut de l'outil attribue chaque flux à une **section de la CITI**.
+- La matrice tunisienne remplace les lignes des flux couverts par **une ligne par branche**, avec le facteur de la clé.
+- Une matrice par année, car les clés changent chaque année.
+- Les importations, les exportations et les variations de stocks gardent les lignes par défaut.
+
+## Où la Tunisie s'écarte du défaut
+
+```{python}
+gt(changes.filter(pl.col("changed")).select(pl.col("iea_flow").alias("Flux"), pl.col("default_sections").alias("Défaut"),
+                                            pl.col("sections").alias("Tunisie"),
+                                            pl.col("rationale_en").replace_strict(fr_reason, default=pl.col("rationale_en")).alias("Raison")))
+```
+
+`{python} changes.filter(pl.col("changed"))["iea_flow"].n_unique()` flux changent de section ; tous les autres ne font que gagner en détail.
+
+## Ce que fait le convertisseur
+
+1. Il donne à chaque flux son titre (approvisionnement, transformation, consommation propre, consommation finale).
+2. Il enregistre la production primaire comme une **ressource naturelle** fournie par l'environnement et utilisée par la branche qui l'extrait.
+3. Il multiplie chaque valeur du bilan par ses facteurs.
+4. Il transforme les sorties de transformation en **ressources** de produits énergétiques.
+5. Il crée, pour chaque emploi d'énergie, un **résidu** de même montant qui retourne à l'environnement.
+
+## De l'origine à l'emploi en `{python} LAST`
+
+```{python}
+charts.energy_sankey(LAST, height=460)
+```
+
+## Lecture du diagramme
+
+- Le gaz naturel va surtout aux **centrales**, qui le transforment en électricité.
+- Les produits pétroliers vont aux ménages, au transport, à l'industrie et à l'agriculture ; du pétrole brut est aussi exporté.
+- Les biocombustibles, surtout le bois de feu et le charbon de bois, sont utilisés par les ménages.
+- La transformation apparaît comme un emploi de produits ; sa production réapparaît dans la production nationale.
+
+## Points à discuter
+
+- Le niveau de 24 branches convient-il, ou un niveau plus fin serait-il utile ?
+- Autoproducteurs d'électricité et chaleur récupérée : industrie chimique ?
+- Chaleur solaire : produite et utilisée par les ménages ? Usages non énergétiques (bitume) : construction ?
+- L'ONEM pourrait-il répartir la consommation propre de la branche énergie par branche ?
+- Les achats en valeur sont-ils une clé suffisante pour le transport routier et les services ?
+
+## Références
+
+::: {#refs}
+:::

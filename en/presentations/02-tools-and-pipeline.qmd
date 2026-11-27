@@ -1,0 +1,20 @@
+---
+title: "The IMF tools and a reproducible pipeline"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/02-tools-and-pipeline/index.html" title="The IMF tools and a reproducible pipeline" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Full screen](../slides/02-tools-and-pipeline/index.html){target="_blank"}
+::::
+
+Click inside the slides and use the arrow keys to move. Press `F` for full screen, `S` for the speaker view and `Esc` for an overview.
+
+## In this presentation
+
+- What the PEFA Converter and I2A take in and give back
+- Why the same logic was rewritten as an open pipeline
+- Two layers that must agree, checks at every step, and how to run it

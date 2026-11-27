@@ -1,0 +1,24 @@
+---
+title: "Energy accounts: classifications and allocation"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/03-energy-classifications-allocation/index.html" title="Energy accounts: classifications and allocation" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Full screen](../slides/03-energy-classifications-allocation/index.html){target="_blank"}
+::::
+
+Click inside the slides and use the arrow keys to move. Press `F` for full screen, `S` for the speaker view and `Esc` for an overview.
+
+## In this presentation
+
+- Products, flows and activities of the energy accounts
+- How each line of the balance finds its industry, and the two keys
+- The concordance matrix and what the converter does with it
+
+## Related document
+
+- [Physical energy flow accounts](../documents/energy-accounts/index.qmd)

@@ -13,35 +13,35 @@ year,quadrant,level1,level2,product,activity,tj
 2015,Supply,Energy products:,Production of energy products by SIEC class:,Oil,19,56061.252
 2015,Supply,Energy products:,Production of energy products by SIEC class:,Oil,ROW,209005.056
 2015,Supply,Energy residuals:,,Energy residuals from end-use,01,22041.291147093347
-2015,Supply,Energy residuals:,,Energy residuals from end-use,06,7237.092231874496
-2015,Supply,Energy residuals:,,Energy residuals from end-use,07,3002.7068921192554
+2015,Supply,Energy residuals:,,Energy residuals from end-use,06,7237.092231874497
+2015,Supply,Energy residuals:,,Energy residuals from end-use,07,3002.706892119256
 2015,Supply,Energy residuals:,,Energy residuals from end-use,10,7510.42485081161
 2015,Supply,Energy residuals:,,Energy residuals from end-use,13,5167.35046599723
-2015,Supply,Energy residuals:,,Energy residuals from end-use,16,21210.597036663487
+2015,Supply,Energy residuals:,,Energy residuals from end-use,16,21210.59703666349
 2015,Supply,Energy residuals:,,Energy residuals from end-use,19,1214.172
 2015,Supply,Energy residuals:,,Energy residuals from end-use,20,9173.633681395693
 2015,Supply,Energy residuals:,,Energy residuals from end-use,23,55539.706323598264
-2015,Supply,Energy residuals:,,Energy residuals from end-use,24,2824.8572072997126
+2015,Supply,Energy residuals:,,Energy residuals from end-use,24,2824.857207299713
 2015,Supply,Energy residuals:,,Energy residuals from end-use,35,3391.308
-2015,Supply,Energy residuals:,,Energy residuals from end-use,36,7056.24842272395
-2015,Supply,Energy residuals:,,Energy residuals from end-use,41,8338.457774249533
-2015,Supply,Energy residuals:,,Energy residuals from end-use,45,8989.565429614368
+2015,Supply,Energy residuals:,,Energy residuals from end-use,36,7056.248422723951
+2015,Supply,Energy residuals:,,Energy residuals from end-use,41,8338.457774249535
+2015,Supply,Energy residuals:,,Energy residuals from end-use,45,8989.56542961437
 2015,Supply,Energy residuals:,,Energy residuals from end-use,49,37838.0886452423
 2015,Supply,Energy residuals:,,Energy residuals from end-use,55,5405.913943687919
 2015,Supply,Energy residuals:,,Energy residuals from end-use,60,5153.05709582755
-2015,Supply,Energy residuals:,,Energy residuals from end-use,64,595.9266685905632
-2015,Supply,Energy residuals:,,Energy residuals from end-use,77,5570.281808944288
-2015,Supply,Energy residuals:,,Energy residuals from end-use,84,2370.5824369769743
-2015,Supply,Energy residuals:,,Energy residuals from end-use,85,220.2120868010123
-2015,Supply,Energy residuals:,,Energy residuals from end-use,86,474.52133103728755
+2015,Supply,Energy residuals:,,Energy residuals from end-use,64,595.9266685905633
+2015,Supply,Energy residuals:,,Energy residuals from end-use,77,5570.281808944289
+2015,Supply,Energy residuals:,,Energy residuals from end-use,84,2370.582436976975
+2015,Supply,Energy residuals:,,Energy residuals from end-use,85,220.21208680101233
+2015,Supply,Energy residuals:,,Energy residuals from end-use,86,474.5213310372876
 2015,Supply,Energy residuals:,,Energy residuals from end-use,94,73.48762153593623
 2015,Supply,Energy residuals:,,Energy residuals from end-use,HH,117731.92773791525
 2015,Supply,Energy residuals:,,Energy residuals from losses,01,8917.884
 2015,Supply,Energy residuals:,,Energy residuals from losses,06,460.548
-2015,Supply,Energy residuals:,,Energy residuals from losses,19,795.4919999999995
+2015,Supply,Energy residuals:,,Energy residuals from losses,19,795.4920000000029
 2015,Supply,Energy residuals:,,Energy residuals from losses,20,7494.372
-2015,Supply,Energy residuals:,,Energy residuals from losses,35,98921.52360000001
-2015,Supply,Other residual flows:,,Energy from solid waste,ACC,460.5480000000002
+2015,Supply,Energy residuals:,,Energy residuals from losses,35,98921.5236
+2015,Supply,Other residual flows:,,Energy from solid waste,ACC,460.548
 2015,Supply,Other residual flows:,,Residuals from end-use for non-energy purposes,41,11513.7
 2015,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,20,3098.232
 2015,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,2034.7848000000001
@@ -68,16 +68,16 @@ year,quadrant,level1,level2,product,activity,tj
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,23,6196.464
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,24,1004.8320000000002
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,35,14779.404
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,36,3820.320206236605
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,45,2910.9088787358983
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,36,3820.320206236606
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,45,2910.908878735899
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,49,334.944
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,55,2970.1256163988905
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,60,2660.9799474098418
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,55,2970.1256163988915
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,60,2660.979947409842
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,64,315.492312764969
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,77,1626.176286230892
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,84,587.8293656813375
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,85,23.505584298252163
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,86,62.534163150059676
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,77,1626.1762862308924
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,84,587.8293656813377
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,85,23.505584298252174
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,86,62.53416315005969
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,94,10.871639093252504
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,HH,16747.2
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,ROW,1800.324
@@ -118,29 +118,29 @@ year,quadrant,level1,level2,product,activity,tj
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Natural gas,STATDIFF,921.096
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,01,17435.39246709335
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,06,1836.1202318744963
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,07,1579.1948921192554
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,10,1690.7728508116097
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1064.2864659972283
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,07,1579.1948921192557
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,10,1690.77285081161
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1064.2864659972286
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,16,13046.33703666349
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,19,1214.172
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,20,2223.545681395691
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,20,2223.5456813956916
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,23,30209.56632359827
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,24,1526.9492072997127
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,24,1526.949207299713
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,36,1277.747328653778
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,41,8338.457774249533
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,41,8338.457774249535
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,45,4586.612474766633
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,49,33944.3646452423
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,49,33944.364645242305
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,55,913.391537877864
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,60,1128.1391027481375
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,64,118.72251394746068
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,60,1128.1391027481377
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,64,118.7225139474607
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,77,3110.5766162235395
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1481.4494718472417
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1481.449471847242
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,184.65824909848843
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,379.93404236198774
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,57.043508214717704
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,379.9340423619878
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,57.04350821471771
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,6845.418000000001
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,54385.64373791524
-2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,109401.08400000002
+2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,109401.084
 2015,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,-376.8120000000006
 2015,Use,Energy products:,Transformation of energy products by SIEC class:,Biofuels,01,15156.216
 2015,Use,Energy products:,Transformation of energy products by SIEC class:,Electricity,35,2030.5980000000004
@@ -150,9 +150,9 @@ year,quadrant,level1,level2,product,activity,tj
 2015,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,19,56396.196
 2015,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,20,669.888
 2015,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,35,9135.597600000001
-2015,Use,Energy residuals:,,Energy residuals from end-use,ENV,338131.41084
+2015,Use,Energy residuals:,,Energy residuals from end-use,ENV,338131.4108400001
 2015,Use,Energy residuals:,,Energy residuals from losses,ENV,116589.81960000003
-2015,Use,Other residual flows:,,Energy from solid waste,19,460.5480000000002
+2015,Use,Other residual flows:,,Energy from solid waste,19,460.548
 2015,Use,Other residual flows:,,Residuals from end-use for non-energy purposes,ACC,11513.7
 2016,Supply,Energy from natural inputs:,,Inputs of energy from renewable sources,ENV,7368.768000000001
 2016,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,245639.55600000004
@@ -176,13 +176,13 @@ year,quadrant,level1,level2,product,activity,tj
 2016,Supply,Energy residuals:,,Energy residuals from end-use,19,1088.5680000000002
 2016,Supply,Energy residuals:,,Energy residuals from end-use,20,9089.58089405486
 2016,Supply,Energy residuals:,,Energy residuals from end-use,23,52991.3639866649
-2016,Supply,Energy residuals:,,Energy residuals from end-use,24,3001.5630661714663
+2016,Supply,Energy residuals:,,Energy residuals from end-use,24,3001.563066171466
 2016,Supply,Energy residuals:,,Energy residuals from end-use,35,3307.5720000000006
 2016,Supply,Energy residuals:,,Energy residuals from end-use,36,7040.818873272956
 2016,Supply,Energy residuals:,,Energy residuals from end-use,41,8425.409404862547
 2016,Supply,Energy residuals:,,Energy residuals from end-use,45,8658.15043014876
 2016,Supply,Energy residuals:,,Energy residuals from end-use,49,45109.2785704459
-2016,Supply,Energy residuals:,,Energy residuals from end-use,55,5456.1474463368795
+2016,Supply,Energy residuals:,,Energy residuals from end-use,55,5456.14744633688
 2016,Supply,Energy residuals:,,Energy residuals from end-use,60,5077.5262883684645
 2016,Supply,Energy residuals:,,Energy residuals from end-use,64,649.7381769204828
 2016,Supply,Energy residuals:,,Energy residuals from end-use,77,5580.466580554751
@@ -190,13 +190,13 @@ year,quadrant,level1,level2,product,activity,tj
 2016,Supply,Energy residuals:,,Energy residuals from end-use,85,271.4971170809942
 2016,Supply,Energy residuals:,,Energy residuals from end-use,86,517.9577876621058
 2016,Supply,Energy residuals:,,Energy residuals from end-use,94,76.05758623994387
-2016,Supply,Energy residuals:,,Energy residuals from end-use,HH,117454.01957710915
+2016,Supply,Energy residuals:,,Energy residuals from end-use,HH,117454.01957710917
 2016,Supply,Energy residuals:,,Energy residuals from losses,01,9127.224000000002
 2016,Supply,Energy residuals:,,Energy residuals from losses,06,376.812
-2016,Supply,Energy residuals:,,Energy residuals from losses,19,669.8880000000003
+2016,Supply,Energy residuals:,,Energy residuals from losses,19,669.8880000000025
 2016,Supply,Energy residuals:,,Energy residuals from losses,20,7674.404400000001
-2016,Supply,Energy residuals:,,Energy residuals from losses,35,90824.25240000001
-2016,Supply,Other residual flows:,,Energy from solid waste,ACC,460.5480000000002
+2016,Supply,Energy residuals:,,Energy residuals from losses,35,90824.25240000003
+2016,Supply,Other residual flows:,,Energy from solid waste,ACC,460.548
 2016,Supply,Other residual flows:,,Residuals from end-use for non-energy purposes,41,12476.664
 2016,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,20,3223.8360000000002
 2016,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,2051.532
@@ -271,32 +271,32 @@ year,quadrant,level1,level2,product,activity,tj
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Natural gas,94,4.994887911818138
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Natural gas,HH,8876.016
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Natural gas,STATDIFF,251.20800000000006
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,01,17637.226918522014
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,01,17637.22691852201
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,06,1633.1269230007633
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,07,1613.686966216238
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,07,1613.6869662162378
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,10,1608.5579930523036
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1086.989574425953
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1086.9895744259532
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,16,13045.476639544326
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,19,1088.5680000000002
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,20,2223.2288940548597
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,23,28582.319986664897
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,23,28582.319986664894
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,24,1578.051066171466
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,36,1277.622684310876
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,41,8425.409404862547
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,45,4556.005769407458
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,45,4556.005769407457
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,49,35102.8265704459
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,55,919.7647927884185
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,60,1114.606408079315
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,60,1114.6064080793153
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,64,129.25475604013587
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,77,3087.816529791122
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1520.7938618116139
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,231.26983155546114
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,231.2698315554611
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,412.4068705853463
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,58.672781559849575
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,1842.192
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,54191.47157710915
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,58.67278155984957
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,1842.1920000000002
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,54191.47157710916
 2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,103372.09199999999
-2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,5275.368
+2016,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,5275.3679999999995
 2016,Use,Energy products:,Transformation of energy products by SIEC class:,Biofuels,01,15491.160000000002
 2016,Use,Energy products:,Transformation of energy products by SIEC class:,Electricity,35,2051.532
 2016,Use,Energy products:,Transformation of energy products by SIEC class:,Heat,20,3223.8360000000002
@@ -306,8 +306,8 @@ year,quadrant,level1,level2,product,activity,tj
 2016,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,20,724.3164
 2016,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,35,12.5604
 2016,Use,Energy residuals:,,Energy residuals from end-use,ENV,343866.48948000005
-2016,Use,Energy residuals:,,Energy residuals from losses,ENV,108672.58080000003
-2016,Use,Other residual flows:,,Energy from solid waste,19,460.5480000000002
+2016,Use,Energy residuals:,,Energy residuals from losses,ENV,108672.58080000001
+2016,Use,Other residual flows:,,Energy from solid waste,19,460.548
 2016,Use,Other residual flows:,,Residuals from end-use for non-energy purposes,ACC,12476.664
 2017,Supply,Energy from natural inputs:,,Inputs of energy from renewable sources,ENV,8176.8204000000005
 2017,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,223156.44000000003
@@ -321,37 +321,37 @@ year,quadrant,level1,level2,product,activity,tj
 2017,Supply,Energy products:,Production of energy products by SIEC class:,Natural gas,ROW,137996.928
 2017,Supply,Energy products:,Production of energy products by SIEC class:,Oil,06,88174.008
 2017,Supply,Energy products:,Production of energy products by SIEC class:,Oil,19,39104.71200000001
-2017,Supply,Energy products:,Production of energy products by SIEC class:,Oil,ROW,200170.908
+2017,Supply,Energy products:,Production of energy products by SIEC class:,Oil,ROW,200170.90800000002
 2017,Supply,Energy residuals:,,Energy residuals from end-use,01,24466.65027205149
 2017,Supply,Energy residuals:,,Energy residuals from end-use,06,7429.933422475158
 2017,Supply,Energy residuals:,,Energy residuals from end-use,07,3765.3221915355057
 2017,Supply,Energy residuals:,,Energy residuals from end-use,10,7988.191830483877
-2017,Supply,Energy residuals:,,Energy residuals from end-use,13,5327.543635315595
+2017,Supply,Energy residuals:,,Energy residuals from end-use,13,5327.543635315596
 2017,Supply,Energy residuals:,,Energy residuals from end-use,16,21524.01853068656
 2017,Supply,Energy residuals:,,Energy residuals from end-use,19,837.36
 2017,Supply,Energy residuals:,,Energy residuals from end-use,20,9508.365846024384
-2017,Supply,Energy residuals:,,Energy residuals from end-use,23,52601.806565029336
-2017,Supply,Energy residuals:,,Energy residuals from end-use,24,3177.472236920717
+2017,Supply,Energy residuals:,,Energy residuals from end-use,23,52601.80656502933
+2017,Supply,Energy residuals:,,Energy residuals from end-use,24,3177.4722369207166
 2017,Supply,Energy residuals:,,Energy residuals from end-use,35,2972.628
-2017,Supply,Energy residuals:,,Energy residuals from end-use,36,7414.561729159687
-2017,Supply,Energy residuals:,,Energy residuals from end-use,41,8393.179442752435
+2017,Supply,Energy residuals:,,Energy residuals from end-use,36,7414.561729159686
+2017,Supply,Energy residuals:,,Energy residuals from end-use,41,8393.179442752433
 2017,Supply,Energy residuals:,,Energy residuals from end-use,45,9105.899730098101
 2017,Supply,Energy residuals:,,Energy residuals from end-use,49,50736.90050648959
 2017,Supply,Energy residuals:,,Energy residuals from end-use,55,6419.056561789382
-2017,Supply,Energy residuals:,,Energy residuals from end-use,60,5135.966899541849
+2017,Supply,Energy residuals:,,Energy residuals from end-use,60,5135.966899541848
 2017,Supply,Energy residuals:,,Energy residuals from end-use,64,748.929699486955
-2017,Supply,Energy residuals:,,Energy residuals from end-use,77,5867.808535273318
-2017,Supply,Energy residuals:,,Energy residuals from end-use,84,2438.3815255906143
-2017,Supply,Energy residuals:,,Energy residuals from end-use,85,312.1519939909127
-2017,Supply,Energy residuals:,,Energy residuals from end-use,86,542.6442607384745
+2017,Supply,Energy residuals:,,Energy residuals from end-use,77,5867.808535273317
+2017,Supply,Energy residuals:,,Energy residuals from end-use,84,2438.381525590614
+2017,Supply,Energy residuals:,,Energy residuals from end-use,85,312.1519939909126
+2017,Supply,Energy residuals:,,Energy residuals from end-use,86,542.6442607384744
 2017,Supply,Energy residuals:,,Energy residuals from end-use,94,79.51743756436785
 2017,Supply,Energy residuals:,,Energy residuals from end-use,HH,122025.77350700172
 2017,Supply,Energy residuals:,,Energy residuals from losses,01,9294.696
 2017,Supply,Energy residuals:,,Energy residuals from losses,06,334.944
-2017,Supply,Energy residuals:,,Energy residuals from losses,19,502.4159999999984
+2017,Supply,Energy residuals:,,Energy residuals from losses,19,502.41599999999664
 2017,Supply,Energy residuals:,,Energy residuals from losses,20,8469.8964
-2017,Supply,Energy residuals:,,Energy residuals from losses,35,95999.13720000003
-2017,Supply,Other residual flows:,,Energy from solid waste,ACC,502.4160000000001
+2017,Supply,Energy residuals:,,Energy residuals from losses,35,95999.13720000001
+2017,Supply,Other residual flows:,,Energy from solid waste,ACC,502.41600000000017
 2017,Supply,Other residual flows:,,Residuals from end-use for non-energy purposes,41,13272.156
 2017,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,20,4019.328000000001
 2017,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,1938.4884000000002
@@ -430,7 +430,7 @@ year,quadrant,level1,level2,product,activity,tj
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,01,19316.467592051493
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,06,1568.413422475158
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,07,2299.9421915355056
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,10,1791.727830483877
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,10,1791.7278304838767
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1140.7436353155945
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,16,12773.60653068656
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,19,837.36
@@ -438,21 +438,21 @@ year,quadrant,level1,level2,product,activity,tj
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,23,26434.30656502933
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,24,1795.8282369207166
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,36,1290.8983513785217
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,41,8393.179442752435
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,45,4833.536434166334
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,49,41274.7325064896
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,41,8393.179442752433
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,45,4833.5364341663335
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,49,41274.73250648959
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,55,1036.8058149612787
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,60,1104.0972507284287
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,64,143.29518095999128
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,77,3299.582528409281
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1509.8937930770192
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,268.7905224391409
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,433.9161902772063
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,61.62870683645519
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,77,3299.5825284092807
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1509.893793077019
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,268.79052243914083
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,433.9161902772062
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,61.62870683645518
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,-6234.145200000001
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,57130.37350700172
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,57130.373507001714
 2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,88885.76400000001
-2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,376.812
+2017,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,376.8120000000001
 2017,Use,Energy products:,Transformation of energy products by SIEC class:,Biofuels,01,15826.104000000001
 2017,Use,Energy products:,Transformation of energy products by SIEC class:,Electricity,35,1938.4884000000002
 2017,Use,Energy products:,Transformation of energy products by SIEC class:,Heat,20,4019.328000000001
@@ -463,7 +463,7 @@ year,quadrant,level1,level2,product,activity,tj
 2017,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,35,25.1208
 2017,Use,Energy residuals:,,Energy residuals from end-use,ENV,358820.06436
 2017,Use,Energy residuals:,,Energy residuals from losses,ENV,114601.08960000002
-2017,Use,Other residual flows:,,Energy from solid waste,19,502.4160000000001
+2017,Use,Other residual flows:,,Energy from solid waste,19,502.41600000000017
 2017,Use,Other residual flows:,,Residuals from end-use for non-energy purposes,ACC,13272.156
 2018,Supply,Energy from natural inputs:,,Inputs of energy from renewable sources,ENV,8876.016
 2018,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,217378.65600000002
@@ -478,36 +478,36 @@ year,quadrant,level1,level2,product,activity,tj
 2018,Supply,Energy products:,Production of energy products by SIEC class:,Oil,06,85996.872
 2018,Supply,Energy products:,Production of energy products by SIEC class:,Oil,19,45514.7028
 2018,Supply,Energy products:,Production of energy products by SIEC class:,Oil,ROW,198705.52800000002
-2018,Supply,Energy residuals:,,Energy residuals from end-use,01,24480.12014613337
+2018,Supply,Energy residuals:,,Energy residuals from end-use,01,24480.120146133366
 2018,Supply,Energy residuals:,,Energy residuals from end-use,06,7523.248389082569
 2018,Supply,Energy residuals:,,Energy residuals from end-use,07,3745.0259194753735
 2018,Supply,Energy residuals:,,Energy residuals from end-use,10,8367.28271397611
-2018,Supply,Energy residuals:,,Energy residuals from end-use,13,5651.4347477313695
+2018,Supply,Energy residuals:,,Energy residuals from end-use,13,5651.434747731369
 2018,Supply,Energy residuals:,,Energy residuals from end-use,16,22891.486061016793
 2018,Supply,Energy residuals:,,Energy residuals from end-use,19,925.2828000000001
-2018,Supply,Energy residuals:,,Energy residuals from end-use,20,9238.68466441464
-2018,Supply,Energy residuals:,,Energy residuals from end-use,23,51362.236178511506
+2018,Supply,Energy residuals:,,Energy residuals from end-use,20,9238.684664414639
+2018,Supply,Energy residuals:,,Energy residuals from end-use,23,51362.2361785115
 2018,Supply,Energy residuals:,,Energy residuals from end-use,24,3425.6934263859303
 2018,Supply,Energy residuals:,,Energy residuals from end-use,35,2972.628
-2018,Supply,Energy residuals:,,Energy residuals from end-use,36,6204.791118889328
+2018,Supply,Energy residuals:,,Energy residuals from end-use,36,6204.791118889327
 2018,Supply,Energy residuals:,,Energy residuals from end-use,41,7544.243001941563
 2018,Supply,Energy residuals:,,Energy residuals from end-use,45,8524.083189867992
 2018,Supply,Energy residuals:,,Energy residuals from end-use,49,52460.89564316315
 2018,Supply,Energy residuals:,,Energy residuals from end-use,55,8379.878364506903
-2018,Supply,Energy residuals:,,Energy residuals from end-use,60,5094.446387403819
+2018,Supply,Energy residuals:,,Energy residuals from end-use,60,5094.446387403818
 2018,Supply,Energy residuals:,,Energy residuals from end-use,64,714.2934915033961
 2018,Supply,Energy residuals:,,Energy residuals from end-use,77,6152.372555936915
-2018,Supply,Energy residuals:,,Energy residuals from end-use,84,2280.8397778389563
+2018,Supply,Energy residuals:,,Energy residuals from end-use,84,2280.839777838956
 2018,Supply,Energy residuals:,,Energy residuals from end-use,85,324.27232705592985
 2018,Supply,Energy residuals:,,Energy residuals from end-use,86,574.7666714807766
 2018,Supply,Energy residuals:,,Energy residuals from end-use,94,82.68814533566648
 2018,Supply,Energy residuals:,,Energy residuals from end-use,HH,124229.77787834797
 2018,Supply,Energy residuals:,,Energy residuals from losses,01,9545.904
 2018,Supply,Energy residuals:,,Energy residuals from losses,06,460.548
-2018,Supply,Energy residuals:,,Energy residuals from losses,19,581.9652000000026
-2018,Supply,Energy residuals:,,Energy residuals from losses,20,8386.160399999999
-2018,Supply,Energy residuals:,,Energy residuals from losses,35,95350.1832
-2018,Supply,Other residual flows:,,Energy from solid waste,ACC,502.41600000000017
+2018,Supply,Energy residuals:,,Energy residuals from losses,19,581.965200000002
+2018,Supply,Energy residuals:,,Energy residuals from losses,20,8386.1604
+2018,Supply,Energy residuals:,,Energy residuals from losses,35,95350.18319999998
+2018,Supply,Other residual flows:,,Energy from solid waste,ACC,502.4160000000001
 2018,Supply,Other residual flows:,,Residuals from end-use for non-energy purposes,41,12979.08
 2018,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,20,4144.932
 2018,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,2302.74
@@ -585,9 +585,9 @@ year,quadrant,level1,level2,product,activity,tj
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Natural gas,STATDIFF,-418.68
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,01,19200.984026133367
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,06,1745.464389082568
-2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,07,2321.513919475374
+2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,07,2321.5139194753738
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,10,2045.2147139761098
-2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1339.0307477313684
+2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1339.0307477313681
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,16,13387.45006101679
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,19,925.2828000000001
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,20,2372.3326644146405
@@ -602,12 +602,12 @@ year,quadrant,level1,level2,product,activity,tj
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,64,139.19995165817667
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,77,3063.35902356036
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1504.3983805098133
-2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,287.4520846642689
-2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,479.0776489812797
+2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,287.45208466426885
+2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,479.07764898127976
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,67.12915556330789
-2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,-5153.9508
+2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,-5153.9508000000005
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,57743.393878347975
-2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,81768.204
+2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,81768.20400000001
 2018,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,3056.3640000000005
 2018,Use,Energy products:,Transformation of energy products by SIEC class:,Biofuels,01,16202.916000000001
 2018,Use,Energy products:,Transformation of energy products by SIEC class:,Electricity,35,2298.5532000000003
@@ -619,7 +619,7 @@ year,quadrant,level1,level2,product,activity,tj
 2018,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,35,20.934
 2018,Use,Energy residuals:,,Energy residuals from end-use,ENV,363150.47160000005
 2018,Use,Energy residuals:,,Energy residuals from losses,ENV,114324.76079999997
-2018,Use,Other residual flows:,,Energy from solid waste,19,502.41600000000017
+2018,Use,Other residual flows:,,Energy from solid waste,19,502.4160000000001
 2018,Use,Other residual flows:,,Residuals from end-use for non-energy purposes,ACC,12979.08
 2019,Supply,Energy from natural inputs:,,Inputs of energy from renewable sources,ENV,9223.5204
 2019,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,203311.008
@@ -633,7 +633,7 @@ year,quadrant,level1,level2,product,activity,tj
 2019,Supply,Energy products:,Production of energy products by SIEC class:,Natural gas,ROW,151980.84
 2019,Supply,Energy products:,Production of energy products by SIEC class:,Oil,06,78879.31200000002
 2019,Supply,Energy products:,Production of energy products by SIEC class:,Oil,19,6531.408
-2019,Supply,Energy products:,Production of energy products by SIEC class:,Oil,ROW,193597.63200000004
+2019,Supply,Energy products:,Production of energy products by SIEC class:,Oil,ROW,193597.632
 2019,Supply,Energy residuals:,,Energy residuals from end-use,01,24270.785276853454
 2019,Supply,Energy residuals:,,Energy residuals from end-use,06,7788.951987605794
 2019,Supply,Energy residuals:,,Energy residuals from end-use,07,4904.930441077627
@@ -645,13 +645,13 @@ year,quadrant,level1,level2,product,activity,tj
 2019,Supply,Energy residuals:,,Energy residuals from end-use,23,50182.475821015585
 2019,Supply,Energy residuals:,,Energy residuals from end-use,24,4845.860101421861
 2019,Supply,Energy residuals:,,Energy residuals from end-use,35,2930.76
-2019,Supply,Energy residuals:,,Energy residuals from end-use,36,5661.94694014922
-2019,Supply,Energy residuals:,,Energy residuals from end-use,41,7801.656827650598
+2019,Supply,Energy residuals:,,Energy residuals from end-use,36,5661.946940149221
+2019,Supply,Energy residuals:,,Energy residuals from end-use,41,7801.656827650597
 2019,Supply,Energy residuals:,,Energy residuals from end-use,45,8611.372597524238
-2019,Supply,Energy residuals:,,Energy residuals from end-use,49,48979.24026903873
+2019,Supply,Energy residuals:,,Energy residuals from end-use,49,48979.24026903874
 2019,Supply,Energy residuals:,,Energy residuals from end-use,55,8889.147547591003
 2019,Supply,Energy residuals:,,Energy residuals from end-use,60,6932.207326008249
-2019,Supply,Energy residuals:,,Energy residuals from end-use,64,846.0514805165689
+2019,Supply,Energy residuals:,,Energy residuals from end-use,64,846.0514805165687
 2019,Supply,Energy residuals:,,Energy residuals from end-use,77,6654.0872513252925
 2019,Supply,Energy residuals:,,Energy residuals from end-use,84,2238.5297716848986
 2019,Supply,Energy residuals:,,Energy residuals from end-use,85,360.7453222066125
@@ -660,16 +660,16 @@ year,quadrant,level1,level2,product,activity,tj
 2019,Supply,Energy residuals:,,Energy residuals from end-use,HH,123639.92574917596
 2019,Supply,Energy residuals:,,Energy residuals from losses,01,9755.243999999997
 2019,Supply,Energy residuals:,,Energy residuals from losses,06,125.604
-2019,Supply,Energy residuals:,,Energy residuals from losses,19,83.73600000000047
+2019,Supply,Energy residuals:,,Energy residuals from losses,19,83.73600000000003
 2019,Supply,Energy residuals:,,Energy residuals from losses,20,7975.853999999999
-2019,Supply,Energy residuals:,,Energy residuals from losses,35,99243.90720000002
+2019,Supply,Energy residuals:,,Energy residuals from losses,35,99243.9072
 2019,Supply,Other residual flows:,,Energy from solid waste,ACC,502.41600000000017
 2019,Supply,Other residual flows:,,Residuals from end-use for non-energy purposes,41,9671.508
 2019,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,20,4144.932
 2019,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,2482.7724
 2019,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,HH,2595.8160000000003
 2019,Use,Energy from natural inputs:,,Natural resource inputs,01,45803.592000000004
-2019,Use,Energy from natural inputs:,,Natural resource inputs,06,157507.41600000003
+2019,Use,Energy from natural inputs:,,Natural resource inputs,06,157507.416
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,36,112.99880822574593
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,45,89.49306580311867
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,55,181.89303029292674
@@ -750,21 +750,21 @@ year,quadrant,level1,level2,product,activity,tj
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,23,25857.16782101558
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,24,1831.3641014218613
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,36,926.5435501022927
-2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,41,7801.656827650598
+2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,41,7801.656827650597
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,45,4861.016519934878
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,49,44331.89226903873
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,55,1266.6169581154188
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,60,1268.053256091573
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,64,147.0763074410121
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,77,3712.3409210359273
-2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1483.8452776661682
+2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1483.845277666168
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,323.4860101007272
-2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,465.62516867984976
+2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,465.6251686798498
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,63.31547464454547
-2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,636.3936000000006
+2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,636.3935999999999
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,55185.745749175956
 2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,71719.88399999999
-2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,-753.624
+2019,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,-753.6240000000005
 2019,Use,Energy products:,Transformation of energy products by SIEC class:,Biofuels,01,16579.728
 2019,Use,Energy products:,Transformation of energy products by SIEC class:,Electricity,35,2478.5856000000003
 2019,Use,Energy products:,Transformation of energy products by SIEC class:,Heat,20,4144.932
@@ -774,11 +774,11 @@ year,quadrant,level1,level2,product,activity,tj
 2019,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,20,565.218
 2019,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,35,8.373600000000001
 2019,Use,Energy residuals:,,Energy residuals from end-use,ENV,359552.7543600001
-2019,Use,Energy residuals:,,Energy residuals from losses,ENV,117184.34520000001
+2019,Use,Energy residuals:,,Energy residuals from losses,ENV,117184.3452
 2019,Use,Other residual flows:,,Energy from solid waste,19,502.41600000000017
 2019,Use,Other residual flows:,,Residuals from end-use for non-energy purposes,ACC,9671.508
 2020,Supply,Energy from natural inputs:,,Inputs of energy from renewable sources,ENV,7829.316000000001
-2020,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,199961.56800000003
+2020,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,199961.568
 2020,Supply,Energy products:,Production of energy products by SIEC class:,Biofuels,01,52963.02
 2020,Supply,Energy products:,Production of energy products by SIEC class:,Electricity,20,4228.668000000001
 2020,Supply,Energy products:,Production of energy products by SIEC class:,Electricity,35,75069.324
@@ -788,7 +788,7 @@ year,quadrant,level1,level2,product,activity,tj
 2020,Supply,Energy products:,Production of energy products by SIEC class:,Natural gas,06,81014.58000000002
 2020,Supply,Energy products:,Production of energy products by SIEC class:,Natural gas,ROW,140006.592
 2020,Supply,Energy products:,Production of energy products by SIEC class:,Oil,06,72934.05600000001
-2020,Supply,Energy products:,Production of energy products by SIEC class:,Oil,19,47624.850000000006
+2020,Supply,Energy products:,Production of energy products by SIEC class:,Oil,19,47624.85
 2020,Supply,Energy products:,Production of energy products by SIEC class:,Oil,ROW,185475.24000000002
 2020,Supply,Energy residuals:,,Energy residuals from end-use,01,24435.79515196317
 2020,Supply,Energy residuals:,,Energy residuals from end-use,06,8209.129897579394
@@ -806,20 +806,20 @@ year,quadrant,level1,level2,product,activity,tj
 2020,Supply,Energy residuals:,,Energy residuals from end-use,45,9305.085377271556
 2020,Supply,Energy residuals:,,Energy residuals from end-use,49,33061.74482162618
 2020,Supply,Energy residuals:,,Energy residuals from end-use,55,4375.390280518005
-2020,Supply,Energy residuals:,,Energy residuals from end-use,60,7228.007617921528
-2020,Supply,Energy residuals:,,Energy residuals from end-use,64,890.7535918065001
+2020,Supply,Energy residuals:,,Energy residuals from end-use,60,7228.0076179215275
+2020,Supply,Energy residuals:,,Energy residuals from end-use,64,890.7535918065
 2020,Supply,Energy residuals:,,Energy residuals from end-use,77,6524.241704246365
 2020,Supply,Energy residuals:,,Energy residuals from end-use,84,2648.7203265209123
 2020,Supply,Energy residuals:,,Energy residuals from end-use,85,400.749753467127
 2020,Supply,Energy residuals:,,Energy residuals from end-use,86,648.4780070691268
-2020,Supply,Energy residuals:,,Energy residuals from end-use,94,82.1015376290223
-2020,Supply,Energy residuals:,,Energy residuals from end-use,HH,126048.18132152323
+2020,Supply,Energy residuals:,,Energy residuals from end-use,94,82.10153762902229
+2020,Supply,Energy residuals:,,Energy residuals from end-use,HH,126048.18132152321
 2020,Supply,Energy residuals:,,Energy residuals from losses,01,9964.584000000003
 2020,Supply,Energy residuals:,,Energy residuals from losses,06,251.208
-2020,Supply,Energy residuals:,,Energy residuals from losses,19,565.2179999999942
+2020,Supply,Energy residuals:,,Energy residuals from losses,19,565.2179999999952
 2020,Supply,Energy residuals:,,Energy residuals from losses,20,6548.1552
-2020,Supply,Energy residuals:,,Energy residuals from losses,35,97389.15480000003
-2020,Supply,Other residual flows:,,Energy from solid waste,ACC,418.68
+2020,Supply,Energy residuals:,,Energy residuals from losses,35,97389.15480000005
+2020,Supply,Other residual flows:,,Energy from solid waste,ACC,418.6800000000002
 2020,Supply,Other residual flows:,,Residuals from end-use for non-energy purposes,41,7033.8240000000005
 2020,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,20,2763.288
 2020,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,2386.476
@@ -827,15 +827,15 @@ year,quadrant,level1,level2,product,activity,tj
 2020,Use,Energy from natural inputs:,,Natural resource inputs,01,46012.932
 2020,Use,Energy from natural inputs:,,Natural resource inputs,06,153948.63600000003
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,36,148.4526486318168
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,45,114.97670632610996
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,55,108.16707963659113
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,60,169.76217586211823
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,64,20.988005944337722
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,45,114.97670632610995
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,55,108.16707963659111
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,60,169.7621758621182
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,64,20.98800594433772
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,77,78.21853364747918
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,84,24.63593915725644
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,85,1.179788377548894
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,86,3.0798087325060135
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,94,0.42731368423575306
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,84,24.635939157256434
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,85,1.1797883775488938
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,86,3.079808732506013
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,94,0.42731368423575294
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Biofuels,HH,35420.328
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,01,4736.10816
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,07,1046.7
@@ -846,17 +846,17 @@ year,quadrant,level1,level2,product,activity,tj
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,23,4982.292
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,24,2512.08
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,35,16161.048
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,36,3405.132627992298
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,45,2637.278201355147
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,36,3405.1326279922973
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,45,2637.2782013551464
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,49,251.208
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,55,2481.082389164309
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,60,3893.9199088373375
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,64,481.4123863482465
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,77,1794.1376155390537
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,84,565.0868544195695
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,85,27.061395910027755
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,86,70.64311280185669
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,94,9.801507632157586
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,55,2481.0823891643086
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,60,3893.9199088373366
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,64,481.4123863482464
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,77,1794.1376155390535
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,84,565.0868544195694
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,85,27.061395910027752
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,86,70.64311280185667
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,94,9.801507632157584
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,HH,19133.676
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,ROW,3475.0440000000003
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Electricity,STATDIFF,209.34
@@ -899,7 +899,7 @@ year,quadrant,level1,level2,product,activity,tj
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,06,1426.5138975793934
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,07,3020.977987685382
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,10,2262.8904794102327
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1275.5782041130296
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,13,1275.5782041130299
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,16,10988.813133312004
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,19,1193.238
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,20,2095.0166408279583
@@ -916,11 +916,11 @@ year,quadrant,level1,level2,product,activity,tj
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1802.167867229688
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,360.20927534360317
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,542.6480794983889
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,67.41797115447123
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,67.41797115447125
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,2432.5308000000005
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,58766.30532152321
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,58766.305321523214
 2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,74734.38
-2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,-3014.4959999999996
+2020,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,-3014.496
 2020,Use,Energy products:,Transformation of energy products by SIEC class:,Biofuels,01,16914.672000000002
 2020,Use,Energy products:,Transformation of energy products by SIEC class:,Electricity,35,2382.2892
 2020,Use,Energy products:,Transformation of energy products by SIEC class:,Heat,20,2763.288
@@ -930,8 +930,8 @@ year,quadrant,level1,level2,product,activity,tj
 2020,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,20,519.1632000000001
 2020,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,35,217.7136
 2020,Use,Energy residuals:,,Energy residuals from end-use,ENV,334723.77432
-2020,Use,Energy residuals:,,Energy residuals from losses,ENV,114718.32000000005
-2020,Use,Other residual flows:,,Energy from solid waste,19,418.68
+2020,Use,Energy residuals:,,Energy residuals from losses,ENV,114718.32000000004
+2020,Use,Other residual flows:,,Energy from solid waste,19,418.6800000000002
 2020,Use,Other residual flows:,,Residuals from end-use for non-energy purposes,ACC,7033.8240000000005
 2021,Supply,Energy from natural inputs:,,Inputs of energy from renewable sources,ENV,8444.775599999999
 2021,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,228808.62000000002
@@ -957,7 +957,7 @@ year,quadrant,level1,level2,product,activity,tj
 2021,Supply,Energy residuals:,,Energy residuals from end-use,23,50910.458271828364
 2021,Supply,Energy residuals:,,Energy residuals from end-use,24,4974.490935546218
 2021,Supply,Energy residuals:,,Energy residuals from end-use,35,2888.8920000000003
-2021,Supply,Energy residuals:,,Energy residuals from end-use,36,6630.283876733458
+2021,Supply,Energy residuals:,,Energy residuals from end-use,36,6630.283876733459
 2021,Supply,Energy residuals:,,Energy residuals from end-use,41,7375.603740275104
 2021,Supply,Energy residuals:,,Energy residuals from end-use,45,9832.707251055492
 2021,Supply,Energy residuals:,,Energy residuals from end-use,49,41609.08955321148
@@ -965,20 +965,20 @@ year,quadrant,level1,level2,product,activity,tj
 2021,Supply,Energy residuals:,,Energy residuals from end-use,60,7731.616277611325
 2021,Supply,Energy residuals:,,Energy residuals from end-use,64,933.1961486363408
 2021,Supply,Energy residuals:,,Energy residuals from end-use,77,6958.523165622738
-2021,Supply,Energy residuals:,,Energy residuals from end-use,84,2606.906926315088
-2021,Supply,Energy residuals:,,Energy residuals from end-use,85,446.1544929701866
+2021,Supply,Energy residuals:,,Energy residuals from end-use,84,2606.9069263150877
+2021,Supply,Energy residuals:,,Energy residuals from end-use,85,446.15449297018654
 2021,Supply,Energy residuals:,,Energy residuals from end-use,86,693.7023024838654
 2021,Supply,Energy residuals:,,Energy residuals from end-use,94,85.54187205794425
 2021,Supply,Energy residuals:,,Energy residuals from end-use,HH,131193.66582388655
 2021,Supply,Energy residuals:,,Energy residuals from losses,01,10132.055999999999
 2021,Supply,Energy residuals:,,Energy residuals from losses,06,711.7560000000001
-2021,Supply,Energy residuals:,,Energy residuals from losses,19,1176.4908000000105
+2021,Supply,Energy residuals:,,Energy residuals from losses,19,1176.4908000000012
 2021,Supply,Energy residuals:,,Energy residuals from losses,20,7130.120400000001
 2021,Supply,Energy residuals:,,Energy residuals from losses,35,102438.4356
 2021,Supply,Other residual flows:,,Energy from solid waste,ACC,418.6800000000002
 2021,Supply,Other residual flows:,,Residuals from end-use for non-energy purposes,41,8206.127999999999
 2021,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,20,3265.704
-2021,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,2415.7836
+2021,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,2415.7835999999998
 2021,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,HH,2763.288
 2021,Use,Energy from natural inputs:,,Natural resource inputs,01,46138.536
 2021,Use,Energy from natural inputs:,,Natural resource inputs,06,182670.084
@@ -1065,18 +1065,18 @@ year,quadrant,level1,level2,product,activity,tj
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,41,7375.603740275104
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,45,5682.4601877113655
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,49,30179.12555321148
-2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,55,792.4239910272995
-2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,60,1473.3536691008906
+2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,55,792.4239910272994
+2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,60,1473.3536691008908
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,64,173.87802622092013
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,77,4207.608231073321
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1823.8578797719058
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,402.9436188853406
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,565.3421148114546
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,69.98947230566051
-2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,4366.8324
+2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,4366.832400000001
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,HH,62195.201823886564
 2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ROW,93784.32
-2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,-1967.7960000000003
+2021,Use,Energy products:,End-use of energy products by SIEC class:,Oil,STATDIFF,-1967.7960000000005
 2021,Use,Energy products:,Transformation of energy products by SIEC class:,Biofuels,01,17207.748
 2021,Use,Energy products:,Transformation of energy products by SIEC class:,Electricity,35,2407.41
 2021,Use,Energy products:,Transformation of energy products by SIEC class:,Heat,20,3265.704
@@ -1086,11 +1086,11 @@ year,quadrant,level1,level2,product,activity,tj
 2021,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,20,556.8444000000001
 2021,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,35,8.373600000000001
 2021,Use,Energy residuals:,,Energy residuals from end-use,ENV,363170.14956000005
-2021,Use,Energy residuals:,,Energy residuals from losses,ENV,121588.8588
+2021,Use,Energy residuals:,,Energy residuals from losses,ENV,121588.85880000002
 2021,Use,Other residual flows:,,Energy from solid waste,19,418.6800000000002
 2021,Use,Other residual flows:,,Residuals from end-use for non-energy purposes,ACC,8206.127999999999
 2022,Supply,Energy from natural inputs:,,Inputs of energy from renewable sources,ENV,8235.4356
-2022,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,211098.456
+2022,Supply,Energy from natural inputs:,,Natural resource inputs,ENV,211098.45600000003
 2022,Supply,Energy products:,Production of energy products by SIEC class:,Biofuels,01,54260.92800000001
 2022,Supply,Energy products:,Production of energy products by SIEC class:,Electricity,20,4814.820000000001
 2022,Supply,Energy products:,Production of energy products by SIEC class:,Electricity,35,74679.9516
@@ -1100,7 +1100,7 @@ year,quadrant,level1,level2,product,activity,tj
 2022,Supply,Energy products:,Production of energy products by SIEC class:,Natural gas,06,88425.216
 2022,Supply,Energy products:,Production of energy products by SIEC class:,Natural gas,ROW,142853.616
 2022,Supply,Energy products:,Production of energy products by SIEC class:,Oil,06,75655.47600000001
-2022,Supply,Energy products:,Production of energy products by SIEC class:,Oil,19,62186.540400000005
+2022,Supply,Energy products:,Production of energy products by SIEC class:,Oil,19,62186.5404
 2022,Supply,Energy products:,Production of energy products by SIEC class:,Oil,ROW,186982.488
 2022,Supply,Energy residuals:,,Energy residuals from end-use,01,25672.52183202985
 2022,Supply,Energy residuals:,,Energy residuals from end-use,06,9167.161360956057
@@ -1129,9 +1129,9 @@ year,quadrant,level1,level2,product,activity,tj
 2022,Supply,Energy residuals:,,Energy residuals from losses,01,10341.396000000002
 2022,Supply,Energy residuals:,,Energy residuals from losses,06,753.624
 2022,Supply,Energy residuals:,,Energy residuals from losses,19,1076.007599999997
-2022,Supply,Energy residuals:,,Energy residuals from losses,20,7021.2636
+2022,Supply,Energy residuals:,,Energy residuals from losses,20,7021.263599999999
 2022,Supply,Energy residuals:,,Energy residuals from losses,35,90878.68080000002
-2022,Supply,Other residual flows:,,Energy from solid waste,ACC,418.67999999999995
+2022,Supply,Other residual flows:,,Energy from solid waste,ACC,418.6800000000002
 2022,Supply,Other residual flows:,,Residuals from end-use for non-energy purposes,41,7117.560000000001
 2022,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,20,3140.1000000000004
 2022,Use,Energy from natural inputs:,,Inputs of energy from renewable sources,35,2373.9156000000003
@@ -1227,7 +1227,7 @@ year,quadrant,level1,level2,product,activity,tj
 2022,Use,Energy products:,End-use of energy products by SIEC class:,Oil,64,159.03661872244453
 2022,Use,Energy products:,End-use of energy products by SIEC class:,Oil,77,3791.8123641699926
 2022,Use,Energy products:,End-use of energy products by SIEC class:,Oil,84,1597.0474330273134
-2022,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,403.27155002940276
+2022,Use,Energy products:,End-use of energy products by SIEC class:,Oil,85,403.2715500294028
 2022,Use,Energy products:,End-use of energy products by SIEC class:,Oil,86,526.7060109161453
 2022,Use,Energy products:,End-use of energy products by SIEC class:,Oil,94,67.82801506315627
 2022,Use,Energy products:,End-use of energy products by SIEC class:,Oil,ACC,-18932.709600000002
@@ -1243,6 +1243,6 @@ year,quadrant,level1,level2,product,activity,tj
 2022,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,20,531.7236
 2022,Use,Energy products:,Transformation of energy products by SIEC class:,Oil,35,8.373600000000001
 2022,Use,Energy residuals:,,Energy residuals from end-use,ENV,377183.78784000006
-2022,Use,Energy residuals:,,Energy residuals from losses,ENV,110070.97200000001
-2022,Use,Other residual flows:,,Energy from solid waste,19,418.67999999999995
+2022,Use,Energy residuals:,,Energy residuals from losses,ENV,110070.97200000002
+2022,Use,Other residual flows:,,Energy from solid waste,19,418.6800000000002
 2022,Use,Other residual flows:,,Residuals from end-use for non-energy purposes,ACC,7117.560000000001

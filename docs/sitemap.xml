@@ -1,259 +1,271 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/13-workplan/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.322Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/07-indicators-way-forward/index.html</loc>
+    <lastmod>2026-11-27T18:31:00.068Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/11-aea-results/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.322Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/05-emissions-sources-classifications/index.html</loc>
+    <lastmod>2026-11-27T18:30:15.405Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/09-aea-classifications/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.322Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/03-energy-classifications-allocation/index.html</loc>
+    <lastmod>2026-11-27T18:29:30.802Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/07-pefa-results/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.321Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/01-framework-and-sources/index.html</loc>
+    <lastmod>2026-11-27T18:29:09.447Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/05-pefa-allocation/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.321Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/presentations/07-indicators-way-forward.html</loc>
+    <lastmod>2026-11-27T18:35:08.762Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/03-tools-and-pipeline/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.321Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/presentations/05-emissions-sources-classifications.html</loc>
+    <lastmod>2026-11-27T18:35:08.762Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/01-seea-framework/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.320Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/presentations/03-energy-classifications-allocation.html</loc>
+    <lastmod>2026-11-27T18:35:08.762Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/index.html</loc>
-    <lastmod>2026-11-27T17:03:14.376Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/presentations/01-framework-and-sources.html</loc>
+    <lastmod>2026-11-27T18:35:08.762Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/downloads.html</loc>
-    <lastmod>2026-11-27T17:03:29.639Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/documents/energy-accounts/index.html</loc>
-    <lastmod>2026-11-27T17:02:27.829Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/about.html</loc>
-    <lastmod>2026-11-27T17:03:29.640Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/index.html</loc>
-    <lastmod>2026-11-27T15:33:46.955Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/documents/emissions-accounts/index.html</loc>
-    <lastmod>2026-11-27T17:02:27.861Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/explorer/index.html</loc>
+    <lastmod>2026-11-27T18:27:43.743Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/en/documents/index.html</loc>
     <lastmod>2026-11-27T17:03:14.377Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/explorer/index.html</loc>
-    <lastmod>2026-11-27T17:08:34.372Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/documents/emissions-accounts/index.html</loc>
+    <lastmod>2026-11-27T18:27:15.048Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/index.html</loc>
+    <lastmod>2026-11-27T15:33:46.955Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/about.html</loc>
+    <lastmod>2026-11-27T17:03:29.640Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/documents/energy-accounts/index.html</loc>
+    <lastmod>2026-11-27T18:27:15.048Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/downloads.html</loc>
+    <lastmod>2026-11-27T18:27:32.829Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/index.html</loc>
+    <lastmod>2026-11-27T18:41:05.894Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/presentations/02-tools-and-pipeline.html</loc>
+    <lastmod>2026-11-27T18:35:08.762Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/presentations/04-energy-residence-results.html</loc>
+    <lastmod>2026-11-27T18:35:08.762Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/presentations/06-emissions-allocation-results.html</loc>
+    <lastmod>2026-11-27T18:35:08.762Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/en/presentations/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.323Z</lastmod>
+    <lastmod>2026-11-27T18:35:08.762Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/02-data-sources/index.html</loc>
-    <lastmod>2026-11-27T17:18:42.115Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/02-tools-and-pipeline/index.html</loc>
+    <lastmod>2026-11-27T18:29:09.449Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/04-pefa-classifications/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.321Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/04-energy-residence-results/index.html</loc>
+    <lastmod>2026-11-27T18:29:55.419Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/06-pefa-residence-checks/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.321Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/06-emissions-allocation-results/index.html</loc>
+    <lastmod>2026-11-27T18:30:39.186Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/08-aea-sources/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.321Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/07-indicators-way-forward/index.html</loc>
+    <lastmod>2026-11-27T18:37:52.226Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/10-aea-allocation-residence/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.322Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/05-emissions-sources-classifications/index.html</loc>
+    <lastmod>2026-11-27T18:37:30.860Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/en/slides/12-indicators-dissemination/index.html</loc>
-    <lastmod>2026-11-27T17:07:54.322Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/03-energy-classifications-allocation/index.html</loc>
+    <lastmod>2026-11-27T18:36:46.806Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/13-workplan/index.html</loc>
-    <lastmod>2026-11-27T17:20:02.992Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/01-framework-and-sources/index.html</loc>
+    <lastmod>2026-11-27T18:36:01.143Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/11-aea-results/index.html</loc>
-    <lastmod>2026-11-27T17:20:02.987Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/presentations/07-indicators-way-forward.html</loc>
+    <lastmod>2026-11-27T18:35:08.763Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/09-aea-classifications/index.html</loc>
-    <lastmod>2026-11-27T17:19:32.740Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/presentations/05-emissions-sources-classifications.html</loc>
+    <lastmod>2026-11-27T18:35:08.763Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/07-pefa-results/index.html</loc>
-    <lastmod>2026-11-27T17:19:32.735Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/presentations/03-energy-classifications-allocation.html</loc>
+    <lastmod>2026-11-27T18:35:08.763Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/05-pefa-allocation/index.html</loc>
-    <lastmod>2026-11-27T17:19:07.428Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/presentations/01-framework-and-sources.html</loc>
+    <lastmod>2026-11-27T18:35:08.763Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/03-tools-and-pipeline/index.html</loc>
-    <lastmod>2026-11-27T17:19:07.422Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/01-seea-framework/index.html</loc>
-    <lastmod>2026-11-27T17:18:36.878Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/index.html</loc>
-    <lastmod>2026-11-27T17:18:13.971Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/downloads.html</loc>
-    <lastmod>2026-11-27T17:18:13.973Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/documents/energy-accounts/index.html</loc>
-    <lastmod>2026-11-27T17:15:21.397Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/about.html</loc>
-    <lastmod>2026-11-27T17:18:13.974Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/documents/emissions-accounts/index.html</loc>
-    <lastmod>2026-11-27T17:17:29.908Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/explorer/index.html</loc>
+    <lastmod>2026-11-27T18:27:54.115Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/documents/index.html</loc>
     <lastmod>2026-11-27T17:18:13.972Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/explorer/index.html</loc>
-    <lastmod>2026-11-27T17:18:14.004Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/documents/emissions-accounts/index.html</loc>
+    <lastmod>2026-11-27T18:27:15.050Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/about.html</loc>
+    <lastmod>2026-11-27T17:18:13.974Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/documents/energy-accounts/index.html</loc>
+    <lastmod>2026-11-27T18:27:15.050Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/downloads.html</loc>
+    <lastmod>2026-11-27T18:27:32.833Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/index.html</loc>
+    <lastmod>2026-11-27T18:41:05.896Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/presentations/02-tools-and-pipeline.html</loc>
+    <lastmod>2026-11-27T18:35:08.763Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/presentations/04-energy-residence-results.html</loc>
+    <lastmod>2026-11-27T18:35:08.763Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/presentations/06-emissions-allocation-results.html</loc>
+    <lastmod>2026-11-27T18:35:08.763Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/fr/presentations/index.html</loc>
-    <lastmod>2026-11-27T17:18:13.976Z</lastmod>
+    <lastmod>2026-11-27T18:35:08.763Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/02-data-sources/index.html</loc>
-    <lastmod>2026-11-27T17:18:42.116Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/02-tools-and-pipeline/index.html</loc>
+    <lastmod>2026-11-27T18:36:01.145Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/04-pefa-classifications/index.html</loc>
-    <lastmod>2026-11-27T17:19:07.425Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/04-energy-residence-results/index.html</loc>
+    <lastmod>2026-11-27T18:36:46.808Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/06-pefa-residence-checks/index.html</loc>
-    <lastmod>2026-11-27T17:19:32.731Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/06-emissions-allocation-results/index.html</loc>
+    <lastmod>2026-11-27T18:37:30.862Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/08-aea-sources/index.html</loc>
-    <lastmod>2026-11-27T17:19:32.737Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/07-indicators-way-forward/index.html</loc>
+    <lastmod>2026-11-27T18:40:54.166Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/10-aea-allocation-residence/index.html</loc>
-    <lastmod>2026-11-27T17:20:02.985Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/05-emissions-sources-classifications/index.html</loc>
+    <lastmod>2026-11-27T18:40:54.159Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/fr/slides/12-indicators-dissemination/index.html</loc>
-    <lastmod>2026-11-27T17:20:02.990Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/03-energy-classifications-allocation/index.html</loc>
+    <lastmod>2026-11-27T18:39:42.672Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/13-workplan/index.html</loc>
-    <lastmod>2026-11-27T17:28:24.050Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/01-framework-and-sources/index.html</loc>
+    <lastmod>2026-11-27T18:38:49.565Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/11-aea-results/index.html</loc>
-    <lastmod>2026-11-27T17:28:24.045Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/presentations/07-indicators-way-forward.html</loc>
+    <lastmod>2026-11-27T18:35:08.764Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/09-aea-classifications/index.html</loc>
-    <lastmod>2026-11-27T17:27:57.646Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/presentations/05-emissions-sources-classifications.html</loc>
+    <lastmod>2026-11-27T18:35:08.764Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/07-pefa-results/index.html</loc>
-    <lastmod>2026-11-27T17:27:33.517Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/presentations/03-energy-classifications-allocation.html</loc>
+    <lastmod>2026-11-27T18:35:08.764Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/05-pefa-allocation/index.html</loc>
-    <lastmod>2026-11-27T17:27:33.512Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/presentations/01-framework-and-sources.html</loc>
+    <lastmod>2026-11-27T18:35:08.764Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/03-tools-and-pipeline/index.html</loc>
-    <lastmod>2026-11-27T17:27:02.451Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/01-seea-framework/index.html</loc>
-    <lastmod>2026-11-27T17:27:02.447Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/index.html</loc>
-    <lastmod>2026-11-27T17:26:26.185Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/downloads.html</loc>
-    <lastmod>2026-11-27T17:26:26.187Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/documents/energy-accounts/index.html</loc>
-    <lastmod>2026-11-27T17:23:43.023Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/about.html</loc>
-    <lastmod>2026-11-27T17:26:26.188Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/documents/emissions-accounts/index.html</loc>
-    <lastmod>2026-11-27T17:25:38.722Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/explorer/index.html</loc>
+    <lastmod>2026-11-27T18:27:54.115Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/ar/documents/index.html</loc>
     <lastmod>2026-11-27T17:26:26.186Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/explorer/index.html</loc>
-    <lastmod>2026-11-27T17:26:26.217Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/documents/emissions-accounts/index.html</loc>
+    <lastmod>2026-11-27T18:27:15.052Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/about.html</loc>
+    <lastmod>2026-11-27T17:26:26.188Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/documents/energy-accounts/index.html</loc>
+    <lastmod>2026-11-27T18:27:15.053Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/downloads.html</loc>
+    <lastmod>2026-11-27T18:27:32.837Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/index.html</loc>
+    <lastmod>2026-11-27T18:41:05.897Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/presentations/02-tools-and-pipeline.html</loc>
+    <lastmod>2026-11-27T18:35:08.764Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/presentations/04-energy-residence-results.html</loc>
+    <lastmod>2026-11-27T18:35:08.764Z</lastmod>
+  </url>
+  <url>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/presentations/06-emissions-allocation-results.html</loc>
+    <lastmod>2026-11-27T18:35:08.764Z</lastmod>
   </url>
   <url>
     <loc>https://renatovargas.github.io/tun-pefa-aea/ar/presentations/index.html</loc>
-    <lastmod>2026-11-27T17:26:26.189Z</lastmod>
+    <lastmod>2026-11-27T18:35:08.764Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/02-data-sources/index.html</loc>
-    <lastmod>2026-11-27T17:27:02.449Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/02-tools-and-pipeline/index.html</loc>
+    <lastmod>2026-11-27T18:39:42.669Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/04-pefa-classifications/index.html</loc>
-    <lastmod>2026-11-27T17:27:33.510Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/04-energy-residence-results/index.html</loc>
+    <lastmod>2026-11-27T18:39:42.675Z</lastmod>
   </url>
   <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/06-pefa-residence-checks/index.html</loc>
-    <lastmod>2026-11-27T17:27:33.515Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/08-aea-sources/index.html</loc>
-    <lastmod>2026-11-27T17:27:57.644Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/10-aea-allocation-residence/index.html</loc>
-    <lastmod>2026-11-27T17:27:57.649Z</lastmod>
-  </url>
-  <url>
-    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/12-indicators-dissemination/index.html</loc>
-    <lastmod>2026-11-27T17:28:24.047Z</lastmod>
+    <loc>https://renatovargas.github.io/tun-pefa-aea/ar/slides/06-emissions-allocation-results/index.html</loc>
+    <lastmod>2026-11-27T18:40:54.162Z</lastmod>
   </url>
 </urlset>

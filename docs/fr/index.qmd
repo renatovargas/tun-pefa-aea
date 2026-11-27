@@ -27,7 +27,7 @@ Concepts, méthodes de compilation et résultats des comptes de l'énergie et de
 ::: {.card-body}
 ### Présentations
 
-Diapositives pour chaque séance de l'atelier technique, du cadre du SCEE à la diffusion et au plan de travail.
+Sept présentations, du cadre du SCEE et des sources aux comptes de l'énergie, aux comptes des émissions et à leur diffusion.
 
 [Voir les présentations](presentations/index.qmd){.btn .btn-primary}
 :::

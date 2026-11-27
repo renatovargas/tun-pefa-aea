@@ -4,7 +4,7 @@ Why    : the workbooks are the product that users download. They hold the same n
          the three languages; only labels change.
 Inputs : data/intermediate/pefa.parquet (script 13), pefa_indicators.parquet (script 14)
          data/lookups/activities.csv, imf_sections.csv, pefa_rows.csv, terms.csv
-Outputs: data/outputs/accounts/<language>/pefa_accounts.xlsx with sheets:
+Outputs: data/outputs/accounts/<language>/pefa-accounts-<language>.xlsx with sheets:
            Notes; Data (all years, long format); Supply <year> and Use <year> (products in
            rows, industries in columns, as in the PEFA sheet of the IMF tool); ISIC sections
            (all years, by section, as in the tool); Indicators.
@@ -24,7 +24,7 @@ import polars as pl
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from common import ACCOUNTS, LANGUAGES, labels, read_intermediate, read_lookup, terms, write_workbook  # noqa: E402
 
-NAME = "pefa_accounts"
+NAME = "pefa-accounts"
 
 
 def row_order() -> dict[str, dict[str, int]]:
@@ -121,7 +121,7 @@ def main() -> None:
         sheets.append((t["sheet_isic"], isic_data(pefa, lang), 1))
         sheets.append((t["sheet_indicators"], indicator_data(indicators, lang), 3))
         notes = [t[k] for k in ["title_pefa", "unit_tj", "note_source_pefa", "note_method_pefa", "note_provisional", "note_site", "note_code"]]
-        write_workbook(ACCOUNTS / lang / f"{NAME}.xlsx", t["sheet_notes"], notes, sheets, right_to_left=lang == "ar")
+        write_workbook(ACCOUNTS / lang / f"{NAME}-{lang}.xlsx", t["sheet_notes"], notes, sheets, right_to_left=lang == "ar")
 
 
 if __name__ == "__main__":

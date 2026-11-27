@@ -1,0 +1,24 @@
+---
+title: "حسابات الانبعاثات: التوزيع والإقامة والنتائج"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/06-emissions-allocation-results/index.html" title="حسابات الانبعاثات: التوزيع والإقامة والنتائج" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ شاشة كاملة](../slides/06-emissions-allocation-results/index.html){target="_blank"}
+::::
+
+انقر داخل الشرائح واستخدم مفاتيح الأسهم للتنقل. اضغط `F` للشاشة الكاملة، و`S` لعرض المتحدث، و`Esc` للنظرة الشاملة.
+
+## في هذا العرض
+
+- مصفوفة التحويل وخروج تونس عن الافتراضي
+- تعديل الإقامة ببيانات المنظمة وجدول الربط
+- معاملات الانبعاث الضمنية والنتائج الأولى والنشر
+
+## الوثيقة المرتبطة
+
+- [حسابات انبعاثات الهواء](../documents/emissions-accounts/index.qmd)

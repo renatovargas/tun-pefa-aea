@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="fr-FR"><head>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
+
+  <meta name="author" content="Renato Vargas">
+  <meta name="author" content="Achille Pegoue">
+  <title>TUN: PEFA AEA – Comptes de l’énergie : nomenclatures et répartition</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto-756dab751dd6b2c820ca611e6615d88d.css">
+  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+  <script>
+  window.PlotlyConfig = {MathJaxConfig: 'local'};
+  if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+  </script>
+  <script type="module">import "https://cdn.plot.ly/plotly-4.1.1.min"</script>
+
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="theme-title center" data-state="sans-pied">
+  <h1 class="title">Comptes de l’énergie : nomenclatures et répartition</h1>
+  <p class="subtitle">Des lignes du bilan aux branches des comptes nationaux</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Renato Vargas
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Achille Pegoue
+</div>
+</div>
+</div>
+
+</section>
+<section id="contenu-de-cette-présentation" class="slide level2 theme-content">
+<h2>Contenu de cette présentation</h2>
+<ol type="1">
+<li>Les lignes et les colonnes des comptes de l’énergie : produits, flux et activités.</li>
+<li>Comment chaque ligne du bilan trouve sa branche, et les deux lignes qui demandent des clés.</li>
+<li>La matrice de concordance, et ce qu’en fait le convertisseur.</li>
+</ol>
+</section>
+<section>
+<section id="nomenclatures" class="title-slide slide level1 center">
+<h1>Nomenclatures</h1>
+
+</section>
+<section id="lignes-et-colonnes-des-comptes" class="slide level2">
+<h2>Lignes et colonnes des comptes</h2>
+<ul>
+<li><strong>Lignes</strong> : énergie issue des ressources naturelles, produits énergétiques par groupe de la Classification internationale type des produits énergétiques (SIEC), résidus d’énergie <span class="citation" data-cites="ires2018">(<a href="#/références" role="doc-biblioref" onclick="">United Nations, 2018</a>)</span>.</li>
+<li><strong>Colonnes</strong> : branches, ménages, accumulation, reste du monde, environnement.</li>
+<li>L’outil du FMI présente les branches par <strong>section de la CITI</strong> (A, B, C, D, E, F, H, autres).</li>
+<li>La Tunisie utilise les <strong>24 branches</strong> de ses tableaux des ressources et des emplois, qui s’agrègent en ces sections.</li>
+</ul>
+</section>
+<section id="produits-du-bilan-aux-groupes-de-la-siec" class="slide level2">
+<h2>Produits : du bilan aux groupes de la SIEC</h2>
+<div id="1aed92ad" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="yhdjeceraz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#yhdjeceraz table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#yhdjeceraz thead, #yhdjeceraz tbody, #yhdjeceraz tfoot, #yhdjeceraz tr, #yhdjeceraz td, #yhdjeceraz th { border-style: none; }
+#yhdjeceraz tr { background-color: transparent; }
+#yhdjeceraz p { margin: 0; padding: 0; }
+ #yhdjeceraz .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 18px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #yhdjeceraz .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #yhdjeceraz .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #yhdjeceraz .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #yhdjeceraz .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #yhdjeceraz .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yhdjeceraz .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #yhdjeceraz .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #yhdjeceraz .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #yhdjeceraz .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #yhdjeceraz .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #yhdjeceraz .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #yhdjeceraz .gt_spanner_row { border-bottom-style: hidden; }
+ #yhdjeceraz .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #yhdjeceraz .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #yhdjeceraz .gt_from_md> :first-child { margin-top: 0; }
+ #yhdjeceraz .gt_from_md> :last-child { margin-bottom: 0; }
+ #yhdjeceraz .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #yhdjeceraz .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #yhdjeceraz .gt_indent_1 { text-indent: 5px; }
+ #yhdjeceraz .gt_indent_2 { text-indent: calc(5px * 2); }
+ #yhdjeceraz .gt_indent_3 { text-indent: calc(5px * 3); }
+ #yhdjeceraz .gt_indent_4 { text-indent: calc(5px * 4); }
+ #yhdjeceraz .gt_indent_5 { text-indent: calc(5px * 5); }
+ #yhdjeceraz .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #yhdjeceraz .gt_row_group_first td { border-top-width: 2px; }
+ #yhdjeceraz .gt_row_group_first th { border-top-width: 2px; }
+ #yhdjeceraz .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #yhdjeceraz .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yhdjeceraz .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #yhdjeceraz .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #yhdjeceraz .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yhdjeceraz .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #yhdjeceraz .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #yhdjeceraz .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #yhdjeceraz .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #yhdjeceraz .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #yhdjeceraz .gt_left { text-align: left; }
+ #yhdjeceraz .gt_center { text-align: center; }
+ #yhdjeceraz .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #yhdjeceraz .gt_font_normal { font-weight: normal; }
+ #yhdjeceraz .gt_font_bold { font-weight: bold; }
+ #yhdjeceraz .gt_font_italic { font-style: italic; }
+ #yhdjeceraz .gt_super { font-size: 65%; }
+ #yhdjeceraz .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #yhdjeceraz .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #yhdjeceraz .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #yhdjeceraz .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #yhdjeceraz .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #yhdjeceraz .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Produit-du-bilan" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Produit du bilan</th>
+<th id="Anglais" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Anglais</th>
+<th id="Produit-du-modèle-de-l-AIE" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Produit du modèle de l'AIE</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Pétrole brut</td>
+<td class="gt_row gt_left" headers="Anglais">Crude oil</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Crude oil</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Liquides de gaz naturel</td>
+<td class="gt_row gt_left" headers="Anglais">Natural gas liquids</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Natural gas liquids</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Gaz de raffinerie</td>
+<td class="gt_row gt_left" headers="Anglais">Refinery gas</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Refinery gas</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Produit-du-bilan">GPL</td>
+<td class="gt_row gt_left" headers="Anglais">LPG</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Liquefied petroleum gases (LPG)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Essences</td>
+<td class="gt_row gt_left" headers="Anglais">Motor gasoline</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Motor gasoline excl. biofuels</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Pétrole lampant</td>
+<td class="gt_row gt_left" headers="Anglais">Kerosene</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Other kerosene</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Carburéacteurs</td>
+<td class="gt_row gt_left" headers="Anglais">Jet fuel</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Kerosene type jet fuel excl. biofuels</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Naphta</td>
+<td class="gt_row gt_left" headers="Anglais">Naphtha</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Naphtha</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Gasoil</td>
+<td class="gt_row gt_left" headers="Anglais">Gas/diesel oil</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Gas/diesel oil excl. biofuels</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Fioul lourd</td>
+<td class="gt_row gt_left" headers="Anglais">Fuel oil</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Fuel oil</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Coke de pétrole</td>
+<td class="gt_row gt_left" headers="Anglais">Petroleum coke</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Petroleum coke</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Produit-du-bilan">Autres produits pétroliers</td>
+<td class="gt_row gt_left" headers="Anglais">Other oil products</td>
+<td class="gt_row gt_left" headers="Produit-du-modèle-de-l-AIE">Other oil products</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</section>
+<section id="unités" class="slide level2">
+<h2>Unités</h2>
+<ul>
+<li>Le bilan est en <strong>milliers de tonnes équivalent pétrole</strong> (ktep).</li>
+<li>Les comptes sont en <strong>térajoules</strong> (TJ) : 1 ktep = 41,868 TJ <span class="citation" data-cites="ires2018">(<a href="#/références" role="doc-biblioref" onclick="">United Nations, 2018</a>)</span>.</li>
+<li>L’outil du FMI s’exprime en <strong>pétajoules</strong> (PJ) : 1 PJ = 1 000 TJ.</li>
+<li>Le joule permet d’additionner l’électricité, le gaz et le pétrole selon leur contenu énergétique.</li>
+</ul>
+</section>
+<section id="flux-le-bilan-dans-le-modèle-de-laie" class="slide level2">
+<h2>Flux : le bilan dans le modèle de l’AIE</h2>
+<ul>
+<li>Le convertisseur lit le bilan dans la présentation de l’Agence internationale de l’énergie : une liste fixe de flux, dans un ordre fixe.</li>
+<li>Chaque flux tunisien va à un flux du modèle ; quelques cellules font exception.</li>
+<li>Les signes suivent l’AIE : exportations, soutes, entrées en transformation et consommation propre sont négatives.</li>
+</ul>
+</section>
+<section id="exceptions-à-la-correspondance-par-défaut" class="slide level2">
+<h2>Exceptions à la correspondance par défaut</h2>
+<div id="3de71b87" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="jwknhautoy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#jwknhautoy table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#jwknhautoy thead, #jwknhautoy tbody, #jwknhautoy tfoot, #jwknhautoy tr, #jwknhautoy td, #jwknhautoy th { border-style: none; }
+#jwknhautoy tr { background-color: transparent; }
+#jwknhautoy p { margin: 0; padding: 0; }
+ #jwknhautoy .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 18px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #jwknhautoy .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #jwknhautoy .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #jwknhautoy .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #jwknhautoy .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #jwknhautoy .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #jwknhautoy .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #jwknhautoy .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #jwknhautoy .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #jwknhautoy .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #jwknhautoy .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #jwknhautoy .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #jwknhautoy .gt_spanner_row { border-bottom-style: hidden; }
+ #jwknhautoy .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #jwknhautoy .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #jwknhautoy .gt_from_md> :first-child { margin-top: 0; }
+ #jwknhautoy .gt_from_md> :last-child { margin-bottom: 0; }
+ #jwknhautoy .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #jwknhautoy .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #jwknhautoy .gt_indent_1 { text-indent: 5px; }
+ #jwknhautoy .gt_indent_2 { text-indent: calc(5px * 2); }
+ #jwknhautoy .gt_indent_3 { text-indent: calc(5px * 3); }
+ #jwknhautoy .gt_indent_4 { text-indent: calc(5px * 4); }
+ #jwknhautoy .gt_indent_5 { text-indent: calc(5px * 5); }
+ #jwknhautoy .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #jwknhautoy .gt_row_group_first td { border-top-width: 2px; }
+ #jwknhautoy .gt_row_group_first th { border-top-width: 2px; }
+ #jwknhautoy .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #jwknhautoy .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #jwknhautoy .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #jwknhautoy .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #jwknhautoy .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #jwknhautoy .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #jwknhautoy .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #jwknhautoy .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #jwknhautoy .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #jwknhautoy .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #jwknhautoy .gt_left { text-align: left; }
+ #jwknhautoy .gt_center { text-align: center; }
+ #jwknhautoy .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #jwknhautoy .gt_font_normal { font-weight: normal; }
+ #jwknhautoy .gt_font_bold { font-weight: bold; }
+ #jwknhautoy .gt_font_italic { font-style: italic; }
+ #jwknhautoy .gt_super { font-size: 65%; }
+ #jwknhautoy .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #jwknhautoy .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #jwknhautoy .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #jwknhautoy .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #jwknhautoy .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #jwknhautoy .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Flux" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Flux</th>
+<th id="Produit" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Produit</th>
+<th id="Destination" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Destination</th>
+<th id="Raison" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Raison</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux">BUNKERS</td>
+<td class="gt_row gt_left" headers="Produit">JETFUEL</td>
+<td class="gt_row gt_left" headers="Destination">International aviation bunkers</td>
+<td class="gt_row gt_left" headers="Raison">Le carburéacteur des soutes alimente l'aviation internationale ; les autres produits des soutes vont à la navigation internationale.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux">TRF_PROD</td>
+<td class="gt_row gt_left" headers="Produit">WIND</td>
+<td class="gt_row gt_left" headers="Destination">Main activity producer electricity plants (transf.)</td>
+<td class="gt_row gt_left" headers="Raison">L'ONEM transfère la production éolienne vers l'électricité par la ligne des échanges entre produits. Dans le format de l'AIE, c'est une entrée des centrales électriques.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux">TRF_PROD</td>
+<td class="gt_row gt_left" headers="Produit">SOLARPV</td>
+<td class="gt_row gt_left" headers="Destination">Main activity producer electricity plants (transf.)</td>
+<td class="gt_row gt_left" headers="Raison">Même traitement que l'éolien pour le solaire photovoltaïque.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux">TRF_PROD</td>
+<td class="gt_row gt_left" headers="Produit">HYDRO</td>
+<td class="gt_row gt_left" headers="Destination">Main activity producer electricity plants (transf.)</td>
+<td class="gt_row gt_left" headers="Raison">Même traitement que l'éolien pour l'hydraulique.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux">TRF_PROD</td>
+<td class="gt_row gt_left" headers="Produit">ELEC</td>
+<td class="gt_row gt_left" headers="Destination">Main activity producer electricity plants (transf.)</td>
+<td class="gt_row gt_left" headers="Raison">Électricité produite à partir de l'éolien, du solaire photovoltaïque et de l'hydraulique : sortie des centrales électriques.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux">TO_CHARCOAL</td>
+<td class="gt_row gt_left" headers="Produit">BIOMASS</td>
+<td class="gt_row gt_left" headers="Destination">Charcoal</td>
+<td class="gt_row gt_left" headers="Raison">La sortie des charbonnières est du charbon de bois. Le bilan de l'ONEM la range dans la colonne de la biomasse.</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</section>
+<section id="activités-la-plupart-des-lignes-ont-une-seule-branche" class="slide level2">
+<h2>Activités : la plupart des lignes ont une seule branche</h2>
+<div id="165f64af" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="vwvkfrlsyp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#vwvkfrlsyp table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#vwvkfrlsyp thead, #vwvkfrlsyp tbody, #vwvkfrlsyp tfoot, #vwvkfrlsyp tr, #vwvkfrlsyp td, #vwvkfrlsyp th { border-style: none; }
+#vwvkfrlsyp tr { background-color: transparent; }
+#vwvkfrlsyp p { margin: 0; padding: 0; }
+ #vwvkfrlsyp .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 18px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #vwvkfrlsyp .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #vwvkfrlsyp .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #vwvkfrlsyp .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #vwvkfrlsyp .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #vwvkfrlsyp .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #vwvkfrlsyp .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #vwvkfrlsyp .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #vwvkfrlsyp .gt_spanner_row { border-bottom-style: hidden; }
+ #vwvkfrlsyp .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #vwvkfrlsyp .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #vwvkfrlsyp .gt_from_md> :first-child { margin-top: 0; }
+ #vwvkfrlsyp .gt_from_md> :last-child { margin-bottom: 0; }
+ #vwvkfrlsyp .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #vwvkfrlsyp .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #vwvkfrlsyp .gt_indent_1 { text-indent: 5px; }
+ #vwvkfrlsyp .gt_indent_2 { text-indent: calc(5px * 2); }
+ #vwvkfrlsyp .gt_indent_3 { text-indent: calc(5px * 3); }
+ #vwvkfrlsyp .gt_indent_4 { text-indent: calc(5px * 4); }
+ #vwvkfrlsyp .gt_indent_5 { text-indent: calc(5px * 5); }
+ #vwvkfrlsyp .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #vwvkfrlsyp .gt_row_group_first td { border-top-width: 2px; }
+ #vwvkfrlsyp .gt_row_group_first th { border-top-width: 2px; }
+ #vwvkfrlsyp .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #vwvkfrlsyp .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #vwvkfrlsyp .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #vwvkfrlsyp .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #vwvkfrlsyp .gt_left { text-align: left; }
+ #vwvkfrlsyp .gt_center { text-align: center; }
+ #vwvkfrlsyp .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #vwvkfrlsyp .gt_font_normal { font-weight: normal; }
+ #vwvkfrlsyp .gt_font_bold { font-weight: bold; }
+ #vwvkfrlsyp .gt_font_italic { font-style: italic; }
+ #vwvkfrlsyp .gt_super { font-size: 65%; }
+ #vwvkfrlsyp .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #vwvkfrlsyp .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #vwvkfrlsyp .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #vwvkfrlsyp .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #vwvkfrlsyp .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Flux-du-bilan" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Flux du bilan</th>
+<th id="Branche" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Branche</th>
+<th id="Raison" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Raison</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux-du-bilan">Oil refineries (transf.)</td>
+<td class="gt_row gt_left" headers="Branche">19</td>
+<td class="gt_row gt_left" headers="Raison">Raffinerie de Bizerte, branche 19.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux-du-bilan">Charcoal production plants (transf.)</td>
+<td class="gt_row gt_left" headers="Branche">01</td>
+<td class="gt_row gt_left" headers="Raison">Les charbonnières sont une activité de la sylviculture.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux-du-bilan">Iron and steel</td>
+<td class="gt_row gt_left" headers="Branche">24</td>
+<td class="gt_row gt_left" headers="Raison">Les fabrications métalliques font partie des industries mécaniques et électriques dans la nomenclature tunisienne.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux-du-bilan">Chemical and petrochemical</td>
+<td class="gt_row gt_left" headers="Branche">20</td>
+<td class="gt_row gt_left" headers="Raison">Industries chimiques.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux-du-bilan">Non-metallic minerals</td>
+<td class="gt_row gt_left" headers="Branche">23</td>
+<td class="gt_row gt_left" headers="Raison">Matériaux de construction, céramique et verre.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux-du-bilan">Rail</td>
+<td class="gt_row gt_left" headers="Branche">49</td>
+<td class="gt_row gt_left" headers="Raison">Transport ferroviaire.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux-du-bilan">Residential</td>
+<td class="gt_row gt_left" headers="Branche">HH</td>
+<td class="gt_row gt_left" headers="Raison">Consommation des ménages.</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</section>
+<section id="deux-lignes-demandent-des-clés" class="slide level2 theme-content">
+<h2>Deux lignes demandent des clés</h2>
+<ul>
+<li>Le <strong>transport routier</strong> est donné par mode, non par utilisateur : camions, autobus, taxis et voitures particulières appartiennent à de nombreuses branches et aux ménages.</li>
+<li><strong>Commerce, administration, hôtels</strong> est une seule ligne pour plusieurs branches de services.</li>
+<li>Les deux sont répartis avec des <strong>clés</strong> tirées des tableaux des ressources et des emplois de la même année :
+<ul>
+<li>routier : achats de produits pétroliers raffinés (produit 19) ;</li>
+<li>tertiaire : achats d’électricité et de gaz (produit 35).</li>
+</ul></li>
+</ul>
+</section>
+<section id="les-clés-en-2022" class="slide level2">
+<h2>Les clés en 2022</h2>
+<div id="b6d1b32a" class="cell" data-fig-height="4.4" data-fig-width="10" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/cell-7-output-1.png" width="1598" height="649"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="lecture-des-clés" class="slide level2">
+<h2>Lecture des clés</h2>
+<ul>
+<li>Les ménages reçoivent 34 % du carburant routier, le transport 27 %.</li>
+<li>Le raffinage et l’électricité sont exclus de la clé routière, car leurs achats de produit 19 sont surtout des entrées de transformation.</li>
+<li>Les clés changent chaque année avec les comptes nationaux.</li>
+<li>Elles supposent un prix semblable par unité d’énergie pour chaque utilisateur : la meilleure information disponible, mais une hypothèse.</li>
+</ul>
+</section></section>
+<section>
+<section id="la-matrice-de-concordance" class="title-slide slide level1 center">
+<h1>La matrice de concordance</h1>
+
+</section>
+<section id="ce-que-dit-la-matrice" class="slide level2 theme-content">
+<h2>Ce que dit la matrice</h2>
+<p>Pour chaque <strong>flux</strong> et chaque <strong>produit</strong> du bilan :</p>
+<ul>
+<li>quel <strong>produit PEFA</strong> reçoit l’énergie,</li>
+<li>dans quel <strong>tableau</strong> (ressources ou emplois),</li>
+<li>pour quelle <strong>activité</strong>,</li>
+<li>dans quelle <strong>proportion</strong> ; les proportions d’un flux somment à un.</li>
+</ul>
+</section>
+<section id="matrices-par-défaut-et-tunisienne" class="slide level2">
+<h2>Matrices par défaut et tunisienne</h2>
+<ul>
+<li>La matrice par défaut de l’outil attribue chaque flux à une <strong>section de la CITI</strong>.</li>
+<li>La matrice tunisienne remplace les lignes des flux couverts par <strong>une ligne par branche</strong>, avec le facteur de la clé.</li>
+<li>Une matrice par année, car les clés changent chaque année.</li>
+<li>Les importations, les exportations et les variations de stocks gardent les lignes par défaut.</li>
+</ul>
+</section>
+<section id="où-la-tunisie-sécarte-du-défaut" class="slide level2">
+<h2>Où la Tunisie s’écarte du défaut</h2>
+<div id="7e4be922" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="sndbkdzivu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#sndbkdzivu table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#sndbkdzivu thead, #sndbkdzivu tbody, #sndbkdzivu tfoot, #sndbkdzivu tr, #sndbkdzivu td, #sndbkdzivu th { border-style: none; }
+#sndbkdzivu tr { background-color: transparent; }
+#sndbkdzivu p { margin: 0; padding: 0; }
+ #sndbkdzivu .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 18px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #sndbkdzivu .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #sndbkdzivu .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #sndbkdzivu .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #sndbkdzivu .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #sndbkdzivu .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #sndbkdzivu .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #sndbkdzivu .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #sndbkdzivu .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #sndbkdzivu .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #sndbkdzivu .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #sndbkdzivu .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #sndbkdzivu .gt_spanner_row { border-bottom-style: hidden; }
+ #sndbkdzivu .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #sndbkdzivu .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #sndbkdzivu .gt_from_md> :first-child { margin-top: 0; }
+ #sndbkdzivu .gt_from_md> :last-child { margin-bottom: 0; }
+ #sndbkdzivu .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #sndbkdzivu .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #sndbkdzivu .gt_indent_1 { text-indent: 5px; }
+ #sndbkdzivu .gt_indent_2 { text-indent: calc(5px * 2); }
+ #sndbkdzivu .gt_indent_3 { text-indent: calc(5px * 3); }
+ #sndbkdzivu .gt_indent_4 { text-indent: calc(5px * 4); }
+ #sndbkdzivu .gt_indent_5 { text-indent: calc(5px * 5); }
+ #sndbkdzivu .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #sndbkdzivu .gt_row_group_first td { border-top-width: 2px; }
+ #sndbkdzivu .gt_row_group_first th { border-top-width: 2px; }
+ #sndbkdzivu .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #sndbkdzivu .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #sndbkdzivu .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #sndbkdzivu .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #sndbkdzivu .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #sndbkdzivu .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #sndbkdzivu .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #sndbkdzivu .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #sndbkdzivu .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #sndbkdzivu .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #sndbkdzivu .gt_left { text-align: left; }
+ #sndbkdzivu .gt_center { text-align: center; }
+ #sndbkdzivu .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #sndbkdzivu .gt_font_normal { font-weight: normal; }
+ #sndbkdzivu .gt_font_bold { font-weight: bold; }
+ #sndbkdzivu .gt_font_italic { font-style: italic; }
+ #sndbkdzivu .gt_super { font-size: 65%; }
+ #sndbkdzivu .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #sndbkdzivu .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #sndbkdzivu .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #sndbkdzivu .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #sndbkdzivu .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #sndbkdzivu .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Flux" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Flux</th>
+<th id="Défaut" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Défaut</th>
+<th id="Tunisie" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Tunisie</th>
+<th id="Raison" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">Raison</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux">Production</td>
+<td class="gt_row gt_left" headers="Défaut">D</td>
+<td class="gt_row gt_left" headers="Tunisie">HH</td>
+<td class="gt_row gt_left" headers="Raison">La chaleur solaire provient surtout des chauffe-eau des ménages, qui la consomment eux-mêmes.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux">Production</td>
+<td class="gt_row gt_left" headers="Défaut">D</td>
+<td class="gt_row gt_left" headers="Tunisie">C</td>
+<td class="gt_row gt_left" headers="Raison">La chaleur récupérée provient de la fabrication d'acide sulfurique par l'industrie chimique (hypothèse).</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux">Autoproducer electricity plants (transf.)</td>
+<td class="gt_row gt_left" headers="Défaut">D</td>
+<td class="gt_row gt_left" headers="Tunisie">C</td>
+<td class="gt_row gt_left" headers="Raison">Les autoproducteurs d'électricité sont surtout des usines chimiques qui valorisent la chaleur récupérée (hypothèse, question ouverte).</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux">Charcoal production plants (transf.)</td>
+<td class="gt_row gt_left" headers="Défaut">C</td>
+<td class="gt_row gt_left" headers="Tunisie">A</td>
+<td class="gt_row gt_left" headers="Raison">Les charbonnières sont une activité de la sylviculture.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux">Road</td>
+<td class="gt_row gt_left" headers="Défaut">H</td>
+<td class="gt_row gt_left" headers="Tunisie">A, B, C, E, F, H, HH, Other</td>
+<td class="gt_row gt_left" headers="Raison">Le bilan donne le transport routier par mode et non par utilisateur. La répartition suit les emplois de produits pétroliers raffinés (produit 19) des branches et des ménages dans le TRE. Le raffinage (19) et l'électricité (35) sont exclus, car leurs emplois de produit 19 sont surtout des entrées de transformation (question ouverte).</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Flux">Commercial and public services</td>
+<td class="gt_row gt_left" headers="Défaut">Other</td>
+<td class="gt_row gt_left" headers="Tunisie">E, Other</td>
+<td class="gt_row gt_left" headers="Raison">La ligne « commerce, administration, hôtels » couvre plusieurs branches de services. La répartition suit les emplois d'électricité et de gaz (produit 35) de ces branches dans le TRE.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Flux">Non-energy use industry/transformation/energy</td>
+<td class="gt_row gt_left" headers="Défaut">C</td>
+<td class="gt_row gt_left" headers="Tunisie">F</td>
+<td class="gt_row gt_left" headers="Raison">Les usages non énergétiques sont surtout du bitume, utilisé par la construction (hypothèse, question ouverte).</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<p>6 flux changent de section ; tous les autres ne font que gagner en détail.</p>
+</section>
+<section id="ce-que-fait-le-convertisseur" class="slide level2">
+<h2>Ce que fait le convertisseur</h2>
+<ol type="1">
+<li>Il donne à chaque flux son titre (approvisionnement, transformation, consommation propre, consommation finale).</li>
+<li>Il enregistre la production primaire comme une <strong>ressource naturelle</strong> fournie par l’environnement et utilisée par la branche qui l’extrait.</li>
+<li>Il multiplie chaque valeur du bilan par ses facteurs.</li>
+<li>Il transforme les sorties de transformation en <strong>ressources</strong> de produits énergétiques.</li>
+<li>Il crée, pour chaque emploi d’énergie, un <strong>résidu</strong> de même montant qui retourne à l’environnement.</li>
+</ol>
+</section>
+<section id="de-lorigine-à-lemploi-en-2022" class="slide level2">
+<h2>De l’origine à l’emploi en 2022</h2>
+<div id="4a6ff5fe" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div style="height:460px; width:820px;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="f7b69a90-632f-43ce-83af-bf150cdc66db" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("f7b69a90-632f-43ce-83af-bf150cdc66db")) {                    Plotly.newPlot(                        "f7b69a90-632f-43ce-83af-bf150cdc66db",                        [{"arrangement":"snap","link":{"color":["rgba(242,166,0,0.45)","rgba(37,125,224,0.45)","rgba(244,114,48,0.45)","rgba(0,138,23,0.45)","rgba(242,166,0,0.45)","rgba(236,70,71,0.45)","rgba(37,125,224,0.45)","rgba(244,114,48,0.45)","rgba(0,138,23,0.45)","rgba(0,138,23,0.45)","rgba(0,138,23,0.45)","rgba(0,138,23,0.45)","rgba(0,138,23,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(242,166,0,0.45)","rgba(236,70,71,0.45)","rgba(236,70,71,0.45)","rgba(236,70,71,0.45)","rgba(236,70,71,0.45)","rgba(236,70,71,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)"],"hovertemplate":"%{source.label} \u2192 %{target.label}: %{value:,.1f} PJ\u003cextra\u003e\u003c\u002fextra\u003e","source":[1,1,1,0,0,0,0,0,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4,6,6,6,6,6,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3],"target":[4,2,3,5,4,6,2,3,11,13,8,16,7,9,10,11,12,13,17,15,8,16,18,7,11,13,8,16,7,9,10,11,13,15,8,16,18,7,9,10,11,13,17,14,15,8,16,18,7],"value":[9.797112000000002,142.85361600000002,186.98248800000002,54.26092800000001,79.4947716,5.8615200000000005,88.425216,137.84201640000003,0.586152,0.13231203670748803,35.37846,0.579443963292512,17.584560000000003,5.37082704,1.1304360000000002,20.054772,19.594224,3.3000178567044074,0.544284,0.20934000000000003,21.980700000000002,14.452014143295594,0.293076,2.3613552,0.004186800000000001,0.024905795144938927,2.595816,0.10907180485506109,3.1401000000000003,1.5072480000000001,7.326899999999999,35.336592,1.556612196558683,13.774572000000001,11.513700000000002,6.816987803441318,1.297908,152.19018000000003,18.79444679202985,5.680079687893349,46.802178403716134,0.9669394774459278,80.972712,13.599138519731614,37.392238466077636,60.967367765293645,14.306359287811855,0.9210960000000001,63.3839652]},"node":{"color":["#204B92","#8c8c8c","#257de0","#f47230","#f2a600","#008a17","#ec4647","#8c8c8c","#5c5c5c","#008a17","#f47230","#257de0","#f2a600","#00b894","#ee7fac","#6a4ce2","#ec4647","#8c8c8c","#8c8c8c"],"label":["Production nationale","Importations","Gaz naturel","P\u00e9trole et produits p\u00e9troliers","\u00c9lectricit\u00e9","Biocombustibles","Chaleur","Transformation en d'autres produits \u00e9nerg\u00e9tiques","M\u00e9nages","Agriculture, sylviculture et p\u00eache","Industries extractives","Industrie manufacturi\u00e8re","Production et distribution d'\u00e9lectricit\u00e9, de gaz, de vapeur et d'air conditionn\u00e9","Production et distribution d'eau, assainissement, gestion des d\u00e9chets et d\u00e9pollution","Construction","Transports et entreposage","Autres services","Exportations et soutes","\u00c9cart statistique"],"line":{"width":0},"pad":14,"thickness":14},"type":"sankey"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"margin":{"b":0,"l":0,"r":0,"t":30}}},"margin":{"l":10,"r":10,"t":10,"b":10},"font":{"family":"DejaVu Sans, Noto Naskh Arabic, sans-serif","size":11,"color":"#191919"},"height":460,"width":820},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('f7b69a90-632f-43ce-83af-bf150cdc66db');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+</section>
+<section id="lecture-du-diagramme" class="slide level2">
+<h2>Lecture du diagramme</h2>
+<ul>
+<li>Le gaz naturel va surtout aux <strong>centrales</strong>, qui le transforment en électricité.</li>
+<li>Les produits pétroliers vont aux ménages, au transport, à l’industrie et à l’agriculture ; du pétrole brut est aussi exporté.</li>
+<li>Les biocombustibles, surtout le bois de feu et le charbon de bois, sont utilisés par les ménages.</li>
+<li>La transformation apparaît comme un emploi de produits ; sa production réapparaît dans la production nationale.</li>
+</ul>
+</section>
+<section id="points-à-discuter" class="slide level2">
+<h2>Points à discuter</h2>
+<ul>
+<li>Le niveau de 24 branches convient-il, ou un niveau plus fin serait-il utile ?</li>
+<li>Autoproducteurs d’électricité et chaleur récupérée : industrie chimique ?</li>
+<li>Chaleur solaire : produite et utilisée par les ménages ? Usages non énergétiques (bitume) : construction ?</li>
+<li>L’ONEM pourrait-il répartir la consommation propre de la branche énergie par branche ?</li>
+<li>Les achats en valeur sont-ils une clé suffisante pour le transport routier et les services ?</li>
+</ul>
+</section>
+<section id="références" class="slide level2 smaller scrollable">
+<h2>Références</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ires2018" class="csl-entry" role="listitem">
+United Nations. (2018). <em>International Recommendations for Energy Statistics (<span>IRES</span>)</em>. New York: United Nations. Repéré à <a href="https://unstats.un.org/unsd/energystats/methodology/ires/">https://unstats.un.org/unsd/energystats/methodology/ires/</a>
+</div>
+</div>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Comptes de l’énergie et des émissions de la Tunisie</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Menu des diapositives"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1100,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copié");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copié");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/renatovargas\.github\.io\/tun-pefa-aea\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+              if (!link.classList.contains('no-external-icon')) {
+              }
+            }
+          }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

@@ -1,0 +1,161 @@
+---
+title: "The IMF tools and a reproducible pipeline"
+subtitle: "PEFA Converter, I2A, and the same logic in open code"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+pefa_gap = read("pefa_tool_agreement")["max_gap_pj"].drop_nulls().max()
+aea_gap = read("aea_tool_agreement")["max_gap_kt"].max()
+chk = read("checks")
+```
+
+## What this presentation covers {.theme-content}
+
+1. The two IMF tools: what they take in, what they do, what they give back.
+2. Why the same logic was rewritten as an open, reproducible pipeline.
+3. How the pipeline is organised, how it checks itself, and how to run it.
+
+# The IMF tools
+
+## Why tools?
+
+- Compiling accounts from a balance and an inventory means **hundreds of correspondence decisions**.
+- A tool fixes the sequence of steps and applies the international recommendations the same way in every country.
+- The IMF Statistics Department developed two Excel tools with Python functions, written by Achille Pegoue [@pegoue2026pefa; @pegoue2026i2a].
+
+## PEFA Converter
+
+- Converts an **energy balance in the IEA layout** into physical supply and use tables for energy [@imf2024pefa].
+- Inputs, as named ranges of the workbook:
+  - the balance (flows × products, in terajoules);
+  - the **concordance matrix**: for each flow and product, the activity, the PEFA product, the table and the share;
+  - bridging items for residence;
+  - a classification of products (renewable, waste).
+- Output: a long table by PEFA product, activity and table, in petajoules.
+
+## Air Emissions Account Converter (I2A)
+
+- Converts a **greenhouse gas inventory** into air emissions accounts by activity and households [@imf2026i2a].
+- Inputs:
+  - the inventory by gas, category and year;
+  - the **conversion matrix**: for each category, the share of each activity;
+  - the list of activities and bridging items;
+  - OECD estimates of air and maritime transport emissions, for residence.
+- Output: emissions by gas, category and activity, with totals and bridging items.
+
+## How the tools work
+
+```{mermaid}
+flowchart LR
+  EB["Energy balance<br/>(IEA layout, TJ)"] --> CM{{"Concordance matrix<br/>flow × product → activity"}}
+  CM --> PSUT["Supply and use<br/>tables (PJ)"]
+  INV["Inventory<br/>(CRT, kt CO2 eq)"] --> CVM{{"Conversion matrix<br/>category → activity"}}
+  OECD["OECD transport<br/>emissions"] --> CVM
+  CVM --> AEA["Accounts and<br/>bridge table"]
+```
+
+# From workbook to pipeline
+
+## Why rewrite the logic?
+
+- A workbook hides decisions in cells; a **lookup table with a reason per row** shows them.
+- Each year needs the same steps again: a pipeline repeats them **in under a minute**.
+- Checks run every time, and a failed check **stops** the run.
+- The same code writes the accounts in **English, French and Arabic**.
+- Anyone can read, rerun and challenge every number.
+
+## Two layers that must agree
+
+- **Explicit layer**: every rule of the tools rewritten step by step in readable Python. This produces the accounts.
+- **Reference layer**: the original tool functions, called **unchanged**, on the same inputs.
+- The run stops if the two differ:
+  - energy accounts: largest gap `{python} f"{pefa_gap:.0e}"` PJ, all years and matrices;
+  - emissions accounts: largest gap `{python} f"{aea_gap:.0e}"` kt CO2 eq.
+
+## The stages of the pipeline
+
+| Stage | Scripts | What it does |
+|:--|:--|:--|
+| Extract | 01 to 03 | Read the balance, the inventory and the supply and use tables |
+| PEFA | 10 to 15 | IEA template, keys, concordance matrix, tables, checks, Excel |
+| AEA | 20 to 24 | Inventory, conversion matrix, accounts, bridge, Excel |
+| Report | 30 | Tables and labels for documents, slides and the data explorer |
+
+## Where things live
+
+| Folder | Content | Who edits it |
+|:--|:--|:--|
+| `data/sources/` | Files as received | Nobody |
+| `data/lookups/` | Correspondences and labels, with reasons | Compilers |
+| `data/intermediate/` | Working tables | The pipeline |
+| `data/outputs/` | Excel accounts, tables, labels, checks | The pipeline |
+
+## A lookup table
+
+```{python}
+m = lookup("balance_to_activities").filter(pl.col("method") == "direct").select(
+    pl.col("iea_flow").alias("Flow"), pl.col("activity").alias("Industry"), pl.col("rationale_en").alias("Reason")).head(6)
+gt(m)
+```
+
+To change an allocation, edit one row and run the pipeline again.
+
+## Checks at every step
+
+```{python}
+c = chk.select(pl.col("script").str.slice(0, 2).alias("Script"), pl.col("check").alias("Check"),
+               pl.col("value").map_elements(lambda x: f"{x:.2g}", return_dtype=pl.String).alias("Value"),
+               pl.col("unit").alias("Unit"), pl.col("passed").alias("Passed"))
+gt(c.head(12))
+```
+
+All `{python} chk.height` checks pass in the current run.
+
+## What a run produces
+
+- Excel workbooks in three languages, in the layout of the tool sheets.
+- Tidy tables with stable codes, and label tables in three languages.
+- Methods documents and slides whose numbers are read from those tables.
+- A data explorer on the website.
+
+## Running it
+
+```bash
+uv sync                                  # install Python and the packages
+uv run python scripts/run_pipeline.py    # compile both accounts
+bash scripts/render.sh                   # render the website
+```
+
+Rendering only reads the outputs: changing a sentence never requires recomputing.
+
+## Points to discuss
+
+- Who at the INS would run the pipeline, and with what support?
+- Which correspondences should be reviewed first with ONEM and ANME?
+- Should the IMF workbooks remain the demonstration tool, with the pipeline for production?
+
+## References
+
+::: {#refs}
+:::

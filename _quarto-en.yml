@@ -8,7 +8,7 @@ lang: en-US
 csl: assets/apa-en.csl
 
 website:
-  title: "Tunisia: energy and emissions accounts"
+  title: "TUN: PEFA AEA"
   description: "Physical energy flow accounts (PEFA) and air emissions accounts (AEA) for Tunisia"
   navbar:
     left:
@@ -34,15 +34,33 @@ website:
           - text: "العربية"
             href: "#lang-ar"
   sidebar:
-    - title: Documents
+    - title: "Materials"
       style: docked
       contents:
-        - href: en/documents/index.qmd
-          text: Documents
-        - href: en/documents/energy-accounts/index.qmd
-          text: Energy accounts (PEFA)
-        - href: en/documents/emissions-accounts/index.qmd
-          text: Air emissions accounts (AEA)
+        - section: "Documents"
+          href: en/documents/index.qmd
+          contents:
+            - href: en/documents/energy-accounts/index.qmd
+              text: "Energy accounts (PEFA)"
+            - href: en/documents/emissions-accounts/index.qmd
+              text: "Air emissions accounts (AEA)"
+        - section: "Presentations"
+          href: en/presentations/index.qmd
+          contents:
+            - href: en/presentations/01-framework-and-sources.qmd
+              text: "Framework and sources"
+            - href: en/presentations/02-tools-and-pipeline.qmd
+              text: "Tools and pipeline"
+            - href: en/presentations/03-energy-classifications-allocation.qmd
+              text: "Energy: classifications and allocation"
+            - href: en/presentations/04-energy-residence-results.qmd
+              text: "Energy: residence, checks and results"
+            - href: en/presentations/05-emissions-sources-classifications.qmd
+              text: "Emissions: sources and classifications"
+            - href: en/presentations/06-emissions-allocation-results.qmd
+              text: "Emissions: allocation and results"
+            - href: en/presentations/07-indicators-way-forward.qmd
+              text: "Indicators and the way forward"
 
 format:
   html:

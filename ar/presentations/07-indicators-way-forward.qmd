@@ -1,0 +1,25 @@
+---
+title: "المؤشرات والنشر والخطوات القادمة"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/07-indicators-way-forward/index.html" title="المؤشرات والنشر والخطوات القادمة" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ شاشة كاملة](../slides/07-indicators-way-forward/index.html){target="_blank"}
+::::
+
+انقر داخل الشرائح واستخدم مفاتيح الأسهم للتنقل. اضغط `F` للشاشة الكاملة، و`S` لعرض المتحدث، و`Esc` للنظرة الشاملة.
+
+## في هذا العرض
+
+- المستخدمون والمؤشرات الأساسية وصيغ النشر
+- الطاقة والانبعاثات معًا، ومكانة الأسر
+- دورة إنتاج سنوية والأدوار والأولويات
+
+## الوثيقة المرتبطة
+
+- [حسابات التدفقات المادية للطاقة](../documents/energy-accounts/index.qmd)
+- [حسابات انبعاثات الهواء](../documents/emissions-accounts/index.qmd)

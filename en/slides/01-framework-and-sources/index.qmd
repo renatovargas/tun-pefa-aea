@@ -1,0 +1,218 @@
+---
+title: "Energy and emissions accounts"
+subtitle: "The SEEA framework and the Tunisian sources"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+bal = read("energy_balance")
+supply = read("pefa_sankey").filter(pl.col("stage") == "supply")
+prod_last = supply.filter(pl.col("year") == LAST, pl.col("source") == "PROD")["tj"].sum()
+imp_last = supply.filter(pl.col("year") == LAST, pl.col("source") == "IMP")["tj"].sum()
+imp_over = [y for y in YEARS if supply.filter(pl.col("year") == y, pl.col("source") == "IMP")["tj"].sum() > supply.filter(pl.col("year") == y, pl.col("source") == "PROD")["tj"].sum()]
+inv = read("ghg_inventory").filter(pl.col("year") == LAST)
+scope = dict(inv.group_by("scope").agg(pl.col("kt_co2_eq").sum()).iter_rows())
+```
+
+## What this presentation covers {.theme-content}
+
+1. Why statistics on energy and emissions need accounts.
+2. The System of Environmental-Economic Accounting (SEEA) and its energy and emissions accounts.
+3. The three Tunisian sources that feed the accounts, and what each brings.
+
+# Why accounts?
+
+## Three systems describe the same economy
+
+- **Energy statistics** describe the supply and use of energy products on the national territory, by technical sector. In Tunisia, the national energy balance of ONEM.
+- **Greenhouse gas inventories** describe emissions on the territory, by process. In Tunisia, the inventory coordinated by ANME with the Ministry of Agriculture and ONAS.
+- **National accounts** describe the economy of resident units, by industry, in money. In Tunisia, the supply and use tables of the INS.
+
+## Each answers its own questions
+
+| System | Typical question | Unit of classification |
+|:--|:--|:--|
+| Energy balance | How much natural gas was burnt in power plants? | Technical sector |
+| Inventory | How much methane came from livestock? | Emitting process |
+| National accounts | How much value did the food industry add? | Industry |
+
+None of them answers alone: *how much energy does each dinar of value added require, and in which industry?*
+
+## The questions policy asks
+
+- Which industries use the most energy, and the most energy per dinar of value added?
+- How much of household energy goes to transport, cooking or heating?
+- If the cement industry grows, how much do emissions rise?
+- Are energy use and emissions growing faster or slower than the economy?
+
+These questions need energy and emissions **organised like the national accounts**.
+
+## The SEEA, an international standard
+
+- Adopted by the United Nations Statistical Commission in 2012 [@seea2014].
+- A **satellite** of the System of National Accounts: same units, same classifications, same accounting rules.
+- Thematic guides for energy [@seeaenergy2019] and air emissions; compilation manuals by Eurostat for both accounts [@eurostat2014pefa; @eurostat2015aea].
+- Energy and air emissions accounts are among the SEEA accounts that countries compile most often.
+
+# Energy in the SEEA
+
+## Three kinds of energy flows {.theme-content}
+
+- **Energy from natural inputs** flows from the environment into the economy: crude oil and gas when extracted, sun, wind, biomass.
+- **Energy products** circulate within the economy: produced, traded, transformed, used. Natural gas, diesel, electricity.
+- **Energy residuals** flow back to the environment: heat from burning fuels, electricity lost in the grid, gas flared at the well.
+
+## The flows in a picture
+
+```{mermaid}
+flowchart LR
+  ENV1["Environment"] -- "natural inputs" --> IND["Resident industries"]
+  ROW1["Rest of the world"] -- "imports" --> IND
+  IND -- "energy products" --> IND
+  IND -- "energy products" --> HH["Households"]
+  IND -- "exports" --> ROW2["Rest of the world"]
+  IND -- "residuals" --> ENV2["Environment"]
+  HH -- "residuals" --> ENV2
+```
+
+## Energy is conserved
+
+- Energy is neither created nor destroyed; it changes form [@seeaenergy2019, paras 2.14 to 2.21].
+- A power plant burns gas: part becomes **electricity** (a product), the rest is lost as **heat** (a residual).
+- A household uses that electricity: its energy ends as **residual heat** too.
+- So every use of energy has a matching residual, and the totals of the tables exceed the energy actually consumed. This is a feature, not an error.
+
+## Supply and use tables in physical units
+
+| Rows (flows) | Supply: who provides it | Use: who receives it |
+|:--|:--|:--|
+| Natural inputs | Environment | Industries that extract |
+| Energy products | Industries, imports | Industries, households, exports, stocks |
+| Energy residuals | Industries, households | Environment, accumulation |
+
+For every row, **supply equals use**. Columns are the units of the national accounts.
+
+## Territory and residence
+
+- The energy balance records what happens **on the territory**.
+- The accounts record what **resident units** do, wherever they are [@eurostat2014pefa, paras 41 to 48].
+- A Tunisian airline refuelling in Paris: in the accounts, not in the balance.
+- A foreign ship refuelling in Radès: in the balance (bunkers), not in the accounts.
+- A **bridge table** reconciles the two totals.
+
+## Emissions in the SEEA
+
+- Emissions are **residual flows** into the atmosphere [@seea2014].
+- Recorded for the economic unit that emits: industries, and households as consumers [@eurostat2015aea].
+- Same residence principle as the energy accounts, with a bridge to the inventory total.
+- Land use, land-use change and forestry stay outside the accounts and appear in the bridge.
+
+# The Tunisian sources
+
+## Three sources
+
+| Source | Producer | Years | Unit |
+|:--|:--|:--|:--|
+| National energy balance | ONEM | `{python} FIRST` to `{python} LAST` | ktoe |
+| Supply and use tables | INS | 2015 to 2023 | million TND |
+| Greenhouse gas inventory (CRT) | ANME and partners | `{python} FIRST` to `{python} LAST` | TJ, kt |
+
+All three are used as received; the pipeline never edits them.
+
+## The energy balance
+
+- `{python} bal.filter(pl.col("year") == LAST)["flow"].n_unique()` flows and `{python} bal.filter(pl.col("year") == LAST)["product"].n_unique()` products in `{python} LAST`, in thousand tonnes of oil equivalent (1 ktoe = 41.868 TJ).
+- Supply (production, imports, exports, bunkers, stocks), transformation (power plants, refinery, charcoal kilns), own use, losses, final consumption by sector.
+- The layout changes between years: the pipeline reads **labels**, never cell positions, and stops on any unknown label.
+- Totals equal their parts to within `{python} num(check("01_extract_energy_balances", "flow_hierarchy")["value"], 1)` ktoe, the rounding of the published tables.
+
+## Production and imports
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.6
+charts.energy_supply(figsize=(9, 3.6))
+```
+
+In `{python} LAST`: `{python} pj(prod_last)` PJ of energy products from domestic production and `{python} pj(imp_last)` PJ from imports.
+
+## Reading the chart
+
+- Domestic production includes **secondary** products: electricity from power plants and products of the refinery.
+- Domestic production fell over the period while imports rose; imports exceeded domestic production in `{python} ", ".join(map(str, imp_over))`.
+- Imports dipped in 2020, during the pandemic, and recovered in 2021.
+
+## The supply and use tables
+
+- `{python} len(ACTS) - 1` products and as many industries, in millions of dinars at current prices.
+- They give the accounts their **columns**: the industries of the national accounts.
+- Their purchases of fuels and electricity provide the **keys** that split road transport and the tertiary sector.
+- Their **output and value added** turn energy and emissions into intensities.
+- Supply equals use for every product to within `{python} num(check("03_extract_supply_use_tables", "supply_equals_use")["value"], 2)` million TND.
+
+## The greenhouse gas inventory
+
+- One CRT workbook a year; the `Data` sheet holds every reported value in long format.
+- Emissions by category, fuel and gas, and fuel use in terajoules.
+- In `{python} LAST`: **`{python} mt(scope["inventory"])` Mt CO2 eq** excluding land use, and a land-use sink of `{python} mt(scope["lulucf"])` Mt.
+- `Data` matches the published `Summary2` for every category, with one small exception (N2O of 1.B.2.b.ii from 2019).
+
+## Emissions by gas
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.8
+charts.emissions_by_gas(figsize=(9, 3.8))
+```
+
+## What each source brings
+
+:::: {.columns}
+::: {.column width="33%"}
+**Balance**
+
+Every energy flow, by product and technical sector.
+:::
+::: {.column width="33%"}
+**Supply and use tables**
+
+The industries, the keys, the money denominators.
+:::
+::: {.column width="33%"}
+**Inventory**
+
+Emissions by process and gas; bunkers as a check of the balance.
+:::
+::::
+
+## Points to discuss
+
+- Who maintains each file in each institution, and on what calendar?
+- Could the balance be shared in a stable layout, or with a code for each row and column?
+- The row « Fabrications métalliques » of 2015: iron and steel, or mechanical and electrical industries?
+- Is there a survey of fuel use by type of vehicle and user?
+
+## References
+
+::: {#refs}
+:::

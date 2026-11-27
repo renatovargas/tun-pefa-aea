@@ -1,0 +1,168 @@
+---
+title: "Energy accounts: classifications and allocation"
+subtitle: "From the rows of the balance to the industries of the national accounts"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+keys = read("pefa_activity_keys").filter(pl.col("method") == "key", pl.col("year") == LAST)
+hh_road = keys.filter(pl.col("iea_flow") == "Road", pl.col("activity") == "HH")["factor"].sum()
+tr_road = keys.filter(pl.col("iea_flow") == "Road", pl.col("activity") == "49")["factor"].sum()
+changes = read("pefa_concordance_changes")
+```
+
+## What this presentation covers {.theme-content}
+
+1. The rows and columns of the energy accounts: products, flows and activities.
+2. How each line of the balance finds its industry, and the two lines that need keys.
+3. The concordance matrix, and what the converter does with it.
+
+# Classifications
+
+## Rows and columns of the accounts
+
+- **Rows**: energy from natural inputs, energy products by group of the Standard International Energy Product Classification (SIEC), energy residuals [@ires2018].
+- **Columns**: industries, households, accumulation, rest of the world, environment.
+- The IMF tool reports industries by **ISIC section** (A, B, C, D, E, F, H, other).
+- Tunisia uses the **24 industries** of its supply and use tables, which add up to those sections.
+
+## Products: from the balance to SIEC groups
+
+```{python}
+p = lookup("balance_products").filter(pl.col("iea_product").is_not_null())
+gt(p.select(pl.col("en").alias("Product of the balance"), pl.col("fr").alias("Label in the balance"), pl.col("iea_product").alias("Product of the IEA template")).head(12))
+```
+
+## Units
+
+- The balance is in **thousand tonnes of oil equivalent** (ktoe).
+- The accounts are in **terajoules** (TJ): 1 ktoe = 41.868 TJ [@ires2018].
+- The IMF tool reports in **petajoules** (PJ): 1 PJ = 1,000 TJ.
+- The joule makes electricity, gas and oil additive by their energy content.
+
+## Flows: the balance in the IEA template
+
+- The converter reads the balance in the layout of the International Energy Agency: a fixed list of flows, in a fixed order.
+- Each Tunisian flow goes to one flow of the template; a few cells are exceptions.
+- Signs follow the IEA: exports, bunkers, transformation inputs and own use are negative.
+
+## Exceptions to the default correspondence
+
+```{python}
+exc = lookup("balance_template_exceptions")
+gt(exc.select(pl.col("flow").alias("Flow"), pl.col("product").alias("Product"),
+              pl.coalesce("iea_flow", "iea_product").alias("Destination"), pl.col("rationale_en").alias("Reason")).head(6))
+```
+
+## Activities: most lines have one industry
+
+```{python}
+m = lookup("balance_to_activities").filter(pl.col("method") == "direct").select(
+    pl.col("iea_flow").alias("Flow of the balance"), pl.col("activity").alias("Industry"), pl.col("rationale_en").alias("Reason"))
+gt(m.filter(pl.col("Flow of the balance").is_in(["Iron and steel", "Chemical and petrochemical", "Non-metallic minerals", "Rail", "Residential",
+                                                 "Oil refineries (transf.)", "Charcoal production plants (transf.)"])))
+```
+
+## Two lines need keys {.theme-content}
+
+- **Road transport** is given by mode, not by user: trucks, buses, taxis and private cars belong to many industries and to households.
+- **Commerce, administration, hotels** is one line for several service industries.
+- Both are split with **keys** from the supply and use tables of the same year:
+  - road: purchases of refined petroleum products (product 19);
+  - tertiary: purchases of electricity and gas (product 35).
+
+## The keys in `{python} LAST`
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.4
+charts.activity_keys(LAST, figsize=(10, 4.4))
+```
+
+## Reading the keys
+
+- Households receive `{python} pct(hh_road)` of road fuel, transport `{python} pct(tr_road)`.
+- Refining and electricity are left out of the road key, since their purchases of product 19 are mostly transformation inputs.
+- Keys change every year with the national accounts.
+- They assume a similar price per unit of energy for every user: the best available information, but an assumption.
+
+# The concordance matrix
+
+## What the matrix says {.theme-content}
+
+For each **flow** and **product** of the balance:
+
+- which **PEFA product** receives the energy,
+- in which **table** (supply or use),
+- for which **activity**,
+- with which **share**; the shares of a flow add up to one.
+
+## Default and Tunisian matrices
+
+- The default matrix of the tool allocates each flow to an **ISIC section**.
+- The Tunisian matrix replaces the rows of covered flows with **one row per industry**, with the factor of the key.
+- One matrix per year, because the keys change every year.
+- Imports, exports and stock changes keep the default rows.
+
+## Where Tunisia departs from the default
+
+```{python}
+gt(changes.filter(pl.col("changed")).select(pl.col("iea_flow").alias("Flow"), pl.col("default_sections").alias("Default"),
+                                            pl.col("sections").alias("Tunisia"), pl.col("rationale_en").alias("Reason")))
+```
+
+`{python} changes.filter(pl.col("changed"))["iea_flow"].n_unique()` flows move to another section; all others only gain detail.
+
+## What the converter does
+
+1. Gives each flow its heading (supply, transformation, own use, final consumption).
+2. Records primary production as a **natural input** from the environment, used by the extracting industry.
+3. Multiplies each value of the balance by its factors.
+4. Turns transformation outputs into **supply** of energy products.
+5. Creates, for every use of energy, a **residual** of the same size returned to the environment.
+
+## From origin to use in `{python} LAST`
+
+```{python}
+charts.energy_sankey(LAST, height=460)
+```
+
+## Reading the diagram
+
+- Natural gas goes mostly into **power plants**, which turn it into electricity.
+- Oil products go to households, transport, manufacturing and agriculture; crude oil is also exported.
+- Biofuels, mainly firewood and charcoal, are used by households.
+- Transformation appears as a use of products; its output reappears as domestic production.
+
+## Points to discuss
+
+- Is the level of 24 industries right, or would finer detail be useful?
+- Electricity autoproducers and recovered heat: chemical industry?
+- Solar heat: produced and used by households? Non-energy use (bitumen): construction?
+- Could ONEM split the own use of the energy industries by industry?
+- Are money purchases a good enough key for road transport and services?
+
+## References
+
+::: {#refs}
+:::

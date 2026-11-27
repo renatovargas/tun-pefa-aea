@@ -32,3 +32,8 @@ $link-color: $theme-IMFblue;
   margin-inline-end: 0.4rem;
   margin-bottom: 0.4rem;
 }
+
+// Download buttons inside tables
+td .btn {
+  margin: 0.15rem 0.25rem 0.15rem 0;
+}

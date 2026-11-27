@@ -1,0 +1,151 @@
+---
+title: "Comptes des émissions : sources et nomenclatures"
+subtitle: "De l'inventaire des gaz à effet de serre aux branches et aux ménages"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+inv = read("ghg_inventory").filter(pl.col("year") == LAST)
+scope = dict(inv.group_by("scope").agg(pl.col("kt_co2_eq").sum()).iter_rows())
+bio = inv.filter(pl.col("gas") == "CO2bio")["kt"].sum()
+road = aea.filter(pl.col("year") == LAST, pl.col("gas") == "GHG", pl.col("source").str.starts_with("1.A.3.b"), pl.col("activity").is_in(ACTS))
+road_hh = road.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum() / road["kt_co2_eq"].sum()
+```
+
+## Contenu de cette présentation {.theme-content}
+
+1. Ce que sont les comptes des émissions atmosphériques, et leur lien avec l'inventaire.
+2. L'inventaire tunisien : gaz, périmètre et fichiers.
+3. Comment les catégories de l'inventaire deviennent des branches et des ménages.
+
+# Comptes et inventaire
+
+## Pourquoi des comptes des émissions ?
+
+- L'inventaire classe les émissions par **procédé** : combustion dans les industries énergétiques, transport routier, fermentation entérique, décharges [@ipcc2006].
+- Il ne dit pas **quelles unités économiques** émettent.
+- Les comptes réorganisent les mêmes émissions par **branche** et pour les **ménages**, comme les comptes nationaux [@eurostat2015aea].
+- Les émissions peuvent alors être rapprochées de la production, de la valeur ajoutée, de l'emploi et des comptes de l'énergie.
+
+## L'inventaire tunisien
+
+- Coordonné par l'ANME (énergie, procédés industriels), le ministère de l'Agriculture (agriculture, utilisation des terres) et l'ONAS (déchets) [@besbes2026].
+- Lignes directrices 2006 du GIEC, déclaration dans les tableaux communs de notification (CRT) de la CCNUCC.
+- En `{python} LAST` : **`{python} mt(scope["inventory"])` Mt éq. CO2** hors utilisation des terres ; l'utilisation des terres est un puits net de `{python} mt(scope["lulucf"])` Mt.
+
+## Les gaz à effet de serre et leur unité commune
+
+| Gaz | Principales sources | PRG (AR5) |
+|:--|:--|--:|
+| Dioxyde de carbone (CO2) | Combustion des combustibles fossiles, ciment | 1 |
+| Méthane (CH4) | Bétail, décharges, fuites de gaz | 28 |
+| Protoxyde d'azote (N2O) | Sols agricoles, fumier | 265 |
+| Gaz fluorés | Réfrigération, climatisation, équipements électriques | selon l'espèce |
+
+Chaque gaz est pondéré par son potentiel de réchauffement global à 100 ans [@ipcc2014ar5].
+
+## Émissions par gaz
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.8
+charts.emissions_by_gas(figsize=(9, 3.8))
+```
+
+## Périmètre des comptes
+
+- **Inclus** : CO2, CH4, N2O et gaz fluorés de l'énergie, des procédés industriels, de l'agriculture et des déchets.
+- **Exclus, dans le tableau de passage** : utilisation des terres, changement d'affectation des terres et foresterie [@eurostat2015aea, § 269].
+- **Éléments pour mémoire** : soutes internationales (1.D) et CO2 de la biomasse (`{python} mt(bio)` Mt en `{python} LAST`), dont le carbone a été prélevé récemment dans l'atmosphère.
+
+## Deux fichiers d'entrée
+
+| Fichier | Contenu | Usage |
+|:--|:--|:--|
+| Classeurs CRT (`Data`, `Summary2`) | Toutes les catégories, combustibles et gaz ; kt et TJ | Les comptes |
+| `Tunisia_UNFCCC.xlsx` | Catégories principales, kt de chaque gaz | Contrôle croisé |
+
+Les totaux par secteur des deux fichiers concordent à `{python} num(check("20_prepare_ghg_inventory", "prepared_file_sectors")["value"], 3)` kt près.
+
+## Préparation de l'inventaire
+
+- Le CO2, le CH4 et le N2O viennent de `Data`, pondérés par leurs potentiels de réchauffement.
+- Les gaz fluorés viennent de `Summary2`, où ils sont en équivalent CO2 par catégorie.
+- Chaque catégorie reçoit le code le plus détaillé de l'outil I2A dont elle relève.
+- Le total, utilisation des terres comprise, égale le total net de `Summary2`, une fois pris en compte un petit écart de N2O.
+
+# Des procédés aux unités économiques
+
+## Deux nomenclatures {.theme-content}
+
+- **Inventaire** : quel procédé émet. *Transport routier.*
+- **Comptes** : qui émet. *Les ménages qui conduisent leur voiture, les camions de l'agro-alimentaire, les autobus de la branche transport.*
+- Les ménages apparaissent comme consommateurs : leurs voitures et leurs logements. Les ménages producteurs, comme les exploitations familiales, relèvent de leur branche.
+
+## La table des règles
+
+- `crt_to_activities.csv` : un préfixe de codes CRT, une activité et une raison.
+- Chaque catégorie prend le **préfixe correspondant le plus long** :
+  - « 3 » couvre toute l'agriculture ;
+  - « 1.A.4.b » remplace « 1.A.4 » pour les logements.
+- Une table courte couvre tout l'inventaire, et les exceptions restent visibles.
+
+## Exemples de règles
+
+```{python}
+m = lookup("crt_to_activities")
+gt(m.filter(pl.col("prefix").is_in(["1.A.1.a", "1.A.2.f", "1.A.3.b", "1.A.4.b", "2.A", "3", "5"])).select(
+    pl.col("prefix").alias("Préfixe CRT"), pl.col("activity").fill_null("clé").alias("Activité"), pl.col("rationale_fr").alias("Raison")))
+```
+
+## Des clés partagées avec les comptes de l'énergie
+
+- Le transport routier (1.A.3.b) est réparti entre les branches et les ménages avec la **clé routière** des comptes de l'énergie.
+- La combustion du commerce et des services publics (1.A.4.a) est répartie entre les branches de services avec la **clé du tertiaire**.
+- Les deux comptes répartissent donc ces secteurs **de la même façon**.
+- En `{python} LAST`, les ménages reçoivent `{python} pct(road_hh)` des émissions du transport routier.
+
+## Des secteurs aux activités en `{python} LAST`
+
+```{python}
+charts.emissions_sankey(LAST, height=460)
+```
+
+## Lecture du diagramme
+
+- La combustion (1.A) se répartit dans toute l'économie.
+- Les procédés industriels (2) viennent presque entièrement de l'industrie manufacturière, surtout du ciment.
+- L'agriculture (3) reste dans l'agriculture ; les déchets (5) vont aux services de l'eau et des déchets.
+- L'ajustement de résidence ajoute au transport les émissions des transporteurs tunisiens à l'étranger.
+
+## Points à discuter
+
+- Comment l'INS peut-il recevoir chaque année les classeurs CRT, et à quel moment ?
+- N2O de 1.B.2.b.ii à partir de 2019 : présent dans `Data` mais pas dans `Summary2`.
+- Réseaux de gaz naturel : exploités par la branche électricité et gaz en Tunisie ?
+- Gaz de la réfrigération commerciale : commerce, ou branches qui possèdent les équipements ?
+
+## Références
+
+::: {#refs}
+:::

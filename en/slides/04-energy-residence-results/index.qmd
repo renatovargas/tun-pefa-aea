@@ -1,0 +1,195 @@
+---
+title: "Energy accounts: residence, checks and results"
+subtitle: "From the territory of the balance to the residents of the accounts, and what the accounts show"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+ind = read("pefa_indicators").filter(pl.col("year") == LAST)
+hh = ind.filter(pl.col("activity") == "HH")["end_use_energy"].sum()
+industries = ind.filter(pl.col("activity") != "HH")
+intensity = industries["end_use_energy"].sum() / industries["value_added_mtnd"].sum()
+gic = read("energy_balance").filter(pl.col("year") == LAST, pl.col("flow") == "GIC", pl.col("product") == "TOTAL")["tj"].sum()
+bunk = read("pefa_bunkers_check").filter(pl.col("year") == LAST)["balance_tj"].sum()
+top = industries.sort("end_use_energy", descending=True)
+c23 = ind.filter(pl.col("activity") == "23")["intensity_value_added"][0]
+```
+
+## What this presentation covers {.theme-content}
+
+1. Territory, residence and the bridge between the accounts and the balance.
+2. The checks that every compilation must pass.
+3. First results for `{python} FIRST` to `{python} LAST`, and how to disseminate them.
+
+# Residence
+
+## Territory and residence
+
+- The energy balance records what happens **on the territory**; the accounts record what **resident units** do, wherever they are [@eurostat2014pefa, paras 41 to 48].
+- The difference is mostly **international transport**:
+  - fuel bought abroad by Tunisian airlines and shipping companies belongs to the accounts;
+  - fuel bought in Tunisia by foreign carriers belongs to the balance, not to the accounts.
+- Road transport can also cross borders: foreign trucks, cross-border purchases.
+
+## The bridge table
+
+| | |
+|:--|:--|
+| Net domestic energy use of the accounts | residence principle |
+| − energy use of residents abroad | |
+| + energy use of non-residents on the territory | |
+| ± other differences | |
+| = Gross inland consumption of the balance | territory principle |
+
+[@eurostat2014pefa, paras 109 to 111]
+
+## International bunkers
+
+```{python}
+b = read("pefa_bunkers_check").filter(pl.col("iea_flow") == "International aviation bunkers")
+gt(b.select(pl.col("year").cast(pl.String).alias("Year"), pl.col("balance_tj").alias("Balance (TJ)"),
+            pl.col("inventory_tj").alias("Inventory 1.D.1.a (TJ)"), pl.col("gap_pct").alias("Gap (%)")),
+   decimals={"Balance (TJ)": 0, "Inventory 1.D.1.a (TJ)": 0, "Gap (%)": 2})
+```
+
+The aviation bunkers of the balance and of the inventory agree closely every year.
+
+## Net domestic energy use and gross inland consumption
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.6
+charts.ndeu_vs_gic(figsize=(9, 3.6))
+```
+
+In `{python} LAST`: `{python} pj(ind["net_domestic_energy_use"].sum())` PJ against `{python} pj(gic)` PJ.
+
+## Why the two differ
+
+- Net domestic energy use adds up the residuals of residents plus energy kept in products such as bitumen [@eurostat2014pefa, paras 103 to 106].
+- Gross inland consumption excludes international bunkers (`{python} pj(bunk)` PJ in `{python} LAST`).
+- Until residence data exist, the accounts attribute bunkers to resident carriers, as the tool does by default.
+- A complete bridge needs fuel bought abroad by residents and fuel bought in Tunisia by non-residents.
+
+# Checks
+
+## Three kinds of checks {.theme-content}
+
+- **Identities**: supply equals use, row by row.
+- **Agreement with the tools**: the explicit layer reproduces the IMF functions.
+- **Plausibility**: the physical accounts make sense against the money accounts.
+
+## Supply equals use
+
+- Natural inputs and residuals balance **exactly**, since the converter writes both sides of each flow.
+- Energy products balance to within `{python} num(check("14_check_pefa_and_indicators", "energy_products_balance")["value"], 1)` ktoe, the rounding and statistical difference of the published balance.
+- The explicit layer matches the tool to within `{python} f"{read('pefa_tool_agreement')['max_gap_pj'].drop_nulls().max():.0e}"` PJ.
+
+## Plausibility: implied prices
+
+- For each industry, divide its **purchases of energy** in the supply and use tables (crude oil and gas, refined products, electricity and gas) by its **energy use** in the accounts.
+- The result is an implied price in dinars per gigajoule.
+- An industry that buys energy but uses none, or the reverse, would reveal an allocation error. None appears.
+
+## Implied prices in `{python} LAST`
+
+```{python}
+#| fig-width: 9
+#| fig-height: 4.2
+charts.implied_prices(LAST, figsize=(9, 4.2))
+```
+
+## Reading the prices
+
+- Lowest prices: miscellaneous industries, agriculture, building materials, which buy heavy fuel, petroleum coke or gas, cheap per unit of energy.
+- Highest prices: services, whose energy is mostly electricity.
+- Refining and electricity are left out: their purchases are mainly transformation inputs.
+
+# Results
+
+## Key figures for `{python} LAST` {.theme-content}
+
+- Net domestic energy use: **`{python} pj(ind["net_domestic_energy_use"].sum())` PJ**.
+- Households: **`{python} pct(hh / ind["end_use_energy"].sum())`** of energy end use.
+- Energy intensity of the economy: **`{python} num(intensity, 2)` TJ** per million TND of value added.
+
+## Who uses energy
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.energy_users(LAST, n=10, figsize=(10, 4.2))
+```
+
+## Reading the chart
+
+- Households lead, combining cooking, heating, appliances and their share of road fuel.
+- Next come `{python} activity(top["activity"][0]).lower()` and `{python} activity(top["activity"][1]).lower()`.
+- Oil dominates final use; natural gas matters for industry; biofuels for households.
+
+## Energy intensity
+
+- Energy intensity relates the energy an industry uses to the **value it adds**.
+- It shows where energy is concentrated in production, and where efficiency policies matter most.
+- At current prices, changes mix efficiency with prices: use with care over time.
+
+## Energy intensity by industry
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.energy_intensity(LAST, figsize=(10, 4.2))
+```
+
+Building materials use about `{python} num(c23, 0)` TJ per million TND of value added.
+
+## Supply and use of energy products, `{python} LAST`
+
+```{python}
+pefa = read("pefa_supply_use")
+sections = dict(lookup("activities").select("code", "imf_section").iter_rows())
+t = (pefa.filter(pl.col("year") == LAST, pl.col("level1") == "Energy products:", pl.col("quadrant") == "Use")
+     .with_columns(section=pl.col("activity").replace_strict(sections, default=pl.col("activity")),
+                   product=pl.col("product").replace_strict(lab("pefa_rows"), default=pl.col("product")))
+     .group_by("product", "section").agg(pl.col("tj").sum() / 1000).pivot("section", index="product", values="tj").fill_null(0))
+cols = [c for c in ["A", "B", "C", "D", "E", "F", "H", "Other", "HH", "ROW"] if c in t.columns]
+gt(t.select("product", *cols).rename({"product": "Use (PJ)", "HH": "Households", "ROW": "Exports"}), decimals=0)
+```
+
+## Dissemination
+
+- Excel workbooks in three languages: supply and use tables by year, ISIC sections, indicators.
+- A methods document where every number is read from the data.
+- A data explorer on the website.
+
+## Points to discuss
+
+- Fuel bought abroad by Tunisian airlines and shipping companies: which source?
+- Fuel bought in Tunisia by non-residents: trucks, ships, aircraft?
+- Which tables and indicators should be published first, and how often?
+- How should provisional results be labelled, and which users consulted?
+
+## References
+
+::: {#refs}
+:::

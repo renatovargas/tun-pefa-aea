@@ -73,7 +73,12 @@ M = transpose(emissions)
 I = transpose(intensity)
 domain = Object.keys(colors)
 range = Object.values(colors)
-viewof year = Inputs.range([years[0], years[years.length - 1]], {step: 1, value: years[years.length - 1], label: UI.year})
+viewof year = Inputs.select(years.slice().reverse(), {value: years[years.length - 1], label: UI.year})
+// Axes and bar order stay fixed across years, so that only real changes move.
+// Les axes et l'ordre des barres restent fixes d'une année à l'autre.
+totals = (rows) => d3.rollup(rows, v => d3.sum(v, d => d.value), d => d.year, d => d.name)
+maxTotal = (rows) => d3.max(Array.from(totals(rows).values(), m => d3.max(m.values())))
+stableOrder = (rows) => d3.groupSort(rows, v => -d3.sum(v, d => d.value), d => d.name)
 ```
 
 ::: {.panel-tabset}
@@ -83,11 +88,11 @@ viewof year = Inputs.range([years[0], years[years.length - 1]], {step: 1, value:
 ```{ojs}
 //| echo: false
 energyYear = E.filter(d => d.year === year)
-energyOrder = d3.groupSort(energyYear, v => -d3.sum(v, d => d.value), d => d.name)
+energyOrder = stableOrder(E)
 Plot.plot({
   title: `${UI.energy_title}, ${year} (${UI.pj})`,
   marginLeft: rtl ? 10 : 260, marginRight: rtl ? 260 : 40, width: 1000, height: 560,
-  x: {label: UI.pj, grid: true, reverse: rtl},
+  x: {label: UI.pj, grid: true, reverse: rtl, domain: [0, maxTotal(E)], nice: true},
   y: {label: null, domain: energyOrder, axis: rtl ? "right" : "left", tickFormat: t => t.length > 40 ? t.slice(0, 39) + "…" : t},
   color: {domain, range, legend: true},
   marks: [
@@ -113,11 +118,11 @@ Plot.plot({
 ```{ojs}
 //| echo: false
 emissionsYear = M.filter(d => d.year === year)
-emissionsOrder = d3.groupSort(emissionsYear, v => -d3.sum(v, d => d.value), d => d.name)
+emissionsOrder = stableOrder(M)
 Plot.plot({
   title: `${UI.emissions_title}, ${year} (${UI.kt})`,
   marginLeft: rtl ? 10 : 260, marginRight: rtl ? 260 : 40, width: 1000, height: 560,
-  x: {label: UI.kt, grid: true, reverse: rtl},
+  x: {label: UI.kt, grid: true, reverse: rtl, domain: [0, maxTotal(M)], nice: true},
   y: {label: null, domain: emissionsOrder, axis: rtl ? "right" : "left", tickFormat: t => t.length > 40 ? t.slice(0, 39) + "…" : t},
   color: {domain, range, legend: true},
   marks: [
@@ -144,7 +149,8 @@ Plot.plot({
 //| echo: false
 Plot.plot({
   title: `${UI.intensity_title}, ${year}`, subtitle: UI.intensity_note, width: 1000, height: 560, marginLeft: 60,
-  x: {type: "log", label: UI.intensity_x, grid: true}, y: {type: "log", label: UI.intensity_y, grid: true},
+  x: {type: "log", label: UI.intensity_x, grid: true, domain: d3.extent(I.filter(d => d.intensity_value_added > 0), d => d.intensity_value_added)},
+  y: {type: "log", label: UI.intensity_y, grid: true, domain: d3.extent(I.filter(d => d.ghg_intensity_value_added > 0), d => d.ghg_intensity_value_added)},
   r: {range: [3, 22]},
   color: {domain: Object.keys(section_colors), range: Object.values(section_colors)},
   marks: [

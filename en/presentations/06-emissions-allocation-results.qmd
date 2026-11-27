@@ -1,0 +1,24 @@
+---
+title: "Air emissions accounts: allocation, residence and results"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/06-emissions-allocation-results/index.html" title="Air emissions accounts: allocation, residence and results" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ Full screen](../slides/06-emissions-allocation-results/index.html){target="_blank"}
+::::
+
+Click inside the slides and use the arrow keys to move. Press `F` for full screen, `S` for the speaker view and `Esc` for an overview.
+
+## In this presentation
+
+- The conversion matrix and where Tunisia departs from the default
+- Residence adjustment with OECD data and the bridge table
+- Implied emission factors, first results and dissemination
+
+## Related document
+
+- [Air emissions accounts](../documents/emissions-accounts/index.qmd)

@@ -1,0 +1,24 @@
+---
+title: "حسابات الانبعاثات: المصادر والتصنيفات"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/05-emissions-sources-classifications/index.html" title="حسابات الانبعاثات: المصادر والتصنيفات" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ شاشة كاملة](../slides/05-emissions-sources-classifications/index.html){target="_blank"}
+::::
+
+انقر داخل الشرائح واستخدم مفاتيح الأسهم للتنقل. اضغط `F` للشاشة الكاملة، و`S` لعرض المتحدث، و`Esc` للنظرة الشاملة.
+
+## في هذا العرض
+
+- الحسابات والجرد: الغازات والنطاق والملفات
+- من العمليات المطلِقة إلى الوحدات المطلِقة
+- جدول القواعد والمفاتيح المشتركة مع حسابات الطاقة
+
+## الوثيقة المرتبطة
+
+- [حسابات انبعاثات الهواء](../documents/emissions-accounts/index.qmd)

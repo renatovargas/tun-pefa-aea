@@ -4,7 +4,7 @@ Why    : the workbooks are the product that users download. They hold the same n
          the three languages; only labels change.
 Inputs : data/intermediate/aea.parquet (script 22), aea_bridge.parquet and aea_indicators.parquet (script 23)
          data/lookups/activities.csv, gases.csv, aea_bridge.csv, terms.csv
-Outputs: data/outputs/accounts/<language>/aea_accounts.xlsx with sheets:
+Outputs: data/outputs/accounts/<language>/aea-accounts-<language>.xlsx with sheets:
            Notes; Data (all years, long, by CRT category and activity); Bridge (accounts to
            inventory, all years); AEA <year> (activities in rows, gases in columns, as in the
            AEA sheet of the IMF tool); Source by activity (as in sheet Output_Source_Activity);
@@ -23,7 +23,7 @@ import polars as pl
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from common import ACCOUNTS, LANGUAGES, PSEUDO_ACTIVITIES, labels, read_intermediate, read_lookup, terms, write_workbook  # noqa: E402
 
-NAME = "aea_accounts"
+NAME = "aea-accounts"
 GASES = ["CO2", "CH4", "N2O", "F-gases", "GHG"]
 BRIDGE_ORDER = read_lookup("aea_bridge").sort("order")["code"].to_list()
 ACTIVITIES = [c for c in read_lookup("activities")["code"] if c not in PSEUDO_ACTIVITIES]
@@ -99,7 +99,7 @@ def main() -> None:
         sheets.append((t["sheet_source_activity"], source_by_activity(aea, lang), 2))
         sheets.append((t["sheet_indicators"], indicator_data(indicators, lang), 1))
         notes = [t[k] for k in ["title_aea", "unit_kt_co2_eq", "note_source_aea", "note_method_aea", "note_provisional", "note_site", "note_code"]]
-        write_workbook(ACCOUNTS / lang / f"{NAME}.xlsx", t["sheet_notes"], notes, sheets, right_to_left=lang == "ar")
+        write_workbook(ACCOUNTS / lang / f"{NAME}-{lang}.xlsx", t["sheet_notes"], notes, sheets, right_to_left=lang == "ar")
 
 
 if __name__ == "__main__":

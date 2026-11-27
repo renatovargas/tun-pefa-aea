@@ -1,0 +1,181 @@
+---
+title: "Air emissions accounts: allocation, residence and results"
+subtitle: "Conversion matrix, OECD adjustments, bridge table and first results"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+dropped = read("aea_categories_without_factor").filter(pl.col("year") == LAST)["kt_co2_eq"].sum()
+b = {r["year"]: r for r in bridge.filter(pl.col("gas") == "GHG").iter_rows(named=True)}
+oe = read("aea_bunkers_vs_oecd").filter(pl.col("year") == LAST).row(0, named=True)
+fi = read("aea_implied_factors_inventory").filter(pl.col("year") == LAST)
+d = aea.filter(pl.col("year") == LAST, pl.col("gas") == "GHG", pl.col("activity").is_in(ACTS)).group_by("activity").agg(pl.col("kt_co2_eq").sum())
+total = d["kt_co2_eq"].sum(); hh = d.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum()
+ind = read("aea_indicators").filter(pl.col("year") == LAST, pl.col("activity") != "HH")
+changes = read("aea_conversion_changes")
+```
+
+## What this presentation covers {.theme-content}
+
+1. The conversion matrix and where Tunisia departs from the default.
+2. The residence adjustment and the bridge table.
+3. Checks against the energy accounts, first results and dissemination.
+
+# The conversion matrix
+
+## Default and Tunisian matrices
+
+- The I2A tool comes with a **default matrix** from inventory categories to ISIC sections and households, following the Eurostat correspondence [@eurostat2015aea; @imf2026i2a].
+- The **Tunisian matrix** uses the 24 industries and households, one matrix per year.
+- Each category's emissions are multiplied by its factors; a category with no factors receives nothing.
+
+## A gap in the default matrix
+
+- The default matrix has **no factors for agricultural soils** (3.D).
+- Without a Tunisian rule, `{python} num(dropped, 0)` kt CO2 eq would disappear in `{python} LAST`, silently.
+- The Tunisian matrix assigns them to agriculture.
+- The pipeline lists every category that the default matrix would drop.
+
+## Where Tunisia departs from the default
+
+```{python}
+ch = changes.filter(pl.col("status") == "changed").sort("kt_co2_eq", descending=True).head(8)
+gt(ch.select(pl.col("tool_code").alias("Category"), pl.col("kt_co2_eq").alias("kt CO2 eq"), pl.col("default_sections").alias("Default"),
+             pl.col("section").alias("Tunisia"), pl.col("activities").alias("Activities")), decimals=0)
+```
+
+## Three groups of changes
+
+- Road transport and residential combustion move from transport and construction to **households**, as the accounts require.
+- Natural gas transmission and distribution move from transport to **electricity and gas**, which runs the network.
+- Commercial refrigeration gases go to **trade**.
+
+# Residence
+
+## How the tool adjusts for residence {.theme-content}
+
+1. **Air**: OECD estimates emissions of Tunisian airlines on domestic flights and abroad [@oecd2024transport].
+2. Emissions of resident airlines **abroad** are added to air transport and recorded as a bridging item.
+3. If the OECD estimate for domestic flights is **below** the inventory, the difference goes to non-residents on the territory.
+4. **Sea**: if the OECD estimate for resident vessels **exceeds** domestic navigation, the difference is added to water transport.
+
+## The adjustment in `{python} LAST`
+
+| | kt CO2 |
+|:--|--:|
+| Resident airlines abroad (OECD) | `{python} num(oe["oecd_air_residents_kt"], 0)` |
+| Aviation bunkers in the inventory | `{python} num(oe["aviation_bunkers_kt"], 0)` |
+| Resident vessels (OECD) | `{python} num(oe["oecd_sea_residents_kt"], 0)` |
+| Marine bunkers in the inventory | `{python} num(oe["marine_bunkers_kt"], 0)` |
+
+The OECD maritime estimate is much larger than marine bunkers, and missing before 2019.
+
+## The bridge table
+
+```{python}
+items = lookup("aea_bridge").sort(pl.col("order").cast(pl.Int32))
+rows = [{"Item": r["en"], **{str(y): b[y][r["code"]] for y in YEARS[-4:]}} for r in items.iter_rows(named=True)]
+gt(pl.DataFrame(rows), decimals=0)
+```
+
+## Reading the bridge table
+
+- Start from the accounts total (residents, wherever they emit).
+- Subtract residents abroad; add non-residents on the territory.
+- The result equals the inventory total without land use, to within 10^-6^ kt, every year and gas.
+- Adding land use gives the net inventory total.
+
+# Checks
+
+## Agreement with the tool
+
+- The explicit layer reproduces the I2A function to within `{python} f"{read('aea_tool_agreement')['max_gap_kt'].max():.0e}"` kt CO2 eq, with the default and the Tunisian matrices.
+- Two features of the tool are handled explicitly: the positive maritime gap has no bridging item, and the tool's own total adds bridging items without their sign.
+
+## Plausibility: implied emission factors
+
+- For each activity, divide **CO2 from fuel combustion** in the emissions accounts by the **fossil energy** it uses in the energy accounts.
+- The result, in tonnes of CO2 per terajoule, should fall near the range of fuels in the inventory: from `{python} num(fi["t_co2_per_tj"].min(), 1)` (natural gas) to `{python} num(fi["t_co2_per_tj"].max(), 1)` (liquid fuels).
+
+## Implied factors in `{python} LAST`
+
+```{python}
+#| fig-width: 9
+#| fig-height: 4.2
+charts.implied_factors(LAST, figsize=(9, 4.2))
+```
+
+## Reading the factors
+
+- Most activities fall inside the band: the two accounts are consistent.
+- Activities outside the band point to classification differences between the balance and the inventory, for example own use of the energy industries and electricity autoproducers.
+- These are the places to review with ONEM and ANME.
+
+# Results
+
+## Key figures for `{python} LAST` {.theme-content}
+
+- Emissions of resident units: **`{python} mt(total)` Mt CO2 eq**.
+- Households: **`{python} pct(hh / total)`** of the total.
+- Intensity of the economy: **`{python} num(1000 * ind["ghg_kt"].sum() / ind["value_added_mtnd"].sum(), 0)` t CO2 eq** per million TND of value added.
+
+## Who emits
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.emitters(LAST, n=10, figsize=(10, 4.2))
+```
+
+## Reading the chart
+
+- Electricity and gas lead, then building materials, where cement kilns emit from fuel and from limestone.
+- Agriculture emits mostly methane and nitrous oxide, from livestock and soils.
+- Water and waste services owe their place to landfills.
+
+## Emission intensity
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.emission_intensity(LAST, figsize=(10, 4.2))
+```
+
+A few industries emit far more per dinar than the rest; changes in their output or technology matter most.
+
+## Dissemination
+
+- Excel workbooks in three languages: accounts by activity and gas, bridge table, source by activity, indicators.
+- The layout follows the Eurostat questionnaire, which eases international comparison [@eurostat2015aea].
+
+## Points to discuss
+
+- Which national data could replace the OECD maritime estimate?
+- Activities outside the band: reclassify, or document?
+- Joint release with the inventory, or with the national accounts?
+- Revision policy when the inventory or the national accounts change.
+
+## References
+
+::: {#refs}
+:::

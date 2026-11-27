@@ -1,0 +1,24 @@
+---
+title: "حسابات الطاقة: التصنيفات والتوزيع"
+toc: false
+---
+
+::::{.slide-embed}
+<iframe class="slide-deck" src="../slides/03-energy-classifications-allocation/index.html" title="حسابات الطاقة: التصنيفات والتوزيع" loading="lazy"></iframe>
+::::
+
+::::{.slide-links}
+[⛶ شاشة كاملة](../slides/03-energy-classifications-allocation/index.html){target="_blank"}
+::::
+
+انقر داخل الشرائح واستخدم مفاتيح الأسهم للتنقل. اضغط `F` للشاشة الكاملة، و`S` لعرض المتحدث، و`Esc` للنظرة الشاملة.
+
+## في هذا العرض
+
+- منتجات حسابات الطاقة وتدفقاتها وأنشطتها
+- كيف يجد كل سطر من الميزان فرعه، والمفتاحان
+- مصفوفة التوافق وما تفعله الأداة بها
+
+## الوثيقة المرتبطة
+
+- [حسابات التدفقات المادية للطاقة](../documents/energy-accounts/index.qmd)

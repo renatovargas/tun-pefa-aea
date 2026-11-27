@@ -1,69 +1,14 @@
 ---
 title: "Downloads"
-subtitle: "The accounts in Excel and the tables behind every figure"
+subtitle: "The accounts in Excel, in English, French and Arabic"
 toc: false
 ---
 
-The three language versions of each workbook hold the same numbers; only labels change. Arabic workbooks read from right to left. The accounts are provisional: the allocation assumptions are described in the documents.
+The three language versions of each workbook hold the same numbers; only labels change, and Arabic workbooks read from right to left. The accounts are provisional, and the allocation assumptions are described in the [documents](documents/index.qmd).
 
-:::: {.grid}
+| Workbook | Content | Download |
+|:-----------|:------------------------------------------|:---------------|
+| **Physical energy flow accounts (PEFA), 2015 to 2022** | Supply and use tables of energy by industry and for households, in terajoules, for each year; the same tables by ISIC section; a long table of all years; indicators of energy use and intensity. | [English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/en/pefa-accounts-en.xlsx){.btn .btn-sm .btn-primary download="pefa-accounts-en.xlsx"} [Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/fr/pefa-accounts-fr.xlsx){.btn .btn-sm .btn-outline-primary download="pefa-accounts-fr.xlsx"} [العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/ar/pefa-accounts-ar.xlsx){.btn .btn-sm .btn-outline-primary download="pefa-accounts-ar.xlsx"} |
+| **Air emissions accounts (AEA), 2015 to 2022** | Greenhouse gas emissions by industry, households and gas, in kilotonnes of CO2 equivalent; the bridge table to the national inventory; emissions by inventory category and activity; emission intensities. | [English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/en/aea-accounts-en.xlsx){.btn .btn-sm .btn-primary download="aea-accounts-en.xlsx"} [Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/fr/aea-accounts-fr.xlsx){.btn .btn-sm .btn-outline-primary download="aea-accounts-fr.xlsx"} [العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/ar/aea-accounts-ar.xlsx){.btn .btn-sm .btn-outline-primary download="aea-accounts-ar.xlsx"} |
 
-::: {.g-col-12 .g-col-md-6}
-::: {.card .h-100 .shadow-sm .download-card}
-::: {.card-body}
-### Physical energy flow accounts, 2015 to 2022
-
-Supply and use tables of energy by industry of the national accounts and for households, in terajoules, for each year; the same tables by ISIC section; a long table of all years; and indicators of energy use and intensity.
-
-[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/en/pefa_accounts.xlsx){.btn .btn-primary download="pefa_accounts.xlsx"}
-[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/fr/pefa_accounts.xlsx){.btn .btn-outline-primary download="pefa_accounts.xlsx"}
-[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/ar/pefa_accounts.xlsx){.btn .btn-outline-primary download="pefa_accounts.xlsx"}
-
-[Methods and results](documents/energy-accounts/index.qmd)
-:::
-:::
-:::
-
-::: {.g-col-12 .g-col-md-6}
-::: {.card .h-100 .shadow-sm .download-card}
-::: {.card-body}
-### Air emissions accounts, 2015 to 2022
-
-Greenhouse gas emissions by industry and households, by gas, in kilotonnes of CO2 equivalent; the bridge table to the national inventory; emissions by inventory category and activity; and emission intensities.
-
-[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/en/aea_accounts.xlsx){.btn .btn-primary download="aea_accounts.xlsx"}
-[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/fr/aea_accounts.xlsx){.btn .btn-outline-primary download="aea_accounts.xlsx"}
-[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/ar/aea_accounts.xlsx){.btn .btn-outline-primary download="aea_accounts.xlsx"}
-
-[Methods and results](documents/emissions-accounts/index.qmd)
-:::
-:::
-:::
-
-::: {.g-col-12 .g-col-md-6}
-::: {.card .h-100 .shadow-sm .download-card}
-::: {.card-body}
-### Tables for analysis
-
-Every table read by the documents and the data explorer, in CSV and Parquet, with codes only. Labels in English, French and Arabic for every code are in a separate folder.
-
-[Tables](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/outputs/tables){.btn .btn-primary}
-[Labels](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/outputs/labels){.btn .btn-outline-primary}
-:::
-:::
-:::
-
-::: {.g-col-12 .g-col-md-6}
-::: {.card .h-100 .shadow-sm .download-card}
-::: {.card-body}
-### Code and lookup tables
-
-The scripts that compile the accounts, and the lookup tables that hold every correspondence and allocation choice, each with its reason.
-
-[Scripts](https://github.com/renatovargas/tun-pefa-aea/tree/main/scripts){.btn .btn-primary}
-[Lookup tables](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/lookups){.btn .btn-outline-primary}
-:::
-:::
-:::
-
-::::
+: {.table .align-middle tbl-colwidths="[28,47,25]"}

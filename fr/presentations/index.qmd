@@ -1,27 +1,19 @@
 ---
 title: "Présentations"
-subtitle: "Diapositives de l'atelier technique sur les comptes de l'énergie et des émissions atmosphériques, Tunis, 7 au 11 décembre 2026"
+subtitle: "Diapositives sur les comptes de l'énergie et des émissions atmosphériques, du cadre à la production régulière"
 toc: false
 ---
 
-Chaque présentation correspond à une séance de l'atelier. Les graphiques et les chiffres sont lus dans les mêmes tableaux que les documents ; les diapositives suivent donc les données. Ouvrez une présentation, puis appuyez sur `F` pour le plein écran, sur `S` pour la vue de l'orateur et sur `Échap` pour une vue d'ensemble des diapositives.
+Les présentations suivent les documents dans une progression didactique, du cadre et des sources aux comptes de l'énergie, aux comptes des émissions et à leur diffusion. Leurs graphiques et leurs chiffres sont lus dans les mêmes tableaux que les documents.
 
-| Jour | Heure | Séance | Présentation |
-|:--|:--|:--|:--|
-| Lundi 7 décembre | 11 h 15 | Aperçu du cadre du SCEE | [L'énergie et les émissions dans le SCEE](../slides/01-seea-framework/index.html){target="_blank"} |
-| | 13 h 30 | Dispositif institutionnel des statistiques de l'énergie | [Des statistiques de l'énergie aux comptes de l'énergie](../slides/02-data-sources/index.html){target="_blank"} |
-| | 15 h 15 | Démonstration des outils PEFA et AEA | [Les outils du FMI et un pipeline reproductible](../slides/03-tools-and-pipeline/index.html){target="_blank"} |
-| Mardi 8 décembre | 9 h 00 | Comptes de l'énergie : nomenclatures d'activités et de produits | [Produits et activités](../slides/04-pefa-classifications/index.html){target="_blank"} |
-| | 11 h 15 | Comptes de l'énergie : matrice d'allocation | [La matrice d'allocation](../slides/05-pefa-allocation/index.html){target="_blank"} |
-| | 13 h 45 | Comptes de l'énergie : ajustement de résidence et contrôles de cohérence | [Résidence et contrôles de cohérence](../slides/06-pefa-residence-checks/index.html){target="_blank"} |
-| | 15 h 45 | Compilation et diffusion des comptes de l'énergie | [Compilation et diffusion](../slides/07-pefa-results/index.html){target="_blank"} |
-| Mercredi 9 décembre | 9 h 00 | Dispositif institutionnel et sources des comptes des émissions | [Institutions et sources](../slides/08-aea-sources/index.html){target="_blank"} |
-| | 11 h 15 | Comptes des émissions : nomenclatures d'activités et de sources | [Sources et activités](../slides/09-aea-classifications/index.html){target="_blank"} |
-| | 13 h 45 | Comptes des émissions : matrice d'allocation, résidence et contrôles | [Matrice, résidence et contrôles](../slides/10-aea-allocation-residence/index.html){target="_blank"} |
-| | 15 h 45 | Compilation et diffusion des comptes des émissions | [Compilation et diffusion](../slides/11-aea-results/index.html){target="_blank"} |
-| Jeudi 10 décembre | 9 h 00 | Formats de diffusion et indicateurs | [Formats de diffusion et indicateurs](../slides/12-indicators-dissemination/index.html){target="_blank"} |
-| | 11 h 15 | Plan de travail des comptes de l'énergie et des émissions | [Vers une production régulière](../slides/13-workplan/index.html){target="_blank"} |
+| Présentation | Contenu |
+|:--------------------|:----------------------------------------------|
+| [Comptes de l'énergie et des émissions : cadre et sources](01-framework-and-sources.qmd) | Pourquoi les statistiques de l'énergie et des émissions ont besoin de comptes; Le SCEE : flux d'énergie, tableaux des ressources et des emplois, territoire et résidence; Le bilan énergétique, les tableaux des ressources et des emplois et l'inventaire |
+| [Les outils du FMI et un pipeline reproductible](02-tools-and-pipeline.qmd) | Ce que reçoivent et produisent le PEFA Converter et I2A; Pourquoi la même logique a été réécrite en pipeline ouvert; Deux couches qui doivent concorder, des contrôles à chaque étape, et comment l'exécuter |
+| [Comptes de l'énergie : nomenclatures et répartition](03-energy-classifications-allocation.qmd) | Produits, flux et activités des comptes de l'énergie; Comment chaque ligne du bilan trouve sa branche, et les deux clés; La matrice de concordance et ce qu'en fait le convertisseur |
+| [Comptes de l'énergie : résidence, contrôles et résultats](04-energy-residence-results.qmd) | Territoire, résidence et passage au bilan; Identités, concordance avec l'outil et vraisemblance; Premiers résultats : qui utilise l'énergie, et intensité énergétique |
+| [Comptes des émissions : sources et nomenclatures](05-emissions-sources-classifications.qmd) | Comptes et inventaire : gaz, périmètre et fichiers; Des procédés émetteurs aux unités émettrices; La table des règles et les clés partagées avec les comptes de l'énergie |
+| [Comptes des émissions : répartition, résidence et résultats](06-emissions-allocation-results.qmd) | La matrice de conversion et les écarts tunisiens au défaut; Ajustement de résidence avec les données de l'OCDE et tableau de passage; Facteurs d'émission implicites, premiers résultats et diffusion |
+| [Indicateurs, diffusion et perspectives](07-indicators-way-forward.qmd) | Utilisateurs, indicateurs de base et formats de diffusion; L'énergie et les émissions ensemble, et la place des ménages; Un cycle annuel de production, des rôles et des priorités |
 
-: Présentations par séance de l'atelier. {tbl-colwidths="[18,8,40,34]"}
-
-Les séances du jeudi après-midi et du vendredi sont consacrées aux discussions et aux recommandations, et s'appuient sur les présentations ci-dessus.
+: {tbl-colwidths="[35,65]"}
