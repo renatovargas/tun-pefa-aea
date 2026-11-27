@@ -40,6 +40,15 @@ research/          notes on the reference manuals
 
 Code comments are in English, followed by their French translation. Each numbered script states what it reads, what it does and what it writes, and stops if one of its checks fails.
 
+## Working on this repository
+
+These rules keep the accounts, the documents and the three languages consistent. They apply to people and to coding agents alike.
+
+- **Render with `bash scripts/render.sh`.** It renders English first and then French and Arabic with `--no-clean`. A plain `quarto render --profile fr` (or `ar`) deletes the other languages from `docs/`. To check a single page, render only that page: `uv run quarto render en/<path> --profile en`.
+- **Never type a result by hand.** Every number in the documents and slides is an inline expression (`` `{python} expr` ``) that reads `data/outputs/`. Documents never compute; when a number must change, change the pipeline or a lookup and run it again.
+- **Keep the languages mirrored.** English is the source. Each English page has a French and an Arabic page at the same path, with the same code and the same inline expressions; only the words differ. `uv run python scripts/check_translations.py` checks this.
+- **Leave the sources untouched.** `data/sources/` holds the files as received. Allocation choices live in `data/lookups/`, one rule per row with its reason, and are changed there.
+
 ## IMF tools
 
 The compilation follows the PEFA Converter and the Air Emissions Account Converter (I2A) of the IMF Statistics Department, by Achille Pegoue. The pipeline re-implements each of their rules explicitly and calls the original functions unchanged to confirm that both give the same numbers. See `imf-tools/README.md`.
