@@ -1,0 +1,25 @@
+source_label,code,block,aggregate,en,fr,ar,to_review
+Production,P1,supply,no,Output,Production,الإنتاج,yes
+Importation,P7,supply,no,Imports,Importations,الواردات,yes
+Droits de douane,D212,supply,no,Import duties,Droits de douane,الرسوم الجمركية,yes
+T.V.A non déductible,D211,supply,no,Non-deductible VAT,TVA non déductible,الأداء على القيمة المضافة غير القابل للطرح,yes
+Autres impôts sur les produits,D214,supply,no,Other taxes on products,Autres impôts sur les produits,ضرائب أخرى على المنتجات,yes
+Subventions sur les produits,D31,supply,no,Subsidies on products,Subventions sur les produits,الإعانات على المنتجات,yes
+Marges commerciales,TRADE_MARGIN,supply,no,Trade margins,Marges commerciales,الهوامش التجارية,yes
+Marges du transport,TRANSPORT_MARGIN,supply,no,Transport margins,Marges de transport,هوامش النقل,yes
+CAF/FOB & SI,CIF_FOB,supply,no,CIF/FOB adjustment and intermediation services,Correction CAF/FOB et services d'intermédiation,تعديل سيف/فوب وخدمات الوساطة,yes
+Total Ressources=Emplois,TOTAL_SUPPLY,supply,yes,Total supply,Total des ressources,مجموع الموارد,yes
+Total des Ressources,TOTAL_SUPPLY,supply,yes,Total supply,Total des ressources,مجموع الموارد,yes
+Consommation intermédiaire,P2,use,yes,Intermediate consumption,Consommation intermédiaire,الاستهلاك الوسيط,yes
+DCF Ménages,P3_HH,use,no,Household final consumption expenditure,Dépense de consommation finale des ménages,نفقات الاستهلاك النهائي للأسر,yes
+DCF APU,P3_GOV,use,no,Government final consumption expenditure,Dépense de consommation finale des administrations publiques,نفقات الاستهلاك النهائي للإدارات العمومية,yes
+Consommation finale,P3,use,yes,Final consumption,Consommation finale,الاستهلاك النهائي,yes
+F.B.C.F,P51G,use,no,Gross fixed capital formation,Formation brute de capital fixe,التكوين الخام لرأس المال الثابت,yes
+Variation de stocks,P52,use,no,Changes in inventories,Variation des stocks,التغير في المخزون,yes
+Exportation,P6,use,no,Exports,Exportations,الصادرات,yes
+Somme des Emplois,TOTAL_USE,use,yes,Total use,Total des emplois,مجموع الاستخدامات,yes
+Production secteur,P1,value_added,no,Output by industry,Production de la branche,إنتاج الفرع,yes
+Valeur Ajoutée,B1G,value_added,no,Gross value added,Valeur ajoutée brute,القيمة المضافة الخام,yes
+Rémunération des salariés,D1,value_added,no,Compensation of employees,Rémunération des salariés,أجور الأجراء,yes
+Impôts et taxes indirectes nets de subventions,D29_D39,value_added,no,Other taxes less subsidies on production,Autres impôts sur la production nets de subventions,ضرائب أخرى على الإنتاج صافية من الإعانات,yes
+Excédent Brut d'Exploitation,B2G,value_added,no,Gross operating surplus,Excédent brut d'exploitation,فائض الاستغلال الخام,yes

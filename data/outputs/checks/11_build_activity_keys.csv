@@ -1,0 +1,2 @@
+script,check,value,tolerance,unit,passed,description
+11_build_activity_keys,factors_sum_to_one,1.1102230246251565e-16,1e-9,share,true,Factors of each flow add up to one

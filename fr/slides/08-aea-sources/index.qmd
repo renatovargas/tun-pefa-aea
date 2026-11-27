@@ -1,0 +1,74 @@
+---
+title: "Comptes des émissions : institutions et sources"
+subtitle: "L'inventaire des gaz à effet de serre comme point de départ"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-09"
+date-format: long
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+inv = read("ghg_inventory")
+by_scope = inv.filter(pl.col("year") == LAST).group_by("scope").agg(pl.col("kt_co2_eq").sum())
+s = dict(by_scope.iter_rows())
+```
+
+## L'inventaire {.theme-content}
+
+- Coordonné par l'ANME (énergie, procédés industriels), le ministère de l'Agriculture (agriculture, utilisation des terres) et l'ONAS (déchets) [@besbes2026].
+- Lignes directrices 2006 du GIEC, potentiels de réchauffement de l'AR5, déclaration au format CRT [@ipcc2006].
+- En `{python} LAST` : **`{python} mt(s["inventory"])` Mt éq. CO2** hors utilisation des terres, et un puits net de `{python} mt(s["lulucf"])` Mt pour l'utilisation des terres.
+
+## Ce que les comptes prennent dans l'inventaire
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.8
+charts.emissions_by_gas(figsize=(9, 3.8))
+```
+
+## Deux fichiers d'entrée
+
+| Fichier | Contenu | Usage |
+|:--|:--|:--|
+| Classeurs CRT (`Data`, `Summary2`) | Toutes les catégories, combustibles et gaz, kt et TJ | Les comptes |
+| `Tunisia_UNFCCC.xlsx` | Catégories principales, kt de chaque gaz | Contrôle croisé |
+
+Les totaux par secteur des deux fichiers concordent à `{python} num(check("20_prepare_ghg_inventory", "prepared_file_sectors")["value"], 3)` kt près.
+
+## Périmètre
+
+- **Inclus** : CO2, CH4, N2O et gaz fluorés des secteurs 1, 2, 3 et 5.
+- **Exclus, dans le tableau de passage** : utilisation des terres, changement d'affectation des terres et foresterie (secteur 4).
+- **Éléments pour mémoire** : soutes internationales (1.D) et CO2 de la biomasse.
+
+## Points à discuter
+
+- Comment l'INS peut-il recevoir chaque année les classeurs CRT, et à quel moment ?
+- N2O de la catégorie 1.B.2.b.ii à partir de 2019 : présent dans `Data` mais pas dans `Summary2`.
+- Revoir `Tunisia_UNFCCC.xlsx` (unité, code « N20 », sous-catégories manquantes, gaz fluorés) s'il doit être réutilisé.
+- Polluants atmosphériques (SO2, NOx, particules) : des estimations sont-elles prévues ?
+
+## Références
+
+::: {#refs}
+:::

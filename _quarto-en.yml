@@ -1,25 +1,28 @@
-# English profile. Render: quarto render en --profile en
+# English profile. Render: quarto render en --profile en --no-clean
 project:
   render:
+    - index.qmd
     - en/**/*.qmd
 
 lang: en-US
 csl: assets/apa-en.csl
 
 website:
-  title: "Tunisia: energy and air emissions accounts"
+  title: "Tunisia: energy and emissions accounts"
   description: "Physical energy flow accounts (PEFA) and air emissions accounts (AEA) for Tunisia"
   navbar:
     left:
       - href: en/index.qmd
         text: Home
-      - href: en/materiaux/index.qmd
-        text: Materials
-      - href: en/traitement/index.qmd
-        text: Processing
-      - href: en/telechargements.qmd
+      - href: en/documents/index.qmd
+        text: Documents
+      - href: en/presentations/index.qmd
+        text: Presentations
+      - href: en/explorer/index.qmd
+        text: Data explorer
+      - href: en/downloads.qmd
         text: Downloads
-      - href: en/a-propos.qmd
+      - href: en/about.qmd
         text: About
     right:
       - text: "Language"
@@ -31,62 +34,18 @@ website:
           - text: "العربية"
             href: "#lang-ar"
   sidebar:
-    - title: Materials
+    - title: Documents
       style: docked
       contents:
-        - href: en/materiaux/index.qmd
-          text: Materials
-        - section: Documents
-          contents:
-            - href: en/materiaux/documents/contexte-mission/index.qmd
-              text: Mission context
-        - section: Presentations
-          contents:
-            - href: en/materiaux/presentations/00-introduction.qmd
-              text: Introduction
-    - title: Processing
-      style: docked
-      contents:
-        - href: en/traitement/index.qmd
-          text: Data processing
-        - href: en/traitement/00-bilan-energetique/index.qmd
-          text: Reading the energy balance
-        - section: Source extraction
-          contents:
-            - href: en/traitement/01-extraction-bilans/index.qmd
-              text: Energy balances
-            - href: en/traitement/02-extraction-crt/index.qmd
-              text: GHG inventory (CRT)
-            - href: en/traitement/03-extraction-tre/index.qmd
-              text: Supply and use tables
-        - section: Energy accounts (PEFA)
-          contents:
-            - href: en/traitement/10-bilan-format-aie/index.qmd
-              text: Balance in IEA format
-            - href: en/traitement/11-activites/index.qmd
-              text: Industries
-            - href: en/traitement/12-matrice-concordance/index.qmd
-              text: Concordance matrix
-            - href: en/traitement/13-tableaux-pefa/index.qmd
-              text: PEFA tables
-            - href: en/traitement/14-controles-export-pefa/index.qmd
-              text: Checks and export
-        - section: Air emissions accounts (AEA)
-          contents:
-            - href: en/traitement/20-inventaire-aea/index.qmd
-              text: GHG inventory
-            - href: en/traitement/21-correspondance-aea/index.qmd
-              text: Categories and industries
-            - href: en/traitement/22-comptes-aea/index.qmd
-              text: AEA accounts
-            - href: en/traitement/23-passage-export-aea/index.qmd
-              text: Bridge and export
+        - href: en/documents/index.qmd
+          text: Documents
+        - href: en/documents/energy-accounts/index.qmd
+          text: Energy accounts (PEFA)
+        - href: en/documents/emissions-accounts/index.qmd
+          text: Air emissions accounts (AEA)
 
 format:
   html:
     theme:
       - yeti
       - assets/styles.scss
-
-execute:
-  eval: false

@@ -1,13 +1,13 @@
 [project]
 name = "tun-pefa-aea"
 version = "0.1.0"
-description = "Comptes physiques des flux d'énergie (PEFA) et comptes des émissions atmosphériques (AEA) de la Tunisie : site Quarto et pipeline reproductible."
+description = "Physical energy flow accounts (PEFA) and air emissions accounts (AEA) for Tunisia: reproducible pipeline and trilingual Quarto site."
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{ name = "renatovargas" }]
 dependencies = [
   "polars>=1.10",
-  "pandas>=2.2,<3",  # outils FMI écrits pour pandas 2
+  "pandas>=2.2,<3",  # the IMF tool code breaks under pandas 3
   "pyarrow>=17",
   "numpy>=1.26",
   "fastexcel>=0.12",
@@ -20,6 +20,8 @@ dependencies = [
   "ipykernel>=6.29",
   "nbformat>=5.10",
   "nbclient>=0.10",
+  "great-tables>=1.2.0",
+  "kaleido>=1.5.2",
 ]
 
 [tool.uv]

@@ -1,0 +1,76 @@
+key,en,fr,ar
+year,Year,Année,السنة
+quadrant,Table,Tableau,الجدول
+level1,Category,Catégorie,الفئة
+level2,Subcategory,Sous-catégorie,الفئة الفرعية
+product,Product,Produit,المنتج
+activity,Activity,Activité,النشاط
+activity_code,Activity code,Code de l'activité,رمز النشاط
+section_code,ISIC section,Section de la CITI,باب التصنيف الصناعي الدولي
+tj,Terajoules,Térajoules,تيراجول
+supply,Supply,Ressources,الموارد
+use,Use,Emplois,الاستخدامات
+total,Total,Total,المجموع
+gas,Gas,Gaz,الغاز
+crt_category,CRT category,Catégorie CRT,فئة CRT
+kt_co2_eq,Thousand tonnes of CO2 equivalent,Milliers de tonnes d'équivalent CO2,ألف طن من مكافئ ثاني أكسيد الكربون
+bridge_item,Bridging item,Élément de passage,بند الربط
+sheet_notes,Notes,Notes,ملاحظات
+sheet_data,Data,Données,البيانات
+sheet_supply,Supply,Ressources,الموارد
+sheet_use,Use,Emplois,الاستخدامات
+sheet_isic,ISIC sections,Sections CITI,أبواب التصنيف
+sheet_indicators,Indicators,Indicateurs,المؤشرات
+sheet_aea,AEA,AEA,AEA
+sheet_bridge,Bridge,Passage,الربط
+sheet_source_activity,Source by activity,Source par activité,المصدر حسب النشاط
+natural_inputs,Use of natural energy inputs (TJ),Utilisation de ressources naturelles d'énergie (TJ),استخدام الموارد الطبيعية للطاقة (تيراجول)
+production,Production of energy products (TJ),Production de produits énergétiques (TJ),إنتاج المنتجات الطاقوية (تيراجول)
+transformation_input,Transformation input (TJ),Entrées en transformation (TJ),مدخلات التحويل (تيراجول)
+end_use_energy,End use for energy purposes (TJ),Utilisation finale à des fins énergétiques (TJ),الاستخدام النهائي لأغراض طاقوية (تيراجول)
+end_use_non_energy,End use for non-energy purposes (TJ),Utilisation finale à des fins non énergétiques (TJ),الاستخدام النهائي لأغراض غير طاقوية (تيراجول)
+net_domestic_energy_use,Net domestic energy use (TJ),Utilisation intérieure nette d'énergie (TJ),الاستخدام المحلي الصافي للطاقة (تيراجول)
+residuals,Energy residuals generated (TJ),Résidus d'énergie générés (TJ),بقايا الطاقة المتولدة (تيراجول)
+output_mtnd,Output (million TND),Production (millions de TND),الإنتاج (مليون دينار)
+value_added_mtnd,Value added (million TND),Valeur ajoutée (millions de TND),القيمة المضافة (مليون دينار)
+household_consumption_mtnd,Household final consumption expenditure (million TND),Dépense de consommation finale des ménages (millions de TND),الإنفاق على الاستهلاك النهائي للأسر (مليون دينار)
+intensity_output,Energy intensity of output (TJ per million TND),Intensité énergétique de la production (TJ par million de TND),كثافة الطاقة في الإنتاج (تيراجول لكل مليون دينار)
+intensity_value_added,Energy intensity of value added (TJ per million TND),Intensité énergétique de la valeur ajoutée (TJ par million de TND),كثافة الطاقة في القيمة المضافة (تيراجول لكل مليون دينار)
+intensity_household,Household energy use per million TND of final consumption expenditure (TJ),Énergie des ménages par million de TND de dépense de consommation finale (TJ),استخدام الأسر للطاقة لكل مليون دينار من الإنفاق على الاستهلاك النهائي (تيراجول)
+ghg_kt,GHG emissions (kt CO2 eq),Émissions de GES (kt éq. CO2),انبعاثات غازات الاحتباس الحراري (ألف طن مكافئ CO2)
+ghg_intensity_output,GHG intensity of output (t CO2 eq per million TND),Intensité en GES de la production (t éq. CO2 par million de TND),كثافة غازات الاحتباس الحراري في الإنتاج (طن مكافئ CO2 لكل مليون دينار)
+ghg_intensity_value_added,GHG intensity of value added (t CO2 eq per million TND),Intensité en GES de la valeur ajoutée (t éq. CO2 par million de TND),كثافة غازات الاحتباس الحراري في القيمة المضافة (طن مكافئ CO2 لكل مليون دينار)
+ghg_intensity_household,Household emissions per million TND of final consumption expenditure (t CO2 eq),Émissions des ménages par million de TND de dépense de consommation finale (t éq. CO2),انبعاثات الأسر لكل مليون دينار من الإنفاق على الاستهلاك النهائي (طن مكافئ CO2)
+title_pefa,Physical energy flow accounts (PEFA) of Tunisia,Comptes physiques des flux d'énergie (PEFA) de la Tunisie,حسابات التدفقات المادية للطاقة لتونس
+title_aea,Air emissions accounts (AEA) of Tunisia: greenhouse gases,Comptes des émissions atmosphériques (AEA) de la Tunisie : gaz à effet de serre,حسابات انبعاثات الهواء لتونس: غازات الاحتباس الحراري
+unit_tj,Unit: terajoules (TJ),Unité : térajoules (TJ),الوحدة: تيراجول
+unit_kt_co2_eq,"Unit: thousand tonnes of CO2 equivalent, 100-year global warming potentials of the IPCC Fifth Assessment Report","Unité : milliers de tonnes d'équivalent CO2, potentiels de réchauffement global à 100 ans du cinquième rapport d'évaluation du GIEC",الوحدة: ألف طن من مكافئ ثاني أكسيد الكربون، إمكانات الاحترار العالمي على مدى 100 سنة من تقرير التقييم الخامس للهيئة الحكومية الدولية المعنية بتغير المناخ
+note_source_pefa,Sources: ONEM energy balances (2015-2022) and INS supply and use tables.,Sources : bilans énergétiques de l'ONEM (2015-2022) et tableaux des ressources et des emplois de l'INS.,المصادر: موازين الطاقة للمرصد الوطني للطاقة والمناجم (2015-2022) وجداول الموارد والاستخدامات للمعهد الوطني للإحصاء.
+note_method_pefa,"Method: IMF PEFA Converter (Achille Pegoue), re-implemented in Python, with a Tunisian concordance matrix by industry of the supply and use tables.","Méthode : PEFA Converter du FMI (Achille Pegoue), réécrit en Python, avec une matrice de concordance tunisienne par branche du tableau des ressources et des emplois.",المنهجية: أداة PEFA Converter لصندوق النقد الدولي (أشيل بيغوي)، أعيدت كتابتها بلغة Python، مع مصفوفة توافق تونسية حسب فروع جدول الموارد والاستخدامات.
+note_source_aea,"Sources: national greenhouse gas inventory (CRT tables 2015-2022), OECD air and maritime transport emissions, INS supply and use tables.","Sources : inventaire national des gaz à effet de serre (tableaux CRT 2015-2022), émissions du transport aérien et maritime de l'OCDE, tableaux des ressources et des emplois de l'INS.",المصادر: الجرد الوطني لغازات الاحتباس الحراري (جداول CRT 2015-2022)، انبعاثات النقل الجوي والبحري لمنظمة التعاون والتنمية في الميدان الاقتصادي، جداول الموارد والاستخدامات للمعهد الوطني للإحصاء.
+note_method_aea,"Method: IMF Air Emissions Account Converter (I2A, Achille Pegoue), re-implemented in Python, with a Tunisian conversion matrix by industry and OECD residence adjustments.","Méthode : convertisseur des comptes des émissions atmosphériques du FMI (I2A, Achille Pegoue), réécrit en Python, avec une matrice de conversion tunisienne par branche et les ajustements de résidence de l'OCDE.",المنهجية: أداة تحويل حسابات انبعاثات الهواء لصندوق النقد الدولي (I2A، أشيل بيغوي)، أعيدت كتابتها بلغة Python، مع مصفوفة تحويل تونسية حسب الفروع وتعديلات الإقامة من بيانات منظمة التعاون والتنمية في الميدان الاقتصادي.
+note_provisional,Provisional version. The allocation assumptions are documented in the methodological documents of the website.,Version provisoire. Les hypothèses de répartition sont documentées dans les documents méthodologiques du site.,نسخة مؤقتة. فرضيات التوزيع موثقة في الوثائق المنهجية للموقع.
+note_site,Documentation: https://renatovargas.github.io/tun-pefa-aea/,Documentation : https://renatovargas.github.io/tun-pefa-aea/,التوثيق: https://renatovargas.github.io/tun-pefa-aea/
+note_code,Code: https://github.com/renatovargas/tun-pefa-aea,Code : https://github.com/renatovargas/tun-pefa-aea,الشيفرة: https://github.com/renatovargas/tun-pefa-aea
+node_PROD,Domestic production,Production nationale,الإنتاج الوطني
+node_IMP,Imports,Importations,الواردات
+node_TRANSF,Transformation into other energy products,Transformation en d'autres produits énergétiques,التحويل إلى منتجات طاقوية أخرى
+node_EXP,Exports and bunkers,Exportations et soutes,الصادرات والمستودعات الدولية
+node_STOCK,Stock changes,Variation des stocks,التغير في المخزون
+node_STATDIFF,Statistical difference,Écart statistique,الفارق الإحصائي
+node_LOSS,Losses and own use of the energy industries,Pertes et autoconsommation de la branche énergie,الخسائر والاستهلاك الذاتي لقطاع الطاقة
+chart_domestic_production,Domestic production,Production nationale,الإنتاج الوطني
+chart_imports,Imports,Importations,الواردات
+chart_pj,PJ,PJ,بيتاجول
+chart_percent,percent,pour cent,نسبة مئوية
+chart_road_key,Road transport (product 19),Transport routier (produit 19),النقل البري (المنتج 19)
+chart_tertiary_key,"Commerce, administration, hotels (product 35)","Commerce, administration, hôtels (produit 35)",التجارة والإدارة والنزل (المنتج 35)
+chart_tnd_per_gj,TND per GJ,TND par GJ,دينار لكل جيغاجول
+chart_tj_per_mtnd,TJ per million TND,TJ par million de TND,تيراجول لكل مليون دينار
+chart_ndeu,Net domestic energy use (accounts),Utilisation intérieure nette d'énergie (comptes),الاستخدام المحلي الصافي للطاقة (الحسابات)
+chart_gic,Gross inland consumption (balance),Consommation intérieure brute (bilan),الاستهلاك الداخلي الإجمالي (الميزان)
+chart_mt_co2,Mt CO2 eq,Mt éq. CO2,مليون طن مكافئ CO2
+chart_kt_co2,kt CO2 eq,kt éq. CO2,ألف طن مكافئ CO2
+chart_t_per_mtnd,t CO2 eq per million TND,t éq. CO2 par million de TND,طن مكافئ CO2 لكل مليون دينار
+chart_t_per_tj,t CO2 per TJ,t CO2 par TJ,طن CO2 لكل تيراجول
+chart_residents_abroad,Residents abroad (air transport),Résidents à l'étranger (transport aérien),المقيمون في الخارج (النقل الجوي)

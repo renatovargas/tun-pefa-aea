@@ -1,6 +1,6 @@
 # I2A (IMF Air Emissions Account Converter, Achille Pegoue): how it works
 
-Notes from reading `outils-fmi/i2a/I2A.py` (function `I2A`, lines 29 to 617) and running it headless with `scripts/outils_fmi.py` (`plages_i2a`, `oecd_i2a`, `i2a`). Written 2026-11-24. Manual: `User_Manual_AEA_Converter.docx`, version 0.0, March 2026 (bib keys `imf2026i2a`, `pegoue2026i2a`).
+Notes from reading `imf-tools/i2a/I2A.py` (function `I2A`, lines 29 to 617) and running it headless with `scripts/imf_tools.py` (`plages_i2a`, `oecd_i2a`, `i2a`). Written 2026-11-24. Manual: `User_Manual_AEA_Converter.docx`, version 0.0, March 2026 (bib keys `imf2026i2a`, `pegoue2026i2a`).
 
 ## Call
 
@@ -24,10 +24,10 @@ Workbook formula `Output_Source_Activity!B3`: `I2A(Inventory_2, Conversion_Matri
 
 - Default matrix has no factors for 3.D (agricultural soils) and 1.C: 1 481.8 kt CO2 eq lost for Tunisia in 2022.
 - Codes in the matrix but not in `CRT_Def` (`2`, `3`, `4`, `5`, `6` without dot, all of `4.D.2.*`) are dropped silently; the inventory is mapped to codes present in both.
-- `INV-TOTAL` exceeds the inventory by 2 × NRA-AIR + NRA-WATER (checked every year on page 23).
+- `INV-TOTAL` exceeds the inventory by 2 × NRA-AIR + NRA-WATER (checked every year in script 23).
 - `Tunisia_UNFCCC.xlsx` (provided) is in kt of each gas, writes N2O as `N20`, omits sub-categories (5.A, 5.B, 5.D under 5) and F-gases. Not used; the CRT `Data` sheet is the source.
 - The Tunisian matrix must carry rows for 1.A.3.a and 1.A.3.d even without inventory emissions, or the OECD data are dropped.
 
 ## Layer comparison
 
-The polars re-implementation on page 22 matches the tool to below 1e-11 kt on: default matrix without OECD, with OECD, and the Tunisian matrix by SUT branch with OECD (run year by year because keys vary).
+The polars re-implementation in script 22 matches the tool to below 1e-11 kt on: default matrix without OECD, with OECD, and the Tunisian matrix by SUT branch with OECD (run year by year because keys vary).

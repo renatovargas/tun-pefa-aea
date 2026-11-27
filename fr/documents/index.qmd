@@ -1,0 +1,35 @@
+---
+title: "Documents"
+subtitle: "Concepts, méthodes et résultats"
+toc: false
+---
+
+Chaque document présente les concepts qu'il utilise, explique les étapes réalisées par les scripts et présente les résultats sous forme de graphiques et de tableaux. Chaque nombre cité dans le texte est lu dans les tableaux publiés par le pipeline ; les documents suivent donc les données chaque fois que les comptes sont recompilés. Chaque document existe aussi en PDF.
+
+:::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Comptes physiques des flux d'énergie
+
+Comment l'énergie entre dans l'économie tunisienne, quelles branches et quels ménages la produisent et l'utilisent, et comment elle retourne à l'environnement. Du bilan énergétique national aux tableaux des ressources et des emplois en térajoules, avec des indicateurs d'intensité énergétique.
+
+[Lire](energy-accounts/index.qmd){.btn .btn-primary} [PDF](energy-accounts/index.pdf){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Comptes des émissions atmosphériques
+
+Émissions de gaz à effet de serre par branche et par les ménages. De l'inventaire national à des comptes qui suivent les comptes nationaux, avec un tableau de passage et des intensités d'émission.
+
+[Lire](emissions-accounts/index.qmd){.btn .btn-primary} [PDF](emissions-accounts/index.pdf){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::::

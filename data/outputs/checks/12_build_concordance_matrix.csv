@@ -1,0 +1,4 @@
+script,check,value,tolerance,unit,passed,description
+12_build_concordance_matrix,factors_sum_to_one,1.1102230246251565e-16,1e-9,share,true,Factors of covered flows add up to one
+12_build_concordance_matrix,aviation_bunkers_vs_inventory,0.45077458180571295,1.0,percent,true,Aviation bunkers in the balance against memo item 1.D.1.a of the inventory
+12_build_concordance_matrix,bridging_items_empty,0.0,0.0,cells,true,Filled cells in the Bridging_Items sheet of the tool

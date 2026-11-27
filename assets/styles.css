@@ -1,4 +1,4 @@
-/* Permet de couper les URL longues dans la bibliographie */
+/* Allow long URLs to break in the bibliography */
 #refs a,
 .csl-entry a,
 .references a {

@@ -1,0 +1,370 @@
+---
+title: "Air Emissions Accounts for Tunisia"
+subtitle: "Greenhouse gases by industry and households: concepts, compilation methods and results, 2015 to 2022"
+author:
+  - name: Renato Vargas
+    affiliations:
+      - name: Consultant, IMF Statistics Department
+  - name: Achille Pegoue
+    affiliations:
+      - name: Senior Economist, IMF Statistics Department
+date: last-modified
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    other-links:
+      - text: "PDF version"
+        href: index.pdf
+  typst:
+    citeproc: true
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    papersize: a4
+    margin: {x: 2.2cm, y: 2.4cm}
+    fig-format: png
+    output-file: index.pdf
+    include-in-header:
+      text: |
+        #show figure: set block(breakable: true)
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+#| label: setup
+import sys
+sys.path.insert(0, "scripts/report")
+from doc_helpers import *
+import charts
+import polars as pl
+import matplotlib.pyplot as plt
+setup("en")
+
+inventory = read("ghg_inventory")
+aea = read("aea_emissions")
+bridge = read("aea_bridge")
+indicators = read("aea_indicators")
+agreement = read("aea_tool_agreement")
+changes = read("aea_conversion_changes")
+dropped = read("aea_categories_without_factor")
+oecd = read("aea_bunkers_vs_oecd")
+factors_inv = read("aea_implied_factors_inventory")
+factors_acc = read("aea_implied_factors_accounts")
+sankey_flows = read("aea_sankey")
+prepared = read("ghg_prepared_file_check")
+
+YEARS = sorted(aea["year"].unique().to_list())
+FIRST, LAST = YEARS[0], YEARS[-1]
+ACTS = [c for c in lab("activities") if c not in ("ROW", "ACC", "ENV", "STATDIFF")]
+INDUSTRIES = [c for c in ACTS if c != "HH"]
+GASES = ["CO2", "CH4", "N2O", "F-gases"]
+
+# Numbers quoted in the text.
+ghg = bridge.filter(pl.col("gas") == "GHG")
+b = {r["year"]: r for r in ghg.iter_rows(named=True)}
+by_act = aea.filter(pl.col("gas") == "GHG", pl.col("activity").is_in(ACTS), pl.col("year") == LAST).group_by("activity").agg(pl.col("kt_co2_eq").sum()).sort("kt_co2_eq", descending=True)
+total_last = by_act["kt_co2_eq"].sum()
+hh_last = by_act.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum()
+top3 = [r for r in by_act.filter(pl.col("activity") != "HH").head(3).iter_rows(named=True)]
+gas_last = {g: aea.filter(pl.col("year") == LAST, pl.col("gas") == g, pl.col("activity").is_in(ACTS))["kt_co2_eq"].sum() for g in GASES}
+lulucf_last = b[LAST]["LULUCF"]
+memo_bio = inventory.filter(pl.col("year") == LAST, pl.col("gas") == "CO2bio")["kt"].sum()
+dropped_last = dropped.filter(pl.col("year") == LAST)["kt_co2_eq"].sum()
+max_gap = agreement["max_gap_kt"].max()
+c_summary = check("02_extract_crt_inventory", "summary2_n2o_1B2")
+changed = changes.filter(pl.col("status") == "changed")
+road_last = aea.filter(pl.col("year") == LAST, pl.col("gas") == "GHG", pl.col("source").str.starts_with("1.A.3.b"), pl.col("activity").is_in(ACTS))
+road_hh = road_last.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum() / road_last["kt_co2_eq"].sum()
+va_last = indicators.filter(pl.col("year") == LAST, pl.col("activity").is_in(INDUSTRIES))
+intensity_economy = 1000 * va_last["ghg_kt"].sum() / va_last["value_added_mtnd"].sum()
+fi = factors_inv.filter(pl.col("year") == LAST)
+```
+
+# Summary {.unnumbered}
+
+Air emissions accounts (AEA) record the greenhouse gases emitted by each industry of the national accounts and by households, following the same rules as the national accounts. They answer a question that the greenhouse gas inventory, organised by technical process, does not answer directly: which parts of the economy produce the emissions, and how much they emit per dinar of output. This document explains the concepts, describes each step of a reproducible compilation of the accounts for `{python} FIRST` to `{python} LAST`, and presents the first results.
+
+In `{python} LAST`, resident industries and households emitted `{python} mt(total_last)` million tonnes of CO2 equivalent. Carbon dioxide made up `{python} pct(gas_last["CO2"] / total_last)` of the total and methane `{python} pct(gas_last["CH4"] / total_last)`. The largest emitters were `{python} activity(top3[0]["activity"]).lower()`, `{python} activity(top3[1]["activity"]).lower()` and `{python} activity(top3[2]["activity"]).lower()`, and households emitted `{python} pct(hh_last / total_last)` of the total, mostly from their cars and their homes. A bridge table reconciles the accounts with the national inventory, and the compilation reproduces the IMF Air Emissions Account Converter (I2A) to within `{python} f"{max_gap:.0e}"` kilotonnes.
+
+# Introduction
+
+Tunisia reports its greenhouse gas emissions to the United Nations Framework Convention on Climate Change (UNFCCC) in a national inventory, coordinated by the Agence nationale pour la maîtrise de l'énergie (ANME) for energy and industrial processes, by the Ministry of Agriculture for agriculture and land use, and by the Office national de l'assainissement (ONAS) for waste [@besbes2026]. The inventory follows the guidelines of the Intergovernmental Panel on Climate Change (IPCC) and classifies emissions by source: fuel combustion in energy industries, road transport, enteric fermentation of livestock, landfills and so on [@ipcc2006].
+
+That classification serves the purpose of the inventory well, since it follows the processes that cause emissions and the methods used to estimate them. It does not say which economic units emit. Road transport emissions come from households driving their cars, from trucks of the food industry, from buses and taxis of the transport industry. Combustion in "other sectors" covers shops, hotels, offices and homes. Air emissions accounts reorganise the same emissions by the industries of the national accounts and by households [@eurostat2015aea; @seea2014]. Once emissions are recorded this way, they can be set beside output, value added, employment and the energy accounts, and they can feed economic models.
+
+The International Monetary Fund (IMF) has developed an Excel tool for this conversion, the Air Emissions Account Converter, known as I2A [@imf2026i2a; @pegoue2026i2a]. This document follows its logic step by step. The calculations are carried out by Python scripts in the folder <https://github.com/renatovargas/tun-pefa-aea/tree/main/scripts>, listed in @tbl-scripts. Each step of the Methods section points to the entry of its script in [Annex I](#annex-scripts). The emissions accounts reuse two allocation keys of the energy accounts, which are described in the companion document on physical energy flow accounts.
+
+```{python}
+#| label: tbl-scripts
+#| tbl-cap: "Scripts that compile the air emissions accounts, in the order in which they run."
+scripts = pl.DataFrame({
+    "Script": ["extract/02_extract_crt_inventory.py", "extract/03_extract_supply_use_tables.py", "pefa/11_build_activity_keys.py",
+               "aea/20_prepare_ghg_inventory.py", "aea/21_build_conversion_matrix.py", "aea/22_compile_aea_tables.py",
+               "aea/23_bridge_and_indicators.py", "aea/24_export_aea.py", "report/30_publish_tables.py"],
+    "Purpose": ["Common reporting tables of the greenhouse gas inventory", "Supply and use tables of the national accounts",
+                "Keys for road transport and the tertiary sector (from the energy accounts)", "Emissions by category and gas, scope and tool codes",
+                "Tunisian conversion matrix from inventory categories to activities", "Emissions by activity, with residence adjustments, checked against I2A",
+                "Bridge to the inventory, plausibility and intensities", "Excel workbooks in English, French and Arabic",
+                "Tables and labels for the documents and the data explorer"],
+})
+gt(scripts)
+```
+
+# Concepts
+
+## Emissions as residual flows
+
+The SEEA treats emissions as residual flows: substances released by economic activity that leave the economy and enter the environment [@seea2014, section 3.6]. Air emissions accounts are the part of these accounts that concerns gases and particles released into the atmosphere. They follow the same accounting rules as the national accounts. Emissions are recorded for the economic units that generate them, namely industries, classified as in the national accounts, and households, in their role as consumers [@eurostat2015aea, paras 32 to 38]. Emissions of households as producers, for example a family farm, belong to the industry concerned.
+
+## Greenhouse gases and their common unit
+
+The accounts cover the greenhouse gases of the inventory. Carbon dioxide (CO2) comes mainly from burning fossil fuels and from some industrial processes such as cement. Methane (CH4) comes from livestock, landfills and leaks of natural gas. Nitrous oxide (N2O) comes mainly from agricultural soils and manure. Fluorinated gases (HFCs, PFCs, SF6 and NF3) are industrial gases used in refrigeration, air conditioning and electrical equipment. Each gas warms the climate to a different degree, so emissions are converted into CO2 equivalent with global warming potentials over 100 years. Tunisia, like most countries, uses the values of the Fifth Assessment Report of the IPCC, in which one tonne of methane counts as 28 tonnes of CO2 and one tonne of nitrous oxide as 265 [@ipcc2014ar5].
+
+## Territory and residence
+
+The inventory records emissions that occur on the national territory, whoever causes them. The accounts record emissions caused by resident units, wherever they occur [@eurostat2015aea, paras 33 to 37]. A Tunisian airline flying from Paris to Montreal emits into the Tunisian accounts, while a foreign truck crossing Tunisia does not. The difference concerns mainly international transport. The accounts make it explicit in a **bridge table**, which starts from the total of the accounts, subtracts emissions of residents abroad, adds those of non-residents on the territory, and arrives at the total of the inventory [@eurostat2015aea, paras 227 to 230]. @fig-scope shows how the two totals relate.
+
+```{mermaid}
+%%| label: fig-scope
+%%| fig-cap: "From the air emissions accounts to the inventory total: the bridging items."
+%%| fig-width: 6.3
+flowchart LR
+  AEA["Accounts total<br/>(industries + households,<br/>residence principle)"] --> M1["minus residents abroad<br/>(air and sea transport)"]
+  M1 --> P1["plus non-residents<br/>on the territory"]
+  P1 --> INV["Inventory total<br/>excluding LULUCF<br/>(territory principle)"]
+  INV --> L["plus land use, land-use<br/>change and forestry"]
+  L --> NET["Inventory net total"]
+```
+
+## What the accounts leave out
+
+Two items of the inventory stay outside the accounts. Emissions and removals from land use, land-use change and forestry (LULUCF) are not attributed to economic activity in the accounts and appear only in the bridge table [@eurostat2015aea, para 269]. In Tunisia this sector is a net sink, with `{python} mt(lulucf_last)` million tonnes of CO2 equivalent in `{python} LAST`, mostly from forests. Carbon dioxide from burning biomass, such as firewood, is a memo item in the inventory, since the carbon was recently taken from the atmosphere. It is kept apart in the accounts as well (`{python} mt(memo_bio)` million tonnes in `{python} LAST`).
+
+# Data sources
+
+The **greenhouse gas inventory** is the main source. Tunisia reports it in the common reporting tables (CRT), one Excel workbook per year. Each workbook contains a sheet named `Data`, which holds every reported value in long format: activity data in terajoules and emissions in kilotonnes, by category, fuel and gas, about twelve thousand rows per year. A summary sheet, `Summary2`, gives the totals by category in CO2 equivalent. The accounts cover `{python} FIRST` to `{python} LAST`.
+
+A second file, `Tunisia_UNFCCC.xlsx`, was prepared in the layout of the I2A tool. It holds the main categories in kilotonnes of each gas. The pipeline builds its input from the CRT workbooks instead, because they are more detailed, include fluorinated gases and give CO2 equivalents. Its sector totals match the CRT tables (@tbl-prepared), which confirms that both describe the same inventory.
+
+The **supply and use tables** of the INS provide the 24 industries of the accounts, the allocation keys and the output and value added of each industry. The **OECD estimates of air and maritime transport emissions**, shipped with the I2A tool, provide the emissions of resident airlines and shipping companies, for the residence adjustment [@oecd2024transport].
+
+# Methods
+
+## Preparing the inventory
+
+The script [02_extract_crt_inventory.py](#script-02) stacks the `Data` sheets, removes exact duplicate rows, and compares the emissions added up by category with the totals of `Summary2`. They match for every category, gas and year, with one exception: nitrous oxide from category 1.B.2.b.ii, reported in `Data` from 2019 but not counted in `Summary2`, a difference of at most `{python} num(c_summary["value"], 2)` kilotonnes of CO2 equivalent.
+
+The script [20_prepare_ghg_inventory.py](#script-20) then builds a table of emissions by year, category and gas. CO2, CH4 and N2O come from `Data` and are weighted by their warming potentials. Fluorinated gases are reported in `Data` gas by gas but in CO2 equivalent only by industrial category in `Summary2`, so their totals come from `Summary2`. Each row is marked as part of the inventory total, LULUCF, or memo item. The inventory total, including LULUCF, equals the net total of `Summary2` once the nitrous oxide above is taken into account.
+
+The I2A tool knows a list of category codes that stops at the fifth level of the CRT classification, while the Tunisian `Data` sheet sometimes goes further, for example by animal sub-category. Each category therefore receives the most detailed code of the tool's list to which it belongs.
+
+```{python}
+#| label: tbl-prepared
+#| tbl-cap: "The file prepared for the I2A tool against the CRT tables, by sector and gas, last year (kt of each gas)."
+gt(prepared.select(pl.col("code").alias("Sector"), pl.col("IPCCDesc").alias("Description"), pl.col("POLLUTANT").alias("Gas in the file"),
+                   pl.col("file_kt").alias("Prepared file"), pl.col("crt_kt").alias("CRT tables")), decimals=1)
+```
+
+::: {.callout-note}
+## Open question
+
+The file `Tunisia_UNFCCC.xlsx` writes nitrous oxide as "N20", reports kilotonnes of each gas rather than CO2 equivalent, omits some sub-categories and has no fluorinated gases. If it is to serve other purposes, it would be worth revising with the inventory team. The treatment of nitrous oxide in category 1.B.2.b.ii from 2019 is also worth clarifying.
+:::
+
+## From inventory categories to economic activities
+
+The conversion matrix gives, for each inventory category, the share of its emissions that goes to each economic activity. The I2A tool comes with a default matrix by ISIC section and households, which follows the correspondence of the Eurostat manual [@eurostat2015aea, para 12; @imf2026i2a]. The script [21_build_conversion_matrix.py](#script-21) builds a Tunisian matrix by the 24 industries of the supply and use tables and households, from the lookup table `crt_to_activities.csv`. Each row of that table gives a prefix of CRT codes, an activity and a reason. A category takes the row with the longest prefix that matches its code, so that a short prefix ("3" for agriculture) covers a whole sector and a longer one overrides it for a sub-category.
+
+Most categories belong to one activity: public electricity production to electricity and gas (35), cement production to building materials (23), enteric fermentation to agriculture (01), landfills to water and waste services (36). Two categories need keys, and they reuse those of the energy accounts, so that both accounts split these sectors in the same way. Road transport (1.A.3.b) is shared between industries and households in proportion to their purchases of refined petroleum products, and combustion in commerce and public services (1.A.4.a) is shared among service industries in proportion to their purchases of electricity and gas. In `{python} LAST`, households receive `{python} pct(road_hh)` of road transport emissions.
+
+@tbl-changes lists the categories that the Tunisian matrix assigns to a different section than the default matrix of the tool, with their emissions in `{python} LAST`.
+
+```{python}
+#| label: tbl-changes
+#| tbl-cap: "Inventory categories assigned to a different section than in the default matrix of the I2A tool, last year (kt CO2 eq)."
+ch = changes.filter(pl.col("status") != "same").with_columns(
+    pl.col("status").replace({"changed": "Different section", "no_default_factor": "No factor in the default matrix"}))
+gt(ch.select(pl.col("tool_code").alias("Category"), pl.col("kt_co2_eq").alias("Emissions"), pl.col("default_sections").alias("Default"),
+             pl.col("section").alias("Tunisia"), pl.col("activities").alias("Tunisian activities"), pl.col("status").alias("Note")), decimals=1)
+```
+
+Three groups stand out. Road transport and residential combustion move from transport and construction to households, as the accounts require. Natural gas transmission and distribution move from transport to the electricity and gas industry, which operates the network in Tunisia. And the default matrix of the tool has no factors for agricultural soils (3.D), so their emissions, `{python} num(dropped_last, 0)` kilotonnes of CO2 equivalent in `{python} LAST`, would be lost without a Tunisian rule. The Tunisian matrix assigns them to agriculture.
+
+::: {.callout-note}
+## Open question
+
+The choices that depart from the default matrix would benefit from validation with the INS and ANME, in particular the split of road transport between industries and households, the allocation of commercial combustion to service industries rather than construction, and the treatment of fluorinated gases from commercial refrigeration.
+:::
+
+## Compiling the accounts and the residence adjustment
+
+The script [22_compile_aea_tables.py](#script-22) applies the matrix to the inventory. As for the energy accounts, it does so twice: once by calling the function `I2A` of the tool unchanged, and once by applying each of its rules explicitly. The explicit version produces the accounts, and the script stops if the two differ by more than 10^-9^ kilotonnes. The rules are the following.
+
+1. **Inventory input.** The inventory is laid out as the tool's inventory sheet: one row per gas and category, one column per year, in kilotonnes of CO2 equivalent.
+2. **Allocation.** Each value is multiplied by the factors of its category in the matrix. A category without factors receives nothing, which is why agricultural soils needed a Tunisian rule.
+3. **Air transport.** The OECD estimates emissions of resident airlines on domestic flights and abroad [@oecd2024transport]. Where the OECD figure for domestic flights is lower than domestic aviation in the inventory, the difference is attributed to non-residents on the territory. Emissions of resident airlines abroad are added to air transport and recorded as a bridging item.
+4. **Maritime transport.** Where the OECD estimate for resident vessels exceeds domestic navigation in the inventory, the difference is added to the activity.
+5. **Totals.** The accounts total adds up industries and households, and the greenhouse gas total adds up the four gases.
+
+Run with its default matrix, with and without OECD data, and with the Tunisian matrix for every year, the explicit version agrees with the tool to within `{python} f"{max_gap:.0e}"` kilotonnes (@tbl-agreement).
+
+```{python}
+#| label: tbl-agreement
+#| tbl-cap: "Agreement between the I2A tool and the explicit compilation, by run."
+ag = agreement.with_columns(
+    pl.col("run").replace({"default_without_oecd": "Default matrix, without OECD data", "default_with_oecd": "Default matrix, with OECD data",
+                           "tunisian_with_oecd": "Tunisian matrix, with OECD data"}),
+    pl.col("year").cast(pl.String).fill_null("all"), pl.col("max_gap_kt").map_elements(lambda x: f"{x:.1e}", return_dtype=pl.String))
+gt(ag.select(pl.col("run").alias("Run"), pl.col("year").alias("Years"), pl.col("max_gap_kt").alias("Largest gap (kt CO2 eq)")))
+```
+
+::: {.callout-note}
+## Open question
+
+The OECD estimate for vessels operated by residents (`{python} num(oecd.filter(pl.col("year") == LAST)["oecd_sea_residents_kt"][0], 0)` kilotonnes of CO2 in `{python} LAST`) is much larger than the marine bunkers of the inventory (`{python} num(oecd.filter(pl.col("year") == LAST)["marine_bunkers_kt"][0], 0)` kilotonnes), and it is missing before 2019, which creates a break in the series. It would be worth comparing it with data on the Tunisian fleet and its refuelling abroad held by the INS, ONEM and the Office de la marine marchande et des ports.
+:::
+
+## Bridge table and checks
+
+The script [23_bridge_and_indicators.py](#script-23) builds the bridge table of @tbl-bridge. Starting from the accounts total, it subtracts emissions of resident carriers abroad, adds those of non-residents on the territory, and must reach the inventory total excluding LULUCF. The gap is below 10^-6^ kilotonnes in every year and gas. Two features of the tool are worth noting, and the pipeline handles both. The positive gap of maritime transport is added to the activity without a matching bridging item, so the pipeline records it as residents abroad on water. And the tool's own inventory total adds the bridging items without their sign; the bridge table uses the signed sum.
+
+```{python}
+#| label: tbl-bridge
+#| tbl-cap: "Bridge table from the air emissions accounts to the national inventory, greenhouse gases (kt CO2 eq)."
+items = lookup("aea_bridge").sort(pl.col("order").cast(pl.Int32))
+rows = []
+for r in items.iter_rows(named=True):
+    sign = int(r["sign"])
+    rows.append({"Item": r["en"], **{str(y): b[y][r["code"]] for y in YEARS}})
+gt(pl.DataFrame(rows), decimals=0)
+```
+
+The script also checks the allocation against the energy accounts. For each activity, the CO2 emitted by fuel combustion divided by the fossil energy that the energy accounts assign to it gives an implied emission factor, in tonnes of CO2 per terajoule. Implied factors by fuel in the inventory range from `{python} num(fi["t_co2_per_tj"].min(), 1)` for natural gas to `{python} num(fi["t_co2_per_tj"].max(), 1)` for liquid fuels in `{python} LAST`, so an activity's factor should fall within or near that range. @fig-factors shows the result.
+
+```{python}
+#| label: fig-factors
+#| fig-cap: "Implied CO2 factor of fuel combustion by activity: CO2 from combustion in the air emissions accounts divided by fossil energy use in the energy accounts, last year (t CO2 per TJ). The band shows the range of implied factors by fuel in the inventory."
+charts.implied_factors(LAST)
+```
+
+Most activities fall inside the band. Activities outside it point to differences of classification between the energy balance and the inventory, for example for the own use of the energy industries and for electricity autoproducers, which are worth reviewing with ONEM and ANME.
+
+## Indicators and export
+
+Emission intensities divide emissions by output or value added at current prices, in tonnes of CO2 equivalent per million dinars. For households, the denominator is their final consumption expenditure, as the I2A manual suggests [@imf2026i2a]. The script [24_export_aea.py](#script-24) writes the accounts to Excel workbooks in English, French and Arabic, with the long table, the bridge table, the accounts of each year by activity and gas, the emissions by source and activity, and the indicators.
+
+# Results
+
+## Emissions over time and by gas
+
+@fig-gases shows emissions of resident units by gas. They stayed close to `{python} mt(b[FIRST]["AEA"], 0)` million tonnes of CO2 equivalent over the period, with a dip in 2020, when activity and travel fell during the COVID-19 pandemic.
+
+```{python}
+#| label: fig-gases
+#| fig-cap: "Greenhouse gas emissions of resident units by gas (million tonnes CO2 eq)."
+charts.emissions_by_gas()
+```
+
+## From inventory sectors to the economy
+
+@fig-sankey follows emissions of `{python} LAST` from the sectors of the inventory to the sections of the economy that emit them. Fuel combustion spreads over every part of the economy. Industrial processes come almost entirely from manufacturing, mainly cement. Agricultural emissions stay in agriculture, and waste emissions go to the water and waste industry. The residence adjustment adds the emissions of Tunisian carriers abroad to transport.
+
+```{python}
+#| label: fig-sankey
+#| fig-cap: "Greenhouse gas emissions by inventory category and by section of the emitting activity, last year (kt CO2 eq). RES marks the residence adjustment."
+charts.emissions_sankey(LAST)
+```
+
+## Emissions by activity
+
+@fig-activities ranks the emitters of `{python} LAST`. Electricity and gas supply leads, followed by building materials, where cement kilns emit both from fuel and from the chemical transformation of limestone. Agriculture comes next, through livestock and soils, then households. Water and waste services owe their place to landfills.
+
+```{python}
+#| label: fig-activities
+#| fig-cap: "Greenhouse gas emissions by activity and gas, last year (kt CO2 eq). The fifteen largest emitters."
+charts.emitters(LAST)
+```
+
+## Emission intensity
+
+Across all industries, the economy emitted `{python} num(intensity_economy, 0)` tonnes of CO2 equivalent per million dinars of value added in `{python} LAST`. @fig-intensity shows how unevenly this is spread. A few industries, building materials, electricity, water and waste, and agriculture, emit far more per dinar than the rest. Policies that change the output of these industries, or the technology they use, have the largest effect on national emissions.
+
+```{python}
+#| label: fig-intensity
+#| fig-cap: "Greenhouse gas emissions per million TND of value added by industry, last year (t CO2 eq per million TND, current prices)."
+charts.emission_intensity(LAST)
+```
+
+## Accounts by activity and gas
+
+```{python}
+#| label: tbl-aea
+#| tbl-cap: "Air emissions accounts by activity and gas, last year (kt CO2 eq)."
+d = (aea.filter(pl.col("year") == LAST, pl.col("activity").is_in(ACTS))
+     .group_by("activity", "gas").agg(pl.col("kt_co2_eq").sum()).pivot("gas", index="activity", values="kt_co2_eq").fill_null(0)
+     .with_columns(order=pl.col("activity").replace_strict({c: i for i, c in enumerate(ACTS)}, return_dtype=pl.Int16)).sort("order"))
+d = d.select(pl.col("activity").replace_strict(lab("activities")).alias("Activity"), *[pl.col(g).alias(L("gases", g)) for g in GASES + ["GHG"] if g in d.columns])
+gt(d, decimals=1)
+```
+
+# Limitations
+
+These accounts are a first, provisional compilation. The split of road transport and of commercial combustion rests on money purchases rather than on physical data. The residence adjustment relies on OECD estimates, which are modelled rather than observed and which, for maritime transport, start only in 2019. Fluorinated gases are allocated by category, without detail by species. Air pollutants other than greenhouse gases, such as sulphur dioxide or particles, are not covered, since the inventory holds few of them. Intensities at current prices mix volume and price changes. Each of these points can be improved as more detailed data become available, and the pipeline makes it simple to run the accounts again after any change in a lookup table.
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
+
+# Annex I. Scripts of the pipeline {.unnumbered #annex-scripts}
+
+This annex describes each script that the emissions accounts use, in the order in which it runs. The link under each name opens its code on GitHub. Comments in the code are in English, followed by their French translation.
+
+## 02_extract_crt_inventory.py {#script-02 .unnumbered .unlisted}
+
+[View on GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extract/02_extract_crt_inventory.py)
+
+This script stacks the `Data` sheet of the eight CRT workbooks, adds the year, casts values to numbers and removes exact duplicate rows. It compares emissions summed by category with sheet `Summary2` and writes `crt.parquet`.
+
+## 20_prepare_ghg_inventory.py {#script-20 .unnumbered .unlisted}
+
+[View on GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/20_prepare_ghg_inventory.py)
+
+This script builds emissions by year, category and gas, in kilotonnes and CO2 equivalent, takes fluorinated gases from `Summary2`, marks the scope of each row (inventory, LULUCF, memo item) and gives each category its code in the I2A tool. It checks the inventory total against `Summary2` and compares the file prepared for the tool with the CRT tables.
+
+## 21_build_conversion_matrix.py {#script-21 .unnumbered .unlisted}
+
+[View on GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/21_build_conversion_matrix.py)
+
+This script assigns each tool code the rule with the longest matching prefix in `crt_to_activities.csv`, applies the keys of the energy accounts where a rule calls for them, and writes the Tunisian conversion matrix for each year. It also lists the categories that the default matrix would drop and the departures from its sections.
+
+## 22_compile_aea_tables.py {#script-22 .unnumbered .unlisted}
+
+[View on GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/22_compile_aea_tables.py)
+
+This script compiles the accounts by calling the function `I2A` of the tool unchanged and by applying each of its rules explicitly, including the residence adjustments based on OECD data. It runs both with the default and the Tunisian matrices and stops if they differ by more than 10^-9^ kilotonnes. It writes `aea.parquet`.
+
+## 23_bridge_and_indicators.py {#script-23 .unnumbered .unlisted}
+
+[View on GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/23_bridge_and_indicators.py)
+
+This script builds the bridge table and checks that it closes on the inventory, compares OECD estimates with international bunkers, computes implied CO2 factors by fuel and by activity, and derives emission intensities.
+
+## 24_export_aea.py {#script-24 .unnumbered .unlisted}
+
+[View on GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/24_export_aea.py)
+
+This script writes `aea_accounts.xlsx` in English, French and Arabic, with labels from the lookup tables.
+
+## 30_publish_tables.py {#script-30 .unnumbered .unlisted}
+
+[View on GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/report/30_publish_tables.py)
+
+This script publishes the tables and labels read by this document, the presentations and the data explorer, in Parquet and CSV.

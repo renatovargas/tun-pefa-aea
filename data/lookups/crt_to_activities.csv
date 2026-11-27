@@ -1,0 +1,68 @@
+prefix,activity,method,key,rationale_en,rationale_fr
+1.A.1.a,35,direct,,"Public electricity and heat production, by the electricity and gas industry.","Production publique d'électricité et de chaleur, par la branche électricité et gaz."
+1.A.1.b,19,direct,,Combustion in refineries.,Combustion dans les raffineries.
+1.A.1.c,06,direct,,"Other energy industries; in Tunisia, mainly oil and gas extraction facilities.","Autres industries de l'énergie ; en Tunisie, surtout les installations d'extraction de pétrole et de gaz."
+1.A.2.a,24,direct,,"Iron and steel, included in the mechanical and electrical industries of the supply and use tables.","Sidérurgie, comprise dans les industries mécaniques et électriques du TRE."
+1.A.2.b,24,direct,,"Non-ferrous metals, included in the mechanical and electrical industries of the supply and use tables.","Métaux non ferreux, compris dans les industries mécaniques et électriques du TRE."
+1.A.2.c,20,direct,,Chemical industry.,Industrie chimique.
+1.A.2.d,16,direct,,"Paper and printing, included in the miscellaneous industries of the supply and use tables.","Papier et imprimerie, compris dans les industries diverses du TRE."
+1.A.2.e,10,direct,,Food industries.,Industries agro-alimentaires.
+1.A.2.f,23,direct,,"Non-metallic minerals (cement, lime, ceramics, glass).","Minéraux non métalliques (ciment, chaux, céramique, verre)."
+1.A.2.g.i,24,direct,,Manufacture of machinery.,Fabrication de machines.
+1.A.2.g.ii,24,direct,,Manufacture of transport equipment.,Fabrication de matériel de transport.
+1.A.2.g.iii,07,direct,,Mining and quarrying other than hydrocarbons.,Industries extractives hors hydrocarbures.
+1.A.2.g.iv,16,direct,,"Wood, included in the miscellaneous industries of the supply and use tables.","Bois, compris dans les industries diverses du TRE."
+1.A.2.g.v,41,direct,,Construction.,Construction.
+1.A.2.g.vi,13,direct,,Textiles and leather.,Textile et cuir.
+1.A.2.g.vii,41,direct,,Off-road mobile machinery in industry and construction; construction is the main user.,Engins mobiles non routiers de l'industrie et de la construction ; la construction en est le principal utilisateur.
+1.A.2.g.viii,16,direct,,"Other industries, not specified in the inventory.","Autres industries, non précisées dans l'inventaire."
+1.A.3.a,49,direct,,Domestic aviation.,Aviation intérieure.
+1.A.3.b,,key,Road,"Road transport, split between industries and households with the key of the energy accounts.","Transport routier, réparti entre les branches et les ménages avec la clé des comptes PEFA."
+1.A.3.c,49,direct,,Railways.,Chemin de fer.
+1.A.3.d,49,direct,,Domestic navigation.,Navigation intérieure.
+1.A.3.e,49,direct,,Pipeline and other transport.,Transport par conduites et autres transports.
+1.A.4.a,,key,Commercial and public services,"Commerce, services and administration, split between service industries with the key of the energy accounts.","Commerce, services et administrations, répartis entre les branches de services avec la clé des comptes PEFA."
+1.A.4.b,HH,direct,,Combustion in the residential sector.,Combustion dans le secteur résidentiel.
+1.A.4.c,01,direct,,"Agriculture, forestry and fishing.","Agriculture, sylviculture et pêche."
+1.A.5,84,direct,,"Other unspecified uses, including military.","Autres usages non précisés, notamment militaires."
+1.B.1.a,07,direct,,Coal mining.,Extraction du charbon.
+1.B.1.b,01,direct,,"Charcoal production, assigned to forestry as in the energy accounts.","Production de charbon de bois, attribuée à la sylviculture comme dans les comptes PEFA."
+1.B.1.c,07,direct,,Other emissions from solid fuels.,Autres émissions des combustibles solides.
+1.B.2.a,06,direct,,"Exploration, production and other fugitive emissions from oil.","Exploration, production et autres émissions fugitives du pétrole."
+1.B.2.a.iii,49,direct,,Transport of crude oil.,Transport du pétrole brut.
+1.B.2.a.iv,19,direct,,Oil refining and storage.,Raffinage et stockage du pétrole.
+1.B.2.a.v,45,direct,,Distribution of oil products.,Distribution des produits pétroliers.
+1.B.2.b,06,direct,,Exploration and production of natural gas.,Exploration et production de gaz naturel.
+1.B.2.b.iv,35,direct,,"Transmission and storage of natural gas, by the electricity and gas industry.","Transport et stockage du gaz naturel, par la branche électricité et gaz."
+1.B.2.b.v,35,direct,,"Distribution of natural gas, by the electricity and gas industry.","Distribution du gaz naturel, par la branche électricité et gaz."
+1.B.2.c,06,direct,,Venting and flaring in oil and gas extraction.,Évacuation et torchage dans l'extraction de pétrole et de gaz.
+1.B.2.d,06,direct,,Other fugitive emissions from energy production.,Autres émissions fugitives de la production d'énergie.
+1.C,06,direct,,CO2 transport and storage.,Transport et stockage du CO2.
+2.A,23,direct,,"Mineral industry (cement, lime, glass, carbonates).","Industrie minérale (ciment, chaux, verre, carbonates)."
+2.B,20,direct,,Chemical industry.,Industrie chimique.
+2.C,24,direct,,Metal industry.,Industrie métallurgique.
+2.D,16,direct,,"Non-energy products from fuels and solvent use (lubricants, paraffin wax, solvents).","Produits non énergétiques des combustibles et solvants (lubrifiants, paraffines, solvants)."
+2.D.3.b,41,direct,,Road paving with asphalt.,Revêtement des routes avec de l'asphalte.
+2.D.3.c,41,direct,,Asphalt roofing.,Toitures en asphalte.
+2.E,24,direct,,Electronics industry.,Industrie électronique.
+2.F.1.a,45,direct,,Commercial refrigeration.,Réfrigération commerciale.
+2.F.1.b,HH,direct,,Domestic refrigeration.,Réfrigération domestique.
+2.F.1.c,10,direct,,"Industrial refrigeration, mainly food industry.","Réfrigération industrielle, surtout agro-alimentaire."
+2.F.1.d,49,direct,,Transport refrigeration.,Transport frigorifique.
+2.F.1.e,,key,Road,Mobile air conditioning.,Climatisation des véhicules.
+2.F.1.f,,key,Commercial and public services,Stationary air conditioning.,Climatisation fixe.
+2.F.2,16,direct,,Foam blowing agents.,Agents d'expansion des mousses.
+2.F.3,84,direct,,Fire protection.,Protection contre l'incendie.
+2.F.4,HH,direct,,Aerosols.,Aérosols.
+2.F.5,16,direct,,Solvents.,Solvants.
+2.F.6,16,direct,,Other uses of substitutes for ozone-depleting substances.,Autres usages des substituts des substances appauvrissant l'ozone.
+2.G.1,35,direct,,"Electrical equipment (SF6), mainly the power grid.","Équipements électriques (SF6), surtout le réseau électrique."
+2.G.2,16,direct,,Other uses of SF6 and PFCs.,Autres usages du SF6 et des PFC.
+2.G.3,86,direct,,"N2O from product uses, mainly medical.","N2O des usages de produits, surtout médicaux."
+2.G.4,16,direct,,Other product manufacture and use.,Autres fabrications et usages de produits.
+2.H,16,direct,,Other industrial processes.,Autres procédés industriels.
+2.H.2,10,direct,,Food and beverages industry.,Industries alimentaires et boissons.
+3,01,direct,,Agriculture.,Agriculture.
+4,LULUCF,direct,,"Land use, land-use change and forestry, excluded from the air emissions accounts.","Utilisation des terres, changement d'affectation des terres et foresterie, exclue des comptes AEA."
+5,36,direct,,Waste and wastewater treatment.,Traitement des déchets et des eaux usées.
+6,16,direct,,Other sources.,Autres sources.

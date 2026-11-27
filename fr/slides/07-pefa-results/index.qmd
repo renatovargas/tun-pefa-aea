@@ -1,0 +1,67 @@
+---
+title: "Comptes de l'énergie : compilation et diffusion"
+subtitle: "Premiers résultats de 2015 à 2022"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-08"
+date-format: long
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+ind = read("pefa_indicators").filter(pl.col("year") == LAST)
+hh = ind.filter(pl.col("activity") == "HH")["end_use_energy"].sum()
+```
+
+## Chiffres clés {.theme-content}
+
+- Utilisation intérieure nette d'énergie en `{python} LAST` : **`{python} pj(ind["net_domestic_energy_use"].sum())` PJ**.
+- Ménages : **`{python} pct(hh / ind["end_use_energy"].sum())`** de l'utilisation finale d'énergie.
+- Intensité énergétique de l'économie : **`{python} num(ind.filter(pl.col("activity") != "HH")["end_use_energy"].sum() / ind.filter(pl.col("activity") != "HH")["value_added_mtnd"].sum(), 2)` TJ** par million de TND de valeur ajoutée.
+
+## Qui utilise l'énergie
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.energy_users(LAST, n=10, figsize=(10, 4.2))
+```
+
+## Intensité énergétique par branche
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.energy_intensity(LAST, figsize=(10, 4.2))
+```
+
+## Diffusion
+
+- Des classeurs Excel en trois langues : tableaux des ressources et des emplois par année, sections de la CITI, indicateurs.
+- Un document méthodologique dont chaque chiffre est lu dans les données.
+- Un explorateur de données sur le site.
+- Des tableaux en CSV et Parquet pour les chercheurs.
+
+## Points à discuter
+
+- Quels tableaux et indicateurs publier en premier, et à quelle fréquence ?
+- Comment signaler les résultats provisoires ?
+- Quels utilisateurs consulter (ministère de l'énergie, planification, ANME, chercheurs) ?

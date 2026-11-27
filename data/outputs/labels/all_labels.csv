@@ -1,0 +1,315 @@
+dimension,code,en,fr,ar
+activities,01,"Agriculture, forestry and fishing","Agriculture, sylviculture et pêche",الفلاحة والغابات والصيد البحري
+activities,06,Extraction of crude petroleum and natural gas,Extraction de pétrole et de gaz naturel,استخراج النفط والغاز الطبيعي
+activities,07,Other mining and quarrying,Industries extractives hors hydrocarbures,الصناعات الاستخراجية خارج المحروقات
+activities,10,Food industries,Industries agro-alimentaires,الصناعات الغذائية
+activities,13,"Textiles, clothing and leather","Industries du textile, de l'habillement et du cuir",صناعات النسيج والملابس والجلود
+activities,19,Petroleum refining,Raffinage du pétrole,تكرير النفط
+activities,20,Chemical industries,Industries chimiques,الصناعات الكيميائية
+activities,23,Non-metallic mineral products,Industries des matériaux de construction,صناعات مواد البناء
+activities,24,Mechanical and electrical industries,Industries mécaniques et électriques,الصناعات الميكانيكية والكهربائية
+activities,16,Miscellaneous industries,Industries diverses,الصناعات المختلفة
+activities,35,Electricity and gas supply,Production et distribution d'électricité et de gaz,إنتاج وتوزيع الكهرباء والغاز
+activities,36,"Water supply, sewerage and waste management","Distribution d'eau, assainissement et gestion des déchets",توزيع المياه والتطهير وإدارة النفايات
+activities,41,Construction,Construction,البناء
+activities,45,Trade and repair,Commerce et réparation,التجارة والإصلاح
+activities,49,Transport and storage,Transport et entreposage,النقل والتخزين
+activities,55,Accommodation and food services,Hébergement et restauration,الإيواء والمطاعم
+activities,60,Information and communication,Information et communication,الإعلام والاتصال
+activities,64,Financial and insurance activities,Activités financières et d'assurance,الأنشطة المالية والتأمين
+activities,84,Public administration and defence,Administration publique et défense,الإدارة العمومية والدفاع
+activities,85,Education,Enseignement,التعليم
+activities,86,Human health and social work,Santé humaine et action sociale,الصحة والعمل الاجتماعي
+activities,77,Other market services,Autres services marchands,خدمات سوقية أخرى
+activities,97,Domestic services,Services domestiques,الخدمات المنزلية
+activities,94,Activities of membership organisations,Activités des organisations associatives,أنشطة المنظمات الجمعياتية
+activities,HH,Households,Ménages,الأسر
+activities,ROW,Rest of the world,Reste du monde,بقية العالم
+activities,ACC,Accumulation,Accumulation,التراكم
+activities,ENV,Environment,Environnement,البيئة
+activities,STATDIFF,Statistical difference,Écart statistique,الفارق الإحصائي
+imf_sections,A,"Agriculture, forestry and fishing","Agriculture, sylviculture et pêche",الفلاحة والغابات والصيد البحري
+imf_sections,B,Mining and quarrying,Industries extractives,الصناعات الاستخراجية
+imf_sections,C,Manufacturing,Industrie manufacturière,الصناعات التحويلية
+imf_sections,D,"Electricity, gas, steam and air conditioning supply","Production et distribution d'électricité, de gaz, de vapeur et d'air conditionné",إنتاج وتوزيع الكهرباء والغاز والبخار وتكييف الهواء
+imf_sections,E,"Water supply, sewerage, waste management and remediation","Production et distribution d'eau, assainissement, gestion des déchets et dépollution",توزيع المياه والتطهير ومعالجة النفايات
+imf_sections,F,Construction,Construction,البناء والأشغال العامة
+imf_sections,H,Transportation and storage,Transports et entreposage,النقل والتخزين
+imf_sections,Other,Other services,Autres services,خدمات أخرى
+imf_sections,HH,Households,Ménages,الأسر
+imf_sections,ACC,Accumulation,Accumulation,التراكم
+imf_sections,ROW,Rest of the world,Reste du monde,بقية العالم
+imf_sections,ENV,Environment,Environnement,البيئة
+imf_sections,STATDIFF,Statistical difference,Écart statistique,الفارق الإحصائي
+balance_flows,PROD,Primary production,Production primaire,الإنتاج الأولي
+balance_flows,IMP,Imports,Importations,الواردات
+balance_flows,STOCK,Stock changes,Variation des stocks,التغير في المخزون
+balance_flows,EXP,Exports,Exportations,الصادرات
+balance_flows,BUNKERS,International bunkers,Soutes internationales,وقود السفن والطائرات الدولية
+balance_flows,GIC,Gross inland consumption,Consommation intérieure brute,الاستهلاك الداخلي الخام
+balance_flows,TI,Transformation inputs,Entrées en transformation,مدخلات التحويل
+balance_flows,TI_MAINPLANT,Main activity thermal power plants,Centrales thermiques : activité principale,محطات حرارية: نشاط رئيسي
+balance_flows,TI_AUTOPLANT,Autoproducer thermal power plants,Centrales thermiques : autoproduction,محطات حرارية: إنتاج ذاتي
+balance_flows,TI_REFINERY,Refineries,Raffineries,المصافي
+balance_flows,TI_CHARCOAL,Charcoal production,Production de charbon de bois,إنتاج الفحم الخشبي
+balance_flows,TO,Transformation outputs,Sorties de transformation,مخرجات التحويل
+balance_flows,TO_MAINPLANT,Main activity thermal power plants,Centrales thermiques : activité principale,محطات حرارية: نشاط رئيسي
+balance_flows,TO_AUTOPLANT,Autoproducer thermal power plants,Centrales thermiques : autoproduction,محطات حرارية: إنتاج ذاتي
+balance_flows,TO_REFINERY,Refineries,Raffineries,المصافي
+balance_flows,TO_CHARCOAL,Charcoal production,Production de charbon de bois,إنتاج الفحم الخشبي
+balance_flows,TRF,"Exchanges, transfers, returns","Échanges, transferts, restitutions",التبادلات والتحويلات والمرتجعات
+balance_flows,TRF_PROD,Interproduct transfers,Échanges entre produits,التبادلات بين المنتجات
+balance_flows,TRF_TRANSF,Products transferred,Produits transférés,المنتجات المحولة
+balance_flows,TRF_PETCHEM,Returns from petrochemical industry,Restitutions de la pétrochimie,مرتجعات البتروكيمياء
+balance_flows,OWNUSE,Energy industry own use,Consommation de la branche énergie,استهلاك قطاع الطاقة
+balance_flows,LOSSES,Losses,Pertes,الخسائر
+balance_flows,AVAIL,Available for final consumption,Disponible pour la consommation finale,المتاح للاستهلاك النهائي
+balance_flows,NEU,Non-energy final consumption,Consommation finale non énergétique,الاستهلاك النهائي غير الطاقوي
+balance_flows,NEU_CHEM,Chemicals,Chimie,الكيمياء
+balance_flows,NEU_OTHER,Other,Autres,أخرى
+balance_flows,FEC,Final energy consumption,Consommation finale énergétique,الاستهلاك النهائي للطاقة
+balance_flows,IND,Industry,Industrie,الصناعة
+balance_flows,IND_METAL,Basic metals including iron and steel,Fabrications métalliques y compris sidérurgie,الصناعات المعدنية بما فيها الحديد والصلب
+balance_flows,IND_CHEM,Chemicals,Chimie,الكيمياء
+balance_flows,IND_NONMET,Non-metallic minerals,Produits minéraux non métalliques,المنتجات المعدنية غير الفلزية
+balance_flows,IND_MINING,Mining and quarrying,Extraction,الاستخراج
+balance_flows,IND_FOOD,"Food, beverages and tobacco","Alimentation, boissons, tabac",الأغذية والمشروبات والتبغ
+balance_flows,IND_TEXTILE,"Textiles, leather and clothing","Textiles, cuir, habillement",النسيج والجلود والملابس
+balance_flows,IND_PAPER,Paper and printing,Papier et imprimerie,الورق والطباعة
+balance_flows,IND_MACH,Machinery and electrical equipment,Fabrications mécaniques et électriques,الصناعات الميكانيكية والكهربائية
+balance_flows,IND_OTHER,Other industries,Autres industries,صناعات أخرى
+balance_flows,TRA,Transport,Transport,النقل
+balance_flows,TRA_RAIL,Rail,Transport ferroviaire,النقل بالسكك الحديدية
+balance_flows,TRA_ROAD,Road,Transport routier,النقل البري
+balance_flows,TRA_AIR,Domestic aviation,Transport aérien,النقل الجوي
+balance_flows,TRA_PIPE,Pipeline transport,Transport par conduites,النقل عبر الأنابيب
+balance_flows,OTH,"Households, commerce, public administration, etc.","Foyers domestiques, commerce, administration, etc.",الأسر والتجارة والإدارة وغيرها
+balance_flows,OTH_RES,Households,Foyers domestiques,الأسر
+balance_flows,OTH_COM,"Commerce, public administration, hotels, etc.","Commerce, administration, hôtels, etc.",التجارة والإدارة والفنادق وغيرها
+balance_flows,OTH_AGR,Agriculture and fishing,Agriculture et pêche,الفلاحة والصيد البحري
+balance_flows,STATDIFF,Statistical difference,Écart statistique,الفارق الإحصائي
+balance_products,TOTAL,Total all products,Total tous produits,مجموع كل المنتجات
+balance_products,CRUDE,Crude oil,Pétrole brut,النفط الخام
+balance_products,NGL,Natural gas liquids,Liquides de gaz naturel,سوائل الغاز الطبيعي
+balance_products,OILPROD,Oil products,Produits pétroliers,المنتجات النفطية
+balance_products,REFGAS,Refinery gas,Gaz de raffinerie,غاز المصافي
+balance_products,LPG,LPG,GPL,غاز النفط المسال
+balance_products,GASOLINE,Motor gasoline,Essences,البنزين
+balance_products,KEROSENE,Kerosene,Pétrole lampant,الكيروسين
+balance_products,JETFUEL,Jet fuel,Carburéacteurs,وقود الطائرات
+balance_products,NAPHTHA,Naphtha,Naphta,النافتا
+balance_products,GASOIL,Gas/diesel oil,Gasoil,الغازوال
+balance_products,FUELOIL,Fuel oil,Fioul lourd,زيت الوقود الثقيل
+balance_products,PETCOKE,Petroleum coke,Coke de pétrole,فحم الكوك البترولي
+balance_products,OTHOIL,Other oil products,Autres produits pétroliers,منتجات نفطية أخرى
+balance_products,NATGAS,Natural gas,Gaz naturel,الغاز الطبيعي
+balance_products,RENEW,Renewable energy,Énergies renouvelables,الطاقات المتجددة
+balance_products,SOLARTH,Solar thermal,Solaire thermique,الطاقة الشمسية الحرارية
+balance_products,SOLARPV,Solar photovoltaic,Solaire photovoltaïque,الطاقة الشمسية الكهروضوئية
+balance_products,GEOTHERM,Geothermal,Géothermie,الطاقة الحرارية الجوفية
+balance_products,BIOMASS,Biomass,Biomasse,الكتلة الحيوية
+balance_products,WIND,Wind energy,Énergie éolienne,طاقة الرياح
+balance_products,HYDRO,Hydropower,Énergie hydraulique,الطاقة الكهرومائية
+balance_products,HEAT,Heat,Chaleur,الحرارة
+balance_products,ELEC,Electricity,Électricité,الكهرباء
+pefa_rows,Energy from natural inputs:,Energy from natural inputs,Énergie issue des ressources naturelles,الطاقة المستمدة من الموارد الطبيعية
+pefa_rows,Energy products:,Energy products,Produits énergétiques,المنتجات الطاقوية
+pefa_rows,Energy residuals:,Energy residuals,Résidus d'énergie,بقايا الطاقة
+pefa_rows,Other residual flows:,Other residual flows,Autres flux de résidus,تدفقات بقايا أخرى
+pefa_rows,Production of energy products by SIEC class:,Production of energy products by SIEC class,Production de produits énergétiques par classe de la CIPE,إنتاج المنتجات الطاقوية حسب فئات التصنيف الدولي الموحد لمنتجات الطاقة
+pefa_rows,Transformation of energy products by SIEC class:,Transformation of energy products by SIEC class,Transformation de produits énergétiques par classe de la CIPE,تحويل المنتجات الطاقوية حسب فئات التصنيف الدولي الموحد لمنتجات الطاقة
+pefa_rows,End-use of energy products by SIEC class:,End-use of energy products by SIEC class,Utilisation finale de produits énergétiques par classe de la CIPE,الاستخدام النهائي للمنتجات الطاقوية حسب فئات التصنيف الدولي الموحد لمنتجات الطاقة
+pefa_rows,Natural resource inputs,Natural resource inputs,Intrants de ressources naturelles,مدخلات الموارد الطبيعية
+pefa_rows,Inputs of energy from renewable sources,Inputs of energy from renewable sources,Intrants d'énergie de sources renouvelables,مدخلات الطاقة من المصادر المتجددة
+pefa_rows,Other natural inputs,Other natural inputs,Autres intrants naturels,مدخلات طبيعية أخرى
+pefa_rows,Coal,Coal,Charbon,الفحم
+pefa_rows,Peat and peat products,Peat and peat products,Tourbe et produits de la tourbe,الخث ومنتجاته
+pefa_rows,Oil shale / oil sands,Oil shale / oil sands,Schistes et sables bitumineux,الصخر الزيتي والرمال النفطية
+pefa_rows,Natural gas,Natural gas,Gaz naturel,الغاز الطبيعي
+pefa_rows,Oil,Oil,Pétrole et produits pétroliers,النفط والمنتجات النفطية
+pefa_rows,Biofuels,Biofuels,Biocombustibles,الوقود الحيوي
+pefa_rows,Waste,Waste,Déchets,النفايات
+pefa_rows,Electricity,Electricity,Électricité,الكهرباء
+pefa_rows,Heat,Heat,Chaleur,الحرارة
+pefa_rows,Nuclear fuels and other fuels,Nuclear fuels and other fuels,Combustibles nucléaires et autres combustibles,الوقود النووي وأنواع الوقود الأخرى
+pefa_rows,End-use of energy products for non-energy purposes,End-use of energy products for non-energy purposes,Utilisation de produits énergétiques à des fins non énergétiques,استخدام المنتجات الطاقوية لأغراض غير طاقوية
+pefa_rows,Energy residuals from end-use,Energy residuals from end-use,Résidus d'énergie de l'utilisation finale,بقايا الطاقة من الاستخدام النهائي
+pefa_rows,Energy residuals from losses,Energy residuals from losses,Résidus d'énergie des pertes,بقايا الطاقة من الخسائر
+pefa_rows,Residuals from end-use for non-energy purposes,Residuals from end-use for non-energy purposes,Résidus de l'utilisation à des fins non énergétiques,بقايا الاستخدام لأغراض غير طاقوية
+pefa_rows,Energy from solid waste,Energy from solid waste,Énergie issue des déchets solides,الطاقة المستمدة من النفايات الصلبة
+gases,CO2,Carbon dioxide (CO2),Dioxyde de carbone (CO2),ثاني أكسيد الكربون (CO2)
+gases,CH4,Methane (CH4),Méthane (CH4),الميثان (CH4)
+gases,N2O,Nitrous oxide (N2O),Protoxyde d'azote (N2O),أكسيد النيتروز (N2O)
+gases,F-gases,Fluorinated gases,Gaz fluorés,الغازات المفلورة
+gases,GHG,Total greenhouse gases,Total des gaz à effet de serre,مجموع غازات الاحتباس الحراري
+aea_bridge,AEA,Air emissions accounts (resident units),Émissions des comptes AEA (unités résidentes),انبعاثات حسابات انبعاثات الهواء (الوحدات المقيمة)
+aea_bridge,NRA-AIR,Less: air transport of residents abroad,Moins : transport aérien des résidents à l'étranger,ناقص: النقل الجوي للمقيمين في الخارج
+aea_bridge,NRA-WATER,Less: water transport of residents abroad,Moins : transport maritime des résidents à l'étranger,ناقص: النقل البحري للمقيمين في الخارج
+aea_bridge,NRT-AIR,Plus: air transport of non-residents on the territory,Plus : transport aérien des non-résidents sur le territoire,زائد: النقل الجوي لغير المقيمين في الإقليم
+aea_bridge,NRT-WATER,Plus: water transport of non-residents on the territory,Plus : transport maritime des non-résidents sur le territoire,زائد: النقل البحري لغير المقيمين في الإقليم
+aea_bridge,OTHER,Other adjustments,Autres ajustements,تعديلات أخرى
+aea_bridge,INV,National inventory excluding LULUCF,Inventaire national hors UTCATF,الجرد الوطني دون استخدام الأراضي وتغيير استخدامها والحراجة
+aea_bridge,LULUCF,"Land use, land-use change and forestry (LULUCF)","Utilisation des terres, changement d'affectation des terres et foresterie (UTCATF)",استخدام الأراضي وتغيير استخدامها والحراجة
+aea_bridge,INV-TOTAL,National inventory including LULUCF,Inventaire national y compris UTCATF,الجرد الوطني بما في ذلك استخدام الأراضي وتغيير استخدامها والحراجة
+sut_products,01,"Agriculture, forestry and fishing products","Produits de l'agriculture, de la sylviculture et de la pêche",منتجات الفلاحة والغابات والصيد البحري
+sut_products,06,Crude petroleum and natural gas,Pétrole et gaz naturel,النفط والغاز الطبيعي
+sut_products,07,Mining products,Produits miniers,المنتجات المنجمية
+sut_products,10,Food products,Produits agro-alimentaires,المنتجات الغذائية
+sut_products,13,"Textiles, clothing and leather products","Produits du textile, de l'habillement et du cuir",منتجات النسيج والملابس والجلود
+sut_products,19,Refined petroleum products,Produits pétroliers raffinés,المنتجات النفطية المكررة
+sut_products,20,Chemical products,Produits chimiques,المنتجات الكيميائية
+sut_products,23,Other non-metallic mineral products,Autres produits minéraux non métalliques,منتجات معدنية غير فلزية أخرى
+sut_products,24,Mechanical and electrical products,Produits des industries mécaniques et électriques,منتجات الصناعات الميكانيكية والكهربائية
+sut_products,16,Products of miscellaneous industries,Produits des industries diverses,منتجات الصناعات المختلفة
+sut_products,35,Electricity and gas,Électricité et gaz,الكهرباء والغاز
+sut_products,36,"Water supply, sewerage and waste management","Distribution d'eau, assainissement et gestion des déchets",توزيع المياه والتطهير وإدارة النفايات
+sut_products,41,Construction,Construction,البناء
+sut_products,45,Trade and repair,Commerce et réparation,التجارة والإصلاح
+sut_products,49,Transport and storage,Transport et entreposage,النقل والتخزين
+sut_products,55,Accommodation and food services,Hébergement et restauration,الإيواء والمطاعم
+sut_products,60,Information and communication,Information et communication,الإعلام والاتصال
+sut_products,64,Financial and insurance services,Activités financières et d'assurance,الأنشطة المالية والتأمين
+sut_products,84,Public administration and defence,Administration publique et défense,الإدارة العمومية والدفاع
+sut_products,85,Education,Enseignement,التعليم
+sut_products,86,Human health and social work,Santé humaine et action sociale,الصحة والعمل الاجتماعي
+sut_products,77,Other market services,Autres services marchands,خدمات سوقية أخرى
+sut_products,97,Domestic services,Services domestiques,الخدمات المنزلية
+sut_products,94,Activities of membership organisations,Activités des organisations associatives,أنشطة المنظمات الجمعياتية
+sut_products,CR2,Territorial adjustment,Correction territoriale (CT),التعديل الإقليمي
+sut_products,CR3,CIF/FOB adjustment,Correction CAF/FOB,تعديل سيف/فوب
+sut_columns,P1,Output,Production,الإنتاج
+sut_columns,P7,Imports,Importations,الواردات
+sut_columns,D212,Import duties,Droits de douane,الرسوم الجمركية
+sut_columns,D211,Non-deductible VAT,TVA non déductible,الأداء على القيمة المضافة غير القابل للطرح
+sut_columns,D214,Other taxes on products,Autres impôts sur les produits,ضرائب أخرى على المنتجات
+sut_columns,D31,Subsidies on products,Subventions sur les produits,الإعانات على المنتجات
+sut_columns,TRADE_MARGIN,Trade margins,Marges commerciales,الهوامش التجارية
+sut_columns,TRANSPORT_MARGIN,Transport margins,Marges de transport,هوامش النقل
+sut_columns,CIF_FOB,CIF/FOB adjustment and intermediation services,Correction CAF/FOB et services d'intermédiation,تعديل سيف/فوب وخدمات الوساطة
+sut_columns,TOTAL_SUPPLY,Total supply,Total des ressources,مجموع الموارد
+sut_columns,TOTAL_SUPPLY,Total supply,Total des ressources,مجموع الموارد
+sut_columns,P2,Intermediate consumption,Consommation intermédiaire,الاستهلاك الوسيط
+sut_columns,P3_HH,Household final consumption expenditure,Dépense de consommation finale des ménages,نفقات الاستهلاك النهائي للأسر
+sut_columns,P3_GOV,Government final consumption expenditure,Dépense de consommation finale des administrations publiques,نفقات الاستهلاك النهائي للإدارات العمومية
+sut_columns,P3,Final consumption,Consommation finale,الاستهلاك النهائي
+sut_columns,P51G,Gross fixed capital formation,Formation brute de capital fixe,التكوين الخام لرأس المال الثابت
+sut_columns,P52,Changes in inventories,Variation des stocks,التغير في المخزون
+sut_columns,P6,Exports,Exportations,الصادرات
+sut_columns,TOTAL_USE,Total use,Total des emplois,مجموع الاستخدامات
+sut_columns,P1,Output by industry,Production de la branche,إنتاج الفرع
+sut_columns,B1G,Gross value added,Valeur ajoutée brute,القيمة المضافة الخام
+sut_columns,D1,Compensation of employees,Rémunération des salariés,أجور الأجراء
+sut_columns,D29_D39,Other taxes less subsidies on production,Autres impôts sur la production nets de subventions,ضرائب أخرى على الإنتاج صافية من الإعانات
+sut_columns,B2G,Gross operating surplus,Excédent brut d'exploitation,فائض الاستغلال الخام
+crt_categories,1,Energy,Énergie,الطاقة
+crt_categories,1.A,Fuel combustion,Combustion de combustibles,احتراق الوقود
+crt_categories,1.A.1,Energy industries,Industries énergétiques,الصناعات الطاقوية
+crt_categories,1.A.2,Manufacturing industries and construction,Industries manufacturières et construction,الصناعات التحويلية والبناء
+crt_categories,1.A.3,Transport,Transport,النقل
+crt_categories,1.A.4,Other sectors,Autres secteurs,قطاعات أخرى
+crt_categories,1.A.5,Other (not specified elsewhere),Autres (non spécifiés ailleurs),أخرى (غير محددة في مكان آخر)
+crt_categories,1.B,Fugitive emissions from fuels,Émissions fugitives des combustibles,الانبعاثات المتسربة من الوقود
+crt_categories,1.B.1,Solid fuels,Combustibles solides,الوقود الصلب
+crt_categories,1.B.2,"Oil, natural gas and other emissions from energy production","Pétrole, gaz naturel et autres émissions de la production d'énergie",النفط والغاز الطبيعي والانبعاثات الأخرى من إنتاج الطاقة
+crt_categories,1.C,CO2 transport and storage,Transport et stockage du CO2,نقل وتخزين ثاني أكسيد الكربون
+crt_categories,1.D,Memo items (international bunkers),Éléments pour mémoire (soutes internationales),بنود تذكيرية (المستودعات الدولية)
+crt_categories,2,Industrial processes and product use,Procédés industriels et utilisation de produits,العمليات الصناعية واستخدام المنتجات
+crt_categories,2.A,Mineral industry,Industrie minérale,الصناعة المعدنية غير الفلزية
+crt_categories,2.B,Chemical industry,Industrie chimique,الصناعة الكيميائية
+crt_categories,2.C,Metal industry,Industrie métallurgique,صناعة المعادن
+crt_categories,2.D,Non-energy products from fuels and solvent use,Produits non énergétiques des combustibles et utilisation de solvants,المنتجات غير الطاقوية من الوقود واستخدام المذيبات
+crt_categories,2.E,Electronics industry,Industrie électronique,صناعة الإلكترونيات
+crt_categories,2.F,Product uses as substitutes for ozone-depleting substances,Utilisations de produits comme substituts aux substances appauvrissant la couche d'ozone,استخدام المنتجات كبدائل للمواد المستنفدة للأوزون
+crt_categories,2.G,Other product manufacture and use,Autres fabrications et utilisations de produits,تصنيع واستخدام منتجات أخرى
+crt_categories,2.H,Other industrial processes,Autres procédés industriels,عمليات صناعية أخرى
+crt_categories,3,Agriculture,Agriculture,الفلاحة
+crt_categories,3.A,Enteric fermentation,Fermentation entérique,التخمر المعوي
+crt_categories,3.B,Manure management,Gestion du fumier,إدارة السماد الحيواني
+crt_categories,3.C,Rice cultivation,Riziculture,زراعة الأرز
+crt_categories,3.D,Agricultural soils,Sols agricoles,التربة الفلاحية
+crt_categories,3.F,Field burning of agricultural residues,Brûlage des résidus agricoles,حرق المخلفات الفلاحية في الحقول
+crt_categories,3.G,Liming,Chaulage,إضافة الجير
+crt_categories,3.H,Urea application,Application d'urée,استخدام اليوريا
+crt_categories,4,"Land use, land-use change and forestry","Utilisation des terres, changement d'affectation des terres et foresterie",استخدام الأراضي وتغيير استخدام الأراضي والحراجة
+crt_categories,5,Waste,Déchets,النفايات
+crt_categories,5.A,Solid waste disposal,Élimination des déchets solides,التخلص من النفايات الصلبة
+crt_categories,5.B,Biological treatment of solid waste,Traitement biologique des déchets solides,المعالجة البيولوجية للنفايات الصلبة
+crt_categories,5.C,Incineration and open burning of waste,Incinération et brûlage à l'air libre des déchets,حرق النفايات وحرقها في الهواء الطلق
+crt_categories,5.D,Wastewater treatment and discharge,Traitement et rejet des eaux usées,معالجة المياه المستعملة وتصريفها
+crt_categories,5.E,Other waste,Autres déchets,نفايات أخرى
+crt_categories,6,Other sources,Autres sources,مصادر أخرى
+terms,year,Year,Année,السنة
+terms,quadrant,Table,Tableau,الجدول
+terms,level1,Category,Catégorie,الفئة
+terms,level2,Subcategory,Sous-catégorie,الفئة الفرعية
+terms,product,Product,Produit,المنتج
+terms,activity,Activity,Activité,النشاط
+terms,activity_code,Activity code,Code de l'activité,رمز النشاط
+terms,section_code,ISIC section,Section de la CITI,باب التصنيف الصناعي الدولي
+terms,tj,Terajoules,Térajoules,تيراجول
+terms,supply,Supply,Ressources,الموارد
+terms,use,Use,Emplois,الاستخدامات
+terms,total,Total,Total,المجموع
+terms,gas,Gas,Gaz,الغاز
+terms,crt_category,CRT category,Catégorie CRT,فئة CRT
+terms,kt_co2_eq,Thousand tonnes of CO2 equivalent,Milliers de tonnes d'équivalent CO2,ألف طن من مكافئ ثاني أكسيد الكربون
+terms,bridge_item,Bridging item,Élément de passage,بند الربط
+terms,sheet_notes,Notes,Notes,ملاحظات
+terms,sheet_data,Data,Données,البيانات
+terms,sheet_supply,Supply,Ressources,الموارد
+terms,sheet_use,Use,Emplois,الاستخدامات
+terms,sheet_isic,ISIC sections,Sections CITI,أبواب التصنيف
+terms,sheet_indicators,Indicators,Indicateurs,المؤشرات
+terms,sheet_aea,AEA,AEA,AEA
+terms,sheet_bridge,Bridge,Passage,الربط
+terms,sheet_source_activity,Source by activity,Source par activité,المصدر حسب النشاط
+terms,natural_inputs,Use of natural energy inputs (TJ),Utilisation de ressources naturelles d'énergie (TJ),استخدام الموارد الطبيعية للطاقة (تيراجول)
+terms,production,Production of energy products (TJ),Production de produits énergétiques (TJ),إنتاج المنتجات الطاقوية (تيراجول)
+terms,transformation_input,Transformation input (TJ),Entrées en transformation (TJ),مدخلات التحويل (تيراجول)
+terms,end_use_energy,End use for energy purposes (TJ),Utilisation finale à des fins énergétiques (TJ),الاستخدام النهائي لأغراض طاقوية (تيراجول)
+terms,end_use_non_energy,End use for non-energy purposes (TJ),Utilisation finale à des fins non énergétiques (TJ),الاستخدام النهائي لأغراض غير طاقوية (تيراجول)
+terms,net_domestic_energy_use,Net domestic energy use (TJ),Utilisation intérieure nette d'énergie (TJ),الاستخدام المحلي الصافي للطاقة (تيراجول)
+terms,residuals,Energy residuals generated (TJ),Résidus d'énergie générés (TJ),بقايا الطاقة المتولدة (تيراجول)
+terms,output_mtnd,Output (million TND),Production (millions de TND),الإنتاج (مليون دينار)
+terms,value_added_mtnd,Value added (million TND),Valeur ajoutée (millions de TND),القيمة المضافة (مليون دينار)
+terms,household_consumption_mtnd,Household final consumption expenditure (million TND),Dépense de consommation finale des ménages (millions de TND),الإنفاق على الاستهلاك النهائي للأسر (مليون دينار)
+terms,intensity_output,Energy intensity of output (TJ per million TND),Intensité énergétique de la production (TJ par million de TND),كثافة الطاقة في الإنتاج (تيراجول لكل مليون دينار)
+terms,intensity_value_added,Energy intensity of value added (TJ per million TND),Intensité énergétique de la valeur ajoutée (TJ par million de TND),كثافة الطاقة في القيمة المضافة (تيراجول لكل مليون دينار)
+terms,intensity_household,Household energy use per million TND of final consumption expenditure (TJ),Énergie des ménages par million de TND de dépense de consommation finale (TJ),استخدام الأسر للطاقة لكل مليون دينار من الإنفاق على الاستهلاك النهائي (تيراجول)
+terms,ghg_kt,GHG emissions (kt CO2 eq),Émissions de GES (kt éq. CO2),انبعاثات غازات الاحتباس الحراري (ألف طن مكافئ CO2)
+terms,ghg_intensity_output,GHG intensity of output (t CO2 eq per million TND),Intensité en GES de la production (t éq. CO2 par million de TND),كثافة غازات الاحتباس الحراري في الإنتاج (طن مكافئ CO2 لكل مليون دينار)
+terms,ghg_intensity_value_added,GHG intensity of value added (t CO2 eq per million TND),Intensité en GES de la valeur ajoutée (t éq. CO2 par million de TND),كثافة غازات الاحتباس الحراري في القيمة المضافة (طن مكافئ CO2 لكل مليون دينار)
+terms,ghg_intensity_household,Household emissions per million TND of final consumption expenditure (t CO2 eq),Émissions des ménages par million de TND de dépense de consommation finale (t éq. CO2),انبعاثات الأسر لكل مليون دينار من الإنفاق على الاستهلاك النهائي (طن مكافئ CO2)
+terms,title_pefa,Physical energy flow accounts (PEFA) of Tunisia,Comptes physiques des flux d'énergie (PEFA) de la Tunisie,حسابات التدفقات المادية للطاقة لتونس
+terms,title_aea,Air emissions accounts (AEA) of Tunisia: greenhouse gases,Comptes des émissions atmosphériques (AEA) de la Tunisie : gaz à effet de serre,حسابات انبعاثات الهواء لتونس: غازات الاحتباس الحراري
+terms,unit_tj,Unit: terajoules (TJ),Unité : térajoules (TJ),الوحدة: تيراجول
+terms,unit_kt_co2_eq,"Unit: thousand tonnes of CO2 equivalent, 100-year global warming potentials of the IPCC Fifth Assessment Report","Unité : milliers de tonnes d'équivalent CO2, potentiels de réchauffement global à 100 ans du cinquième rapport d'évaluation du GIEC",الوحدة: ألف طن من مكافئ ثاني أكسيد الكربون، إمكانات الاحترار العالمي على مدى 100 سنة من تقرير التقييم الخامس للهيئة الحكومية الدولية المعنية بتغير المناخ
+terms,note_source_pefa,Sources: ONEM energy balances (2015-2022) and INS supply and use tables.,Sources : bilans énergétiques de l'ONEM (2015-2022) et tableaux des ressources et des emplois de l'INS.,المصادر: موازين الطاقة للمرصد الوطني للطاقة والمناجم (2015-2022) وجداول الموارد والاستخدامات للمعهد الوطني للإحصاء.
+terms,note_method_pefa,"Method: IMF PEFA Converter (Achille Pegoue), re-implemented in Python, with a Tunisian concordance matrix by industry of the supply and use tables.","Méthode : PEFA Converter du FMI (Achille Pegoue), réécrit en Python, avec une matrice de concordance tunisienne par branche du tableau des ressources et des emplois.",المنهجية: أداة PEFA Converter لصندوق النقد الدولي (أشيل بيغوي)، أعيدت كتابتها بلغة Python، مع مصفوفة توافق تونسية حسب فروع جدول الموارد والاستخدامات.
+terms,note_source_aea,"Sources: national greenhouse gas inventory (CRT tables 2015-2022), OECD air and maritime transport emissions, INS supply and use tables.","Sources : inventaire national des gaz à effet de serre (tableaux CRT 2015-2022), émissions du transport aérien et maritime de l'OCDE, tableaux des ressources et des emplois de l'INS.",المصادر: الجرد الوطني لغازات الاحتباس الحراري (جداول CRT 2015-2022)، انبعاثات النقل الجوي والبحري لمنظمة التعاون والتنمية في الميدان الاقتصادي، جداول الموارد والاستخدامات للمعهد الوطني للإحصاء.
+terms,note_method_aea,"Method: IMF Air Emissions Account Converter (I2A, Achille Pegoue), re-implemented in Python, with a Tunisian conversion matrix by industry and OECD residence adjustments.","Méthode : convertisseur des comptes des émissions atmosphériques du FMI (I2A, Achille Pegoue), réécrit en Python, avec une matrice de conversion tunisienne par branche et les ajustements de résidence de l'OCDE.",المنهجية: أداة تحويل حسابات انبعاثات الهواء لصندوق النقد الدولي (I2A، أشيل بيغوي)، أعيدت كتابتها بلغة Python، مع مصفوفة تحويل تونسية حسب الفروع وتعديلات الإقامة من بيانات منظمة التعاون والتنمية في الميدان الاقتصادي.
+terms,note_provisional,Provisional version. The allocation assumptions are documented in the methodological documents of the website.,Version provisoire. Les hypothèses de répartition sont documentées dans les documents méthodologiques du site.,نسخة مؤقتة. فرضيات التوزيع موثقة في الوثائق المنهجية للموقع.
+terms,note_site,Documentation: https://renatovargas.github.io/tun-pefa-aea/,Documentation : https://renatovargas.github.io/tun-pefa-aea/,التوثيق: https://renatovargas.github.io/tun-pefa-aea/
+terms,note_code,Code: https://github.com/renatovargas/tun-pefa-aea,Code : https://github.com/renatovargas/tun-pefa-aea,الشيفرة: https://github.com/renatovargas/tun-pefa-aea
+terms,node_PROD,Domestic production,Production nationale,الإنتاج الوطني
+terms,node_IMP,Imports,Importations,الواردات
+terms,node_TRANSF,Transformation into other energy products,Transformation en d'autres produits énergétiques,التحويل إلى منتجات طاقوية أخرى
+terms,node_EXP,Exports and bunkers,Exportations et soutes,الصادرات والمستودعات الدولية
+terms,node_STOCK,Stock changes,Variation des stocks,التغير في المخزون
+terms,node_STATDIFF,Statistical difference,Écart statistique,الفارق الإحصائي
+terms,node_LOSS,Losses and own use of the energy industries,Pertes et autoconsommation de la branche énergie,الخسائر والاستهلاك الذاتي لقطاع الطاقة
+terms,chart_domestic_production,Domestic production,Production nationale,الإنتاج الوطني
+terms,chart_imports,Imports,Importations,الواردات
+terms,chart_pj,PJ,PJ,بيتاجول
+terms,chart_percent,percent,pour cent,نسبة مئوية
+terms,chart_road_key,Road transport (product 19),Transport routier (produit 19),النقل البري (المنتج 19)
+terms,chart_tertiary_key,"Commerce, administration, hotels (product 35)","Commerce, administration, hôtels (produit 35)",التجارة والإدارة والنزل (المنتج 35)
+terms,chart_tnd_per_gj,TND per GJ,TND par GJ,دينار لكل جيغاجول
+terms,chart_tj_per_mtnd,TJ per million TND,TJ par million de TND,تيراجول لكل مليون دينار
+terms,chart_ndeu,Net domestic energy use (accounts),Utilisation intérieure nette d'énergie (comptes),الاستخدام المحلي الصافي للطاقة (الحسابات)
+terms,chart_gic,Gross inland consumption (balance),Consommation intérieure brute (bilan),الاستهلاك الداخلي الإجمالي (الميزان)
+terms,chart_mt_co2,Mt CO2 eq,Mt éq. CO2,مليون طن مكافئ CO2
+terms,chart_kt_co2,kt CO2 eq,kt éq. CO2,ألف طن مكافئ CO2
+terms,chart_t_per_mtnd,t CO2 eq per million TND,t éq. CO2 par million de TND,طن مكافئ CO2 لكل مليون دينار
+terms,chart_t_per_tj,t CO2 per TJ,t CO2 par TJ,طن CO2 لكل تيراجول
+terms,chart_residents_abroad,Residents abroad (air transport),Résidents à l'étranger (transport aérien),المقيمون في الخارج (النقل الجوي)

@@ -1,22 +1,61 @@
 ---
 title: "Energy and air emissions accounts for Tunisia"
+subtitle: "Physical energy flow accounts (PEFA) and air emissions accounts (AEA), 2015 to 2022"
+toc: false
 ---
 
-This site gathers the materials that support the compilation of physical energy flow accounts (PEFA) and air emissions accounts (AEA) for Tunisia. The work is carried out by the National Institute of Statistics (INS) and partner institutions, with technical assistance from the International Monetary Fund (IMF). Materials are published as the mission progresses.
+This site presents the physical energy flow accounts and the air emissions accounts of Tunisia. Both follow the System of Environmental-Economic Accounting (SEEA) of the United Nations, which extends the national accounts to the environment. The accounts record, in terajoules and in tonnes of CO2 equivalent, how much energy each industry and households use and how much greenhouse gas they emit, with the same classifications as the supply and use tables of the national accounts.
 
-The site is available in French, English and Arabic. The French version is the reference version. The "Language" menu opens the same page in another language.
+The accounts are compiled by an open, reproducible pipeline of Python scripts. It reads the national energy balance, the greenhouse gas inventory and the supply and use tables, applies the logic of the IMF PEFA Converter and Air Emissions Account Converter, checks every step, and writes the accounts to Excel in English, French and Arabic. Every allocation choice is a table that compilers can review and change.
 
-# Contents
+:::: {.grid}
 
-**Materials.** The [documents and presentations](materiaux/index.qmd) cover the mission context, the SEEA framework and the compilation methods.
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Documents
 
-**Processing.** The [processing pages](traitement/index.qmd) describe step by step, with Python code, how the source data become accounts. Each page ends with the export of its tables.
+Concepts, compilation methods and results of the energy accounts and the air emissions accounts, with an annex describing each script.
 
-**Downloads.** The [downloads page](telechargements.qmd) collects the final tables in Excel format, in French, English and Arabic.
+[Read the documents](documents/index.qmd){.btn .btn-primary}
+:::
+:::
+:::
 
-# Objectives
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Presentations
 
-- Move from the national energy balance to physical energy supply and use tables.
-- Move from the national greenhouse gas inventory to air emissions accounts by economic activity.
-- Keep a complete and reproducible record of data, methods and code.
-- Prepare a workplan for the dissemination of the accounts.
+Slides for each session of the technical workshop, from the SEEA framework to dissemination and a work plan.
+
+[See the presentations](presentations/index.qmd){.btn .btn-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Data explorer
+
+Interactive charts of energy use and emissions by industry, product, gas and year, and the classifications behind them.
+
+[Explore the data](explorer/index.qmd){.btn .btn-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Downloads
+
+The accounts in Excel, in English, French and Arabic, and the tables behind every figure.
+
+[Download](downloads.qmd){.btn .btn-primary}
+:::
+:::
+:::
+
+::::

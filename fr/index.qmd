@@ -1,22 +1,61 @@
 ---
-title: "Comptes de l'énergie et des émissions de la Tunisie"
+title: "Comptes de l'énergie et des émissions atmosphériques de la Tunisie"
+subtitle: "Comptes physiques des flux d'énergie (PEFA) et comptes des émissions atmosphériques (AEA), 2015 à 2022"
+toc: false
 ---
 
-Ce site réunit les matériaux d'appui à l'élaboration des comptes physiques des flux d'énergie (PEFA) et des comptes des émissions atmosphériques (AEA) de la Tunisie. Ce travail est mené par l'Institut national de la statistique (INS) et les institutions partenaires, avec l'assistance technique du Fonds monétaire international (FMI). Les matériaux sont publiés au fur et à mesure de l'avancement de la mission.
+Ce site présente les comptes physiques des flux d'énergie et les comptes des émissions atmosphériques de la Tunisie. Les deux suivent le Système de comptabilité environnementale et économique (SCEE) des Nations unies, qui étend les comptes nationaux à l'environnement. Les comptes enregistrent, en térajoules et en tonnes d'équivalent CO2, la quantité d'énergie que chaque branche et les ménages utilisent et la quantité de gaz à effet de serre qu'ils émettent, avec les mêmes nomenclatures que les tableaux des ressources et des emplois des comptes nationaux.
 
-Le site est disponible en français, en anglais et en arabe. Le menu « Langue » ouvre la même page dans une autre langue.
+Les comptes sont compilés par un pipeline ouvert et reproductible de scripts Python. Il lit le bilan énergétique national, l'inventaire des gaz à effet de serre et les tableaux des ressources et des emplois, applique la logique du PEFA Converter et du convertisseur I2A du FMI, contrôle chaque étape et écrit les comptes en Excel en anglais, en français et en arabe. Chaque choix de répartition est un tableau que les comptables peuvent examiner et modifier.
 
-# Contenu
+:::: {.grid}
 
-**Matériaux.** Les [documents et présentations](materiaux/index.qmd) exposent le contexte de la mission, le cadre du SCEE et les méthodes de compilation.
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Documents
 
-**Traitement.** Les [pages de traitement](traitement/index.qmd) décrivent pas à pas, avec le code Python, la transformation des données sources en comptes. Chaque page se termine par l'export de ses tableaux.
+Concepts, méthodes de compilation et résultats des comptes de l'énergie et des comptes des émissions, avec une annexe qui décrit chaque script.
 
-**Téléchargements.** La [page de téléchargements](telechargements.qmd) rassemble les tableaux finaux au format Excel, en français, en anglais et en arabe.
+[Lire les documents](documents/index.qmd){.btn .btn-primary}
+:::
+:::
+:::
 
-# Objectifs
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Présentations
 
-- Passer du bilan énergétique national aux tableaux physiques des ressources et des emplois d'énergie.
-- Passer de l'inventaire national des gaz à effet de serre aux comptes des émissions atmosphériques par activité économique.
-- Garder une trace complète et reproductible des données, des méthodes et du code.
-- Préparer un plan de travail pour la diffusion des comptes.
+Diapositives pour chaque séance de l'atelier technique, du cadre du SCEE à la diffusion et au plan de travail.
+
+[Voir les présentations](presentations/index.qmd){.btn .btn-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Explorateur de données
+
+Graphiques interactifs de l'utilisation d'énergie et des émissions par branche, produit, gaz et année, et nomenclatures sous-jacentes.
+
+[Explorer les données](explorer/index.qmd){.btn .btn-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Téléchargements
+
+Les comptes en Excel, en anglais, en français et en arabe, et les tableaux qui sous-tendent chaque graphique.
+
+[Télécharger](downloads.qmd){.btn .btn-primary}
+:::
+:::
+:::
+
+::::

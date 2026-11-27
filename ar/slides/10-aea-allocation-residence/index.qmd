@@ -1,0 +1,71 @@
+---
+title: "حسابات الانبعاثات: المصفوفة والإقامة والاختبارات"
+subtitle: "مصفوفة التحويل وتعديلات المنظمة وجدول الربط"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-09"
+date-format: long
+lang: ar-TN
+dir: rtl
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-ar.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "حسابات الطاقة والانبعاثات في تونس"
+    slide-number: true
+    rtl: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+dropped = read("aea_categories_without_factor").filter(pl.col("year") == LAST)["kt_co2_eq"].sum()
+b = {r["year"]: r for r in bridge.filter(pl.col("gas") == "GHG").iter_rows(named=True)}
+oe = read("aea_bunkers_vs_oecd").filter(pl.col("year") == LAST).row(0, named=True)
+```
+
+## مصفوفة التحويل {.theme-content}
+
+- المصفوفة الافتراضية لأداة I2A: من فئات الجرد إلى أبواب التصنيف الصناعي الدولي والأسر.
+- المصفوفة التونسية: الفروع الأربعة والعشرون والأسر، مصفوفة لكل سنة.
+- لولا قاعدة تونسية لضاعت التربة الفلاحية (3.D): فليس لها معامل في المصفوفة الافتراضية (`{python} num(dropped, 0)` ألف طن مكافئ CO2 في `{python} LAST`).
+
+## تعديل الإقامة ببيانات المنظمة
+
+- تُضاف انبعاثات **شركات الطيران التونسية في الخارج** إلى النقل الجوي وتسجل بند ربط.
+- تُضاف انبعاثات **السفن التونسية**، إذا تجاوزت الملاحة الداخلية، إلى النقل المائي.
+- في `{python} LAST`: المقيمون في الخارج جوًا `{python} num(oe["oecd_air_residents_kt"], 0)` ألف طن CO2، وبحرًا `{python} num(oe["oecd_sea_residents_kt"], 0)` ألف طن، مقابل `{python} num(oe["marine_bunkers_kt"], 0)` ألف طن من المستودعات البحرية في الجرد.
+
+## جدول الربط
+
+```{python}
+items = lookup("aea_bridge").sort(pl.col("order").cast(pl.Int32))
+rows = [{"البند": r["ar"], **{str(y): b[y][r["code"]] for y in YEARS[-4:]}} for r in items.iter_rows(named=True)]
+gt(pl.DataFrame(rows), decimals=0)
+```
+
+## التحقق بحسابات الطاقة
+
+```{python}
+#| fig-width: 9
+#| fig-height: 4.2
+charts.implied_factors(LAST, figsize=(9, 4.2))
+```
+
+ثاني أكسيد الكربون من الاحتراق لكل تيراجول من الطاقة الأحفورية؛ والشريط هو مجال أنواع الوقود في الجرد.
+
+## نقاط للنقاش
+
+- تقدير المنظمة البحري أكبر بكثير من المستودعات البحرية، وغائب قبل 2019: أي بيانات وطنية يمكن أن تحل محله؟
+- الأنشطة خارج الشريط: الاستهلاك الذاتي لقطاع الطاقة والمنتجون الذاتيون، المصنفون بطريقتين مختلفتين في الميزان والجرد؟
+- الاتفاق على نشر جدول الربط مع الحسابات.

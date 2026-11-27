@@ -1,0 +1,12 @@
+{
+  "hash": "2c9495908cd0e222a23fe81d77c1884e",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"حسابات الطاقة: الإعداد والنشر\"\nsubtitle: \"النتائج الأولى من 2015 إلى 2022\"\nauthor:\n  - name: Renato Vargas\n  - name: Achille Pegoue\ndate: \"2026-12-08\"\ndate-format: long\nlang: ar-TN\ndir: rtl\nbibliography: ../../../assets/references.bib\ncsl: ../../../assets/apa-ar.csl\nexecute:\n  echo: false\n  warning: false\nformat:\n  revealjs:\n    theme: [simple, ../../../assets/slides.scss]\n    footer: \"حسابات الطاقة والانبعاثات في تونس\"\n    slide-number: true\n    rtl: true\n    width: 1100\n    height: 700\n    title-slide-attributes:\n      class: theme-title\n      data-state: sans-pied\n---\n\n\n\n\n## أرقام رئيسية {.theme-content}\n\n- الاستخدام المحلي الصافي للطاقة في 2022: **494 بيتاجول**.\n- الأسر: **34%** من الاستخدام النهائي للطاقة.\n- الكثافة الطاقوية للاقتصاد: **2\\.05 تيراجول** لكل مليون دينار من القيمة المضافة.\n\n## من يستخدم الطاقة\n\n::: {#31b73aad .cell fig-height='4.2' fig-width='10' execution_count=3}\n\n::: {.cell-output .cell-output-display execution_count=3}\n![](index_files/figure-revealjs/cell-4-output-1.png){width=1492 height=619}\n:::\n:::\n\n\n## الكثافة الطاقوية حسب الفرع\n\n::: {#b4e64b93 .cell fig-height='4.2' fig-width='10' execution_count=4}\n\n::: {.cell-output .cell-output-display execution_count=4}\n![](index_files/figure-revealjs/cell-5-output-1.png){width=1492 height=619}\n:::\n:::\n\n\n## النشر\n\n- مصنفات إكسل بثلاث لغات: جداول الموارد والاستخدامات لكل سنة، وأبواب التصنيف الصناعي الدولي، والمؤشرات.\n- وثيقة منهجية يُقرأ كل رقم فيها من البيانات.\n- مستكشف بيانات على الموقع.\n- جداول بصيغتي CSV وParquet للباحثين.\n\n## نقاط للنقاش\n\n- أي الجداول والمؤشرات تُنشر أولًا، وبأي تواتر؟\n- كيف يُشار إلى النتائج المؤقتة؟\n- أي المستخدمين يُستشارون (وزارة الطاقة، التخطيط، الوكالة الوطنية للتحكم في الطاقة، الباحثون)؟\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

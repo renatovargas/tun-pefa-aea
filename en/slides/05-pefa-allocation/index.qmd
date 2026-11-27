@@ -1,0 +1,75 @@
+---
+title: "Energy accounts: the allocation matrix"
+subtitle: "How the concordance matrix turns a balance into supply and use tables"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-08"
+date-format: long
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## The concordance matrix {.theme-content}
+
+For each **flow** and **product** of the balance, the matrix says:
+
+- which **PEFA product** receives the energy,
+- in which **table** (supply or use),
+- for which **activity**,
+- with which **share** (the factors of a flow add up to one).
+
+## The default matrix and the Tunisian matrix
+
+- The tool's default matrix allocates each flow to an **ISIC section**.
+- The Tunisian matrix replaces the rows of covered flows with **one row per industry**, one matrix per year, because the keys change every year.
+- Flows not covered by a Tunisian rule (imports, exports, stock changes) keep the default rows.
+
+## Where Tunisia departs from the default
+
+```{python}
+ch = read("pefa_concordance_changes").filter(pl.col("changed"))
+gt(ch.select(pl.col("iea_flow").alias("Flow"), pl.col("default_sections").alias("Default"), pl.col("sections").alias("Tunisia"),
+             pl.col("rationale_en").alias("Reason")))
+```
+
+## What the converter does with it
+
+1. Primary production becomes a natural input from the environment, used by the extracting industry.
+2. Each value of the balance is multiplied by its factors.
+3. Transformation outputs become supply of energy products.
+4. Every use of energy creates a residual of the same size, returned to the environment.
+
+## Energy from origin to use
+
+```{python}
+charts.energy_sankey(LAST, height=460)
+```
+
+## Points to discuss
+
+- Electricity autoproducers and recovered heat: chemical industry?
+- Solar heat: produced and used by households?
+- Non-energy use (bitumen): construction?
+- Road transport and the tertiary sector: are money purchases a good enough key?
+
+## References
+
+::: {#refs}
+:::

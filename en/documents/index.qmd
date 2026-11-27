@@ -1,0 +1,35 @@
+---
+title: "Documents"
+subtitle: "Concepts, methods and results"
+toc: false
+---
+
+Each document introduces the concepts it uses, explains the steps that the scripts carry out, and presents the results with figures and tables. Every number in the text is read from the tables published by the pipeline, so the documents follow the data each time the accounts are compiled again. Each document is also available as a PDF.
+
+:::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Physical energy flow accounts
+
+How energy enters the Tunisian economy, which industries and households produce and use it, and how it returns to the environment. From the national energy balance to supply and use tables in terajoules, with indicators of energy intensity.
+
+[Read](energy-accounts/index.qmd){.btn .btn-primary} [PDF](energy-accounts/index.pdf){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm}
+::: {.card-body}
+### Air emissions accounts
+
+Greenhouse gas emissions by industry and households. From the national inventory to accounts that follow the national accounts, with a bridge table and emission intensities.
+
+[Read](emissions-accounts/index.qmd){.btn .btn-primary} [PDF](emissions-accounts/index.pdf){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::::

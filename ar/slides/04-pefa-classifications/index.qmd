@@ -1,0 +1,79 @@
+---
+title: "حسابات الطاقة: المنتجات والأنشطة"
+subtitle: "تصنيفات حسابات التدفقات المادية للطاقة"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-08"
+date-format: long
+lang: ar-TN
+dir: rtl
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-ar.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "حسابات الطاقة والانبعاثات في تونس"
+    slide-number: true
+    rtl: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## أسطر الحسابات وأعمدتها {.theme-content}
+
+- **الأسطر**: الطاقة المستمدة من المدخلات الطبيعية، والمنتجات الطاقوية حسب مجموعات التصنيف الدولي الموحد لمنتجات الطاقة، وبقايا الطاقة [@seeaenergy2019; @ires2018].
+- **الأعمدة**: فروع النشاط، والأسر، والتراكم، وبقية العالم، والبيئة.
+- تونس: **الفروع الأربعة والعشرون** لجداول الموارد والاستخدامات، التي تُجمَّع في أبواب التصنيف الصناعي الدولي لأداة الصندوق.
+
+## المنتجات: من الميزان إلى مجموعات التصنيف
+
+```{python}
+p = lookup("balance_products").filter(pl.col("iea_product").is_not_null())
+gt(p.select(pl.col("ar").alias("منتج الميزان"), pl.col("fr").alias("بالفرنسية"), pl.col("iea_product").alias("منتج نموذج الوكالة")).head(12))
+```
+
+## التدفقات: الميزان في نموذج الوكالة الدولية للطاقة
+
+- يذهب كل تدفق تونسي إلى تدفق في نموذج الوكالة، مع استثناءات قليلة لبعض الخلايا.
+- مثال: يسجل المرصد كهرباء الرياح والشمس والمياه تبادلًا بين المنتجات، وتسجلها الوكالة مدخلات لمحطات التوليد.
+- تتبع الإشارات أعراف الوكالة: الصادرات والمستودعات ومدخلات التحويل والاستهلاك الذاتي سالبة.
+
+## الأنشطة: سطر من الميزان، وفرع أو عدة فروع
+
+```{python}
+m = lookup("balance_to_activities").filter(pl.col("method") == "direct").select(
+    pl.col("iea_flow").alias("التدفق"), pl.col("activity").alias("الفرع"))
+names = lab("activities")
+gt(m.filter(pl.col("التدفق").is_in(["Iron and steel", "Chemical and petrochemical", "Non-metallic minerals", "Rail", "Residential",
+                                    "Oil refineries (transf.)", "Charcoal production plants (transf.)"]))
+   .with_columns(pl.col("الفرع").replace_strict(names, default=pl.col("الفرع")).alias("التسمية")))
+```
+
+## سطران يحتاجان إلى مفاتيح
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.4
+charts.activity_keys(LAST, figsize=(10, 4.4))
+```
+
+## نقاط للنقاش
+
+- هل يناسب مستوى الفروع الأربعة والعشرين، أم يفيد مستوى أدق؟
+- هل تطابق الفروع الصناعية للمرصد فروع المعهد، ولا سيما المعادن والصناعات المتنوعة؟
+- هل يمكن للمرصد توزيع الاستهلاك الذاتي لقطاع الطاقة حسب الفروع؟
+- هل يمكن إجراء مسح لوقود النقل البري حسب نوع المستخدم؟
+
+## المراجع
+
+::: {#refs}
+:::

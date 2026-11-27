@@ -1,0 +1,553 @@
+year,iea_flow,iea_product,activity,method,factor
+2015,Agriculture/forestry,,01,direct,1.0
+2015,Autoproducer electricity plants (transf.),,20,direct,1.0
+2015,Charcoal production plants (transf.),,01,direct,1.0
+2015,Chemical and petrochemical,,20,direct,1.0
+2015,Commercial and public services,,36,key,0.254879275157185
+2015,Commercial and public services,,45,key,0.19420632434151247
+2015,Commercial and public services,,55,key,0.19815707149304113
+2015,Commercial and public services,,60,key,0.17753188308572368
+2015,Commercial and public services,,64,key,0.021048615732243408
+2015,Commercial and public services,,77,key,0.10849316568692428
+2015,Commercial and public services,,84,key,0.03921805360618192
+2015,Commercial and public services,,85,key,0.0015682157423098405
+2015,Commercial and public services,,86,key,0.004172074935035229
+2015,Commercial and public services,,94,key,0.0007253202198431372
+2015,Domestic aviation,,49,direct,1.0
+2015,Food and tobacco,,10,direct,1.0
+2015,International aviation bunkers,,49,direct,1.0
+2015,International marine bunkers,,49,direct,1.0
+2015,Iron and steel,,24,direct,1.0
+2015,Losses,Crude oil,06,direct,1.0
+2015,Losses,Natural gas liquids,06,direct,1.0
+2015,Losses,,35,direct,1.0
+2015,Machinery,,24,direct,1.0
+2015,Main activity producer electricity plants (transf.),,35,direct,1.0
+2015,Mining and quarrying,,07,direct,1.0
+2015,Non-energy use industry/transformation/energy,,41,direct,1.0
+2015,Non-metallic minerals,,23,direct,1.0
+2015,Non-specified (industry),,16,direct,1.0
+2015,Oil and gas extraction (energy),,06,direct,1.0
+2015,Oil refineries (energy),,19,direct,1.0
+2015,Oil refineries (transf.),,19,direct,1.0
+2015,"Own use in electricity, CHP and heat plants (energy)",,35,direct,1.0
+2015,"Paper, pulp and print",,16,direct,1.0
+2015,Pipeline transport,,49,direct,1.0
+2015,Production,Crude oil,06,direct,1.0
+2015,Production,Heat,20,direct,1.0
+2015,Production,Hydro,35,direct,1.0
+2015,Production,Natural gas,06,direct,1.0
+2015,Production,Natural gas liquids,06,direct,1.0
+2015,Production,Primary solid biofuels,01,direct,1.0
+2015,Production,Solar photovoltaics,35,direct,1.0
+2015,Production,Solar thermal,HH,direct,1.0
+2015,Production,Wind,35,direct,1.0
+2015,Rail,,49,direct,1.0
+2015,Residential,,HH,direct,1.0
+2015,Road,,01,key,0.027516342291813413
+2015,Road,,06,key,0.004642005798301919
+2015,Road,,07,key,0.017766567120008726
+2015,Road,,10,key,0.019021863285234402
+2015,Road,,13,key,0.011973643675912247
+2015,Road,,16,key,0.006314840660687672
+2015,Road,,20,key,0.025015768345037694
+2015,Road,,23,key,0.04735897104510754
+2015,Road,,24,key,0.01717878250222063
+2015,Road,,36,key,0.002081409732206399
+2015,Road,,41,key,0.09381094788418012
+2015,Road,,45,key,0.042233928068430786
+2015,Road,,49,key,0.27213717424133627
+2015,Road,,55,key,0.00071818085857427
+2015,Road,,60,key,0.0041290036380893375
+2015,Road,,64,key,0.0003204240595305882
+2015,Road,,77,key,0.029762197798729302
+2015,Road,,84,key,0.014775263331085937
+2015,Road,,85,key,0.002001837595641389
+2015,Road,,86,key,0.004073173917747617
+2015,Road,,94,key,0.0006067772002450686
+2015,Road,,HH,key,0.35656089694987864
+2015,Textile and leather,,13,direct,1.0
+2015,Transfers,,19,direct,1.0
+2016,Agriculture/forestry,,01,direct,1.0
+2016,Autoproducer electricity plants (transf.),,20,direct,1.0
+2016,Charcoal production plants (transf.),,01,direct,1.0
+2016,Chemical and petrochemical,,20,direct,1.0
+2016,Commercial and public services,,36,key,0.25681264201358495
+2016,Commercial and public services,,45,key,0.18279485440120363
+2016,Commercial and public services,,55,key,0.20214484745003758
+2016,Commercial and public services,,60,key,0.17659088658033412
+2016,Commercial and public services,,64,key,0.023193158458938955
+2016,Commercial and public services,,77,key,0.11107448439425602
+2016,Commercial and public services,,84,key,0.04011845230410741
+2016,Commercial and public services,,85,key,0.0017925600895963138
+2016,Commercial and public services,,86,key,0.004703433475569611
+2016,Commercial and public services,,94,key,0.0007746808323714571
+2016,Domestic aviation,,49,direct,1.0
+2016,Food and tobacco,,10,direct,1.0
+2016,International aviation bunkers,,49,direct,1.0
+2016,International marine bunkers,,49,direct,1.0
+2016,Iron and steel,,24,direct,1.0
+2016,Losses,Crude oil,06,direct,1.0
+2016,Losses,Natural gas liquids,06,direct,1.0
+2016,Losses,,35,direct,1.0
+2016,Machinery,,24,direct,1.0
+2016,Main activity producer electricity plants (transf.),,35,direct,1.0
+2016,Mining and quarrying,,07,direct,1.0
+2016,Non-energy use industry/transformation/energy,,41,direct,1.0
+2016,Non-metallic minerals,,23,direct,1.0
+2016,Non-specified (industry),,16,direct,1.0
+2016,Oil and gas extraction (energy),,06,direct,1.0
+2016,Oil refineries (energy),,19,direct,1.0
+2016,Oil refineries (transf.),,19,direct,1.0
+2016,"Own use in electricity, CHP and heat plants (energy)",,35,direct,1.0
+2016,"Paper, pulp and print",,16,direct,1.0
+2016,Pipeline transport,,49,direct,1.0
+2016,Production,Crude oil,06,direct,1.0
+2016,Production,Heat,20,direct,1.0
+2016,Production,Hydro,35,direct,1.0
+2016,Production,Natural gas,06,direct,1.0
+2016,Production,Natural gas liquids,06,direct,1.0
+2016,Production,Primary solid biofuels,01,direct,1.0
+2016,Production,Solar photovoltaics,35,direct,1.0
+2016,Production,Solar thermal,HH,direct,1.0
+2016,Production,Wind,35,direct,1.0
+2016,Rail,,49,direct,1.0
+2016,Residential,,HH,direct,1.0
+2016,Road,,01,key,0.026449425358580032
+2016,Road,,06,key,0.0047045446276737565
+2016,Road,,07,key,0.018120475332488062
+2016,Road,,10,key,0.018062880871081467
+2016,Road,,13,key,0.012206064857945792
+2016,Road,,16,key,0.006340318049131031
+2016,Road,,20,key,0.02496516683632765
+2016,Road,,23,key,0.04404183567978255
+2016,Road,,24,key,0.017720311322223774
+2016,Road,,36,key,0.002152052992578212
+2016,Road,,41,key,0.09461092918467946
+2016,Road,,45,key,0.04248051152275284
+2016,Road,,49,key,0.27899229367078693
+2016,Road,,55,key,0.0007294664172738531
+2016,Road,,60,key,0.004130812011204475
+2016,Road,,64,key,0.00035011180330259297
+2016,Road,,77,key,0.029399486527548892
+2016,Road,,84,key,0.01517234305043905
+2016,Road,,85,key,0.002511864813834593
+2016,Road,,86,key,0.004407673764455638
+2016,Road,,94,key,0.0006220651376867095
+2016,Road,,HH,key,0.3518293661682227
+2016,Textile and leather,,13,direct,1.0
+2016,Transfers,,19,direct,1.0
+2017,Agriculture/forestry,,01,direct,1.0
+2017,Autoproducer electricity plants (transf.),,20,direct,1.0
+2017,Charcoal production plants (transf.),,01,direct,1.0
+2017,Chemical and petrochemical,,20,direct,1.0
+2017,Commercial and public services,,36,key,0.254278836945602
+2017,Commercial and public services,,45,key,0.1774055010666249
+2017,Commercial and public services,,55,key,0.22349243836929203
+2017,Commercial and public services,,60,key,0.16741924919263357
+2017,Commercial and public services,,64,key,0.025148351809133246
+2017,Commercial and public services,,77,key,0.1066429491223043
+2017,Commercial and public services,,84,key,0.03855450017034774
+2017,Commercial and public services,,85,key,0.0018005406035936351
+2017,Commercial and public services,,86,key,0.004514821536491507
+2017,Commercial and public services,,94,key,0.0007428111839770757
+2017,Domestic aviation,,49,direct,1.0
+2017,Food and tobacco,,10,direct,1.0
+2017,International aviation bunkers,,49,direct,1.0
+2017,International marine bunkers,,49,direct,1.0
+2017,Iron and steel,,24,direct,1.0
+2017,Losses,Crude oil,06,direct,1.0
+2017,Losses,Natural gas liquids,06,direct,1.0
+2017,Losses,,35,direct,1.0
+2017,Machinery,,24,direct,1.0
+2017,Main activity producer electricity plants (transf.),,35,direct,1.0
+2017,Mining and quarrying,,07,direct,1.0
+2017,Non-energy use industry/transformation/energy,,41,direct,1.0
+2017,Non-metallic minerals,,23,direct,1.0
+2017,Non-specified (industry),,16,direct,1.0
+2017,Oil and gas extraction (energy),,06,direct,1.0
+2017,Oil refineries (energy),,19,direct,1.0
+2017,Oil refineries (transf.),,19,direct,1.0
+2017,"Own use in electricity, CHP and heat plants (energy)",,35,direct,1.0
+2017,"Paper, pulp and print",,16,direct,1.0
+2017,Pipeline transport,,49,direct,1.0
+2017,Production,Crude oil,06,direct,1.0
+2017,Production,Heat,20,direct,1.0
+2017,Production,Hydro,35,direct,1.0
+2017,Production,Natural gas,06,direct,1.0
+2017,Production,Natural gas liquids,06,direct,1.0
+2017,Production,Primary solid biofuels,01,direct,1.0
+2017,Production,Solar photovoltaics,35,direct,1.0
+2017,Production,Solar thermal,HH,direct,1.0
+2017,Production,Wind,35,direct,1.0
+2017,Rail,,49,direct,1.0
+2017,Residential,,HH,direct,1.0
+2017,Road,,01,key,0.028319992267975096
+2017,Road,,06,key,0.004536388125484765
+2017,Road,,07,key,0.023821845400204066
+2017,Road,,10,key,0.01855797225430874
+2017,Road,,13,key,0.011815348499525688
+2017,Road,,16,key,0.0062412621417462745
+2017,Road,,20,key,0.02432932202757817
+2017,Road,,23,key,0.03658827637686608
+2017,Road,,24,key,0.01860044256011725
+2017,Road,,36,key,0.002090135472446162
+2017,Road,,41,key,0.0869330645949554
+2017,Road,,45,key,0.04219360433256592
+2017,Road,,49,key,0.3017476363214466
+2017,Road,,55,key,0.0008241131852230046
+2017,Road,,60,key,0.004008638590204707
+2017,Road,,64,key,0.00036854735811123543
+2017,Road,,77,key,0.029444753275898412
+2017,Road,,84,key,0.013928477152884026
+2017,Road,,85,key,0.0027041439852330167
+2017,Road,,86,key,0.004294034652910479
+2017,Road,,94,key,0.0006053715481846348
+2017,Road,,HH,key,0.33804662987613027
+2017,Textile and leather,,13,direct,1.0
+2017,Transfers,,19,direct,1.0
+2018,Agriculture/forestry,,01,direct,1.0
+2018,Autoproducer electricity plants (transf.),,20,direct,1.0
+2018,Charcoal production plants (transf.),,01,direct,1.0
+2018,Chemical and petrochemical,,20,direct,1.0
+2018,Commercial and public services,,36,key,0.20655039338356893
+2018,Commercial and public services,,45,key,0.16206367008280229
+2018,Commercial and public services,,55,key,0.2854826022620138
+2018,Commercial and public services,,60,key,0.16058505970703615
+2018,Commercial and public services,,64,key,0.02322602843574772
+2018,Commercial and public services,,77,key,0.12475451586657875
+2018,Commercial and public services,,84,key,0.031357768299591623
+2018,Commercial and public services,,85,key,0.0014870415637602285
+2018,Commercial and public services,,86,key,0.003864546901640341
+2018,Commercial and public services,,94,key,0.0006283734972602339
+2018,Domestic aviation,,49,direct,1.0
+2018,Food and tobacco,,10,direct,1.0
+2018,International aviation bunkers,,49,direct,1.0
+2018,International marine bunkers,,49,direct,1.0
+2018,Iron and steel,,24,direct,1.0
+2018,Losses,Crude oil,06,direct,1.0
+2018,Losses,Natural gas liquids,06,direct,1.0
+2018,Losses,,35,direct,1.0
+2018,Machinery,,24,direct,1.0
+2018,Main activity producer electricity plants (transf.),,35,direct,1.0
+2018,Mining and quarrying,,07,direct,1.0
+2018,Non-energy use industry/transformation/energy,,41,direct,1.0
+2018,Non-metallic minerals,,23,direct,1.0
+2018,Non-specified (industry),,16,direct,1.0
+2018,Oil and gas extraction (energy),,06,direct,1.0
+2018,Oil refineries (energy),,19,direct,1.0
+2018,Oil refineries (transf.),,19,direct,1.0
+2018,"Own use in electricity, CHP and heat plants (energy)",,35,direct,1.0
+2018,"Paper, pulp and print",,16,direct,1.0
+2018,Pipeline transport,,49,direct,1.0
+2018,Production,Crude oil,06,direct,1.0
+2018,Production,Heat,20,direct,1.0
+2018,Production,Hydro,35,direct,1.0
+2018,Production,Natural gas,06,direct,1.0
+2018,Production,Natural gas liquids,06,direct,1.0
+2018,Production,Primary solid biofuels,01,direct,1.0
+2018,Production,Solar photovoltaics,35,direct,1.0
+2018,Production,Solar thermal,HH,direct,1.0
+2018,Production,Wind,35,direct,1.0
+2018,Rail,,49,direct,1.0
+2018,Residential,,HH,direct,1.0
+2018,Road,,01,key,0.025852228918602838
+2018,Road,,06,key,0.005413694839666824
+2018,Road,,07,key,0.023655463892077983
+2018,Road,,10,key,0.02084006579161141
+2018,Road,,13,key,0.013644283257409765
+2018,Road,,16,key,0.007104842720963332
+2018,Road,,20,key,0.02417329020182641
+2018,Road,,23,key,0.034456457032840886
+2018,Road,,24,key,0.019974949573211012
+2018,Road,,36,key,0.002211347030273628
+2018,Road,,41,key,0.0768733568333807
+2018,Road,,45,key,0.03898521504940542
+2018,Road,,49,key,0.3135695246490101
+2018,Road,,55,key,0.0010587894000777351
+2018,Road,,60,key,0.004475113558389676
+2018,Road,,64,key,0.00041762152492304163
+2018,Road,,77,key,0.025839107152259382
+2018,Road,,84,key,0.013978158451161756
+2018,Road,,85,key,0.002864967530703171
+2018,Road,,86,key,0.004715125352153146
+2018,Road,,94,key,0.0006569482132308912
+2018,Road,,HH,key,0.3392394490268208
+2018,Textile and leather,,13,direct,1.0
+2018,Transfers,,19,direct,1.0
+2019,Agriculture/forestry,,01,direct,1.0
+2019,Autoproducer electricity plants (transf.),,20,direct,1.0
+2019,Charcoal production plants (transf.),,01,direct,1.0
+2019,Chemical and petrochemical,,20,direct,1.0
+2019,Commercial and public services,,36,key,0.17992867779011168
+2019,Commercial and public services,,45,key,0.14250034362459582
+2019,Commercial and public services,,55,key,0.28962935940404244
+2019,Commercial and public services,,60,key,0.2152179378723399
+2019,Commercial and public services,,64,key,0.026558598780399376
+2019,Commercial and public services,,77,key,0.11177601653016371
+2019,Commercial and public services,,84,key,0.02867535708634612
+2019,Commercial and public services,,85,key,0.0014157228456337728
+2019,Commercial and public services,,86,key,0.0037313448868578365
+2019,Commercial and public services,,94,key,0.0005666411795093654
+2019,Domestic aviation,,49,direct,1.0
+2019,Food and tobacco,,10,direct,1.0
+2019,International aviation bunkers,,49,direct,1.0
+2019,International marine bunkers,,49,direct,1.0
+2019,Iron and steel,,24,direct,1.0
+2019,Losses,Crude oil,06,direct,1.0
+2019,Losses,Natural gas liquids,06,direct,1.0
+2019,Losses,,35,direct,1.0
+2019,Machinery,,24,direct,1.0
+2019,Main activity producer electricity plants (transf.),,35,direct,1.0
+2019,Mining and quarrying,,07,direct,1.0
+2019,Non-energy use industry/transformation/energy,,41,direct,1.0
+2019,Non-metallic minerals,,23,direct,1.0
+2019,Non-specified (industry),,16,direct,1.0
+2019,Oil and gas extraction (energy),,06,direct,1.0
+2019,Oil refineries (energy),,19,direct,1.0
+2019,Oil refineries (transf.),,19,direct,1.0
+2019,"Own use in electricity, CHP and heat plants (energy)",,35,direct,1.0
+2019,"Paper, pulp and print",,16,direct,1.0
+2019,Pipeline transport,,49,direct,1.0
+2019,Production,Crude oil,06,direct,1.0
+2019,Production,Heat,20,direct,1.0
+2019,Production,Hydro,35,direct,1.0
+2019,Production,Natural gas,06,direct,1.0
+2019,Production,Natural gas liquids,06,direct,1.0
+2019,Production,Primary solid biofuels,01,direct,1.0
+2019,Production,Solar photovoltaics,35,direct,1.0
+2019,Production,Solar thermal,HH,direct,1.0
+2019,Production,Wind,35,direct,1.0
+2019,Rail,,49,direct,1.0
+2019,Residential,,HH,direct,1.0
+2019,Road,,01,key,0.03133207382672522
+2019,Road,,06,key,0.00476096726782667
+2019,Road,,07,key,0.03544100556922712
+2019,Road,,10,key,0.01939605631053986
+2019,Road,,13,key,0.013294922725096992
+2019,Road,,16,key,0.006748486823650665
+2019,Road,,20,key,0.0226066892488042
+2019,Road,,23,key,0.03864876757800262
+2019,Road,,24,key,0.018870310649504434
+2019,Road,,36,key,0.0020953233093226084
+2019,Road,,41,key,0.0803879948308987
+2019,Road,,45,key,0.04418608797865848
+2019,Road,,49,key,0.3122731043223516
+2019,Road,,55,key,0.0010561724769968875
+2019,Road,,60,key,0.004152722026107039
+2019,Road,,64,key,0.00041554433538508966
+2019,Road,,77,key,0.033622623813753784
+2019,Road,,84,key,0.014101898748824816
+2019,Road,,85,key,0.0032745561776165214
+2019,Road,,86,key,0.004643251501910449
+2019,Road,,94,key,0.0006289329499371421
+2019,Road,,HH,key,0.308062507528859
+2019,Textile and leather,,13,direct,1.0
+2019,Transfers,,19,direct,1.0
+2020,Agriculture/forestry,,01,direct,1.0
+2020,Autoproducer electricity plants (transf.),,20,direct,1.0
+2020,Charcoal production plants (transf.),,01,direct,1.0
+2020,Chemical and petrochemical,,20,direct,1.0
+2020,Commercial and public services,,36,key,0.22160816230745553
+2020,Commercial and public services,,45,key,0.17163571571085007
+2020,Commercial and public services,,55,key,0.161470394508621
+2020,Commercial and public services,,60,key,0.2534187444201392
+2020,Commercial and public services,,64,key,0.03133061936374098
+2020,Commercial and public services,,77,key,0.11676359876200076
+2020,Commercial and public services,,84,key,0.03677620610797093
+2020,Commercial and public services,,85,key,0.0017611725804147764
+2020,Commercial and public services,,86,key,0.00459749798847869
+2020,Commercial and public services,,94,key,0.0006378882503280443
+2020,Domestic aviation,,49,direct,1.0
+2020,Food and tobacco,,10,direct,1.0
+2020,International aviation bunkers,,49,direct,1.0
+2020,International marine bunkers,,49,direct,1.0
+2020,Iron and steel,,24,direct,1.0
+2020,Losses,Crude oil,06,direct,1.0
+2020,Losses,Natural gas liquids,06,direct,1.0
+2020,Losses,,35,direct,1.0
+2020,Machinery,,24,direct,1.0
+2020,Main activity producer electricity plants (transf.),,35,direct,1.0
+2020,Mining and quarrying,,07,direct,1.0
+2020,Non-energy use industry/transformation/energy,,41,direct,1.0
+2020,Non-metallic minerals,,23,direct,1.0
+2020,Non-specified (industry),,16,direct,1.0
+2020,Oil and gas extraction (energy),,06,direct,1.0
+2020,Oil refineries (energy),,19,direct,1.0
+2020,Oil refineries (transf.),,19,direct,1.0
+2020,"Own use in electricity, CHP and heat plants (energy)",,35,direct,1.0
+2020,"Paper, pulp and print",,16,direct,1.0
+2020,Pipeline transport,,49,direct,1.0
+2020,Production,Crude oil,06,direct,1.0
+2020,Production,Heat,20,direct,1.0
+2020,Production,Hydro,35,direct,1.0
+2020,Production,Natural gas,06,direct,1.0
+2020,Production,Natural gas liquids,06,direct,1.0
+2020,Production,Primary solid biofuels,01,direct,1.0
+2020,Production,Solar photovoltaics,35,direct,1.0
+2020,Production,Solar thermal,HH,direct,1.0
+2020,Production,Wind,35,direct,1.0
+2020,Rail,,49,direct,1.0
+2020,Residential,,HH,direct,1.0
+2020,Road,,01,key,0.03756137664761409
+2020,Road,,06,key,0.0040808362986475095
+2020,Road,,07,key,0.032458308419282204
+2020,Road,,10,key,0.024313185133808424
+2020,Road,,13,key,0.013705201074218066
+2020,Road,,16,key,0.00731592108402646
+2020,Road,,20,key,0.022509497437160516
+2020,Road,,23,key,0.0425685749373807
+2020,Road,,24,key,0.018759240359786673
+2020,Road,,36,key,0.0024726278146995993
+2020,Road,,41,key,0.07843813438993096
+2020,Road,,45,key,0.050501115333094856
+2020,Road,,49,key,0.23691687296404745
+2020,Road,,55,key,0.00046521487333829815
+2020,Road,,60,key,0.0046096556944933125
+2020,Road,,64,key,0.0005391916970910394
+2020,Road,,77,key,0.03644027075116168
+2020,Road,,84,key,0.017857582211582696
+2020,Road,,85,key,0.003798103477049303
+2020,Road,,86,key,0.0056421747157654415
+2020,Road,,94,key,0.0006982468493656239
+2020,Road,,HH,key,0.3583486678364551
+2020,Textile and leather,,13,direct,1.0
+2020,Transfers,,19,direct,1.0
+2021,Agriculture/forestry,,01,direct,1.0
+2021,Autoproducer electricity plants (transf.),,20,direct,1.0
+2021,Charcoal production plants (transf.),,01,direct,1.0
+2021,Chemical and petrochemical,,20,direct,1.0
+2021,Commercial and public services,,36,key,0.22035285425309778
+2021,Commercial and public services,,45,key,0.16659991278488404
+2021,Commercial and public services,,55,key,0.18197381640883367
+2021,Commercial and public services,,60,key,0.25122022589243803
+2021,Commercial and public services,,64,key,0.030480675256103842
+2021,Commercial and public services,,77,key,0.11042768808208822
+2021,Commercial and public services,,84,key,0.03143328598738019
+2021,Commercial and public services,,85,key,0.0017345781453534262
+2021,Commercial and public services,,86,key,0.005152656153931199
+2021,Commercial and public services,,94,key,0.0006243070358896564
+2021,Domestic aviation,,49,direct,1.0
+2021,Food and tobacco,,10,direct,1.0
+2021,International aviation bunkers,,49,direct,1.0
+2021,International marine bunkers,,49,direct,1.0
+2021,Iron and steel,,24,direct,1.0
+2021,Losses,Crude oil,06,direct,1.0
+2021,Losses,Natural gas liquids,06,direct,1.0
+2021,Losses,,35,direct,1.0
+2021,Machinery,,24,direct,1.0
+2021,Main activity producer electricity plants (transf.),,35,direct,1.0
+2021,Mining and quarrying,,07,direct,1.0
+2021,Non-energy use industry/transformation/energy,,41,direct,1.0
+2021,Non-metallic minerals,,23,direct,1.0
+2021,Non-specified (industry),,16,direct,1.0
+2021,Oil and gas extraction (energy),,06,direct,1.0
+2021,Oil refineries (energy),,19,direct,1.0
+2021,Oil refineries (transf.),,19,direct,1.0
+2021,"Own use in electricity, CHP and heat plants (energy)",,35,direct,1.0
+2021,"Paper, pulp and print",,16,direct,1.0
+2021,Pipeline transport,,49,direct,1.0
+2021,Production,Crude oil,06,direct,1.0
+2021,Production,Heat,20,direct,1.0
+2021,Production,Hydro,35,direct,1.0
+2021,Production,Natural gas,06,direct,1.0
+2021,Production,Natural gas liquids,06,direct,1.0
+2021,Production,Primary solid biofuels,01,direct,1.0
+2021,Production,Solar photovoltaics,35,direct,1.0
+2021,Production,Solar thermal,HH,direct,1.0
+2021,Production,Wind,35,direct,1.0
+2021,Rail,,49,direct,1.0
+2021,Residential,,HH,direct,1.0
+2021,Road,,01,key,0.03650749645963076
+2021,Road,,06,key,0.00600190482914542
+2021,Road,,07,key,0.03255852096352006
+2021,Road,,10,key,0.02307625716233433
+2021,Road,,13,key,0.013891333549122895
+2021,Road,,16,key,0.0076255508200276795
+2021,Road,,20,key,0.025651409013225362
+2021,Road,,23,key,0.04529318593730513
+2021,Road,,24,key,0.021119565576304546
+2021,Road,,36,key,0.0025344087508032812
+2021,Road,,41,key,0.07321831623088611
+2021,Road,,45,key,0.04976294190816629
+2021,Road,,49,key,0.23516875736452908
+2021,Road,,55,key,0.0006056672856846969
+2021,Road,,60,key,0.0046023716246497365
+2021,Road,,64,key,0.0005099170752574908
+2021,Road,,77,key,0.037363232753496865
+2021,Road,,84,key,0.01685141380163589
+2021,Road,,85,key,0.003930849331814541
+2021,Road,,86,key,0.005406612402562455
+2021,Road,,94,key,0.0006698821077671118
+2021,Road,,HH,key,0.3576504050521303
+2021,Textile and leather,,13,direct,1.0
+2021,Transfers,,19,direct,1.0
+2022,Agriculture/forestry,,01,direct,1.0
+2022,Autoproducer electricity plants (transf.),,20,direct,1.0
+2022,Charcoal production plants (transf.),,01,direct,1.0
+2022,Chemical and petrochemical,,20,direct,1.0
+2022,Commercial and public services,,36,key,0.18589521789417726
+2022,Commercial and public services,,45,key,0.14954008318164183
+2022,Commercial and public services,,55,key,0.29123580497043794
+2022,Commercial and public services,,60,key,0.2190687126099084
+2022,Commercial and public services,,64,key,0.027573620728271516
+2022,Commercial and public services,,77,key,0.0924073874358104
+2022,Commercial and public services,,84,key,0.02763743538173969
+2022,Commercial and public services,,85,key,0.0015303549561656365
+2022,Commercial and public services,,86,key,0.004528998918047621
+2022,Commercial and public services,,94,key,0.0005823839237996967
+2022,Domestic aviation,,49,direct,1.0
+2022,Food and tobacco,,10,direct,1.0
+2022,International aviation bunkers,,49,direct,1.0
+2022,International marine bunkers,,49,direct,1.0
+2022,Iron and steel,,24,direct,1.0
+2022,Losses,Crude oil,06,direct,1.0
+2022,Losses,Natural gas liquids,06,direct,1.0
+2022,Losses,,35,direct,1.0
+2022,Machinery,,24,direct,1.0
+2022,Main activity producer electricity plants (transf.),,35,direct,1.0
+2022,Mining and quarrying,,07,direct,1.0
+2022,Non-energy use industry/transformation/energy,,41,direct,1.0
+2022,Non-metallic minerals,,23,direct,1.0
+2022,Non-specified (industry),,16,direct,1.0
+2022,Oil and gas extraction (energy),,06,direct,1.0
+2022,Oil refineries (energy),,19,direct,1.0
+2022,Oil refineries (transf.),,19,direct,1.0
+2022,"Own use in electricity, CHP and heat plants (energy)",,35,direct,1.0
+2022,"Paper, pulp and print",,16,direct,1.0
+2022,Pipeline transport,,49,direct,1.0
+2022,Production,Crude oil,06,direct,1.0
+2022,Production,Heat,20,direct,1.0
+2022,Production,Hydro,35,direct,1.0
+2022,Production,Natural gas,06,direct,1.0
+2022,Production,Natural gas liquids,06,direct,1.0
+2022,Production,Primary solid biofuels,01,direct,1.0
+2022,Production,Solar photovoltaics,35,direct,1.0
+2022,Production,Solar thermal,HH,direct,1.0
+2022,Production,Wind,35,direct,1.0
+2022,Rail,,49,direct,1.0
+2022,Residential,,HH,direct,1.0
+2022,Road,,01,key,0.03445455094181769
+2022,Road,,06,key,0.010787151903012706
+2022,Road,,07,key,0.028143177522195688
+2022,Road,,10,key,0.023496376777799335
+2022,Road,,13,key,0.014123388827869848
+2022,Road,,16,key,0.007356753473762498
+2022,Road,,20,key,0.025459179817516005
+2022,Road,,23,key,0.04245110509189188
+2022,Road,,24,key,0.022421103947802452
+2022,Road,,36,key,0.002258897318188969
+2022,Road,,41,key,0.06434324327127244
+2022,Road,,45,key,0.04543854322209
+2022,Road,,49,key,0.2706144107788635
+2022,Road,,55,key,0.0010190773610520246
+2022,Road,,60,key,0.004529444235232854
+2022,Road,,64,key,0.0004900375770369713
+2022,Road,,77,key,0.03399300938900196
+2022,Road,,84,key,0.014762787301969938
+2022,Road,,85,key,0.003942889349242537
+2022,Road,,86,key,0.005049834599510105
+2022,Road,,94,key,0.0006503399146555757
+2022,Road,,HH,key,0.34421469737821503
+2022,Textile and leather,,13,direct,1.0
+2022,Transfers,,19,direct,1.0

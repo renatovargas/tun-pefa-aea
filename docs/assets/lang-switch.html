@@ -1,7 +1,7 @@
 <script>
-// Sélecteur de langue. Les arborescences fr/, en/ et ar/ sont des miroirs :
-// la même page existe au même chemin dans chaque langue. Les liens du menu
-// pointent vers "#lang-xx" et ce script les remplace par la page équivalente.
+// Language menu. The trees en/, fr/ and ar/ are mirrors: the same page exists
+// at the same path in each language. Menu links point to "#lang-xx" and this
+// script replaces them with the matching page in the other language.
 document.addEventListener("DOMContentLoaded", function () {
   var segment = /\/(fr|en|ar)\/(?!.*\/(fr|en|ar)\/)/;
   var path = window.location.pathname;
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (segment.test(path)) {
       dest = path.replace(segment, "/" + target + "/");
     } else {
-      // Page racine (sélecteur de langue) : aller à l'accueil de la langue
+      // Root page (language picker): go to the home page of the language
       dest = path.replace(/[^\/]*$/, "") + target + "/index.html";
     }
     a.setAttribute("href", dest);

@@ -1,0 +1,69 @@
+---
+title: "التنزيلات"
+subtitle: "الحسابات في مصنفات إكسل والجداول التي يقوم عليها كل رسم"
+toc: false
+---
+
+تتضمن النسخ اللغوية الثلاث من كل مصنف الأرقام نفسها، ولا تتغير إلا التسميات. وتُقرأ المصنفات العربية من اليمين إلى اليسار. والحسابات مؤقتة، وفرضيات التوزيع موصوفة في الوثائق.
+
+:::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### حسابات التدفقات المادية للطاقة، 2015–2022
+
+جداول موارد الطاقة واستخداماتها حسب فروع الحسابات القومية وللأسر، بالتيراجول، لكل سنة؛ والجداول نفسها حسب أبواب التصنيف الصناعي الدولي؛ وجدول طويل لكل السنوات؛ ومؤشرات استخدام الطاقة وكثافتها.
+
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/ar/pefa_accounts.xlsx){.btn .btn-primary download="pefa_accounts.xlsx"}
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/fr/pefa_accounts.xlsx){.btn .btn-outline-primary download="pefa_accounts.xlsx"}
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/en/pefa_accounts.xlsx){.btn .btn-outline-primary download="pefa_accounts.xlsx"}
+
+[المنهجية والنتائج](documents/energy-accounts/index.qmd)
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### حسابات انبعاثات الهواء، 2015–2022
+
+انبعاثات غازات الاحتباس الحراري حسب الفروع والأسر، حسب الغاز، بآلاف الأطنان من مكافئ ثاني أكسيد الكربون؛ وجدول الربط بالجرد الوطني؛ والانبعاثات حسب فئة الجرد والنشاط؛ وكثافات الانبعاث.
+
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/ar/aea_accounts.xlsx){.btn .btn-primary download="aea_accounts.xlsx"}
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/fr/aea_accounts.xlsx){.btn .btn-outline-primary download="aea_accounts.xlsx"}
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/en/aea_accounts.xlsx){.btn .btn-outline-primary download="aea_accounts.xlsx"}
+
+[المنهجية والنتائج](documents/emissions-accounts/index.qmd)
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### جداول للتحليل
+
+كل الجداول التي تقرؤها الوثائق ومستكشف البيانات، بصيغتي CSV وParquet، بالرموز فقط. وتوجد تسميات كل رمز بالإنجليزية والفرنسية والعربية في مجلد منفصل.
+
+[الجداول](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/outputs/tables){.btn .btn-primary}
+[التسميات](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/outputs/labels){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### الشيفرة وجداول المطابقة
+
+البرامج التي تعد الحسابات، وجداول المطابقة التي تضم كل مطابقة وكل خيار توزيع مع سببه.
+
+[البرامج](https://github.com/renatovargas/tun-pefa-aea/tree/main/scripts){.btn .btn-primary}
+[جداول المطابقة](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/lookups){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::::

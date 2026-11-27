@@ -1,0 +1,25 @@
+code,level,parent,en,fr,ar
+TOTAL,0,,Total all products,Total tous produits,مجموع كل المنتجات
+CRUDE,1,TOTAL,Crude oil,Pétrole brut,النفط الخام
+NGL,1,TOTAL,Natural gas liquids,Liquides de gaz naturel,سوائل الغاز الطبيعي
+OILPROD,1,TOTAL,Oil products,Produits pétroliers,المنتجات النفطية
+REFGAS,2,OILPROD,Refinery gas,Gaz de raffinerie,غاز المصافي
+LPG,2,OILPROD,LPG,GPL,غاز النفط المسال
+GASOLINE,2,OILPROD,Motor gasoline,Essences,البنزين
+KEROSENE,2,OILPROD,Kerosene,Pétrole lampant,الكيروسين
+JETFUEL,2,OILPROD,Jet fuel,Carburéacteurs,وقود الطائرات
+NAPHTHA,2,OILPROD,Naphtha,Naphta,النافتا
+GASOIL,2,OILPROD,Gas/diesel oil,Gasoil,الغازوال
+FUELOIL,2,OILPROD,Fuel oil,Fioul lourd,زيت الوقود الثقيل
+PETCOKE,2,OILPROD,Petroleum coke,Coke de pétrole,فحم الكوك البترولي
+OTHOIL,2,OILPROD,Other oil products,Autres produits pétroliers,منتجات نفطية أخرى
+NATGAS,1,TOTAL,Natural gas,Gaz naturel,الغاز الطبيعي
+RENEW,1,TOTAL,Renewable energy,Énergies renouvelables,الطاقات المتجددة
+SOLARTH,2,RENEW,Solar thermal,Solaire thermique,الطاقة الشمسية الحرارية
+SOLARPV,2,RENEW,Solar photovoltaic,Solaire photovoltaïque,الطاقة الشمسية الكهروضوئية
+GEOTHERM,2,RENEW,Geothermal,Géothermie,الطاقة الحرارية الجوفية
+BIOMASS,2,RENEW,Biomass,Biomasse,الكتلة الحيوية
+WIND,2,RENEW,Wind energy,Énergie éolienne,طاقة الرياح
+HYDRO,2,RENEW,Hydropower,Énergie hydraulique,الطاقة الكهرومائية
+HEAT,1,TOTAL,Heat,Chaleur,الحرارة
+ELEC,1,TOTAL,Electricity,Électricité,الكهرباء

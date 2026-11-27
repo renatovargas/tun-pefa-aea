@@ -1,0 +1,79 @@
+---
+title: "حسابات الطاقة: الإقامة واختبارات الاتساق"
+subtitle: "من إقليم الميزان إلى مقيمي الحسابات"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-08"
+date-format: long
+lang: ar-TN
+dir: rtl
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-ar.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "حسابات الطاقة والانبعاثات في تونس"
+    slide-number: true
+    rtl: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## الإقليم والإقامة {.theme-content}
+
+- يسجل ميزان الطاقة ما يحدث **على التراب الوطني**.
+- تسجل الحسابات ما تفعله **الوحدات المقيمة** أينما كانت [@eurostat2014pefa، الفقرات 41 إلى 48].
+- يخص الفرق أساسًا **النقل الدولي**: الوقود الذي يشتريه الناقلون التونسيون في الخارج، والوقود الذي يشتريه الناقلون الأجانب في تونس.
+
+## المستودعات الدولية
+
+```{python}
+b = read("pefa_bunkers_check").filter(pl.col("iea_flow") == "International aviation bunkers")
+gt(b.select(pl.col("year").cast(pl.String).alias("السنة"), pl.col("balance_tj").alias("الميزان (تيراجول)"),
+            pl.col("inventory_tj").alias("الجرد 1.D.1.a (تيراجول)"), pl.col("gap_pct").alias("الفرق (%)")),
+   decimals={"الميزان (تيراجول)": 0, "الجرد 1.D.1.a (تيراجول)": 0, "الفرق (%)": 2})
+```
+
+## الاستخدام المحلي الصافي والاستهلاك الداخلي الإجمالي
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.6
+charts.ndeu_vs_gic(figsize=(9, 3.6))
+```
+
+يرجع الفرق أساسًا إلى المستودعات، التي تسندها الحسابات إلى الناقلين المقيمين في انتظار بيانات الإقامة.
+
+## اختبارات الاتساق
+
+- تتوازن المدخلات الطبيعية والبقايا **تمامًا**.
+- تتوازن المنتجات الطاقوية في حدود `{python} num(check("14_check_pefa_and_indicators", "energy_products_balance")["value"], 1)` ألف طن مكافئ نفط، وهو تقريب الميزان.
+- يُقارن استخدام كل فرع للطاقة **بمشترياته من الطاقة** في جداول الموارد والاستخدامات.
+
+## الأسعار الضمنية
+
+```{python}
+#| fig-width: 9
+#| fig-height: 4.2
+charts.implied_prices(LAST, figsize=(9, 4.2))
+```
+
+## نقاط للنقاش
+
+- الوقود الذي تشتريه شركات الطيران والملاحة التونسية في الخارج: أي مصدر؟
+- الوقود الذي يشتريه غير المقيمين في تونس (شاحنات، سفن، طائرات)؟
+- هل يمكن أن تكون تقديرات منظمة التعاون والتنمية للنقل تقريبًا أوليًا؟
+
+## المراجع
+
+::: {#refs}
+:::

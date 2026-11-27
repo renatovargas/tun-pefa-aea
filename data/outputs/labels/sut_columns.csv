@@ -1,0 +1,25 @@
+code,en,fr,ar
+P1,Output,Production,الإنتاج
+P7,Imports,Importations,الواردات
+D212,Import duties,Droits de douane,الرسوم الجمركية
+D211,Non-deductible VAT,TVA non déductible,الأداء على القيمة المضافة غير القابل للطرح
+D214,Other taxes on products,Autres impôts sur les produits,ضرائب أخرى على المنتجات
+D31,Subsidies on products,Subventions sur les produits,الإعانات على المنتجات
+TRADE_MARGIN,Trade margins,Marges commerciales,الهوامش التجارية
+TRANSPORT_MARGIN,Transport margins,Marges de transport,هوامش النقل
+CIF_FOB,CIF/FOB adjustment and intermediation services,Correction CAF/FOB et services d'intermédiation,تعديل سيف/فوب وخدمات الوساطة
+TOTAL_SUPPLY,Total supply,Total des ressources,مجموع الموارد
+TOTAL_SUPPLY,Total supply,Total des ressources,مجموع الموارد
+P2,Intermediate consumption,Consommation intermédiaire,الاستهلاك الوسيط
+P3_HH,Household final consumption expenditure,Dépense de consommation finale des ménages,نفقات الاستهلاك النهائي للأسر
+P3_GOV,Government final consumption expenditure,Dépense de consommation finale des administrations publiques,نفقات الاستهلاك النهائي للإدارات العمومية
+P3,Final consumption,Consommation finale,الاستهلاك النهائي
+P51G,Gross fixed capital formation,Formation brute de capital fixe,التكوين الخام لرأس المال الثابت
+P52,Changes in inventories,Variation des stocks,التغير في المخزون
+P6,Exports,Exportations,الصادرات
+TOTAL_USE,Total use,Total des emplois,مجموع الاستخدامات
+P1,Output by industry,Production de la branche,إنتاج الفرع
+B1G,Gross value added,Valeur ajoutée brute,القيمة المضافة الخام
+D1,Compensation of employees,Rémunération des salariés,أجور الأجراء
+D29_D39,Other taxes less subsidies on production,Autres impôts sur la production nets de subventions,ضرائب أخرى على الإنتاج صافية من الإعانات
+B2G,Gross operating surplus,Excédent brut d'exploitation,فائض الاستغلال الخام

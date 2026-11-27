@@ -1,0 +1,373 @@
+---
+title: "Comptes des émissions atmosphériques de la Tunisie"
+subtitle: "Gaz à effet de serre par branche et ménages : concepts, méthodes de compilation et résultats, 2015 à 2022"
+author:
+  - name: Renato Vargas
+    affiliations:
+      - name: Consultant, Département des statistiques du FMI
+  - name: Achille Pegoue
+    affiliations:
+      - name: Économiste principal, Département des statistiques du FMI
+date: last-modified
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    other-links:
+      - text: "Version PDF"
+        href: index.pdf
+  typst:
+    citeproc: true
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    papersize: a4
+    margin: {x: 2.2cm, y: 2.4cm}
+    fig-format: png
+    output-file: index.pdf
+    include-in-header:
+      text: |
+        #show figure: set block(breakable: true)
+crossref:
+  tbl-prefix: "tableau"
+  fig-prefix: "figure"
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+#| label: setup
+import sys
+sys.path.insert(0, "scripts/report")
+from doc_helpers import *
+import charts
+import polars as pl
+import matplotlib.pyplot as plt
+setup("fr")
+
+inventory = read("ghg_inventory")
+aea = read("aea_emissions")
+bridge = read("aea_bridge")
+indicators = read("aea_indicators")
+agreement = read("aea_tool_agreement")
+changes = read("aea_conversion_changes")
+dropped = read("aea_categories_without_factor")
+oecd = read("aea_bunkers_vs_oecd")
+factors_inv = read("aea_implied_factors_inventory")
+factors_acc = read("aea_implied_factors_accounts")
+sankey_flows = read("aea_sankey")
+prepared = read("ghg_prepared_file_check")
+
+YEARS = sorted(aea["year"].unique().to_list())
+FIRST, LAST = YEARS[0], YEARS[-1]
+ACTS = [c for c in lab("activities") if c not in ("ROW", "ACC", "ENV", "STATDIFF")]
+INDUSTRIES = [c for c in ACTS if c != "HH"]
+GASES = ["CO2", "CH4", "N2O", "F-gases"]
+
+# Nombres cités dans le texte.
+ghg = bridge.filter(pl.col("gas") == "GHG")
+b = {r["year"]: r for r in ghg.iter_rows(named=True)}
+by_act = aea.filter(pl.col("gas") == "GHG", pl.col("activity").is_in(ACTS), pl.col("year") == LAST).group_by("activity").agg(pl.col("kt_co2_eq").sum()).sort("kt_co2_eq", descending=True)
+total_last = by_act["kt_co2_eq"].sum()
+hh_last = by_act.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum()
+top3 = [r for r in by_act.filter(pl.col("activity") != "HH").head(3).iter_rows(named=True)]
+gas_last = {g: aea.filter(pl.col("year") == LAST, pl.col("gas") == g, pl.col("activity").is_in(ACTS))["kt_co2_eq"].sum() for g in GASES}
+lulucf_last = b[LAST]["LULUCF"]
+memo_bio = inventory.filter(pl.col("year") == LAST, pl.col("gas") == "CO2bio")["kt"].sum()
+dropped_last = dropped.filter(pl.col("year") == LAST)["kt_co2_eq"].sum()
+max_gap = agreement["max_gap_kt"].max()
+c_summary = check("02_extract_crt_inventory", "summary2_n2o_1B2")
+changed = changes.filter(pl.col("status") == "changed")
+road_last = aea.filter(pl.col("year") == LAST, pl.col("gas") == "GHG", pl.col("source").str.starts_with("1.A.3.b"), pl.col("activity").is_in(ACTS))
+road_hh = road_last.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum() / road_last["kt_co2_eq"].sum()
+va_last = indicators.filter(pl.col("year") == LAST, pl.col("activity").is_in(INDUSTRIES))
+intensity_economy = 1000 * va_last["ghg_kt"].sum() / va_last["value_added_mtnd"].sum()
+fi = factors_inv.filter(pl.col("year") == LAST)
+```
+
+# Résumé {.unnumbered}
+
+Les comptes des émissions atmosphériques (AEA) enregistrent les gaz à effet de serre émis par chaque branche des comptes nationaux et par les ménages, selon les mêmes règles que les comptes nationaux. Ils répondent à une question que l'inventaire des gaz à effet de serre, organisé par procédé technique, ne traite pas directement : quelles parties de l'économie produisent les émissions, et combien elles émettent par dinar de production. Ce document expose les concepts, décrit chaque étape d'une compilation reproductible des comptes de `{python} FIRST` à `{python} LAST` et présente les premiers résultats.
+
+En `{python} LAST`, les branches résidentes et les ménages ont émis `{python} mt(total_last)` millions de tonnes d'équivalent CO2. Le dioxyde de carbone représentait `{python} pct(gas_last["CO2"] / total_last)` du total et le méthane `{python} pct(gas_last["CH4"] / total_last)`. Les principaux émetteurs étaient la branche « `{python} activity(top3[0]["activity"]).lower()` », la branche « `{python} activity(top3[1]["activity"]).lower()` » et la branche « `{python} activity(top3[2]["activity"]).lower()` », et les ménages ont émis `{python} pct(hh_last / total_last)` du total, surtout par leurs voitures et leurs logements. Un tableau de passage concilie les comptes avec l'inventaire national, et la compilation reproduit le convertisseur des comptes des émissions atmosphériques du FMI (I2A) à `{python} f"{max_gap:.0e}"` kilotonne près.
+
+# Introduction
+
+La Tunisie déclare ses émissions de gaz à effet de serre à la Convention-cadre des Nations unies sur les changements climatiques (CCNUCC) dans un inventaire national, coordonné par l'Agence nationale pour la maîtrise de l'énergie (ANME) pour l'énergie et les procédés industriels, par le ministère de l'Agriculture pour l'agriculture et l'utilisation des terres, et par l'Office national de l'assainissement (ONAS) pour les déchets [@besbes2026]. L'inventaire suit les lignes directrices du Groupe d'experts intergouvernemental sur l'évolution du climat (GIEC) et classe les émissions par source : combustion dans les industries énergétiques, transport routier, fermentation entérique du bétail, décharges, et ainsi de suite [@ipcc2006].
+
+Cette classification sert bien l'objet de l'inventaire, puisqu'elle suit les procédés qui causent les émissions et les méthodes qui les estiment. Elle ne dit pas quelles unités économiques émettent. Les émissions du transport routier viennent des ménages qui conduisent leur voiture, des camions de l'industrie agro-alimentaire, des autobus et des taxis de la branche transport. La combustion des « autres secteurs » couvre les commerces, les hôtels, les bureaux et les logements. Les comptes des émissions atmosphériques réorganisent les mêmes émissions par branche des comptes nationaux et pour les ménages [@eurostat2015aea; @seea2014]. Ainsi enregistrées, les émissions peuvent être rapprochées de la production, de la valeur ajoutée, de l'emploi et des comptes de l'énergie, et alimenter des modèles économiques.
+
+Le Fonds monétaire international (FMI) a mis au point un outil Excel pour cette conversion, le convertisseur des comptes des émissions atmosphériques, appelé I2A [@imf2026i2a; @pegoue2026i2a]. Ce document en suit la logique pas à pas. Les calculs sont effectués par des scripts Python du dossier <https://github.com/renatovargas/tun-pefa-aea/tree/main/scripts>, présentés au @tbl-scripts. Chaque étape de la partie Méthodes renvoie à la notice de son script à l'[annexe I](#annex-scripts). Les comptes des émissions reprennent deux clés de répartition des comptes de l'énergie, décrites dans le document compagnon sur les comptes physiques des flux d'énergie.
+
+```{python}
+#| label: tbl-scripts
+#| tbl-cap: "Scripts de compilation des comptes des émissions atmosphériques, dans l'ordre de leur exécution."
+scripts = pl.DataFrame({
+    "Script": ["extract/02_extract_crt_inventory.py", "extract/03_extract_supply_use_tables.py", "pefa/11_build_activity_keys.py",
+               "aea/20_prepare_ghg_inventory.py", "aea/21_build_conversion_matrix.py", "aea/22_compile_aea_tables.py",
+               "aea/23_bridge_and_indicators.py", "aea/24_export_aea.py", "report/30_publish_tables.py"],
+    "Objet": ["Tableaux communs de notification de l'inventaire des gaz à effet de serre", "Tableaux des ressources et des emplois des comptes nationaux",
+              "Clés du transport routier et du tertiaire (des comptes de l'énergie)", "Émissions par catégorie et par gaz, périmètre et codes de l'outil",
+              "Matrice de conversion tunisienne des catégories de l'inventaire vers les activités", "Émissions par activité, avec ajustements de résidence, vérifiées avec I2A",
+              "Passage à l'inventaire, vraisemblance et intensités", "Classeurs Excel en anglais, en français et en arabe",
+              "Tableaux et libellés pour les documents et l'explorateur de données"],
+})
+gt(scripts)
+```
+
+# Concepts
+
+## Les émissions, des flux de résidus
+
+Le SCEE traite les émissions comme des flux de résidus : des substances rejetées par l'activité économique, qui quittent l'économie et entrent dans l'environnement [@seea2014, section 3.6]. Les comptes des émissions atmosphériques sont la partie de ces comptes qui concerne les gaz et les particules rejetés dans l'atmosphère. Ils suivent les règles comptables des comptes nationaux. Les émissions sont enregistrées pour les unités économiques qui les génèrent, c'est-à-dire les branches, classées comme dans les comptes nationaux, et les ménages, en tant que consommateurs [@eurostat2015aea, § 32 à 38]. Les émissions des ménages en tant que producteurs, par exemple une exploitation agricole familiale, relèvent de la branche concernée.
+
+## Les gaz à effet de serre et leur unité commune
+
+Les comptes couvrent les gaz à effet de serre de l'inventaire. Le dioxyde de carbone (CO2) provient surtout de la combustion de combustibles fossiles et de quelques procédés industriels comme la fabrication du ciment. Le méthane (CH4) provient du bétail, des décharges et des fuites de gaz naturel. Le protoxyde d'azote (N2O) provient surtout des sols agricoles et du fumier. Les gaz fluorés (HFC, PFC, SF6 et NF3) sont des gaz industriels utilisés dans la réfrigération, la climatisation et les équipements électriques. Chaque gaz réchauffe le climat à un degré différent ; les émissions sont donc converties en équivalent CO2 avec les potentiels de réchauffement global à 100 ans. La Tunisie, comme la plupart des pays, utilise les valeurs du cinquième rapport d'évaluation du GIEC, selon lesquelles une tonne de méthane compte pour 28 tonnes de CO2 et une tonne de protoxyde d'azote pour 265 [@ipcc2014ar5].
+
+## Territoire et résidence
+
+L'inventaire enregistre les émissions qui ont lieu sur le territoire national, quel qu'en soit l'auteur. Les comptes enregistrent les émissions des unités résidentes, où qu'elles aient lieu [@eurostat2015aea, § 33 à 37]. Une compagnie aérienne tunisienne qui vole de Paris à Montréal émet dans les comptes tunisiens, alors qu'un camion étranger qui traverse la Tunisie n'y émet pas. La différence concerne surtout le transport international. Les comptes la rendent explicite dans un **tableau de passage**, qui part du total des comptes, retranche les émissions des résidents à l'étranger, ajoute celles des non-résidents sur le territoire et aboutit au total de l'inventaire [@eurostat2015aea, § 227 à 230]. La @fig-scope montre comment les deux totaux s'articulent.
+
+```{mermaid}
+%%| label: fig-scope
+%%| fig-cap: "Des comptes des émissions atmosphériques au total de l'inventaire : les éléments de passage."
+%%| fig-width: 6.3
+flowchart LR
+  AEA["Total des comptes<br/>(branches + ménages,<br/>principe de résidence)"] --> M1["moins les résidents à l'étranger<br/>(transport aérien et maritime)"]
+  M1 --> P1["plus les non-résidents<br/>sur le territoire"]
+  P1 --> INV["Total de l'inventaire<br/>hors UTCATF<br/>(principe territorial)"]
+  INV --> L["plus utilisation des terres,<br/>changement d'affectation<br/>des terres et foresterie"]
+  L --> NET["Total net<br/>de l'inventaire"]
+```
+
+## Ce que les comptes laissent de côté
+
+Deux éléments de l'inventaire restent en dehors des comptes. Les émissions et absorptions de l'utilisation des terres, du changement d'affectation des terres et de la foresterie (UTCATF) ne sont pas attribuées à l'activité économique dans les comptes et n'apparaissent que dans le tableau de passage [@eurostat2015aea, § 269]. En Tunisie, ce secteur est un puits net, avec `{python} mt(lulucf_last)` millions de tonnes d'équivalent CO2 en `{python} LAST`, surtout grâce aux forêts. Le dioxyde de carbone issu de la combustion de biomasse, comme le bois de feu, est un élément pour mémoire de l'inventaire, car son carbone a été prélevé récemment dans l'atmosphère. Il est aussi tenu à part dans les comptes (`{python} mt(memo_bio)` millions de tonnes en `{python} LAST`).
+
+# Sources de données
+
+L'**inventaire des gaz à effet de serre** est la source principale. La Tunisie le déclare dans les tableaux communs de notification (CRT), un classeur Excel par année. Chaque classeur contient une feuille `Data` qui rassemble toutes les valeurs déclarées en format long : données d'activité en térajoules et émissions en kilotonnes, par catégorie, combustible et gaz, soit environ douze mille lignes par année. Une feuille de synthèse, `Summary2`, donne les totaux par catégorie en équivalent CO2. Les comptes couvrent `{python} FIRST` à `{python} LAST`.
+
+Un second fichier, `Tunisia_UNFCCC.xlsx`, a été préparé dans la présentation de l'outil I2A. Il contient les principales catégories en kilotonnes de chaque gaz. Le pipeline construit plutôt ses données d'entrée à partir des classeurs CRT, plus détaillés, qui comprennent les gaz fluorés et donnent les équivalents CO2. Les totaux par secteur de ce fichier concordent avec les tableaux CRT (@tbl-prepared), ce qui confirme que les deux décrivent le même inventaire.
+
+Les **tableaux des ressources et des emplois** de l'INS fournissent les 24 branches des comptes, les clés de répartition, et la production et la valeur ajoutée de chaque branche. Les **estimations de l'OCDE des émissions du transport aérien et maritime**, livrées avec l'outil I2A, fournissent les émissions des compagnies aériennes et maritimes résidentes pour l'ajustement de résidence [@oecd2024transport].
+
+# Méthodes
+
+## Préparation de l'inventaire
+
+Le script [02_extract_crt_inventory.py](#script-02) empile les feuilles `Data`, retire les lignes en double et compare les émissions additionnées par catégorie aux totaux de `Summary2`. Elles concordent pour chaque catégorie, gaz et année, à une exception près : le protoxyde d'azote de la catégorie 1.B.2.b.ii, déclaré dans `Data` à partir de 2019 mais non compté dans `Summary2`, soit un écart d'au plus `{python} num(c_summary["value"], 2)` kilotonne d'équivalent CO2.
+
+Le script [20_prepare_ghg_inventory.py](#script-20) construit ensuite un tableau des émissions par année, catégorie et gaz. Le CO2, le CH4 et le N2O viennent de `Data` et sont pondérés par leurs potentiels de réchauffement. Les gaz fluorés sont déclarés dans `Data` gaz par gaz, mais en équivalent CO2 seulement par catégorie industrielle dans `Summary2` ; leurs totaux viennent donc de `Summary2`. Chaque ligne est marquée comme faisant partie du total de l'inventaire, de l'UTCATF ou des éléments pour mémoire. Le total de l'inventaire, UTCATF compris, égale le total net de `Summary2` une fois le protoxyde d'azote ci-dessus pris en compte.
+
+L'outil I2A connaît une liste de codes de catégories qui s'arrête au cinquième niveau de la nomenclature CRT, alors que la feuille `Data` tunisienne va parfois plus loin, par exemple par sous-catégorie d'animaux. Chaque catégorie reçoit donc le code le plus détaillé de la liste de l'outil dont elle relève.
+
+```{python}
+#| label: tbl-prepared
+#| tbl-cap: "Le fichier préparé pour l'outil I2A et les tableaux CRT, par secteur et par gaz, dernière année (kt de chaque gaz)."
+gt(prepared.select(pl.col("code").alias("Secteur"), pl.col("IPCCDesc").alias("Description"), pl.col("POLLUTANT").alias("Gaz dans le fichier"),
+                   pl.col("file_kt").alias("Fichier préparé"), pl.col("crt_kt").alias("Tableaux CRT")), decimals=1)
+```
+
+::: {.callout-note}
+## Question ouverte
+
+Le fichier `Tunisia_UNFCCC.xlsx` écrit le protoxyde d'azote « N20 », déclare des kilotonnes de chaque gaz plutôt que des équivalents CO2, omet certaines sous-catégories et ne contient pas de gaz fluorés. S'il doit servir à d'autres usages, il gagnerait à être revu avec l'équipe de l'inventaire. Le traitement du protoxyde d'azote de la catégorie 1.B.2.b.ii à partir de 2019 mérite aussi d'être clarifié.
+:::
+
+## Des catégories de l'inventaire aux activités économiques
+
+La matrice de conversion donne, pour chaque catégorie de l'inventaire, la part de ses émissions qui revient à chaque activité économique. L'outil I2A est livré avec une matrice par défaut par section de la CITI et pour les ménages, qui suit la correspondance du manuel d'Eurostat [@eurostat2015aea, § 12; @imf2026i2a]. Le script [21_build_conversion_matrix.py](#script-21) construit une matrice tunisienne par les 24 branches du TRE et les ménages, à partir de la table `crt_to_activities.csv`. Chaque ligne de cette table donne un préfixe de codes CRT, une activité et une raison. Une catégorie prend la ligne dont le préfixe est le plus long parmi ceux qui correspondent à son code ; un préfixe court (« 3 » pour l'agriculture) couvre ainsi tout un secteur, et un préfixe plus long le remplace pour une sous-catégorie.
+
+La plupart des catégories relèvent d'une seule activité : la production publique d'électricité de l'électricité et du gaz (35), la fabrication du ciment des matériaux de construction (23), la fermentation entérique de l'agriculture (01), les décharges des services de l'eau et des déchets (36). Deux catégories ont besoin de clés, et elles reprennent celles des comptes de l'énergie, pour que les deux comptes répartissent ces secteurs de la même façon. Le transport routier (1.A.3.b) est partagé entre les branches et les ménages au prorata de leurs achats de produits pétroliers raffinés, et la combustion dans le commerce et les services publics (1.A.4.a) entre les branches de services au prorata de leurs achats d'électricité et de gaz. En `{python} LAST`, les ménages reçoivent `{python} pct(road_hh)` des émissions du transport routier.
+
+Le @tbl-changes énumère les catégories que la matrice tunisienne attribue à une autre section que la matrice par défaut de l'outil, avec leurs émissions de `{python} LAST`.
+
+```{python}
+#| label: tbl-changes
+#| tbl-cap: "Catégories de l'inventaire attribuées à une autre section que dans la matrice par défaut de l'outil I2A, dernière année (kt éq. CO2)."
+ch = changes.filter(pl.col("status") != "same").with_columns(
+    pl.col("status").replace({"changed": "Autre section", "no_default_factor": "Sans facteur dans la matrice par défaut"}),
+    pl.col("activities").str.replace("key: Road", "clé : transport routier").str.replace("key: Commercial and public services", "clé : tertiaire"))
+gt(ch.select(pl.col("tool_code").alias("Catégorie"), pl.col("kt_co2_eq").alias("Émissions"), pl.col("default_sections").alias("Défaut"),
+             pl.col("section").alias("Tunisie"), pl.col("activities").alias("Activités tunisiennes"), pl.col("status").alias("Note")), decimals=1)
+```
+
+Trois groupes se distinguent. Le transport routier et la combustion résidentielle passent du transport et de la construction aux ménages, comme le veulent les comptes. Le transport et la distribution du gaz naturel passent du transport à la branche électricité et gaz, qui exploite le réseau en Tunisie. Enfin, la matrice par défaut de l'outil n'a pas de facteurs pour les sols agricoles (3.D) ; leurs émissions, `{python} num(dropped_last, 0)` kilotonnes d'équivalent CO2 en `{python} LAST`, seraient perdues sans règle tunisienne. La matrice tunisienne les attribue à l'agriculture.
+
+::: {.callout-note}
+## Question ouverte
+
+Les choix qui s'écartent de la matrice par défaut gagneraient à être validés avec l'INS et l'ANME, en particulier le partage du transport routier entre les branches et les ménages, l'attribution de la combustion du commerce aux branches de services plutôt qu'à la construction, et le traitement des gaz fluorés de la réfrigération commerciale.
+:::
+
+## Compilation des comptes et ajustement de résidence
+
+Le script [22_compile_aea_tables.py](#script-22) applique la matrice à l'inventaire. Comme pour les comptes de l'énergie, il le fait deux fois : une fois en appelant la fonction `I2A` de l'outil sans la modifier, et une fois en appliquant chacune de ses règles de façon explicite. La version explicite produit les comptes, et le script s'arrête si les deux diffèrent de plus de 10^-9^ kilotonne. Les règles sont les suivantes.
+
+1. **Données de l'inventaire.** L'inventaire est présenté comme la feuille d'inventaire de l'outil : une ligne par gaz et catégorie, une colonne par année, en kilotonnes d'équivalent CO2.
+2. **Répartition.** Chaque valeur est multipliée par les facteurs de sa catégorie dans la matrice. Une catégorie sans facteur ne reçoit rien ; c'est pourquoi les sols agricoles ont eu besoin d'une règle tunisienne.
+3. **Transport aérien.** L'OCDE estime les émissions des compagnies aériennes résidentes sur les vols intérieurs et à l'étranger [@oecd2024transport]. Lorsque l'estimation de l'OCDE pour les vols intérieurs est inférieure à l'aviation intérieure de l'inventaire, la différence est attribuée aux non-résidents sur le territoire. Les émissions des compagnies résidentes à l'étranger sont ajoutées au transport aérien et inscrites comme élément de passage.
+4. **Transport maritime.** Lorsque l'estimation de l'OCDE pour les navires résidents dépasse la navigation intérieure de l'inventaire, la différence est ajoutée à l'activité.
+5. **Totaux.** Le total des comptes additionne les branches et les ménages, et le total des gaz à effet de serre additionne les quatre gaz.
+
+Avec la matrice par défaut, avec et sans les données de l'OCDE, et avec la matrice tunisienne pour chaque année, la version explicite concorde avec l'outil à `{python} f"{max_gap:.0e}"` kilotonne près (@tbl-agreement).
+
+```{python}
+#| label: tbl-agreement
+#| tbl-cap: "Concordance entre l'outil I2A et la compilation explicite, par essai."
+ag = agreement.with_columns(
+    pl.col("run").replace({"default_without_oecd": "Matrice par défaut, sans les données de l'OCDE", "default_with_oecd": "Matrice par défaut, avec les données de l'OCDE",
+                           "tunisian_with_oecd": "Matrice tunisienne, avec les données de l'OCDE"}),
+    pl.col("year").cast(pl.String).fill_null("toutes"), pl.col("max_gap_kt").map_elements(lambda x: f"{x:.1e}", return_dtype=pl.String))
+gt(ag.select(pl.col("run").alias("Essai"), pl.col("year").alias("Années"), pl.col("max_gap_kt").alias("Écart maximal (kt éq. CO2)")))
+```
+
+::: {.callout-note}
+## Question ouverte
+
+L'estimation de l'OCDE pour les navires exploités par des résidents (`{python} num(oecd.filter(pl.col("year") == LAST)["oecd_sea_residents_kt"][0], 0)` kilotonnes de CO2 en `{python} LAST`) est bien supérieure aux soutes maritimes de l'inventaire (`{python} num(oecd.filter(pl.col("year") == LAST)["marine_bunkers_kt"][0], 0)` kilotonnes), et elle manque avant 2019, ce qui crée une rupture de série. Il serait utile de la confronter aux données sur la flotte tunisienne et son ravitaillement à l'étranger détenues par l'INS, l'ONEM et l'Office de la marine marchande et des ports.
+:::
+
+## Tableau de passage et contrôles
+
+Le script [23_bridge_and_indicators.py](#script-23) construit le tableau de passage du @tbl-bridge. Partant du total des comptes, il retranche les émissions des transporteurs résidents à l'étranger, ajoute celles des non-résidents sur le territoire et doit aboutir au total de l'inventaire hors UTCATF. L'écart est inférieur à 10^-6^ kilotonne pour chaque année et chaque gaz. Deux particularités de l'outil méritent d'être signalées, et le pipeline les traite toutes deux. L'écart positif du transport maritime est ajouté à l'activité sans élément de passage correspondant ; le pipeline l'enregistre donc comme résidents à l'étranger par voie maritime. Et le total d'inventaire propre à l'outil additionne les éléments de passage sans leur signe ; le tableau de passage utilise la somme signée.
+
+```{python}
+#| label: tbl-bridge
+#| tbl-cap: "Tableau de passage des comptes des émissions atmosphériques à l'inventaire national, gaz à effet de serre (kt éq. CO2)."
+items = lookup("aea_bridge").sort(pl.col("order").cast(pl.Int32))
+rows = []
+for r in items.iter_rows(named=True):
+    rows.append({"Élément": r["fr"], **{str(y): b[y][r["code"]] for y in YEARS}})
+gt(pl.DataFrame(rows), decimals=0)
+```
+
+Le script vérifie aussi la répartition au regard des comptes de l'énergie. Pour chaque activité, le CO2 émis par la combustion, divisé par l'énergie fossile que les comptes de l'énergie lui attribuent, donne un facteur d'émission implicite, en tonnes de CO2 par térajoule. Les facteurs implicites par combustible de l'inventaire vont de `{python} num(fi["t_co2_per_tj"].min(), 1)` pour le gaz naturel à `{python} num(fi["t_co2_per_tj"].max(), 1)` pour les combustibles liquides en `{python} LAST` ; le facteur d'une activité devrait donc se situer dans cet intervalle ou à proximité. La @fig-factors montre le résultat.
+
+```{python}
+#| label: fig-factors
+#| fig-cap: "Facteur de CO2 implicite de la combustion par activité : CO2 de la combustion des comptes des émissions divisé par l'utilisation d'énergie fossile des comptes de l'énergie, dernière année (t CO2 par TJ). La bande indique l'intervalle des facteurs implicites par combustible de l'inventaire."
+charts.implied_factors(LAST)
+```
+
+La plupart des activités se situent dans la bande. Les activités qui en sortent signalent des différences de classement entre le bilan énergétique et l'inventaire, par exemple pour la consommation propre de la branche énergie et pour les autoproducteurs d'électricité, qu'il serait utile d'examiner avec l'ONEM et l'ANME.
+
+## Indicateurs et export
+
+Les intensités d'émission divisent les émissions par la production ou la valeur ajoutée aux prix courants, en tonnes d'équivalent CO2 par million de dinars. Pour les ménages, le dénominateur est leur dépense de consommation finale, comme le propose le manuel de l'outil I2A [@imf2026i2a]. Le script [24_export_aea.py](#script-24) écrit les comptes dans des classeurs Excel en anglais, en français et en arabe, avec le tableau long, le tableau de passage, les comptes de chaque année par activité et par gaz, les émissions par source et activité, et les indicateurs.
+
+# Résultats
+
+## Émissions dans le temps et par gaz
+
+La @fig-gases montre les émissions des unités résidentes par gaz. Elles sont restées proches de `{python} mt(b[FIRST]["AEA"], 0)` millions de tonnes d'équivalent CO2 sur la période, avec un creux en 2020, lorsque l'activité et les déplacements ont reculé pendant la pandémie de COVID-19.
+
+```{python}
+#| label: fig-gases
+#| fig-cap: "Émissions de gaz à effet de serre des unités résidentes par gaz (millions de tonnes éq. CO2)."
+charts.emissions_by_gas()
+```
+
+## Des secteurs de l'inventaire à l'économie
+
+La @fig-sankey suit les émissions de `{python} LAST` depuis les secteurs de l'inventaire jusqu'aux sections de l'économie qui les émettent. La combustion se répartit dans toute l'économie. Les procédés industriels viennent presque entièrement de l'industrie manufacturière, surtout du ciment. Les émissions de l'agriculture restent dans l'agriculture, et celles des déchets vont à la branche de l'eau et des déchets. L'ajustement de résidence ajoute au transport les émissions des transporteurs tunisiens à l'étranger.
+
+```{python}
+#| label: fig-sankey
+#| fig-cap: "Émissions de gaz à effet de serre par catégorie de l'inventaire et par section de l'activité émettrice, dernière année (kt éq. CO2)."
+charts.emissions_sankey(LAST)
+```
+
+## Émissions par activité
+
+La @fig-activities classe les émetteurs de `{python} LAST`. L'électricité et le gaz viennent en tête, suivis des matériaux de construction, où les fours à ciment émettent à la fois par leur combustible et par la transformation chimique du calcaire. L'agriculture vient ensuite, par le bétail et les sols, puis les ménages. Les services de l'eau et des déchets doivent leur rang aux décharges.
+
+```{python}
+#| label: fig-activities
+#| fig-cap: "Émissions de gaz à effet de serre par activité et par gaz, dernière année (kt éq. CO2). Les quinze principaux émetteurs."
+charts.emitters(LAST)
+```
+
+## Intensité d'émission
+
+Toutes branches confondues, l'économie a émis `{python} num(intensity_economy, 0)` tonnes d'équivalent CO2 par million de dinars de valeur ajoutée en `{python} LAST`. La @fig-intensity montre combien cette moyenne est inégalement répartie. Quelques branches, les matériaux de construction, l'électricité, l'eau et les déchets, et l'agriculture, émettent beaucoup plus par dinar que les autres. Les politiques qui modifient la production de ces branches, ou la technologie qu'elles utilisent, ont le plus d'effet sur les émissions nationales.
+
+```{python}
+#| label: fig-intensity
+#| fig-cap: "Émissions de gaz à effet de serre par million de TND de valeur ajoutée, par branche, dernière année (t éq. CO2 par million de TND, prix courants)."
+charts.emission_intensity(LAST)
+```
+
+## Comptes par activité et par gaz
+
+```{python}
+#| label: tbl-aea
+#| tbl-cap: "Comptes des émissions atmosphériques par activité et par gaz, dernière année (kt éq. CO2)."
+d = (aea.filter(pl.col("year") == LAST, pl.col("activity").is_in(ACTS))
+     .group_by("activity", "gas").agg(pl.col("kt_co2_eq").sum()).pivot("gas", index="activity", values="kt_co2_eq").fill_null(0)
+     .with_columns(order=pl.col("activity").replace_strict({c: i for i, c in enumerate(ACTS)}, return_dtype=pl.Int16)).sort("order"))
+d = d.select(pl.col("activity").replace_strict(lab("activities")).alias("Activité"), *[pl.col(g).alias(L("gases", g)) for g in GASES + ["GHG"] if g in d.columns])
+gt(d, decimals=1)
+```
+
+# Limites
+
+Ces comptes sont une première compilation, provisoire. La répartition du transport routier et de la combustion du commerce repose sur des achats en valeur plutôt que sur des données physiques. L'ajustement de résidence s'appuie sur les estimations de l'OCDE, qui sont modélisées et non observées et qui, pour le transport maritime, ne commencent qu'en 2019. Les gaz fluorés sont répartis par catégorie, sans détail par espèce. Les polluants atmosphériques autres que les gaz à effet de serre, comme le dioxyde de soufre ou les particules, ne sont pas couverts, car l'inventaire en contient peu. Les intensités aux prix courants mêlent volumes et prix. Chacun de ces points peut être amélioré à mesure que des données plus détaillées deviennent disponibles, et le pipeline permet de recompiler simplement les comptes après toute modification d'une table de correspondance.
+
+# Références {.unnumbered}
+
+::: {#refs}
+:::
+
+# Annexe I. Scripts du pipeline {.unnumbered #annex-scripts}
+
+Cette annexe décrit chaque script utilisé par les comptes des émissions, dans l'ordre de son exécution. Le lien sous chaque nom ouvre son code sur GitHub. Les commentaires du code sont en anglais, suivis de leur traduction française.
+
+## 02_extract_crt_inventory.py {#script-02 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extract/02_extract_crt_inventory.py)
+
+Ce script empile la feuille `Data` des huit classeurs CRT, ajoute l'année, convertit les valeurs en nombres et retire les lignes en double. Il compare les émissions sommées par catégorie à la feuille `Summary2` et écrit `crt.parquet`.
+
+## 20_prepare_ghg_inventory.py {#script-20 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/20_prepare_ghg_inventory.py)
+
+Ce script construit les émissions par année, catégorie et gaz, en kilotonnes et en équivalent CO2, prend les gaz fluorés dans `Summary2`, marque le périmètre de chaque ligne (inventaire, UTCATF, élément pour mémoire) et donne à chaque catégorie son code dans l'outil I2A. Il contrôle le total de l'inventaire avec `Summary2` et compare le fichier préparé pour l'outil avec les tableaux CRT.
+
+## 21_build_conversion_matrix.py {#script-21 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/21_build_conversion_matrix.py)
+
+Ce script attribue à chaque code de l'outil la règle de `crt_to_activities.csv` dont le préfixe correspondant est le plus long, applique les clés des comptes de l'énergie lorsqu'une règle les demande, et écrit la matrice de conversion tunisienne de chaque année. Il liste aussi les catégories que la matrice par défaut perdrait et les écarts à ses sections.
+
+## 22_compile_aea_tables.py {#script-22 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/22_compile_aea_tables.py)
+
+Ce script compile les comptes en appelant la fonction `I2A` de l'outil sans la modifier et en appliquant chacune de ses règles de façon explicite, y compris les ajustements de résidence fondés sur les données de l'OCDE. Il exécute les deux avec la matrice par défaut et la matrice tunisienne et s'arrête si elles diffèrent de plus de 10^-9^ kilotonne. Il écrit `aea.parquet`.
+
+## 23_bridge_and_indicators.py {#script-23 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/23_bridge_and_indicators.py)
+
+Ce script construit le tableau de passage et vérifie qu'il aboutit à l'inventaire, compare les estimations de l'OCDE aux soutes internationales, calcule les facteurs de CO2 implicites par combustible et par activité, et dérive les intensités d'émission.
+
+## 24_export_aea.py {#script-24 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/24_export_aea.py)
+
+Ce script écrit `aea_accounts.xlsx` en anglais, en français et en arabe, avec les libellés des tables de correspondance.
+
+## 30_publish_tables.py {#script-30 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/report/30_publish_tables.py)
+
+Ce script publie, en Parquet et en CSV, les tableaux et les libellés lus par ce document, les présentations et l'explorateur de données.

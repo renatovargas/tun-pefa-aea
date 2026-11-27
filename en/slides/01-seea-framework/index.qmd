@@ -1,0 +1,93 @@
+---
+title: "Energy and emissions in the SEEA"
+subtitle: "Why accounts, and how they relate to statistics already produced"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-07"
+date-format: long
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## Three systems, one economy {.theme-content}
+
+- **Energy statistics** describe the supply and use of energy products on the territory, by technical sector (the energy balance of ONEM).
+- **Greenhouse gas inventories** describe emissions on the territory, by process (the inventory coordinated by ANME).
+- **National accounts** describe the economy of resident units, by industry, in money (the supply and use tables of the INS).
+
+The System of Environmental-Economic Accounting (SEEA) connects the three [@seea2014].
+
+## What the SEEA adds
+
+- The **same units and classifications** as the national accounts: 24 industries, households, the rest of the world.
+- **Physical supply and use tables**, in which every flow has a supplier and a user, and supply equals use.
+- The **residence principle**: what resident units do, wherever they do it.
+- Indicators that relate physical flows to output, value added and consumption.
+
+## The accounts covered here
+
+:::: {.columns}
+::: {.column width="50%"}
+**Physical energy flow accounts (PEFA)**
+
+Energy from natural inputs, energy products and energy residuals, in terajoules, by industry and households [@seeaenergy2019; @eurostat2014pefa].
+:::
+::: {.column width="50%"}
+**Air emissions accounts (AEA)**
+
+Greenhouse gases emitted by industries and households, in tonnes of CO2 equivalent, reconciled with the inventory by a bridge table [@eurostat2015aea].
+:::
+::::
+
+## Energy flows in the SEEA
+
+```{mermaid}
+flowchart LR
+  ENV1["Environment"] -- "natural inputs" --> IND["Resident industries"]
+  ROW1["Rest of the world"] -- "imports" --> IND
+  IND -- "energy products" --> HH["Households"]
+  IND -- "exports" --> ROW2["Rest of the world"]
+  IND -- "residuals" --> ENV2["Environment"]
+  HH -- "residuals" --> ENV2
+```
+
+Energy is conserved: every use of energy returns to the environment as a residual of the same size [@seeaenergy2019, paras 2.14 to 2.21].
+
+## A first look at the results
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.6
+charts.energy_supply(figsize=(9, 3.6))
+```
+
+In `{python} LAST`, imports supplied `{python} pj(read("pefa_sankey").filter(pl.col("year") == LAST, pl.col("source") == "IMP")["tj"].sum())` PJ of energy products.
+
+## What the accounts make possible
+
+- Energy and emissions **per dinar of value added**, by industry.
+- The share of **households** in energy use and emissions, and its components.
+- Consistent inputs for **economic models** and climate policy analysis.
+- International comparison with the same concepts as other countries.
+
+## References
+
+::: {#refs}
+:::

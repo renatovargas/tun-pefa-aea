@@ -1,0 +1,66 @@
+---
+title: "Des statistiques de l'énergie aux comptes de l'énergie"
+subtitle: "Les sources tunisiennes et leur lecture par le pipeline"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-07"
+date-format: long
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## Trois sources {.theme-content}
+
+| Source | Producteur | Années | Unité |
+|:--|:--|:--|:--|
+| Bilan énergétique national | ONEM | `{python} FIRST` à `{python} LAST` | ktep |
+| Tableaux des ressources et des emplois | INS | 2015 à 2023 | millions de TND |
+| Inventaire des gaz à effet de serre (CRT) | ANME et partenaires | `{python} FIRST` à `{python} LAST` | TJ, kt |
+
+## Le bilan énergétique
+
+- `{python} read("energy_balance").filter(pl.col("year") == LAST)["flow"].n_unique()` flux et `{python} read("energy_balance").filter(pl.col("year") == LAST)["product"].n_unique()` produits en `{python} LAST`, en milliers de tonnes équivalent pétrole.
+- La présentation change d'une année à l'autre : le script lit les libellés, jamais la position des cellules.
+- Chaque libellé reçoit un code stable d'une table de correspondance ; un libellé inconnu arrête le traitement.
+- Les totaux égalent la somme de leurs composantes à `{python} num(check("01_extract_energy_balances", "flow_hierarchy")["value"], 1)` ktep près, l'arrondi des tableaux publiés.
+
+## Les tableaux des ressources et des emplois
+
+- `{python} len(ACTS) - 1` produits et autant de branches, aux prix courants.
+- Ils fournissent les **colonnes** des comptes, les **clés** qui répartissent le transport routier et le tertiaire, et la **production et la valeur ajoutée** des indicateurs.
+- Les ressources égalent les emplois pour chaque produit à `{python} num(check("03_extract_supply_use_tables", "supply_equals_use")["value"], 2)` million de TND près.
+
+## L'inventaire des gaz à effet de serre
+
+- Un classeur CRT par année ; la feuille `Data` contient toutes les valeurs en format long.
+- Émissions par catégorie, combustible et gaz, et consommation de combustibles en térajoules.
+- La feuille `Data` concorde avec la feuille publiée `Summary2` pour chaque catégorie, à une petite exception près pour le N2O de 1.B.2.b.ii à partir de 2019.
+
+## Points à discuter
+
+- Qui tient ces fichiers dans chaque institution, et selon quel calendrier ?
+- Le bilan pourrait-il être transmis dans une présentation stable, ou avec un code pour chaque ligne et chaque colonne ?
+- La ligne « Fabrications métalliques » de 2015 : sidérurgie, ou industries mécaniques et électriques ?
+- Existe-t-il une enquête sur l'usage des carburants par type de véhicule et d'utilisateur ?
+
+## Références
+
+::: {#refs}
+:::

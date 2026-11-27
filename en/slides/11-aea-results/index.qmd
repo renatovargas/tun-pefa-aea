@@ -1,0 +1,72 @@
+---
+title: "Air emissions accounts: compilation and dissemination"
+subtitle: "First results for 2015 to 2022"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-09"
+date-format: long
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+d = aea.filter(pl.col("year") == LAST, pl.col("gas") == "GHG", pl.col("activity").is_in(ACTS)).group_by("activity").agg(pl.col("kt_co2_eq").sum())
+total = d["kt_co2_eq"].sum(); hh = d.filter(pl.col("activity") == "HH")["kt_co2_eq"].sum()
+ind = read("aea_indicators").filter(pl.col("year") == LAST, pl.col("activity") != "HH")
+```
+
+## Key figures {.theme-content}
+
+- Emissions of resident units in `{python} LAST`: **`{python} mt(total)` Mt CO2 eq**.
+- Households: **`{python} pct(hh / total)`** of the total.
+- Intensity of the economy: **`{python} num(1000 * ind["ghg_kt"].sum() / ind["value_added_mtnd"].sum(), 0)` t CO2 eq** per million TND of value added.
+
+## Who emits
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.emitters(LAST, n=10, figsize=(10, 4.2))
+```
+
+## Emission intensity
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.2
+charts.emission_intensity(LAST, figsize=(10, 4.2))
+```
+
+## Dissemination
+
+- Excel workbooks in three languages: accounts by activity and gas, bridge table, source by activity, indicators.
+- The format follows the Eurostat questionnaire, which eases international comparison [@eurostat2015aea].
+- Methods document and data explorer on the website.
+
+## Points to discuss
+
+- Joint release with the inventory, or with the national accounts?
+- Which intensities to publish: per output, per value added, per household spending?
+- Revision policy when the inventory or the national accounts are revised.
+
+## References
+
+::: {#refs}
+:::

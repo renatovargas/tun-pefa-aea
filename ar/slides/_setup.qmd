@@ -1,0 +1,13 @@
+```{python}
+#| label: setup
+#| include: false
+import sys
+sys.path.insert(0, "scripts/report")
+from doc_helpers import *
+import charts
+import polars as pl
+setup("ar")
+pefa = read("pefa_supply_use"); aea = read("aea_emissions"); bridge = read("aea_bridge")
+YEARS = sorted(pefa["year"].unique().to_list()); FIRST, LAST = YEARS[0], YEARS[-1]
+ACTS = [c for c in lab("activities") if c not in ("ROW", "ACC", "ENV", "STATDIFF")]
+```

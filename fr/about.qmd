@@ -1,0 +1,24 @@
+---
+title: "À propos"
+toc: false
+---
+
+## Auteurs
+
+Renato Vargas, consultant du Département des statistiques du Fonds monétaire international (FMI), et Achille Pegoue, économiste principal à la Division du secteur réel du Département des statistiques du FMI.
+
+## Données
+
+Les comptes utilisent les bilans énergétiques nationaux de l'Observatoire national de l'énergie et des mines (ONEM), l'inventaire national des gaz à effet de serre coordonné par l'Agence nationale pour la maîtrise de l'énergie (ANME) et les tableaux des ressources et des emplois de l'Institut national de la statistique (INS). L'ajustement de résidence des comptes des émissions utilise les estimations des émissions du transport aérien et maritime de l'Organisation de coopération et de développement économiques (OCDE).
+
+## Outils du FMI
+
+La compilation suit le PEFA Converter et le convertisseur des comptes des émissions atmosphériques (I2A) du Département des statistiques du FMI, écrits par Achille Pegoue. Les outils sont publiés avec leurs manuels dans le dossier `imf-tools/` du dépôt. Le pipeline appelle leurs fonctions sans les modifier pour vérifier sa propre mise en œuvre explicite.
+
+## Code et reproductibilité
+
+Le code, les tables de correspondance et les résultats se trouvent dans le dépôt <https://github.com/renatovargas/tun-pefa-aea>. Les commandes `uv sync` puis `uv run python scripts/run_pipeline.py` compilent les comptes à partir des fichiers sources en moins d'une minute.
+
+## Avertissement
+
+Les comptes sont provisoires. Les opinions exprimées sont celles des auteurs et ne représentent pas nécessairement celles du FMI, de son conseil d'administration ou de sa direction, ni celles des autorités tunisiennes.

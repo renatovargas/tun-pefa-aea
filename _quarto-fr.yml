@@ -1,7 +1,6 @@
-# Profil français (langue principale). Rendu : quarto render --profile fr
+# French profile. Render: quarto render fr --profile fr --no-clean
 project:
   render:
-    - index.qmd
     - fr/**/*.qmd
 
 lang: fr-FR
@@ -14,13 +13,15 @@ website:
     left:
       - href: fr/index.qmd
         text: Accueil
-      - href: fr/materiaux/index.qmd
-        text: Matériaux
-      - href: fr/traitement/index.qmd
-        text: Traitement
-      - href: fr/telechargements.qmd
+      - href: fr/documents/index.qmd
+        text: Documents
+      - href: fr/presentations/index.qmd
+        text: Présentations
+      - href: fr/explorer/index.qmd
+        text: Explorateur de données
+      - href: fr/downloads.qmd
         text: Téléchargements
-      - href: fr/a-propos.qmd
+      - href: fr/about.qmd
         text: À propos
     right:
       - text: "Langue"
@@ -32,56 +33,15 @@ website:
           - text: "العربية"
             href: "#lang-ar"
   sidebar:
-    - title: Matériaux
+    - title: Documents
       style: docked
       contents:
-        - href: fr/materiaux/index.qmd
-          text: Matériaux
-        - section: Documents
-          contents:
-            - href: fr/materiaux/documents/contexte-mission/index.qmd
-              text: Contexte de la mission
-        - section: Présentations
-          contents:
-            - href: fr/materiaux/presentations/00-introduction.qmd
-              text: Introduction
-    - title: Traitement
-      style: docked
-      contents:
-        - href: fr/traitement/index.qmd
-          text: Traitement des données
-        - href: fr/traitement/00-bilan-energetique/index.qmd
-          text: Lecture du bilan énergétique
-        - section: Extraction des sources
-          contents:
-            - href: fr/traitement/01-extraction-bilans/index.qmd
-              text: Bilans énergétiques
-            - href: fr/traitement/02-extraction-crt/index.qmd
-              text: Inventaire des GES (CRT)
-            - href: fr/traitement/03-extraction-tre/index.qmd
-              text: Ressources et emplois
-        - section: Comptes de l'énergie (PEFA)
-          contents:
-            - href: fr/traitement/10-bilan-format-aie/index.qmd
-              text: Bilan au format de l'AIE
-            - href: fr/traitement/11-activites/index.qmd
-              text: Branches d'activité
-            - href: fr/traitement/12-matrice-concordance/index.qmd
-              text: Matrice de concordance
-            - href: fr/traitement/13-tableaux-pefa/index.qmd
-              text: Tableaux PEFA
-            - href: fr/traitement/14-controles-export-pefa/index.qmd
-              text: Contrôles et export
-        - section: Comptes des émissions (AEA)
-          contents:
-            - href: fr/traitement/20-inventaire-aea/index.qmd
-              text: Inventaire des GES
-            - href: fr/traitement/21-correspondance-aea/index.qmd
-              text: Catégories et branches
-            - href: fr/traitement/22-comptes-aea/index.qmd
-              text: Comptes AEA
-            - href: fr/traitement/23-passage-export-aea/index.qmd
-              text: Passage et export
+        - href: fr/documents/index.qmd
+          text: Documents
+        - href: fr/documents/energy-accounts/index.qmd
+          text: Comptes de l'énergie (PEFA)
+        - href: fr/documents/emissions-accounts/index.qmd
+          text: Comptes des émissions (AEA)
 
 format:
   html:

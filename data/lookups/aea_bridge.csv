@@ -1,0 +1,10 @@
+code,order,sign,en,fr,ar,to_review
+AEA,1,1,Air emissions accounts (resident units),Émissions des comptes AEA (unités résidentes),انبعاثات حسابات انبعاثات الهواء (الوحدات المقيمة),yes
+NRA-AIR,2,-1,Less: air transport of residents abroad,Moins : transport aérien des résidents à l'étranger,ناقص: النقل الجوي للمقيمين في الخارج,yes
+NRA-WATER,3,-1,Less: water transport of residents abroad,Moins : transport maritime des résidents à l'étranger,ناقص: النقل البحري للمقيمين في الخارج,yes
+NRT-AIR,4,1,Plus: air transport of non-residents on the territory,Plus : transport aérien des non-résidents sur le territoire,زائد: النقل الجوي لغير المقيمين في الإقليم,yes
+NRT-WATER,5,1,Plus: water transport of non-residents on the territory,Plus : transport maritime des non-résidents sur le territoire,زائد: النقل البحري لغير المقيمين في الإقليم,yes
+OTHER,6,1,Other adjustments,Autres ajustements,تعديلات أخرى,yes
+INV,7,1,National inventory excluding LULUCF,Inventaire national hors UTCATF,الجرد الوطني دون استخدام الأراضي وتغيير استخدامها والحراجة,yes
+LULUCF,8,1,"Land use, land-use change and forestry (LULUCF)","Utilisation des terres, changement d'affectation des terres et foresterie (UTCATF)",استخدام الأراضي وتغيير استخدامها والحراجة,yes
+INV-TOTAL,9,1,National inventory including LULUCF,Inventaire national y compris UTCATF,الجرد الوطني بما في ذلك استخدام الأراضي وتغيير استخدامها والحراجة,yes

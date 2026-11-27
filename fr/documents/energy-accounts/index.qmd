@@ -1,0 +1,490 @@
+---
+title: "Comptes physiques des flux d'énergie de la Tunisie"
+subtitle: "Concepts, méthodes de compilation et résultats, 2015 à 2022"
+author:
+  - name: Renato Vargas
+    affiliations:
+      - name: Consultant, Département des statistiques du FMI
+  - name: Achille Pegoue
+    affiliations:
+      - name: Économiste principal, Département des statistiques du FMI
+date: last-modified
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    other-links:
+      - text: "Version PDF"
+        href: index.pdf
+  typst:
+    citeproc: true
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    papersize: a4
+    margin: {x: 2.2cm, y: 2.4cm}
+    fig-format: png
+    output-file: index.pdf
+    include-in-header:
+      text: |
+        #show figure: set block(breakable: true)
+crossref:
+  tbl-prefix: "tableau"
+  fig-prefix: "figure"
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+#| label: setup
+import sys
+sys.path.insert(0, "scripts/report")
+from doc_helpers import *
+import charts
+import polars as pl
+import matplotlib.pyplot as plt
+setup("fr")
+
+# Tableaux publiés (data/outputs/tables/).
+balance = read("energy_balance")
+pefa = read("pefa_supply_use")
+sankey_flows = read("pefa_sankey")
+indicators = read("pefa_indicators")
+keys = read("pefa_activity_keys")
+plausibility = read("pefa_plausibility")
+agreement = read("pefa_tool_agreement")
+bunkers = read("pefa_bunkers_check")
+changes = read("pefa_concordance_changes")
+checks = read("checks")
+production_accounts = read("sut_production_accounts")
+
+YEARS = sorted(pefa["year"].unique().to_list())
+FIRST, LAST = YEARS[0], YEARS[-1]
+INDUSTRIES = [c for c in lab("activities") if c not in ("HH", "ROW", "ACC", "ENV", "STATDIFF")]
+
+# Nombres cités dans le texte.
+supply = sankey_flows.filter(pl.col("stage") == "supply")
+prod = {y: supply.filter(pl.col("year") == y, pl.col("source") == "PROD")["tj"].sum() for y in YEARS}
+imp = {y: supply.filter(pl.col("year") == y, pl.col("source") == "IMP")["tj"].sum() for y in YEARS}
+imp_gas = supply.filter(pl.col("year") == LAST, pl.col("source") == "IMP", pl.col("target") == "Natural gas")["tj"].sum()
+dom_gas = supply.filter(pl.col("year") == LAST, pl.col("source") == "PROD", pl.col("target") == "Natural gas")["tj"].sum()
+ind_last = indicators.filter(pl.col("year") == LAST)
+end_use_total = ind_last["end_use_energy"].sum()
+hh_end_use = ind_last.filter(pl.col("activity") == "HH")["end_use_energy"].sum()
+top_industries = ind_last.filter(pl.col("activity") != "HH").sort("end_use_energy", descending=True)
+ndeu = {y: indicators.filter(pl.col("year") == y)["net_domestic_energy_use"].sum() for y in YEARS}
+gic = {y: balance.filter(pl.col("year") == y, pl.col("flow") == "GIC", pl.col("product") == "TOTAL")["tj"].sum() for y in YEARS}
+bunkers_balance = {y: bunkers.filter(pl.col("year") == y)["balance_tj"].sum() for y in YEARS}
+road_keys = keys.filter(pl.col("method") == "key", pl.col("iea_flow") == "Road", pl.col("year") == LAST).sort("factor", descending=True)
+tert_keys = keys.filter(pl.col("method") == "key", pl.col("iea_flow") == "Commercial and public services", pl.col("year") == LAST).sort("factor", descending=True)
+hh_road = road_keys.filter(pl.col("activity") == "HH")["factor"].sum()
+max_tool_gap = agreement["max_gap_pj"].drop_nulls().max()
+example_with_total = agreement.filter(pl.col("run") == "example_with_total_column").row(0, named=True)
+example = agreement.filter(pl.col("run") == "example").row(0, named=True)
+c_balance = {r["check"]: r for r in checks.filter(pl.col("script") == "01_extract_energy_balances").iter_rows(named=True)}
+c_products = check("14_check_pefa_and_indicators", "energy_products_balance")
+c_aviation = check("12_build_concordance_matrix", "aviation_bunkers_vs_inventory")
+n_changed = changes.filter(pl.col("changed"))["iea_flow"].n_unique()
+va_total_last = production_accounts.filter(pl.col("year") == LAST, pl.col("activity").is_in(INDUSTRIES))["value_added_mtnd"].sum()
+intensity_economy = ind_last.filter(pl.col("activity") != "HH")["end_use_energy"].sum() / va_total_last
+```
+
+# Résumé {.unnumbered}
+
+Les comptes physiques des flux d'énergie (PEFA) décrivent, en térajoules, comment l'énergie entre dans l'économie tunisienne, quelles branches d'activité et quels ménages la produisent et l'utilisent, et comment elle retourne à l'environnement. Ils présentent l'information du bilan énergétique national dans le format des comptes nationaux. L'utilisation de l'énergie peut ainsi être rapprochée de la production, de la valeur ajoutée et de l'emploi, et les comptes des émissions peuvent reposer sur la même répartition. Ce document expose les concepts, décrit chaque étape d'une compilation reproductible des comptes de `{python} FIRST` à `{python} LAST` et présente les premiers résultats.
+
+En `{python} LAST`, l'économie a obtenu `{python} pj(prod[LAST])` pétajoules (PJ) de produits énergétiques de la production nationale et `{python} pj(imp[LAST])` PJ des importations. Les importations ont couvert `{python} pct(imp_gas / (imp_gas + dom_gas))` des ressources en gaz naturel. Les ménages ont été les premiers utilisateurs finals, avec `{python} pct(hh_end_use / end_use_total)` de l'énergie utilisée à des fins énergétiques, devant la branche « `{python} activity(top_industries["activity"][0]).lower()` » et la branche « `{python} activity(top_industries["activity"][1]).lower()` ». L'utilisation intérieure nette d'énergie, principal indicateur des comptes, a atteint `{python} pj(ndeu[LAST])` PJ. La compilation reproduit le PEFA Converter du FMI à `{python} f"{max_tool_gap:.0e}"` PJ près, et chaque choix de répartition est un tableau que les comptables nationaux peuvent examiner et modifier.
+
+# Introduction
+
+Les statistiques de l'énergie de la Tunisie sont riches. L'Observatoire national de l'énergie et des mines (ONEM) publie chaque année un bilan énergétique national, qui montre les ressources de chaque produit énergétique, sa transformation et son utilisation par grand secteur [@bouazizi2026]. Les comptes nationaux, établis par l'Institut national de la statistique (INS), décrivent la même économie en valeur par les tableaux des ressources et des emplois (TRE) par branche. Les deux systèmes parlent des langues différentes. Le bilan regroupe les utilisateurs par secteur technique, comme « transport routier » ou « commerce, administration, hôtels » ; les comptes nationaux les regroupent par branche, comme le transport terrestre, l'hébergement ou l'administration publique. Le bilan enregistre ce qui se passe sur le territoire national ; les comptes nationaux enregistrent ce que font les unités résidentes, où qu'elles se trouvent.
+
+Les comptes physiques des flux d'énergie font le lien entre les deux. Ils font partie du Système de comptabilité environnementale et économique (SCEE), la norme internationale qui étend les comptes nationaux à l'environnement [@seea2014; @seeaenergy2019]. Une fois l'énergie enregistrée par branche, les questions utiles aux politiques publiques trouvent des réponses cohérentes : quelles branches utilisent le plus d'énergie par dinar de valeur ajoutée, quelle part de l'énergie des ménages va au transport, et comment les changements de structure de l'économie modifient la demande d'énergie.
+
+Le Fonds monétaire international (FMI) a mis au point un outil Excel pour cette conversion, le PEFA Converter, qui applique une matrice de concordance à un bilan énergétique au format de l'Agence internationale de l'énergie (AIE) [@imf2024pefa; @pegoue2026pefa]. Ce document en suit la logique pas à pas. Les calculs sont effectués par une série de scripts Python du dossier <https://github.com/renatovargas/tun-pefa-aea/tree/main/scripts>, présentés au @tbl-scripts dans l'ordre de leur exécution. Chaque étape de la partie Méthodes renvoie à la notice de son script à l'[annexe I](#annex-scripts), qui explique ce que le script lit, fait et écrit. Le fichier `run_pipeline.py` exécute toute la série en moins d'une demi-minute, et chaque script s'arrête si l'un de ses contrôles échoue. Les comptes des émissions, qui reprennent plusieurs de ces étapes, sont décrits dans un document compagnon.
+
+```{python}
+#| label: tbl-scripts
+#| tbl-cap: "Scripts de compilation des comptes de l'énergie, dans l'ordre de leur exécution."
+scripts = pl.DataFrame({
+    "Script": ["extract/01_extract_energy_balances.py", "extract/02_extract_crt_inventory.py", "extract/03_extract_supply_use_tables.py",
+               "pefa/10_map_balance_to_iea_template.py", "pefa/11_build_activity_keys.py", "pefa/12_build_concordance_matrix.py",
+               "pefa/13_compile_pefa_tables.py", "pefa/14_check_pefa_and_indicators.py", "pefa/15_export_pefa.py",
+               "report/30_publish_tables.py"],
+    "Objet": ["Bilans énergétiques de l'ONEM en format long, avec des codes stables", "Tableaux communs de notification de l'inventaire des gaz à effet de serre",
+              "Tableaux des ressources et des emplois des comptes nationaux", "Le bilan tunisien dans le modèle AIE de l'outil du FMI",
+              "Rattachement de chaque flux du bilan aux branches des comptes nationaux", "La matrice de concordance tunisienne, une par année",
+              "Tableaux physiques des ressources et des emplois, vérifiés avec l'outil du FMI", "Contrôles d'équilibre, vraisemblance et indicateurs",
+              "Classeurs Excel en anglais, en français et en arabe", "Tableaux et libellés pour les documents et l'explorateur de données"],
+})
+gt(scripts)
+```
+
+# Concepts
+
+## L'énergie dans le Système de comptabilité environnementale et économique
+
+Le SCEE suit l'énergie lorsqu'elle franchit la frontière entre l'environnement et l'économie et lorsqu'elle circule dans l'économie. Il distingue trois sortes de flux [@seeaenergy2019, § 2.14 à 2.21]. L'**énergie issue des ressources naturelles** passe de l'environnement à l'économie, par exemple le contenu énergétique du pétrole brut au moment de son extraction, ou l'énergie solaire captée par un panneau. Les **produits énergétiques** circulent dans l'économie : ils sont produits, échangés, transformés et utilisés, comme le gaz naturel, le gasoil ou l'électricité. Les **résidus d'énergie** retournent à l'environnement : chaleur dégagée par la combustion, électricité perdue sur le réseau, gaz torché en tête de puits.
+
+Les comptes respectent le principe de conservation de l'énergie. L'énergie n'est ni créée ni détruite ; elle change seulement de forme. Lorsque du gaz naturel est brûlé dans une centrale, une partie de son contenu énergétique devient de l'électricité, un produit énergétique, et le reste se perd en chaleur, un résidu d'énergie. Lorsqu'un ménage utilise cette électricité, son contenu énergétique finit lui aussi en chaleur résiduelle. Pour cette raison, chaque emploi d'énergie a pour contrepartie un résidu de même montant, et les totaux des tableaux des ressources et des emplois dépassent l'énergie que le pays consomme réellement. La @fig-flows montre ces flux.
+
+```{mermaid}
+%%| label: fig-flows
+%%| fig-cap: "Flux d'énergie enregistrés dans les comptes physiques des flux d'énergie."
+%%| fig-width: 6.3
+flowchart LR
+  ENV1["Environnement"] -- "ressources naturelles<br/>(pétrole brut, gaz, soleil, vent, biomasse)" --> IND["Branches résidentes"]
+  ROW1["Reste du monde"] -- "importations de<br/>produits énergétiques" --> IND
+  IND -- "produits énergétiques" --> IND
+  IND -- "produits énergétiques" --> HH["Ménages"]
+  IND -- "exportations" --> ROW2["Reste du monde"]
+  IND -- "résidus d'énergie<br/>(pertes, chaleur)" --> ENV2["Environnement"]
+  HH -- "résidus d'énergie" --> ENV2
+```
+
+## Tableaux des ressources et des emplois en unités physiques
+
+Les comptes se présentent sous la forme de deux tableaux qui ont les mêmes lignes [@seea2014, section 3.3]. Le **tableau des ressources** indique qui fournit chaque flux : l'environnement fournit les ressources naturelles, les branches produisent les produits énergétiques et les résidus, le reste du monde fournit les importations, et les ménages génèrent des résidus. Le **tableau des emplois** indique qui reçoit chaque flux : les branches utilisent les ressources naturelles et les produits énergétiques, les ménages consomment des produits énergétiques, le reste du monde reçoit les exportations, et l'environnement reçoit les résidus. Pour chaque ligne, le total des ressources égale le total des emplois. Les colonnes sont les unités économiques des comptes nationaux, c'est-à-dire les branches, les ménages, l'accumulation (variations de stocks et énergie incorporée dans des produits comme le bitume), le reste du monde et l'environnement.
+
+Les lignes de l'outil du FMI suivent la Classification internationale type des produits énergétiques (SIEC) au niveau des grands groupes de produits : charbon, gaz naturel, pétrole, biocombustibles, déchets, électricité, chaleur et combustibles nucléaires [@ires2018; @imf2024pefa]. Les colonnes de l'outil suivent les sections de la Classification internationale type, par industrie, de toutes les branches d'activité économique (CITI). Les comptes tunisiens de ce document vont un niveau plus loin et utilisent les 24 branches des tableaux des ressources et des emplois de la Tunisie. Ils restent ainsi cohérents avec les comptes nationaux, et leurs résultats peuvent être agrégés par section de la CITI pour les comparaisons internationales.
+
+## Territoire et résidence
+
+Un bilan énergétique enregistre ce qui se passe sur le territoire national. Les comptes nationaux, et donc les comptes de l'énergie, enregistrent ce que font les unités résidentes, où qu'elles se trouvent [@eurostat2014pefa, § 41 à 48]. La différence concerne surtout le transport international. Le carburant qu'une compagnie aérienne tunisienne achète à Paris appartient aux comptes tunisiens, mais pas au bilan tunisien. Le carburant qu'un navire étranger achète à Radès figure dans le bilan comme soute internationale, mais pas dans les comptes tunisiens. Les comptes concilient les deux points de vue dans un tableau de passage, qui part du total des comptes et ajoute ou retranche ces éléments pour retrouver le total du bilan [@eurostat2014pefa, § 109 à 111].
+
+## Unités
+
+Les comptes de l'énergie se mesurent en joules. Un térajoule (TJ) vaut 10^12^ joules, et un pétajoule (PJ) vaut mille térajoules. Le bilan tunisien est publié en milliers de tonnes équivalent pétrole (ktep). Une tonne équivalent pétrole vaut 41,868 gigajoules, donc une ktep vaut 41,868 TJ [@ires2018].
+
+# Sources de données
+
+```{python}
+#| label: tbl-sources
+#| tbl-cap: "Sources de données des comptes de l'énergie."
+sources = pl.DataFrame({
+    "Source": ["Bilan énergétique national", "Tableaux des ressources et des emplois", "Inventaire des gaz à effet de serre, tableaux communs de notification"],
+    "Producteur": ["ONEM", "INS", "ANME et partenaires"],
+    "Années": [f"{FIRST} à {LAST}", "2015 à 2023", f"{FIRST} à {LAST}"],
+    "Unité": ["ktep", "millions de TND, prix courants", "TJ (combustibles) et kt (émissions)"],
+    "Usage dans les comptes": ["Tous les flux d'énergie", "Branches, clés de répartition, production et valeur ajoutée", "Soutes internationales, pour contrôle"],
+})
+gt(sources)
+```
+
+Le **bilan énergétique** de l'ONEM est la source principale. Il couvre la production primaire, les importations, les exportations, les soutes maritimes internationales et les variations de stocks, la transformation de l'énergie dans les centrales, la raffinerie et les charbonnières, la consommation propre de la branche énergie, les pertes, et la consommation finale de dix branches industrielles, de quatre modes de transport, des ménages, de l'agriculture et du tertiaire. Les produits couvrent le pétrole brut, les liquides de gaz naturel, dix produits pétroliers, le gaz naturel, six sources renouvelables, la chaleur et l'électricité. Les classeurs ont la même structure chaque année, mais le nombre et l'ordre des lignes et des colonnes changent : 2015 a des lignes distinctes pour la sidérurgie et les métaux non ferreux, que les années suivantes regroupent, et 2016 a une colonne de produit de plus que les années suivantes.
+
+Les **tableaux des ressources et des emplois** de l'INS décrivent, pour 24 produits et 24 branches, qui produit et qui utilise chaque produit, en millions de dinars aux prix courants. Les comptes s'en servent de trois façons. Leurs branches sont les colonnes des comptes de l'énergie. Leurs emplois de produits pétroliers raffinés et d'électricité et de gaz fournissent les clés qui répartissent deux lignes du bilan entre les branches. Leur production et leur valeur ajoutée transforment l'utilisation d'énergie en indicateurs d'intensité.
+
+L'**inventaire des gaz à effet de serre**, dans les tableaux communs de notification (CRT) de la Convention-cadre des Nations unies sur les changements climatiques, fournit la consommation de l'aviation et de la navigation internationales comme éléments pour mémoire [@ipcc2006]. Les comptes de l'énergie ne l'utilisent que pour contrôler les soutes du bilan ; il est la source principale des comptes des émissions.
+
+# Méthodes
+
+La @fig-pipeline montre l'enchaînement des étapes. Les scripts d'extraction lisent chaque source telle qu'elle a été reçue et l'écrivent en format long, les scripts de l'énergie construisent les comptes, et un dernier script publie les tableaux lus par ce document.
+
+```{mermaid}
+%%| label: fig-pipeline
+%%| fig-cap: "Étapes de la compilation des comptes de l'énergie. Les numéros sont ceux des scripts."
+%%| fig-width: 6.3
+flowchart LR
+  B["Bilans énergétiques<br/>(ONEM)"] --> S01["01 extraction"]
+  T["Tableaux des ressources<br/>et des emplois (INS)"] --> S03["03 extraction"]
+  C["Inventaire CRT<br/>(ANME)"] --> S02["02 extraction"]
+  S01 --> S10["10 modèle AIE"]
+  S10 --> S11["11 clés des branches"]
+  S03 --> S11
+  S11 --> S12["12 matrice de concordance"]
+  S02 --> S12
+  S12 --> S13["13 tableaux des ressources et des emplois"]
+  S10 --> S13
+  S13 --> S14["14 contrôles et indicateurs"]
+  S03 --> S14
+  S14 --> S15["15 classeurs Excel"]
+```
+
+## Lecture des bilans énergétiques
+
+Comme la présentation du bilan change dans le temps, l'extraction le lit par ses libellés, jamais par la position de ses cellules (voir [01_extract_energy_balances.py à l'annexe I](#script-01)). Le script repère la ligne d'en-tête par sa première cellule, reconstitue le nom des produits à partir des deux lignes d'en-tête et met le tableau en format long, avec une ligne par année, flux et produit. Chaque libellé de la source reçoit ensuite un code stable de deux tables de correspondance, l'une pour les flux et l'autre pour les produits. Certains libellés se répètent ; « Raffineries », par exemple, figure parmi les entrées et parmi les sorties de transformation. Un flux est donc identifié par son libellé et par le bloc du bilan où il se trouve. Le script s'arrête sur tout libellé que les tables ne connaissent pas, ce qui rend visible immédiatement un changement dans le classeur de l'année suivante.
+
+Les bilans publiés sont arrondis à l'unité. Chaque total diffère donc légèrement de la somme de ses composantes. L'écart maximal entre un total de flux et ses composantes est de `{python} num(c_balance["flow_hierarchy"]["value"], 1)` ktep, et l'écart maximal dans l'identité qui définit l'énergie disponible pour la consommation finale est de `{python} num(c_balance["availability_identity"]["value"], 1)` ktep, ce qui confirme que le bilan a été correctement lu.
+
+::: {.callout-note}
+## Question ouverte
+
+La ligne « Fabrications métalliques » de 2015 pourrait correspondre soit à la sidérurgie, soit aux industries mécaniques et électriques. Elle est lue ici comme la sidérurgie, car les industries mécaniques et électriques n'ont pas de valeur avant 2019. Les deux relèvent de la même branche du TRE (24) ; le choix n'affecte donc que les séries au niveau du bilan.
+:::
+
+## Du bilan national au modèle de l'AIE
+
+Le PEFA Converter lit un bilan présenté comme ceux de l'AIE : une liste fixe de flux dans un ordre fixe, une liste fixe de produits, des valeurs en térajoules et les conventions de signe de l'AIE, selon lesquelles les exportations, les soutes, les entrées en transformation et la consommation propre sont négatives [@pegoue2026pefa]. Le script [10_map_balance_to_iea_template.py](#script-10) place chaque cellule élémentaire du bilan tunisien dans ce modèle. Des tables de correspondance donnent la destination par défaut de chaque flux et de chaque produit tunisien, et une courte liste d'exceptions traite les cellules qui s'écartent du reste de leur ligne ou de leur colonne (@tbl-exceptions). Les totaux ne sont pas transposés, car l'outil les recalcule.
+
+```{python}
+#| label: tbl-exceptions
+#| tbl-cap: "Cellules du bilan tunisien qui s'écartent de la correspondance par défaut avec le modèle de l'AIE."
+exc = lookup("balance_template_exceptions")
+gt(exc.select(pl.col("flow").alias("Flux"), pl.col("product").alias("Produit"),
+              pl.coalesce("iea_flow", "iea_product").alias("Destination dans le modèle"), pl.col("rationale_fr").alias("Raison")))
+```
+
+Deux contrôles concluent cette étape. L'énergie de toutes les cellules élémentaires, en valeur absolue, est la même avant et après la transposition. Pour chaque produit, les ressources nettes de la transformation, de la consommation propre et des pertes égalent la consommation finale, à l'arrondi du bilan publié près.
+
+::: {.callout-note}
+## Question ouverte
+
+Le bilan ne détaille pas la consommation propre de la branche énergie par branche. Le gaz naturel, le gasoil et les liquides de gaz naturel sont attribués à l'extraction de pétrole et de gaz, le fioul et le gaz de raffinerie à la raffinerie, l'électricité aux centrales. Cette répartition gagnerait à être confirmée par l'ONEM.
+:::
+
+## Les branches des comptes nationaux
+
+Le bilan et les comptes nationaux regroupent les utilisateurs différemment. Pour la plupart des flux, la correspondance est directe : la sidérurgie et les fabrications mécaniques relèvent des industries mécaniques et électriques (24), la chimie de l'industrie chimique (20), et ainsi de suite. Le script [11_build_activity_keys.py](#script-11) lit ces règles dans la table `balance_to_activities.csv`, où chaque ligne porte sa raison. Deux flux ne peuvent pas être attribués à une seule branche.
+
+- Le **transport routier** est donné par mode et non par utilisateur. Camions, autobus, taxis et voitures particulières brûlent tous du gasoil et de l'essence, et ils appartiennent à de nombreuses branches et aux ménages. Le carburant est réparti au prorata des achats de produits pétroliers raffinés (produit 19 du TRE) de chaque branche et des ménages dans le TRE de la même année. Le raffinage et l'électricité sont exclus, car leurs achats de produit 19 sont surtout des entrées de transformation.
+- **Commerce, administration et hôtels** est une seule ligne du bilan pour plusieurs branches de services. Elle est répartie au prorata de leurs achats d'électricité et de gaz (produit 35 du TRE).
+
+Ces clés sont une hypothèse. Elles supposent que chaque utilisateur paie un prix semblable par unité d'énergie, ce qui n'est pas tout à fait exact, mais elles utilisent la meilleure information disponible et suivent chaque année les comptes nationaux. La @fig-keys les montre pour `{python} LAST`. Les ménages reçoivent `{python} pct(hh_road)` du carburant routier.
+
+```{python}
+#| label: fig-keys
+#| fig-cap: "Clés de répartition du transport routier et du tertiaire, part de chaque utilisateur, dernière année."
+charts.activity_keys(LAST)
+```
+
+::: {.callout-note}
+## Question ouverte
+
+La clé du transport routier mêle le carburant et d'autres usages des produits pétroliers, comme le gaz de pétrole liquéfié pour la cuisson ou le fioul pour la chaleur. Une enquête sur l'usage des carburants par type de véhicule et d'utilisateur, si elle existe à l'INS ou à l'Agence nationale pour la maîtrise de l'énergie (ANME), donnerait une répartition plus directe.
+:::
+
+## La matrice de concordance
+
+La matrice de concordance est le cœur du PEFA Converter. Pour chaque flux et chaque produit du bilan, elle indique quel produit PEFA reçoit l'énergie, dans quel tableau (ressources ou emplois), pour quelle activité et dans quelle proportion [@imf2024pefa]. L'outil est livré avec une matrice par défaut qui attribue chaque flux à une section de la CITI. Le script [12_build_concordance_matrix.py](#script-12) construit une matrice tunisienne pour chaque année : il garde les lignes par défaut des flux que les règles tunisiennes ne couvrent pas, comme les importations et les exportations, et remplace les lignes des flux couverts par une ligne par branche, avec le facteur de la clé. Les facteurs de chaque flux somment à un.
+
+La plupart des règles tunisiennes restent dans la section de la CITI de la matrice par défaut et ne font qu'ajouter du détail. Les règles de `{python} n_changed` flux déplacent l'énergie vers une autre section (@tbl-changes). Chaque déplacement traduit une particularité de l'économie tunisienne ou du bilan, et chacun est enregistré avec sa raison.
+
+```{python}
+#| label: tbl-changes
+#| tbl-cap: "Flux que la matrice tunisienne attribue à une autre section de la CITI que la matrice par défaut de l'outil."
+fr_reason = dict(zip(lookup("balance_to_activities")["rationale_en"], lookup("balance_to_activities")["rationale_fr"]))
+ch = changes.filter(pl.col("changed")).select(
+    pl.col("iea_flow").alias("Flux du modèle de l'AIE"), pl.col("iea_product").alias("Produit"),
+    pl.col("default_sections").alias("Défaut"), pl.col("sections").alias("Tunisie"),
+    pl.col("rationale_en").replace_strict(fr_reason, default=pl.col("rationale_en")).alias("Raison"))
+gt(ch)
+```
+
+::: {.callout-note}
+## Question ouverte
+
+Les choix qui s'écartent des sections de l'outil gagneraient à être validés avec l'INS et l'ONEM. Les autoproducteurs d'électricité et la chaleur récupérée sont placés dans l'industrie chimique, la chaleur solaire est produite par les ménages, les charbonnières relèvent de la sylviculture, les usages non énergétiques (surtout du bitume) vont à la construction, et le transport routier est partagé entre les branches et les ménages.
+:::
+
+### Soutes internationales et résidence
+
+Le bilan enregistre les soutes maritimes internationales, et son bloc transport comprend le carburant livré aux avions des vols internationaux. Le script compare les unes et l'autre aux éléments pour mémoire de l'inventaire des gaz à effet de serre, qui déclarent le même carburant en térajoules. Les soutes aériennes concordent à `{python} num(c_aviation["value"], 2)` pour cent près chaque année. Comme dans la matrice par défaut de l'outil, les soutes sont attribuées au transport (49), comme si elles étaient toutes achetées par des transporteurs résidents.
+
+L'outil du FMI peut ajouter des ajustements de résidence dans une feuille d'éléments de passage : carburant acheté à l'étranger par les transporteurs résidents, et carburant acheté en Tunisie par les non-résidents. Cette feuille est vide pour la Tunisie, car aucune source de ces quantités n'est encore disponible.
+
+::: {.callout-note}
+## Question ouverte
+
+Quelles données l'INS ou l'ONEM pourraient-ils fournir sur le carburant acheté à l'étranger par les compagnies aériennes et maritimes résidentes, et sur le carburant acheté en Tunisie par les non-résidents ? Les estimations de l'Organisation de coopération et de développement économiques (OCDE) sur les émissions du transport aérien et maritime, utilisées dans les comptes des émissions, couvrent la Tunisie et pourraient servir de première approximation.
+:::
+
+## Compilation des tableaux des ressources et des emplois
+
+Le script [13_compile_pefa_tables.py](#script-13) applique la matrice au bilan. Il le fait de deux façons. D'abord, il appelle la fonction `EB2PEFA` du PEFA Converter lui-même, sans la modifier, en chargeant le code Python de l'outil et en lui passant des plages construites exactement comme Excel le ferait. Ensuite, il applique chaque règle de cette fonction de façon explicite, dans un code lisible. La seconde version produit les comptes. La première sert de référence, et le script s'arrête si les deux diffèrent de plus de 10^-9^ PJ dans une cellule.
+
+Les règles, dans l'ordre où l'outil les applique, sont les suivantes.
+
+1. **Niveaux des flux.** L'outil lit le modèle de haut en bas et donne à chaque flux le titre sous lequel il se trouve : approvisionnement primaire, transformation, consommation propre de la branche énergie, pertes, et consommation finale de l'industrie, du transport, des autres secteurs et des usages non énergétiques.
+2. **Préparation du bilan.** La ligne pour mémoire des usages non énergétiques de la chimie est retranchée des usages non énergétiques de l'industrie, pour ne pas la compter deux fois, et les exportations et les variations de stocks changent de signe.
+3. **Préparation de la matrice.** Les lignes de facteur nul sont retirées et les facteurs de chaque flux sont normalisés pour sommer à un.
+4. **Ressources naturelles.** La production primaire d'un produit énergétique est fournie par la branche qui l'extrait. La même énergie est enregistrée comme une ressource naturelle fournie par l'environnement et utilisée par la branche. Les sources renouvelables forment une ligne distincte des ressources fossiles.
+5. **Répartition.** Chaque valeur du bilan est multipliée par les facteurs de ses lignes dans la matrice et divisée par mille, car l'outil s'exprime en pétajoules.
+6. **Flux en aval et résidus.** Les sorties de transformation deviennent des ressources de produits énergétiques. Chaque emploi d'énergie en transformation, consommation propre, pertes, consommation finale et soutes crée un résidu d'énergie de même montant, fourni par l'utilisateur et reçu par l'environnement. Les usages non énergétiques créent un résidu qui va à l'accumulation, comme énergie stockée dans des produits.
+
+Sur l'exemple de l'outil lui-même, les deux versions concordent à `{python} f"{example['max_gap_pj']:.0e}"` PJ près. Une particularité de l'exemple mérite d'être signalée. Le bilan d'exemple comprend une colonne « Total », et la matrice par défaut a des lignes pour cette colonne dans les flux non énergétiques. Lorsque la colonne est transmise à l'outil, les usages non énergétiques sont comptés deux fois, et le total des ressources (`{python} num(example_with_total["supply_pj"], 1)` PJ) diffère du total des emplois (`{python} num(example_with_total["use_pj"], 1)` PJ). Sans la colonne, les deux valent `{python} num(example["supply_pj"], 1)` PJ. Le pipeline transmet donc le bilan sans sa colonne de total. Sur le bilan tunisien, avec la matrice par défaut et avec la matrice tunisienne, pour chaque année, les deux versions concordent à `{python} f"{max_tool_gap:.0e}"` PJ près (@tbl-agreement).
+
+```{python}
+#| label: tbl-agreement
+#| tbl-cap: "Concordance entre le PEFA Converter et la compilation explicite, par essai. Ressources et emplois en PJ."
+ag = agreement.filter(pl.col("run") != "example_with_total_column").with_columns(
+    pl.col("run").replace({"example": "Exemple de l'outil", "default": "Tunisie, matrice par défaut", "tunisian": "Tunisie, matrice tunisienne"}),
+    pl.col("year").cast(pl.String).fill_null("–"),
+    pl.col("max_gap_pj").map_elements(lambda x: f"{x:.1e}", return_dtype=pl.String))
+gt(ag.select(pl.col("run").alias("Essai"), pl.col("year").alias("Année"), pl.col("cells").alias("Cellules"),
+             pl.col("max_gap_pj").alias("Écart maximal (PJ)"), pl.col("supply_pj").alias("Ressources"), pl.col("use_pj").alias("Emplois")),
+   decimals={"Ressources": 1, "Emplois": 1})
+```
+
+## Contrôles et indicateurs
+
+Le script [14_check_pefa_and_indicators.py](#script-14) vérifie trois propriétés du résultat.
+
+- **Les ressources naturelles et les résidus s'équilibrent exactement**, puisque l'outil crée les deux côtés de chacun de ces flux.
+- **Les produits énergétiques s'équilibrent à l'arrondi du bilan près.** L'écart maximal entre les ressources et les emplois d'un produit, toutes années confondues, est de `{python} num(c_products["value"], 1)` ktep ; il provient de l'arrondi et de l'écart statistique du bilan publié.
+- **L'utilisation d'énergie est vraisemblable au regard des achats en valeur.** Pour chaque branche, l'énergie utilisée est comparée à ses achats de pétrole brut et de gaz, de produits raffinés, et d'électricité et de gaz dans le TRE. Le rapport donne un prix implicite en dinars par gigajoule (@fig-prices). Un utilisateur qui achète de l'énergie sans en utiliser, ou l'inverse, signalerait une erreur de répartition ; aucun cas de ce type n'apparaît.
+
+```{python}
+#| label: fig-prices
+#| fig-cap: "Prix implicite de l'énergie par branche : achats de produits énergétiques dans le TRE divisés par l'utilisation finale d'énergie, dernière année (TND par GJ)."
+charts.implied_prices(LAST)
+```
+
+Le raffinage (19) et l'électricité (35) ne figurent pas sur le graphique, car leurs achats de produits énergétiques sont surtout des entrées de transformation, que l'utilisation finale exclut. Les prix les plus bas apparaissent dans les industries diverses, l'agriculture et les matériaux de construction, qui achètent de grandes quantités de fioul lourd, de coke de pétrole ou de gaz naturel, moins chers par unité d'énergie que le gasoil ou l'électricité. Les branches de services ont des prix plus élevés, car leur énergie est surtout de l'électricité.
+
+Le script calcule ensuite les indicateurs des comptes, d'après la feuille Indicator de l'outil du FMI et les indicateurs clés du manuel PEFA d'Eurostat [@eurostat2014pefa, § 101] : utilisation de ressources naturelles, production de produits énergétiques, entrées en transformation, utilisation finale à des fins énergétiques et non énergétiques, résidus d'énergie, et **utilisation intérieure nette d'énergie**. Ce dernier indicateur additionne les résidus fournis par chaque branche et par les ménages et l'énergie incorporée dans les produits à usage non énergétique. Il mesure l'énergie réellement consommée par les unités résidentes, sans le double compte de l'énergie transformée avant son utilisation finale [@eurostat2014pefa, § 103 à 106]. Les intensités énergétiques rapportent l'utilisation finale à la production et à la valeur ajoutée aux prix courants.
+
+## Export
+
+Le script [15_export_pefa.py](#script-15) écrit les comptes dans trois classeurs Excel, en anglais, en français et en arabe, avec les mêmes chiffres. Chacun comprend une feuille de notes, un tableau long de toutes les années, les tableaux des ressources et des emplois de chaque année dans la présentation de la feuille PEFA de l'outil du FMI, les mêmes tableaux agrégés par section de la CITI, et les indicateurs. Les classeurs se téléchargent sur la page Téléchargements du site.
+
+# Résultats
+
+## Ressources en énergie
+
+La Tunisie produit du pétrole brut, du gaz naturel, de la biomasse et une quantité croissante d'électricité renouvelable, et elle importe une grande partie de ses produits pétroliers et de son gaz naturel. La @fig-supply montre que la production nationale de produits énergétiques est passée de `{python} pj(prod[FIRST])` PJ en `{python} FIRST` à `{python} pj(prod[LAST])` PJ en `{python} LAST`, tandis que les importations passaient de `{python} pj(imp[FIRST])` PJ à `{python} pj(imp[LAST])` PJ. La production nationale comprend ici la production des centrales et de la raffinerie, qui transforment une partie de l'énergie primaire.
+
+```{python}
+#| label: fig-supply
+#| fig-cap: "Ressources en produits énergétiques par origine (PJ). La production nationale comprend des produits secondaires comme l'électricité et les produits raffinés."
+charts.energy_supply()
+```
+
+## Des ressources aux emplois
+
+La @fig-sankey suit chaque produit énergétique de son origine à son emploi en `{python} LAST`. Le gaz naturel va surtout aux centrales, qui le transforment en électricité. Les produits pétroliers vont aux ménages, au transport, à l'industrie manufacturière et à l'agriculture, et un flux important de pétrole brut est exporté. Les biocombustibles, surtout le bois de feu et le charbon de bois, sont utilisés par les ménages. Les variations de stocks ne figurent pas sur le diagramme, car un prélèvement sur les stocks ne peut pas y être représenté comme un flux.
+
+```{python}
+#| label: fig-sankey
+#| fig-cap: "Produits énergétiques par origine et par emploi, dernière année (PJ)."
+charts.energy_sankey(LAST)
+```
+
+## Utilisation de l'énergie par les branches et les ménages
+
+La @fig-users classe les utilisateurs d'énergie à des fins énergétiques en `{python} LAST`. Les ménages viennent en tête avec `{python} pj(hh_end_use)` PJ, une part qui réunit la cuisson, le chauffage, les appareils et leur part du carburant routier. Le transport et les matériaux de construction (ciment, céramique, verre) suivent avec des montants voisins, devant l'agriculture et les industries diverses.
+
+```{python}
+#| label: fig-users
+#| fig-cap: "Utilisation finale d'énergie à des fins énergétiques par utilisateur et par produit, dernière année (PJ). Les douze principaux utilisateurs."
+charts.energy_users(LAST)
+```
+
+## Intensité énergétique
+
+L'intensité énergétique rapporte l'énergie qu'une branche utilise à la valeur qu'elle ajoute. Toutes branches confondues, l'économie a utilisé `{python} num(intensity_economy, 2)` TJ par million de dinars de valeur ajoutée en `{python} LAST`. La @fig-intensity montre la grande dispersion qui se cache derrière cette moyenne. Les matériaux de construction utilisent environ `{python} num(ind_last.filter(pl.col("activity") == "23")["intensity_value_added"][0], 0)` TJ par million de dinars, plusieurs fois plus que le transport ou l'électricité, et les branches de services beaucoup moins. Comme la valeur ajoutée est mesurée aux prix courants, l'évolution des intensités mêle les gains d'efficacité et les variations de prix.
+
+```{python}
+#| label: fig-intensity
+#| fig-cap: "Utilisation finale d'énergie par million de TND de valeur ajoutée, par branche, dernière année (TJ par million de TND, prix courants)."
+charts.energy_intensity(LAST)
+```
+
+## Utilisation intérieure nette d'énergie et bilan énergétique
+
+L'utilisation intérieure nette d'énergie, indicateur principal des comptes, fondé sur la résidence, peut être comparée à la consommation intérieure brute, indicateur principal du bilan, fondé sur le territoire (@fig-ndeu). En `{python} LAST`, la première était de `{python} pj(ndeu[LAST])` PJ et la seconde de `{python} pj(gic[LAST])` PJ. L'essentiel de l'écart provient des soutes internationales (`{python} pj(bunkers_balance[LAST])` PJ en `{python} LAST`), que le bilan exclut de la consommation intérieure brute et que les comptes, comme l'outil, attribuent aux transporteurs résidents. Un tableau de passage complet entre les deux nécessitera les données de résidence évoquées dans les méthodes.
+
+```{python}
+#| label: fig-ndeu
+#| fig-cap: "Utilisation intérieure nette d'énergie des comptes et consommation intérieure brute du bilan (PJ)."
+charts.ndeu_vs_gic()
+```
+
+## Tableaux des ressources et des emplois
+
+Le @tbl-sut présente les ressources et les emplois de produits énergétiques en `{python} LAST`, agrégés par section de la CITI pour tenir sur une page. Le détail par les 24 branches figure dans les classeurs Excel.
+
+```{python}
+#| label: tbl-sut
+#| tbl-cap: "Ressources et emplois de produits énergétiques par section de la CITI, dernière année (PJ)."
+sections = dict(lookup("activities").select("code", "imf_section").iter_rows())
+order_cols = ["A", "B", "C", "D", "E", "F", "H", "Other", "HH", "ACC", "ROW"]
+t = (pefa.filter(pl.col("year") == LAST, pl.col("level1") == "Energy products:")
+     .with_columns(section=pl.col("activity").replace_strict(sections, default=pl.col("activity")),
+                   quadrant=pl.col("quadrant").replace({"Supply": L("terms", "supply"), "Use": L("terms", "use")}),
+                   product=pl.col("product").replace_strict(lab("pefa_rows"), default=pl.col("product")))
+     .group_by("quadrant", "product", "section").agg((pl.col("tj").sum() / 1000))
+     .pivot("section", index=["quadrant", "product"], values="tj").fill_null(0))
+cols = [c for c in order_cols if c in t.columns]
+t = t.select("quadrant", "product", *cols).with_columns(pl.sum_horizontal(cols).alias("Total")).sort("quadrant")
+gt(t.rename({c: c if c not in ("HH", "ACC", "ROW", "Other") else {"HH": "Ménages", "ACC": "Acc.", "ROW": "RdM", "Other": "Autres"}[c] for c in cols}),
+   decimals=1, stub="product", groupname="quadrant")
+```
+
+# Limites
+
+Ces comptes sont une première compilation, provisoire, qui repose sur plusieurs hypothèses documentées plus haut. Les clés du transport routier et du tertiaire reposent sur des achats en valeur plutôt que sur des quantités physiques. La consommation propre de la branche énergie est répartie par produit plutôt que mesurée. Les ajustements de résidence manquent, si bien que les soutes internationales sont traitées comme si elles étaient toutes achetées par des transporteurs résidents. La valeur ajoutée aux prix courants mêle volumes et prix dans les intensités. Enfin, le bilan lui-même est arrondi à l'unité en milliers de tonnes équivalent pétrole, ce qui limite la précision des petits flux. Chacun de ces points peut être amélioré à mesure que l'INS et ses partenaires fournissent des données plus détaillées, et le pipeline permet de recompiler simplement les comptes après toute modification d'une table de correspondance.
+
+# Références {.unnumbered}
+
+::: {#refs}
+:::
+
+# Annexe I. Scripts du pipeline {.unnumbered #annex-scripts}
+
+Cette annexe décrit chaque script dans l'ordre de son exécution. Le lien sous chaque nom ouvre son code sur GitHub. Chaque script enregistre ses contrôles dans `data/outputs/checks/` et s'arrête si l'un d'eux échoue, de sorte qu'aucune étape ultérieure ne lise un tableau faux. Les commentaires du code sont en anglais, suivis de leur traduction française.
+
+## 01_extract_energy_balances.py {#script-01 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extract/01_extract_energy_balances.py)
+
+Ce script lit comme du texte les huit classeurs du bilan énergétique national, repère l'en-tête par le libellé « en 1000 tep », reconstitue le nom des produits à partir de deux lignes d'en-tête et met chaque feuille en format long. Chaque ligne hérite du bloc du dernier titre placé au-dessus d'elle, ce qui distingue les libellés qui se répètent. Les codes viennent de `balance_flow_sources.csv` et de `balance_product_sources.csv`, et les lignes qui reçoivent le même code, comme en 2015, sont additionnées. Les valeurs sont converties de ktep en TJ. Le script écrit `energy_balances.parquet` et contrôle les hiérarchies des flux et des produits ainsi que l'identité de l'énergie disponible pour la consommation finale.
+
+## 02_extract_crt_inventory.py {#script-02 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extract/02_extract_crt_inventory.py)
+
+Ce script empile la feuille `Data` des huit classeurs CRT de l'inventaire des gaz à effet de serre, qui contient déjà toutes les valeurs déclarées en format long, ajoute l'année, convertit les valeurs en nombres et retire les lignes en double. Il compare les émissions sommées par catégorie à la feuille `Summary2` et écrit `crt.parquet`. Les comptes de l'énergie n'en utilisent que la consommation des soutes internationales.
+
+## 03_extract_supply_use_tables.py {#script-03 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extract/03_extract_supply_use_tables.py)
+
+Ce script lit une feuille par année des tableaux des ressources et des emplois. La largeur des colonnes change d'une période à l'autre ; les blocs sont donc repérés par le texte de leur en-tête, et les colonnes de la matrice de consommation intermédiaire par leur code d'activité. Il écrit `sut.parquet` en format long et vérifie que les ressources égalent les emplois pour chaque produit, et que la production égale la consommation intermédiaire plus la valeur ajoutée pour chaque branche.
+
+## 10_map_balance_to_iea_template.py {#script-10 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/pefa/10_map_balance_to_iea_template.py)
+
+Ce script donne à chaque cellule élémentaire du bilan le flux et le produit du modèle de l'AIE lu par le PEFA Converter, applique les exceptions de `balance_template_exceptions.csv` et multiplie les valeurs par le signe AIE de leur flux. Il écrit `balance_iea.parquet` et contrôle la conservation de l'énergie et l'identité de l'AIE par produit.
+
+## 11_build_activity_keys.py {#script-11 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/pefa/11_build_activity_keys.py)
+
+Ce script lit `balance_to_activities.csv`. Les flux marqués « direct » vont en entier à une activité. Les flux marqués « key » sont répartis au prorata des emplois d'un produit du TRE par chaque activité de la liste, la même année. Il écrit `activity_keys.parquet`, avec des facteurs qui somment à un pour chaque flux.
+
+## 12_build_concordance_matrix.py {#script-12 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/pefa/12_build_concordance_matrix.py)
+
+Ce script lit la matrice de concordance par défaut du PEFA Converter et remplace, année par année, les lignes des flux couverts par les clés tunisiennes. Il écrit `concordance_matrix.parquet`, le tableau des écarts aux sections de la CITI par défaut et une comparaison des soutes du bilan avec celles de l'inventaire, et vérifie que la feuille des éléments de passage de l'outil est vide.
+
+## 13_compile_pefa_tables.py {#script-13 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/pefa/13_compile_pefa_tables.py)
+
+Ce script compile les tableaux physiques des ressources et des emplois de deux façons : en appelant la fonction `EB2PEFA` du PEFA Converter sans la modifier, et en appliquant chacune de ses règles de façon explicite. Il exécute les deux sur l'exemple de l'outil et sur le bilan tunisien, avec la matrice par défaut et la matrice tunisienne, pour chaque année, et s'arrête si elles diffèrent de plus de 10^-9^ PJ. Il écrit `pefa.parquet` (matrice tunisienne), `pefa_isic.parquet` (matrice par défaut) et le tableau de concordance.
+
+## 14_check_pefa_and_indicators.py {#script-14 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/pefa/14_check_pefa_and_indicators.py)
+
+Ce script vérifie que les ressources naturelles et les résidus s'équilibrent exactement et que les produits énergétiques s'équilibrent à l'arrondi du bilan près, compare l'utilisation d'énergie aux achats de produits énergétiques dans le TRE et calcule les indicateurs par activité. Il écrit les tableaux d'équilibre par catégorie et par produit, le tableau de vraisemblance et les indicateurs.
+
+## 15_export_pefa.py {#script-15 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/pefa/15_export_pefa.py)
+
+Ce script écrit `pefa_accounts.xlsx` en anglais, en français et en arabe, avec les libellés des tables de correspondance. Les classeurs arabes se lisent de droite à gauche.
+
+## 30_publish_tables.py {#script-30 .unnumbered .unlisted}
+
+[Voir sur GitHub](https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/report/30_publish_tables.py)
+
+Ce script publie les tableaux et les libellés lus par ce document, les présentations et l'explorateur de données dans `data/outputs/tables/` et `data/outputs/labels/`, en Parquet et en CSV. Il construit aussi les tableaux de flux des diagrammes de Sankey et rassemble les contrôles de tous les scripts.

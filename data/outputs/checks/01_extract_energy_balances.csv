@@ -1,0 +1,4 @@
+script,check,value,tolerance,unit,passed,description
+01_extract_energy_balances,flow_hierarchy,2.0,2.5,ktoe,true,Largest gap between a flow total and the signed sum of its sub-flows
+01_extract_energy_balances,product_hierarchy,2.0,2.5,ktoe,true,Largest gap between a product total and the sum of its products
+01_extract_energy_balances,availability_identity,1.5,2.5,ktoe,true,Largest gap in: available = supply - transformation - own use - losses

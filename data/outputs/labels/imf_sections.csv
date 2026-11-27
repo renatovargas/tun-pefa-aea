@@ -1,0 +1,14 @@
+code,order,en,fr,ar
+A,1,"Agriculture, forestry and fishing","Agriculture, sylviculture et pêche",الفلاحة والغابات والصيد البحري
+B,2,Mining and quarrying,Industries extractives,الصناعات الاستخراجية
+C,3,Manufacturing,Industrie manufacturière,الصناعات التحويلية
+D,4,"Electricity, gas, steam and air conditioning supply","Production et distribution d'électricité, de gaz, de vapeur et d'air conditionné",إنتاج وتوزيع الكهرباء والغاز والبخار وتكييف الهواء
+E,5,"Water supply, sewerage, waste management and remediation","Production et distribution d'eau, assainissement, gestion des déchets et dépollution",توزيع المياه والتطهير ومعالجة النفايات
+F,6,Construction,Construction,البناء والأشغال العامة
+H,7,Transportation and storage,Transports et entreposage,النقل والتخزين
+Other,8,Other services,Autres services,خدمات أخرى
+HH,9,Households,Ménages,الأسر
+ACC,10,Accumulation,Accumulation,التراكم
+ROW,11,Rest of the world,Reste du monde,بقية العالم
+ENV,12,Environment,Environnement,البيئة
+STATDIFF,13,Statistical difference,Écart statistique,الفارق الإحصائي

@@ -1,0 +1,27 @@
+---
+title: "Présentations"
+subtitle: "Diapositives de l'atelier technique sur les comptes de l'énergie et des émissions atmosphériques, Tunis, 7 au 11 décembre 2026"
+toc: false
+---
+
+Chaque présentation correspond à une séance de l'atelier. Les graphiques et les chiffres sont lus dans les mêmes tableaux que les documents ; les diapositives suivent donc les données. Ouvrez une présentation, puis appuyez sur `F` pour le plein écran, sur `S` pour la vue de l'orateur et sur `Échap` pour une vue d'ensemble des diapositives.
+
+| Jour | Heure | Séance | Présentation |
+|:--|:--|:--|:--|
+| Lundi 7 décembre | 11 h 15 | Aperçu du cadre du SCEE | [L'énergie et les émissions dans le SCEE](../slides/01-seea-framework/index.html){target="_blank"} |
+| | 13 h 30 | Dispositif institutionnel des statistiques de l'énergie | [Des statistiques de l'énergie aux comptes de l'énergie](../slides/02-data-sources/index.html){target="_blank"} |
+| | 15 h 15 | Démonstration des outils PEFA et AEA | [Les outils du FMI et un pipeline reproductible](../slides/03-tools-and-pipeline/index.html){target="_blank"} |
+| Mardi 8 décembre | 9 h 00 | Comptes de l'énergie : nomenclatures d'activités et de produits | [Produits et activités](../slides/04-pefa-classifications/index.html){target="_blank"} |
+| | 11 h 15 | Comptes de l'énergie : matrice d'allocation | [La matrice d'allocation](../slides/05-pefa-allocation/index.html){target="_blank"} |
+| | 13 h 45 | Comptes de l'énergie : ajustement de résidence et contrôles de cohérence | [Résidence et contrôles de cohérence](../slides/06-pefa-residence-checks/index.html){target="_blank"} |
+| | 15 h 45 | Compilation et diffusion des comptes de l'énergie | [Compilation et diffusion](../slides/07-pefa-results/index.html){target="_blank"} |
+| Mercredi 9 décembre | 9 h 00 | Dispositif institutionnel et sources des comptes des émissions | [Institutions et sources](../slides/08-aea-sources/index.html){target="_blank"} |
+| | 11 h 15 | Comptes des émissions : nomenclatures d'activités et de sources | [Sources et activités](../slides/09-aea-classifications/index.html){target="_blank"} |
+| | 13 h 45 | Comptes des émissions : matrice d'allocation, résidence et contrôles | [Matrice, résidence et contrôles](../slides/10-aea-allocation-residence/index.html){target="_blank"} |
+| | 15 h 45 | Compilation et diffusion des comptes des émissions | [Compilation et diffusion](../slides/11-aea-results/index.html){target="_blank"} |
+| Jeudi 10 décembre | 9 h 00 | Formats de diffusion et indicateurs | [Formats de diffusion et indicateurs](../slides/12-indicators-dissemination/index.html){target="_blank"} |
+| | 11 h 15 | Plan de travail des comptes de l'énergie et des émissions | [Vers une production régulière](../slides/13-workplan/index.html){target="_blank"} |
+
+: Présentations par séance de l'atelier. {tbl-colwidths="[18,8,40,34]"}
+
+Les séances du jeudi après-midi et du vendredi sont consacrées aux discussions et aux recommandations, et s'appuient sur les présentations ci-dessus.

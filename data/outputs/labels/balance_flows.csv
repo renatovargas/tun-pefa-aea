@@ -1,0 +1,48 @@
+code,level,parent,en,fr,ar
+PROD,1,GIC,Primary production,Production primaire,الإنتاج الأولي
+IMP,1,GIC,Imports,Importations,الواردات
+STOCK,1,GIC,Stock changes,Variation des stocks,التغير في المخزون
+EXP,1,GIC,Exports,Exportations,الصادرات
+BUNKERS,1,GIC,International bunkers,Soutes internationales,وقود السفن والطائرات الدولية
+GIC,0,,Gross inland consumption,Consommation intérieure brute,الاستهلاك الداخلي الخام
+TI,0,,Transformation inputs,Entrées en transformation,مدخلات التحويل
+TI_MAINPLANT,1,TI,Main activity thermal power plants,Centrales thermiques : activité principale,محطات حرارية: نشاط رئيسي
+TI_AUTOPLANT,1,TI,Autoproducer thermal power plants,Centrales thermiques : autoproduction,محطات حرارية: إنتاج ذاتي
+TI_REFINERY,1,TI,Refineries,Raffineries,المصافي
+TI_CHARCOAL,1,TI,Charcoal production,Production de charbon de bois,إنتاج الفحم الخشبي
+TO,0,,Transformation outputs,Sorties de transformation,مخرجات التحويل
+TO_MAINPLANT,1,TO,Main activity thermal power plants,Centrales thermiques : activité principale,محطات حرارية: نشاط رئيسي
+TO_AUTOPLANT,1,TO,Autoproducer thermal power plants,Centrales thermiques : autoproduction,محطات حرارية: إنتاج ذاتي
+TO_REFINERY,1,TO,Refineries,Raffineries,المصافي
+TO_CHARCOAL,1,TO,Charcoal production,Production de charbon de bois,إنتاج الفحم الخشبي
+TRF,0,,"Exchanges, transfers, returns","Échanges, transferts, restitutions",التبادلات والتحويلات والمرتجعات
+TRF_PROD,1,TRF,Interproduct transfers,Échanges entre produits,التبادلات بين المنتجات
+TRF_TRANSF,1,TRF,Products transferred,Produits transférés,المنتجات المحولة
+TRF_PETCHEM,1,TRF,Returns from petrochemical industry,Restitutions de la pétrochimie,مرتجعات البتروكيمياء
+OWNUSE,0,,Energy industry own use,Consommation de la branche énergie,استهلاك قطاع الطاقة
+LOSSES,0,,Losses,Pertes,الخسائر
+AVAIL,0,,Available for final consumption,Disponible pour la consommation finale,المتاح للاستهلاك النهائي
+NEU,1,AVAIL,Non-energy final consumption,Consommation finale non énergétique,الاستهلاك النهائي غير الطاقوي
+NEU_CHEM,2,NEU,Chemicals,Chimie,الكيمياء
+NEU_OTHER,2,NEU,Other,Autres,أخرى
+FEC,1,AVAIL,Final energy consumption,Consommation finale énergétique,الاستهلاك النهائي للطاقة
+IND,2,FEC,Industry,Industrie,الصناعة
+IND_METAL,3,IND,Basic metals including iron and steel,Fabrications métalliques y compris sidérurgie,الصناعات المعدنية بما فيها الحديد والصلب
+IND_CHEM,3,IND,Chemicals,Chimie,الكيمياء
+IND_NONMET,3,IND,Non-metallic minerals,Produits minéraux non métalliques,المنتجات المعدنية غير الفلزية
+IND_MINING,3,IND,Mining and quarrying,Extraction,الاستخراج
+IND_FOOD,3,IND,"Food, beverages and tobacco","Alimentation, boissons, tabac",الأغذية والمشروبات والتبغ
+IND_TEXTILE,3,IND,"Textiles, leather and clothing","Textiles, cuir, habillement",النسيج والجلود والملابس
+IND_PAPER,3,IND,Paper and printing,Papier et imprimerie,الورق والطباعة
+IND_MACH,3,IND,Machinery and electrical equipment,Fabrications mécaniques et électriques,الصناعات الميكانيكية والكهربائية
+IND_OTHER,3,IND,Other industries,Autres industries,صناعات أخرى
+TRA,2,FEC,Transport,Transport,النقل
+TRA_RAIL,3,TRA,Rail,Transport ferroviaire,النقل بالسكك الحديدية
+TRA_ROAD,3,TRA,Road,Transport routier,النقل البري
+TRA_AIR,3,TRA,Domestic aviation,Transport aérien,النقل الجوي
+TRA_PIPE,3,TRA,Pipeline transport,Transport par conduites,النقل عبر الأنابيب
+OTH,2,FEC,"Households, commerce, public administration, etc.","Foyers domestiques, commerce, administration, etc.",الأسر والتجارة والإدارة وغيرها
+OTH_RES,3,OTH,Households,Foyers domestiques,الأسر
+OTH_COM,3,OTH,"Commerce, public administration, hotels, etc.","Commerce, administration, hôtels, etc.",التجارة والإدارة والفنادق وغيرها
+OTH_AGR,3,OTH,Agriculture and fishing,Agriculture et pêche,الفلاحة والصيد البحري
+STATDIFF,1,AVAIL,Statistical difference,Écart statistique,الفارق الإحصائي

@@ -1,0 +1,75 @@
+---
+title: "Comptes de l'énergie : produits et activités"
+subtitle: "Les nomenclatures des comptes physiques des flux d'énergie"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-08"
+date-format: long
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## Lignes et colonnes des comptes {.theme-content}
+
+- **Lignes** : énergie issue des ressources naturelles, produits énergétiques par groupe de la SIEC, résidus d'énergie [@seeaenergy2019; @ires2018].
+- **Colonnes** : branches, ménages, accumulation, reste du monde, environnement.
+- Tunisie : les **24 branches** des tableaux des ressources et des emplois, qui s'agrègent en sections de la CITI de l'outil du FMI.
+
+## Produits : du bilan aux groupes de la SIEC
+
+```{python}
+p = lookup("balance_products").filter(pl.col("iea_product").is_not_null())
+gt(p.select(pl.col("fr").alias("Produit du bilan"), pl.col("en").alias("Anglais"), pl.col("iea_product").alias("Produit du modèle de l'AIE")).head(12))
+```
+
+## Flux : le bilan dans le modèle de l'AIE
+
+- Chaque flux tunisien va à un flux du modèle de l'AIE ; quelques cellules font exception.
+- Exemple : l'ONEM enregistre l'électricité éolienne, solaire et hydraulique comme un échange entre produits ; l'AIE l'enregistre comme une entrée des centrales.
+- Les signes suivent l'AIE : exportations, soutes, entrées en transformation et consommation propre sont négatives.
+
+## Activités : une ligne du bilan, une ou plusieurs branches
+
+```{python}
+m = lookup("balance_to_activities").filter(pl.col("method") == "direct").select(
+    pl.col("iea_flow").alias("Flux"), pl.col("activity").alias("Branche"), pl.col("rationale_fr").alias("Raison"))
+gt(m.filter(pl.col("Flux").is_in(["Iron and steel", "Chemical and petrochemical", "Non-metallic minerals", "Rail", "Residential",
+                                  "Oil refineries (transf.)", "Charcoal production plants (transf.)"])))
+```
+
+## Deux lignes demandent des clés
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.4
+charts.activity_keys(LAST, figsize=(10, 4.4))
+```
+
+## Points à discuter
+
+- Le niveau de 24 branches du TRE convient-il, ou un niveau plus fin serait-il utile ?
+- Les branches industrielles de l'ONEM correspondent-elles à celles de l'INS, en particulier pour les métaux et les industries diverses ?
+- L'ONEM pourrait-il répartir la consommation propre de la branche énergie par branche ?
+- Une enquête sur le carburant routier par type d'utilisateur serait-elle réalisable ?
+
+## Références
+
+::: {#refs}
+:::

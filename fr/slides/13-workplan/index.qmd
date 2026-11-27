@@ -1,0 +1,76 @@
+---
+title: "Vers une production régulière"
+subtitle: "Un plan de travail pour les comptes de l'énergie et des émissions atmosphériques"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-10"
+date-format: long
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## Ce qui existe aujourd'hui {.theme-content}
+
+- Une première compilation complète des deux comptes, de `{python} FIRST` à `{python} LAST`.
+- Un pipeline ouvert qui reproduit les outils du FMI et s'exécute en moins d'une minute.
+- Des documents, des classeurs Excel en trois langues et un explorateur de données.
+- Une liste d'hypothèses et de questions ouvertes, chacune inscrite dans une table de correspondance.
+
+## Un cycle annuel
+
+```{mermaid}
+flowchart LR
+  A["Nouveau bilan (ONEM),<br/>inventaire (ANME),<br/>TRE (INS)"] --> B["Ajouter les fichiers<br/>dans data/sources/"]
+  B --> C["Exécuter le pipeline<br/>et ses contrôles"]
+  C --> D["Revoir les tables de correspondance<br/>avec les producteurs de données"]
+  D --> C
+  C --> E["Publier classeurs,<br/>documents, explorateur"]
+```
+
+## Rôles
+
+| Tâche | Qui |
+|:--|:--|
+| Fournir le bilan énergétique, dans une présentation stable | ONEM |
+| Fournir les classeurs CRT | ANME et partenaires de l'inventaire |
+| Fournir les tableaux des ressources et des emplois | INS, comptes nationaux |
+| Exécuter le pipeline, revoir les tables, publier | INS, comptes de l'environnement |
+| Valider les choix de répartition | INS avec l'ONEM et l'ANME |
+
+## Priorités pour l'année à venir
+
+1. Valider les hypothèses de répartition avec l'ONEM, l'ANME et les comptes nationaux.
+2. Obtenir des données de résidence pour le transport international.
+3. Former une équipe de l'INS à l'exécution et à la maintenance du pipeline.
+4. Convenir d'une première publication et de son calendrier.
+5. Étendre aux polluants atmosphériques et aux comptes d'actifs énergétiques lorsque les données le permettront.
+
+## Compétences et outils
+
+- Python avec `uv` : une commande pour installer, une pour compiler.
+- Tables de correspondance en CSV : modifiées dans Excel, revues sur GitHub.
+- Quarto pour les documents et le site.
+- Les outils du FMI restent la référence de contrôle.
+
+## Points à discuter
+
+- Qui pilote les comptes à l'INS, et avec quelle équipe ?
+- Des accords formels de transmission des données avec l'ONEM et l'ANME ?
+- L'hébergement du code et du site ?

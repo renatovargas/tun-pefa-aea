@@ -1,0 +1,11 @@
+run,year,max_gap_kt
+default_without_oecd,,7.275957614183426e-12
+default_with_oecd,,7.275957614183426e-12
+tunisian_with_oecd,2015,7.275957614183426e-12
+tunisian_with_oecd,2016,1.8189894035458565e-12
+tunisian_with_oecd,2017,7.275957614183426e-12
+tunisian_with_oecd,2018,7.275957614183426e-12
+tunisian_with_oecd,2019,7.275957614183426e-12
+tunisian_with_oecd,2020,7.275957614183426e-12
+tunisian_with_oecd,2021,7.275957614183426e-12
+tunisian_with_oecd,2022,7.275957614183426e-12

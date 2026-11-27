@@ -1,13 +1,13 @@
 /*-- scss:defaults --*/
 
-// Police arabe pour le site en arabe (direction rtl fixée dans _quarto-ar.yml)
+// Arabic font for the Arabic site (rtl direction is set in _quarto-ar.yml)
 $web-font-path: "https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300..800&display=swap";
 $font-family-sans-serif: "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
 $headings-font-family: "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
 
 /*-- scss:rules --*/
 
-// Le code et les tableaux de données restent de gauche à droite
+// Code and data tables stay left to right
 pre, code, .sourceCode, .cell-output {
   direction: ltr;
   text-align: left;

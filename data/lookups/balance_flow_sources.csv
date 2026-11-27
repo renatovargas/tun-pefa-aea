@@ -1,0 +1,62 @@
+block,source_label,code
+supply,Production primaire,PROD
+supply,Importation,IMP
+supply,Variation des stocks,STOCK
+supply,Exportations,EXP
+supply,Soutess internationales,BUNKERS
+supply,Soutes internationales,BUNKERS
+supply,Consommation intérieur brute,GIC
+supply,Consommation intérieure brute,GIC
+transformation_input,Entrées en transformation,TI
+transformation_input,Centrales thermiques publiques,TI_MAINPLANT
+transformation_input,Centrales thermiques: activité principale,TI_MAINPLANT
+transformation_input,"Centrales thermiques, activité principale",TI_MAINPLANT
+transformation_input,Centrales thermiques des autoproducteurs,TI_AUTOPLANT
+transformation_input,Centrales thermiques: autoproduction,TI_AUTOPLANT
+transformation_input,Raffineries,TI_REFINERY
+transformation_input,production de charbon de bois,TI_CHARCOAL
+transformation_output,Sortie de transformation,TO
+transformation_output,Centrales thermiques publiques,TO_MAINPLANT
+transformation_output,Centrales thermiques: activité principale,TO_MAINPLANT
+transformation_output,"Centrales thermiques, activité principale",TO_MAINPLANT
+transformation_output,Centrales thermiques des autoproducteurs,TO_AUTOPLANT
+transformation_output,Centrales thermiques: autoproduction,TO_AUTOPLANT
+transformation_output,Raffineries,TO_REFINERY
+transformation_output,production de charbon de bois,TO_CHARCOAL
+transfers,"Echanges, transfer, restitutions",TRF
+transfers,Echanges entre produits,TRF_PROD
+transfers,Produits transférés,TRF_TRANSF
+transfers,Restitutions de la pétrochimie,TRF_PETCHEM
+transfers,Consommantion de la branche énergie,OWNUSE
+transfers,Consommation de la branche Energie,OWNUSE
+transfers,Pertes,LOSSES
+transfers,Disponible pour consom. Finale,AVAIL
+non_energy,Consommation finale non énergétique,NEU
+non_energy,chimie,NEU_CHEM
+non_energy,Chimie,NEU_CHEM
+non_energy,Autres,NEU_OTHER
+energy,Consommation finale énergétique,FEC
+energy,Industrie,IND
+energy,Sidérurgie,IND_METAL
+energy,Métaux non ferreux,IND_METAL
+energy,Fabrications métalliques,IND_METAL
+energy,Fabrications métalliques y compris sidérurgie,IND_METAL
+energy,Chimie,IND_CHEM
+energy,Produits minéraux non métalliques,IND_NONMET
+energy,Extraction,IND_MINING
+energy,"Alimentation, boisson, tabac",IND_FOOD
+energy,"Textiles, cuir, habillement",IND_TEXTILE
+energy,Papier et imprimerie,IND_PAPER
+energy,Fabrications mécaniques et électriques,IND_MACH
+energy,Autres industries,IND_OTHER
+energy,Transport,TRA
+energy,Ferorviaires,TRA_RAIL
+energy,Routes,TRA_ROAD
+energy,Aériens,TRA_AIR
+energy,pipeline,TRA_PIPE
+energy,"Foyers domestiques, commerce, adm, etc.",OTH
+energy,Foyers domestiques,OTH_RES
+energy,"commerce, adm, Hotels, etc,",OTH_COM
+energy,Agriculture,OTH_AGR
+energy,Agriculture et pêche,OTH_AGR
+energy,Ecart statistique,STATDIFF

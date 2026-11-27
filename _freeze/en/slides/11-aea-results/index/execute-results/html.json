@@ -1,0 +1,12 @@
+{
+  "hash": "5a170c8c33b3ac3370a3217c23701afd",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Air emissions accounts: compilation and dissemination\"\nsubtitle: \"First results for 2015 to 2022\"\nauthor:\n  - name: Renato Vargas\n  - name: Achille Pegoue\ndate: \"2026-12-09\"\ndate-format: long\nlang: en-US\nbibliography: ../../../assets/references.bib\ncsl: ../../../assets/apa-en.csl\nexecute:\n  echo: false\n  warning: false\nformat:\n  revealjs:\n    theme: [simple, ../../../assets/slides.scss]\n    footer: \"Energy and emissions accounts for Tunisia\"\n    slide-number: true\n    width: 1100\n    height: 700\n    title-slide-attributes:\n      class: theme-title\n      data-state: sans-pied\n---\n\n\n\n\n## Key figures {.theme-content}\n\n- Emissions of resident units in 2022: **46\\.9 Mt CO2 eq**.\n- Households: **11%** of the total.\n- Intensity of the economy: **326 t CO2 eq** per million TND of value added.\n\n## Who emits\n\n::: {#a38d0670 .cell fig-height='4.2' fig-width='10' execution_count=3}\n\n::: {.cell-output .cell-output-display execution_count=3}\n![](index_files/figure-revealjs/cell-4-output-1.png){width=1487 height=620}\n:::\n:::\n\n\n## Emission intensity\n\n::: {#b0c03512 .cell fig-height='4.2' fig-width='10' execution_count=4}\n\n::: {.cell-output .cell-output-display execution_count=4}\n![](index_files/figure-revealjs/cell-5-output-1.png){width=1487 height=620}\n:::\n:::\n\n\n## Dissemination\n\n- Excel workbooks in three languages: accounts by activity and gas, bridge table, source by activity, indicators.\n- The format follows the Eurostat questionnaire, which eases international comparison [@eurostat2015aea].\n- Methods document and data explorer on the website.\n\n## Points to discuss\n\n- Joint release with the inventory, or with the national accounts?\n- Which intensities to publish: per output, per value added, per household spending?\n- Revision policy when the inventory or the national accounts are revised.\n\n## References\n\n::: {#refs}\n:::\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

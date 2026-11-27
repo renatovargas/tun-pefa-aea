@@ -1,0 +1,27 @@
+script,check,value,tolerance,unit,passed,description
+01_extract_energy_balances,flow_hierarchy,2.0,2.5,ktoe,true,Largest gap between a flow total and the signed sum of its sub-flows
+01_extract_energy_balances,product_hierarchy,2.0,2.5,ktoe,true,Largest gap between a product total and the sum of its products
+01_extract_energy_balances,availability_identity,1.5,2.5,ktoe,true,Largest gap in: available = supply - transformation - own use - losses
+02_extract_crt_inventory,summary2_categories,9.094947017729282e-13,0.01,kt CO2 eq,true,"Largest gap between Data and Summary2 by category and gas, except N2O of 1.B.2"
+02_extract_crt_inventory,summary2_n2o_1B2,0.23638000000005377,1.0,kt CO2 eq,true,Largest gap for N2O of 1.B.2 (1.B.2.b.ii is in Data from 2019 but not in Summary2)
+03_extract_supply_use_tables,supply_total,0.6859179120000363,1.0,million TND,true,Largest gap between total supply and the sum of supply items
+03_extract_supply_use_tables,supply_equals_use,0.076611882999714,1.0,million TND,true,"Largest gap between total supply and the sum of uses, by product"
+03_extract_supply_use_tables,output_identity,0.03921697700002369,1.0,million TND,true,Largest gap in output = intermediate consumption + value added
+10_map_balance_to_iea_template,conservation,4.656612873077393e-10,1e-6,TJ,true,Energy of elementary cells before and after the mapping
+10_map_balance_to_iea_template,iea_identity,2.9999999999999845,3.5,ktoe,true,Largest gap between net supply and final consumption by product (rounding of the published balance)
+11_build_activity_keys,factors_sum_to_one,1.1102230246251565e-16,1e-9,share,true,Factors of each flow add up to one
+12_build_concordance_matrix,factors_sum_to_one,1.1102230246251565e-16,1e-9,share,true,Factors of covered flows add up to one
+12_build_concordance_matrix,aviation_bunkers_vs_inventory,0.45077458180571295,1.0,percent,true,Aviation bunkers in the balance against memo item 1.D.1.a of the inventory
+12_build_concordance_matrix,bridging_items_empty,0.0,0.0,cells,true,Filled cells in the Bridging_Items sheet of the tool
+13_compile_pefa_tables,explicit_equals_tool,4.547473508864641e-13,1e-9,PJ,true,"Largest cell gap between EB2PEFA and the explicit layer, all runs"
+13_compile_pefa_tables,example_balanced,0.001999999996769475,0.01,PJ,true,Supply minus use on the tool example without the Total column
+14_check_pefa_and_indicators,natural_inputs_and_residuals_balance,4.170798288439912e-12,1e-6,ktoe,true,Supply minus use of natural inputs and residuals
+14_check_pefa_and_indicators,energy_products_balance,3.300000000001599,5.0,ktoe,true,Supply minus use by energy product (rounding and statistical difference of the balance)
+20_prepare_ghg_inventory,total_vs_summary2,7.275957614183426e-12,0.01,kt CO2 eq,true,"Inventory total (including LULUCF) against the net total of Summary2, after N2O of 1.B.2.b.ii"
+20_prepare_ghg_inventory,all_categories_have_tool_code,0.0,0.0,categories,true,Categories outside the memo items without a code of the I2A tool
+20_prepare_ghg_inventory,prepared_file_sectors,0.0008519999999998529,0.01,kt,true,Sector totals of Tunisia_UNFCCC.xlsx against the CRT tables (kt of each gas)
+21_build_conversion_matrix,all_codes_have_rule,0.0,0.0,codes,true,Tool codes without a rule in crt_to_activities.csv
+21_build_conversion_matrix,factors_sum_to_one,1.1102230246251565e-16,1e-9,share,true,Factors of each code add up to one
+21_build_conversion_matrix,known_activities,0.0,0.0,activities,true,Activities of the matrix missing from data/lookups/activities.csv
+22_compile_aea_tables,explicit_equals_tool,7.275957614183426e-12,1e-9,kt CO2 eq,true,"Largest cell gap between I2A and the explicit layer, all runs"
+23_bridge_and_indicators,bridge_closes,7.275957614183426e-12,1e-6,kt CO2 eq,true,Accounts plus bridging items minus the inventory without LULUCF

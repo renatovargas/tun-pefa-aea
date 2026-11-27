@@ -1,0 +1,37 @@
+source_label,code
+Total tous produits,TOTAL
+Total tous produits ktep,TOTAL
+Pétrole brut,CRUDE
+Liquides de gaz,NGL
+GPL primaire,NGL
+Produits Pétroliers,OILPROD
+Total Produits Pétroliers,OILPROD
+Gaz de raffinage,REFGAS
+GPL,LPG
+Essences,GASOLINE
+Pétrole lampant,KEROSENE
+Jet fuels,JETFUEL
+Naphtha,NAPHTHA
+Gasoil,GASOIL
+Gasoil ktep,GASOIL
+Fuel oil,FUELOIL
+PETCOKE,PETCOKE
+Autres produits,OTHOIL
+Gaz Naturel,NATGAS
+Energies Renouvelabl,RENEW
+Total Energies Renouvelables,RENEW
+Total Energies Renouvelables ktep,RENEW
+Total Energie Renouvelable s ktep,RENEW
+Solaire thermique,SOLARTH
+Solaire photovoltaique,SOLARPV
+Solaire photovoltaiq ue,SOLARPV
+photovoltai que,SOLARPV
+géothermie,GEOTHERM
+Biomasse,BIOMASS
+Energie éolienne,WIND
+Energie éolienne hydraulique,WIND
+Energie hydraulique,HYDRO
+Energie,HYDRO
+Chaleur,HEAT
+électricité,ELEC
+Electricité,ELEC

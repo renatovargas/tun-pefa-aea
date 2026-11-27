@@ -1,0 +1,24 @@
+---
+title: "About"
+toc: false
+---
+
+## Authors
+
+Renato Vargas, consultant to the Statistics Department of the International Monetary Fund (IMF), and Achille Pegoue, senior economist in the Real Sector Division of the IMF Statistics Department.
+
+## Data
+
+The accounts use the national energy balances of the Observatoire national de l'énergie et des mines (ONEM), the national greenhouse gas inventory coordinated by the Agence nationale pour la maîtrise de l'énergie (ANME), and the supply and use tables of the Institut national de la statistique (INS). The residence adjustment of the emissions accounts uses estimates of air and maritime transport emissions by the Organisation for Economic Co-operation and Development (OECD).
+
+## IMF tools
+
+The compilation follows the PEFA Converter and the Air Emissions Account Converter (I2A) of the IMF Statistics Department, written by Achille Pegoue. The tools are published in the folder `imf-tools/` of the repository with their manuals. The pipeline calls their functions unchanged to check its own explicit implementation.
+
+## Code and reproducibility
+
+All code, lookup tables and outputs are in the repository <https://github.com/renatovargas/tun-pefa-aea>. Running `uv sync` and `uv run python scripts/run_pipeline.py` compiles the accounts from the source files in less than a minute.
+
+## Disclaimer
+
+The accounts are provisional. The views expressed are those of the authors and do not necessarily represent the views of the IMF, its Executive Board or IMF management, or of the Tunisian authorities.

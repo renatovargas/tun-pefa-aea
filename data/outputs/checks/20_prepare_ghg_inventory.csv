@@ -1,0 +1,4 @@
+script,check,value,tolerance,unit,passed,description
+20_prepare_ghg_inventory,total_vs_summary2,7.275957614183426e-12,0.01,kt CO2 eq,true,"Inventory total (including LULUCF) against the net total of Summary2, after N2O of 1.B.2.b.ii"
+20_prepare_ghg_inventory,all_categories_have_tool_code,0.0,0.0,categories,true,Categories outside the memo items without a code of the I2A tool
+20_prepare_ghg_inventory,prepared_file_sectors,0.0008519999999998529,0.01,kt,true,Sector totals of Tunisia_UNFCCC.xlsx against the CRT tables (kt of each gas)

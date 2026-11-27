@@ -1,0 +1,93 @@
+---
+title: "L'énergie et les émissions dans le SCEE"
+subtitle: "Pourquoi des comptes, et leur lien avec les statistiques existantes"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-07"
+date-format: long
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## Trois systèmes, une économie {.theme-content}
+
+- Les **statistiques de l'énergie** décrivent les ressources et les emplois des produits énergétiques sur le territoire, par secteur technique (le bilan énergétique de l'ONEM).
+- Les **inventaires des gaz à effet de serre** décrivent les émissions sur le territoire, par procédé (l'inventaire coordonné par l'ANME).
+- Les **comptes nationaux** décrivent l'économie des unités résidentes, par branche, en valeur (les tableaux des ressources et des emplois de l'INS).
+
+Le Système de comptabilité environnementale et économique (SCEE) relie les trois [@seea2014].
+
+## Ce qu'apporte le SCEE
+
+- Les **mêmes unités et nomenclatures** que les comptes nationaux : 24 branches, ménages, reste du monde.
+- Des **tableaux physiques des ressources et des emplois**, où chaque flux a un fournisseur et un utilisateur, et où les ressources égalent les emplois.
+- Le **principe de résidence** : ce que font les unités résidentes, où qu'elles se trouvent.
+- Des indicateurs qui rapportent les flux physiques à la production, à la valeur ajoutée et à la consommation.
+
+## Les comptes présentés ici
+
+:::: {.columns}
+::: {.column width="50%"}
+**Comptes physiques des flux d'énergie (PEFA)**
+
+Énergie issue des ressources naturelles, produits énergétiques et résidus d'énergie, en térajoules, par branche et pour les ménages [@seeaenergy2019; @eurostat2014pefa].
+:::
+::: {.column width="50%"}
+**Comptes des émissions atmosphériques (AEA)**
+
+Gaz à effet de serre émis par les branches et les ménages, en tonnes d'équivalent CO2, conciliés avec l'inventaire par un tableau de passage [@eurostat2015aea].
+:::
+::::
+
+## Les flux d'énergie dans le SCEE
+
+```{mermaid}
+flowchart LR
+  ENV1["Environnement"] -- "ressources naturelles" --> IND["Branches résidentes"]
+  ROW1["Reste du monde"] -- "importations" --> IND
+  IND -- "produits énergétiques" --> HH["Ménages"]
+  IND -- "exportations" --> ROW2["Reste du monde"]
+  IND -- "résidus" --> ENV2["Environnement"]
+  HH -- "résidus" --> ENV2
+```
+
+L'énergie se conserve : chaque emploi d'énergie retourne à l'environnement sous forme de résidu de même montant [@seeaenergy2019, § 2.14 à 2.21].
+
+## Un premier aperçu des résultats
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.6
+charts.energy_supply(figsize=(9, 3.6))
+```
+
+En `{python} LAST`, les importations ont fourni `{python} pj(read("pefa_sankey").filter(pl.col("year") == LAST, pl.col("source") == "IMP")["tj"].sum())` PJ de produits énergétiques.
+
+## Ce que permettent les comptes
+
+- L'énergie et les émissions **par dinar de valeur ajoutée**, par branche.
+- La part des **ménages** dans l'utilisation d'énergie et les émissions, et ses composantes.
+- Des données cohérentes pour les **modèles économiques** et l'analyse des politiques climatiques.
+- La comparaison internationale, avec les mêmes concepts que les autres pays.
+
+## Références
+
+::: {#refs}
+:::

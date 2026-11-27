@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar-TN" xml:lang="ar-TN" dir="rtl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Renato Vargas">
+<meta name="author" content="Achille Pegoue">
+
+<title>حسابات انبعاثات الهواء في تونس – Tunisia PEFA-AEA</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-0278a19f3b3aafa4dea5f1b9d5efe64e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-4.1.1.min"</script>
+
+
+
+<link rel="stylesheet" href="../../../assets/styles.css">
+</head>
+
+<body class="quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+   
+  <ul>
+  <li><a href="#الملخص" id="toc-الملخص" class="nav-link active" data-scroll-target="#الملخص">الملخص</a></li>
+  <li><a href="#مقدمة" id="toc-مقدمة" class="nav-link" data-scroll-target="#مقدمة"><span class="header-section-number">1</span> مقدمة</a></li>
+  <li><a href="#المفاهيم" id="toc-المفاهيم" class="nav-link" data-scroll-target="#المفاهيم"><span class="header-section-number">2</span> المفاهيم</a>
+  <ul class="collapse">
+  <li><a href="#الانبعاثات-بوصفها-تدفقات-بقايا" id="toc-الانبعاثات-بوصفها-تدفقات-بقايا" class="nav-link" data-scroll-target="#الانبعاثات-بوصفها-تدفقات-بقايا"><span class="header-section-number">2.1</span> الانبعاثات بوصفها تدفقات بقايا</a></li>
+  <li><a href="#غازات-الاحتباس-الحراري-ووحدتها-المشتركة" id="toc-غازات-الاحتباس-الحراري-ووحدتها-المشتركة" class="nav-link" data-scroll-target="#غازات-الاحتباس-الحراري-ووحدتها-المشتركة"><span class="header-section-number">2.2</span> غازات الاحتباس الحراري ووحدتها المشتركة</a></li>
+  <li><a href="#الإقليم-والإقامة" id="toc-الإقليم-والإقامة" class="nav-link" data-scroll-target="#الإقليم-والإقامة"><span class="header-section-number">2.3</span> الإقليم والإقامة</a></li>
+  <li><a href="#ما-تتركه-الحسابات-جانبا" id="toc-ما-تتركه-الحسابات-جانبا" class="nav-link" data-scroll-target="#ما-تتركه-الحسابات-جانبا"><span class="header-section-number">2.4</span> ما تتركه الحسابات جانبًا</a></li>
+  </ul></li>
+  <li><a href="#مصادر-البيانات" id="toc-مصادر-البيانات" class="nav-link" data-scroll-target="#مصادر-البيانات"><span class="header-section-number">3</span> مصادر البيانات</a></li>
+  <li><a href="#المنهجية" id="toc-المنهجية" class="nav-link" data-scroll-target="#المنهجية"><span class="header-section-number">4</span> المنهجية</a>
+  <ul class="collapse">
+  <li><a href="#إعداد-الجرد" id="toc-إعداد-الجرد" class="nav-link" data-scroll-target="#إعداد-الجرد"><span class="header-section-number">4.1</span> إعداد الجرد</a></li>
+  <li><a href="#من-فئات-الجرد-إلى-الأنشطة-الاقتصادية" id="toc-من-فئات-الجرد-إلى-الأنشطة-الاقتصادية" class="nav-link" data-scroll-target="#من-فئات-الجرد-إلى-الأنشطة-الاقتصادية"><span class="header-section-number">4.2</span> من فئات الجرد إلى الأنشطة الاقتصادية</a></li>
+  <li><a href="#إعداد-الحسابات-وتعديل-الإقامة" id="toc-إعداد-الحسابات-وتعديل-الإقامة" class="nav-link" data-scroll-target="#إعداد-الحسابات-وتعديل-الإقامة"><span class="header-section-number">4.3</span> إعداد الحسابات وتعديل الإقامة</a></li>
+  <li><a href="#جدول-الربط-والاختبارات" id="toc-جدول-الربط-والاختبارات" class="nav-link" data-scroll-target="#جدول-الربط-والاختبارات"><span class="header-section-number">4.4</span> جدول الربط والاختبارات</a></li>
+  <li><a href="#المؤشرات-والتصدير" id="toc-المؤشرات-والتصدير" class="nav-link" data-scroll-target="#المؤشرات-والتصدير"><span class="header-section-number">4.5</span> المؤشرات والتصدير</a></li>
+  </ul></li>
+  <li><a href="#النتائج" id="toc-النتائج" class="nav-link" data-scroll-target="#النتائج"><span class="header-section-number">5</span> النتائج</a>
+  <ul class="collapse">
+  <li><a href="#الانبعاثات-عبر-الزمن-وحسب-الغاز" id="toc-الانبعاثات-عبر-الزمن-وحسب-الغاز" class="nav-link" data-scroll-target="#الانبعاثات-عبر-الزمن-وحسب-الغاز"><span class="header-section-number">5.1</span> الانبعاثات عبر الزمن وحسب الغاز</a></li>
+  <li><a href="#من-قطاعات-الجرد-إلى-الاقتصاد" id="toc-من-قطاعات-الجرد-إلى-الاقتصاد" class="nav-link" data-scroll-target="#من-قطاعات-الجرد-إلى-الاقتصاد"><span class="header-section-number">5.2</span> من قطاعات الجرد إلى الاقتصاد</a></li>
+  <li><a href="#الانبعاثات-حسب-النشاط" id="toc-الانبعاثات-حسب-النشاط" class="nav-link" data-scroll-target="#الانبعاثات-حسب-النشاط"><span class="header-section-number">5.3</span> الانبعاثات حسب النشاط</a></li>
+  <li><a href="#كثافة-الانبعاث" id="toc-كثافة-الانبعاث" class="nav-link" data-scroll-target="#كثافة-الانبعاث"><span class="header-section-number">5.4</span> كثافة الانبعاث</a></li>
+  <li><a href="#الحسابات-حسب-النشاط-والغاز" id="toc-الحسابات-حسب-النشاط-والغاز" class="nav-link" data-scroll-target="#الحسابات-حسب-النشاط-والغاز"><span class="header-section-number">5.5</span> الحسابات حسب النشاط والغاز</a></li>
+  </ul></li>
+  <li><a href="#حدود-الحسابات" id="toc-حدود-الحسابات" class="nav-link" data-scroll-target="#حدود-الحسابات"><span class="header-section-number">6</span> حدود الحسابات</a></li>
+  <li><a href="#المراجع" id="toc-المراجع" class="nav-link" data-scroll-target="#المراجع">المراجع</a></li>
+  <li><a href="#annex-scripts" id="toc-annex-scripts" class="nav-link" data-scroll-target="#annex-scripts">الملحق الأول. برامج خط المعالجة</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/ar/documents/emissions-accounts/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="index.pdf"><i class="bi bi-link-45deg"></i>نسخة PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">حسابات انبعاثات الهواء في تونس</h1>
+<p class="subtitle lead">غازات الاحتباس الحراري حسب الفروع والأسر: المفاهيم وطرق الإعداد والنتائج، من 2015 إلى 2022</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Renato Vargas </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            خبير استشاري، إدارة الإحصاء بصندوق النقد الدولي
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Achille Pegoue </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            خبير اقتصادي أول، إدارة الإحصاء بصندوق النقد الدولي
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">27 نوفمبر 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="الملخص" class="level1 unnumbered">
+<h1 class="unnumbered">الملخص</h1>
+<p>تسجل حسابات انبعاثات الهواء (AEA) غازات الاحتباس الحراري التي يطلقها كل فرع من فروع الحسابات القومية والأسر، وفق القواعد نفسها التي تتبعها الحسابات القومية. وهي تجيب عن سؤال لا يجيب عنه جرد غازات الاحتباس الحراري، المنظم حسب العمليات التقنية، إجابة مباشرة: أي أجزاء الاقتصاد تنتج الانبعاثات، وكم تطلق لكل دينار من الإنتاج. تشرح هذه الوثيقة المفاهيم، وتصف كل خطوة من خطوات إعداد قابل للتكرار للحسابات من 2015 إلى 2022، وتعرض النتائج الأولى.</p>
+<p>في سنة 2022، أطلقت فروع النشاط المقيمة والأسر 46.9 مليون طن من مكافئ ثاني أكسيد الكربون. وشكل ثاني أكسيد الكربون 71% من المجموع والميثان 22%. وكانت أكبر الجهات المطلِقة فروع «إنتاج وتوزيع الكهرباء والغاز» و«صناعات مواد البناء» و«الفلاحة والغابات والصيد البحري»، وأطلقت الأسر 11% من المجموع، أساسًا من سياراتها ومساكنها. ويوفق جدول ربط بين الحسابات والجرد الوطني، ويعيد الإعداد إنتاج نتائج أداة تحويل حسابات انبعاثات الهواء لصندوق النقد الدولي (I2A) بفارق لا يتجاوز 7e-12 ألف طن.</p>
+</section>
+<section id="مقدمة" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> مقدمة</h1>
+<p>تبلغ تونس عن انبعاثاتها من غازات الاحتباس الحراري إلى اتفاقية الأمم المتحدة الإطارية بشأن تغير المناخ في جرد وطني، تنسقه الوكالة الوطنية للتحكم في الطاقة لقطاعي الطاقة والعمليات الصناعية، ووزارة الفلاحة للفلاحة واستخدام الأراضي، والديوان الوطني للتطهير للنفايات <span class="citation" data-cites="besbes2026">(<a href="#ref-besbes2026" role="doc-biblioref">Besbes, 2026</a>)</span>. ويتبع الجرد المبادئ التوجيهية للهيئة الحكومية الدولية المعنية بتغير المناخ، ويصنف الانبعاثات حسب المصدر: احتراق الوقود في الصناعات الطاقوية، والنقل البري، والتخمر المعوي للماشية، ومصبات النفايات، وغير ذلك <span class="citation" data-cites="ipcc2006">(<a href="#ref-ipcc2006" role="doc-biblioref">Intergovernmental Panel on Climate Change, 2006</a>)</span>.</p>
+<p>ويخدم هذا التصنيف غرض الجرد جيدًا، لأنه يتبع العمليات التي تسبب الانبعاثات والطرق التي تُقدَّر بها. لكنه لا يبين أي الوحدات الاقتصادية تطلقها. فانبعاثات النقل البري تأتي من الأسر التي تقود سياراتها، ومن شاحنات الصناعات الغذائية، ومن حافلات فرع النقل وسيارات الأجرة. ويشمل الاحتراق في «القطاعات الأخرى» المتاجر والنزل والمكاتب والمساكن. وتعيد حسابات انبعاثات الهواء تنظيم الانبعاثات نفسها حسب فروع الحسابات القومية والأسر <span class="citation" data-cites="eurostat2015aea seea2014">(<a href="#ref-eurostat2015aea" role="doc-biblioref">Eurostat, 2015</a>; <a href="#ref-seea2014" role="doc-biblioref">United Nations وآخرون, 2014</a>)</span>. وعندما تُسجَّل الانبعاثات بهذه الطريقة، يمكن مقارنتها بالإنتاج والقيمة المضافة والتشغيل وحسابات الطاقة، ويمكن أن تغذي النماذج الاقتصادية.</p>
+<p>وقد طور صندوق النقد الدولي أداة في برنامج إكسل لهذا التحويل، هي أداة تحويل حسابات انبعاثات الهواء، المعروفة باسم I2A <span class="citation" data-cites="imf2026i2a pegoue2026i2a">(<a href="#ref-imf2026i2a" role="doc-biblioref">International Monetary Fund, 2026</a>; <a href="#ref-pegoue2026i2a" role="doc-biblioref">Pegoue, 2026</a>)</span>. وتتبع هذه الوثيقة منطقها خطوة بخطوة. وتُنفَّذ الحسابات ببرامج نصية بلغة Python في المجلد <a href="https://github.com/renatovargas/tun-pefa-aea/tree/main/scripts" class="uri">https://github.com/renatovargas/tun-pefa-aea/tree/main/scripts</a>، مدرجة في <a href="#tbl-scripts" class="quarto-xref">الجدول&nbsp;1</a>. وتحيل كل خطوة من قسم المنهجية إلى بطاقة برنامجها في <a href="#annex-scripts">الملحق الأول</a>. وتعيد حسابات الانبعاثات استخدام مفتاحين من مفاتيح التوزيع في حسابات الطاقة، تصفهما الوثيقة المرافقة عن حسابات التدفقات المادية للطاقة.</p>
+<div class="cell" data-execution_count="2">
+<div id="tbl-scripts" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-scripts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الجدول&nbsp;1: البرامج النصية لإعداد حسابات انبعاثات الهواء، حسب ترتيب تنفيذها.
+</figcaption>
+<div aria-describedby="tbl-scripts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="vxfywxtkqt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#vxfywxtkqt table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#vxfywxtkqt thead, #vxfywxtkqt tbody, #vxfywxtkqt tfoot, #vxfywxtkqt tr, #vxfywxtkqt td, #vxfywxtkqt th { border-style: none; }
+#vxfywxtkqt tr { background-color: transparent; }
+#vxfywxtkqt p { margin: 0; padding: 0; }
+ #vxfywxtkqt .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 11px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #vxfywxtkqt .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #vxfywxtkqt .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #vxfywxtkqt .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #vxfywxtkqt .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #vxfywxtkqt .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #vxfywxtkqt .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #vxfywxtkqt .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #vxfywxtkqt .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #vxfywxtkqt .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #vxfywxtkqt .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #vxfywxtkqt .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #vxfywxtkqt .gt_spanner_row { border-bottom-style: hidden; }
+ #vxfywxtkqt .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #vxfywxtkqt .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #vxfywxtkqt .gt_from_md> :first-child { margin-top: 0; }
+ #vxfywxtkqt .gt_from_md> :last-child { margin-bottom: 0; }
+ #vxfywxtkqt .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #vxfywxtkqt .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #vxfywxtkqt .gt_indent_1 { text-indent: 5px; }
+ #vxfywxtkqt .gt_indent_2 { text-indent: calc(5px * 2); }
+ #vxfywxtkqt .gt_indent_3 { text-indent: calc(5px * 3); }
+ #vxfywxtkqt .gt_indent_4 { text-indent: calc(5px * 4); }
+ #vxfywxtkqt .gt_indent_5 { text-indent: calc(5px * 5); }
+ #vxfywxtkqt .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #vxfywxtkqt .gt_row_group_first td { border-top-width: 2px; }
+ #vxfywxtkqt .gt_row_group_first th { border-top-width: 2px; }
+ #vxfywxtkqt .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #vxfywxtkqt .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #vxfywxtkqt .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #vxfywxtkqt .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #vxfywxtkqt .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #vxfywxtkqt .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #vxfywxtkqt .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #vxfywxtkqt .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #vxfywxtkqt .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #vxfywxtkqt .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #vxfywxtkqt .gt_left { text-align: left; }
+ #vxfywxtkqt .gt_center { text-align: center; }
+ #vxfywxtkqt .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #vxfywxtkqt .gt_font_normal { font-weight: normal; }
+ #vxfywxtkqt .gt_font_bold { font-weight: bold; }
+ #vxfywxtkqt .gt_font_italic { font-style: italic; }
+ #vxfywxtkqt .gt_super { font-size: 65%; }
+ #vxfywxtkqt .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #vxfywxtkqt .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #vxfywxtkqt .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #vxfywxtkqt .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #vxfywxtkqt .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #vxfywxtkqt .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="البرنامج" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">البرنامج</th>
+<th id="الغرض" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الغرض</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="البرنامج">extract/02_extract_crt_inventory.py</td>
+<td class="gt_row gt_left" headers="الغرض">الجداول المشتركة للإبلاغ في جرد غازات الاحتباس الحراري</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="البرنامج">extract/03_extract_supply_use_tables.py</td>
+<td class="gt_row gt_left" headers="الغرض">جداول الموارد والاستخدامات في الحسابات القومية</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="البرنامج">pefa/11_build_activity_keys.py</td>
+<td class="gt_row gt_left" headers="الغرض">مفاتيح النقل البري وقطاع الخدمات (من حسابات الطاقة)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="البرنامج">aea/20_prepare_ghg_inventory.py</td>
+<td class="gt_row gt_left" headers="الغرض">الانبعاثات حسب الفئة والغاز، والنطاق، ورموز الأداة</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="البرنامج">aea/21_build_conversion_matrix.py</td>
+<td class="gt_row gt_left" headers="الغرض">مصفوفة التحويل التونسية من فئات الجرد إلى الأنشطة</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="البرنامج">aea/22_compile_aea_tables.py</td>
+<td class="gt_row gt_left" headers="الغرض">الانبعاثات حسب النشاط مع تعديلات الإقامة، والتحقق بأداة I2A</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="البرنامج">aea/23_bridge_and_indicators.py</td>
+<td class="gt_row gt_left" headers="الغرض">الربط بالجرد والمعقولية والكثافات</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="البرنامج">aea/24_export_aea.py</td>
+<td class="gt_row gt_left" headers="الغرض">مصنفات إكسل بالإنجليزية والفرنسية والعربية</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="البرنامج">report/30_publish_tables.py</td>
+<td class="gt_row gt_left" headers="الغرض">جداول وتسميات للوثائق ومستكشف البيانات</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="المفاهيم" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> المفاهيم</h1>
+<section id="الانبعاثات-بوصفها-تدفقات-بقايا" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="الانبعاثات-بوصفها-تدفقات-بقايا"><span class="header-section-number">2.1</span> الانبعاثات بوصفها تدفقات بقايا</h2>
+<p>يعامل نظام المحاسبة البيئية والاقتصادية الانبعاثات بوصفها تدفقات بقايا: مواد يطلقها النشاط الاقتصادي فتغادر الاقتصاد وتدخل البيئة <span class="citation" data-cites="seea2014">(<a href="#ref-seea2014" role="doc-biblioref">United Nations وآخرون, 2014</a>، القسم 3.6)</span>. وحسابات انبعاثات الهواء هي الجزء من هذه الحسابات الذي يخص الغازات والجسيمات المطلقة في الغلاف الجوي. وهي تتبع القواعد المحاسبية للحسابات القومية. فتُسجَّل الانبعاثات للوحدات الاقتصادية التي تولدها، أي فروع النشاط مصنفة كما في الحسابات القومية، والأسر بصفتها مستهلكة <span class="citation" data-cites="eurostat2015aea">(<a href="#ref-eurostat2015aea" role="doc-biblioref">Eurostat, 2015</a>، الفقرات 32 إلى 38)</span>. أما انبعاثات الأسر بصفتها منتجة، كالمستغلة الفلاحية العائلية، فتنتمي إلى الفرع المعني.</p>
+</section>
+<section id="غازات-الاحتباس-الحراري-ووحدتها-المشتركة" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="غازات-الاحتباس-الحراري-ووحدتها-المشتركة"><span class="header-section-number">2.2</span> غازات الاحتباس الحراري ووحدتها المشتركة</h2>
+<p>تغطي الحسابات غازات الاحتباس الحراري الواردة في الجرد. فثاني أكسيد الكربون يأتي أساسًا من حرق الوقود الأحفوري ومن بعض العمليات الصناعية كصناعة الإسمنت. والميثان يأتي من الماشية ومصبات النفايات وتسربات الغاز الطبيعي. وأكسيد النيتروز يأتي أساسًا من التربة الفلاحية والسماد الحيواني. والغازات المفلورة غازات صناعية تستخدم في التبريد والتكييف والمعدات الكهربائية. ويسخن كل غاز المناخ بدرجة مختلفة، فتُحوَّل الانبعاثات إلى مكافئ ثاني أكسيد الكربون بإمكانات الاحترار العالمي على مدى 100 سنة. وتستخدم تونس، كمعظم البلدان، قيم تقرير التقييم الخامس للهيئة، التي يعادل فيها طن الميثان 28 طنًا من ثاني أكسيد الكربون وطن أكسيد النيتروز 265 طنًا <span class="citation" data-cites="ipcc2014ar5">(<a href="#ref-ipcc2014ar5" role="doc-biblioref">Intergovernmental Panel on Climate Change, 2013</a>)</span>.</p>
+</section>
+<section id="الإقليم-والإقامة" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="الإقليم-والإقامة"><span class="header-section-number">2.3</span> الإقليم والإقامة</h2>
+<p>يسجل الجرد الانبعاثات التي تحدث على التراب الوطني أيًا كان مصدرها. أما الحسابات فتسجل الانبعاثات التي تتسبب فيها الوحدات المقيمة أينما حدثت <span class="citation" data-cites="eurostat2015aea">(<a href="#ref-eurostat2015aea" role="doc-biblioref">Eurostat, 2015</a>، الفقرات 33 إلى 37)</span>. فشركة طيران تونسية تطير من باريس إلى مونتريال تطلق انبعاثات في الحسابات التونسية، في حين لا تدخلها شاحنة أجنبية تعبر تونس. ويخص هذا الفرق أساسًا النقل الدولي. وتبينه الحسابات في <strong>جدول ربط</strong> ينطلق من مجموع الحسابات، ويطرح انبعاثات المقيمين في الخارج، ويضيف انبعاثات غير المقيمين على التراب الوطني، فيصل إلى مجموع الجرد <span class="citation" data-cites="eurostat2015aea">(<a href="#ref-eurostat2015aea" role="doc-biblioref">Eurostat, 2015</a>، الفقرات 227 إلى 230)</span>. ويبين <a href="#fig-scope" class="quarto-xref">الشكل&nbsp;1</a> كيف يرتبط المجموعان.</p>
+<div class="cell" data-fig-width="6.3" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-scope" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scope-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-scope">flowchart LR
+  AEA["مجموع الحسابات&lt;br/&gt;(الفروع + الأسر،&lt;br/&gt;مبدأ الإقامة)"] --&gt; M1["ناقص المقيمين في الخارج&lt;br/&gt;(النقل الجوي والبحري)"]
+  M1 --&gt; P1["زائد غير المقيمين&lt;br/&gt;على التراب الوطني"]
+  P1 --&gt; INV["مجموع الجرد&lt;br/&gt;دون استخدام الأراضي&lt;br/&gt;(المبدأ الإقليمي)"]
+  INV --&gt; L["زائد استخدام الأراضي&lt;br/&gt;وتغيير استخدامها والحراجة"]
+  L --&gt; NET["المجموع الصافي&lt;br/&gt;للجرد"]
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scope-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الشكل&nbsp;1: من حسابات انبعاثات الهواء إلى مجموع الجرد: بنود الربط.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ما-تتركه-الحسابات-جانبا" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="ما-تتركه-الحسابات-جانبا"><span class="header-section-number">2.4</span> ما تتركه الحسابات جانبًا</h2>
+<p>يبقى بندان من الجرد خارج الحسابات. فانبعاثات استخدام الأراضي وتغيير استخدام الأراضي والحراجة وعمليات الإزالة منها لا تُسند إلى النشاط الاقتصادي في الحسابات، ولا تظهر إلا في جدول الربط <span class="citation" data-cites="eurostat2015aea">(<a href="#ref-eurostat2015aea" role="doc-biblioref">Eurostat, 2015</a>، الفقرة 269)</span>. وفي تونس، هذا القطاع بالوعة صافية، بمقدار -10.8 مليون طن من مكافئ ثاني أكسيد الكربون في 2022، ويعود ذلك أساسًا إلى الغابات. أما ثاني أكسيد الكربون الناتج عن حرق الكتلة الحيوية، كحطب الوقود، فهو بند تذكيري في الجرد، لأن كربونه سُحب من الغلاف الجوي حديثًا. ويبقى منفصلًا في الحسابات أيضًا (4.4 مليون طن في 2022).</p>
+</section>
+</section>
+<section id="مصادر-البيانات" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> مصادر البيانات</h1>
+<p><strong>جرد غازات الاحتباس الحراري</strong> هو المصدر الرئيسي. وتبلغ عنه تونس في الجداول المشتركة للإبلاغ، بمصنف إكسل لكل سنة. ويتضمن كل مصنف ورقة باسم <code>Data</code> تضم كل القيم المبلغ عنها في صيغة طويلة: بيانات النشاط بالتيراجول والانبعاثات بآلاف الأطنان، حسب الفئة والوقود والغاز، أي نحو اثني عشر ألف سطر في السنة. وتعطي ورقة ملخص، <code>Summary2</code>، المجاميع حسب الفئة بمكافئ ثاني أكسيد الكربون. وتغطي الحسابات الفترة من 2015 إلى 2022.</p>
+<p>وأُعد ملف ثان، <code>Tunisia_UNFCCC.xlsx</code>، بعرض أداة I2A. وهو يضم الفئات الرئيسية بآلاف الأطنان من كل غاز. ويبني خط المعالجة مدخلاته من مصنفات CRT بدلًا منه، لأنها أكثر تفصيلًا وتتضمن الغازات المفلورة وتعطي مكافئات ثاني أكسيد الكربون. وتتطابق مجاميع القطاعات في هذا الملف مع جداول CRT (<a href="#tbl-prepared" class="quarto-xref">الجدول&nbsp;2</a>)، مما يؤكد أنهما يصفان الجرد نفسه.</p>
+<p>وتوفر <strong>جداول الموارد والاستخدامات</strong> للمعهد الوطني للإحصاء الفروعَ الأربعة والعشرين للحسابات ومفاتيحَ التوزيع وإنتاجَ كل فرع وقيمته المضافة. وتوفر <strong>تقديرات منظمة التعاون والتنمية في الميدان الاقتصادي لانبعاثات النقل الجوي والبحري</strong>، المرفقة بأداة I2A، انبعاثاتِ شركات الطيران والملاحة المقيمة، لتعديل الإقامة <span class="citation" data-cites="oecd2024transport">(<a href="#ref-oecd2024transport" role="doc-biblioref">OECD, 2024</a>)</span>.</p>
+</section>
+<section id="المنهجية" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> المنهجية</h1>
+<section id="إعداد-الجرد" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="إعداد-الجرد"><span class="header-section-number">4.1</span> إعداد الجرد</h2>
+<p>يكدس البرنامج <a href="#script-02">02_extract_crt_inventory.py</a> أوراق <code>Data</code>، ويحذف الأسطر المكررة، ويقارن الانبعاثات المجمعة حسب الفئة بمجاميع <code>Summary2</code>. وهي تتطابق لكل فئة وغاز وسنة، باستثناء واحد: أكسيد النيتروز في الفئة 1.B.2.b.ii، المبلغ عنه في <code>Data</code> ابتداء من 2019 دون أن يُحسب في <code>Summary2</code>، بفارق لا يتجاوز 0.24 ألف طن من مكافئ ثاني أكسيد الكربون.</p>
+<p>ثم يبني البرنامج <a href="#script-20">20_prepare_ghg_inventory.py</a> جدولًا للانبعاثات حسب السنة والفئة والغاز. ويأتي ثاني أكسيد الكربون والميثان وأكسيد النيتروز من <code>Data</code>، وتُرجَّح بإمكانات احترارها. أما الغازات المفلورة فيُبلغ عنها في <code>Data</code> غازًا غازًا، لكن بمكافئ ثاني أكسيد الكربون حسب الفئة الصناعية فقط في <code>Summary2</code>، فتأتي مجاميعها من <code>Summary2</code>. ويوسَم كل سطر بأنه جزء من مجموع الجرد، أو من استخدام الأراضي، أو من البنود التذكيرية. ويساوي مجموع الجرد، بما فيه استخدام الأراضي، المجموعَ الصافي في <code>Summary2</code> بعد احتساب أكسيد النيتروز المذكور أعلاه.</p>
+<p>وتعرف أداة I2A قائمة من رموز الفئات تتوقف عند المستوى الخامس من تصنيف CRT، في حين تذهب ورقة <code>Data</code> التونسية أحيانًا أبعد من ذلك، كما في الفئات الفرعية للحيوانات. لذلك تتلقى كل فئة أكثر رموز قائمة الأداة تفصيلًا مما تنتمي إليه.</p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-prepared" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prepared-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الجدول&nbsp;2: الملف المعد لأداة I2A وجداول CRT، حسب القطاع والغاز، السنة الأخيرة (ألف طن من كل غاز).
+</figcaption>
+<div aria-describedby="tbl-prepared-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="ltqletredj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#ltqletredj table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#ltqletredj thead, #ltqletredj tbody, #ltqletredj tfoot, #ltqletredj tr, #ltqletredj td, #ltqletredj th { border-style: none; }
+#ltqletredj tr { background-color: transparent; }
+#ltqletredj p { margin: 0; padding: 0; }
+ #ltqletredj .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 11px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #ltqletredj .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #ltqletredj .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #ltqletredj .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #ltqletredj .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #ltqletredj .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #ltqletredj .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #ltqletredj .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #ltqletredj .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #ltqletredj .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #ltqletredj .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #ltqletredj .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #ltqletredj .gt_spanner_row { border-bottom-style: hidden; }
+ #ltqletredj .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #ltqletredj .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #ltqletredj .gt_from_md> :first-child { margin-top: 0; }
+ #ltqletredj .gt_from_md> :last-child { margin-bottom: 0; }
+ #ltqletredj .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #ltqletredj .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #ltqletredj .gt_indent_1 { text-indent: 5px; }
+ #ltqletredj .gt_indent_2 { text-indent: calc(5px * 2); }
+ #ltqletredj .gt_indent_3 { text-indent: calc(5px * 3); }
+ #ltqletredj .gt_indent_4 { text-indent: calc(5px * 4); }
+ #ltqletredj .gt_indent_5 { text-indent: calc(5px * 5); }
+ #ltqletredj .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #ltqletredj .gt_row_group_first td { border-top-width: 2px; }
+ #ltqletredj .gt_row_group_first th { border-top-width: 2px; }
+ #ltqletredj .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #ltqletredj .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #ltqletredj .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #ltqletredj .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #ltqletredj .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #ltqletredj .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #ltqletredj .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #ltqletredj .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #ltqletredj .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #ltqletredj .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #ltqletredj .gt_left { text-align: left; }
+ #ltqletredj .gt_center { text-align: center; }
+ #ltqletredj .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #ltqletredj .gt_font_normal { font-weight: normal; }
+ #ltqletredj .gt_font_bold { font-weight: bold; }
+ #ltqletredj .gt_font_italic { font-style: italic; }
+ #ltqletredj .gt_super { font-size: 65%; }
+ #ltqletredj .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #ltqletredj .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #ltqletredj .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #ltqletredj .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #ltqletredj .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #ltqletredj .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="القطاع" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">القطاع</th>
+<th id="الوصف" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الوصف</th>
+<th id="الغاز-في-الملف" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الغاز في الملف</th>
+<th id="الملف-المعد" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الملف المعد</th>
+<th id="جداول-CRT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">جداول CRT</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="القطاع">1</td>
+<td class="gt_row gt_left" headers="الوصف">Energy</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">CH4</td>
+<td class="gt_row gt_right" headers="الملف-المعد">127.9</td>
+<td class="gt_row gt_right" headers="جداول-CRT">127.9</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="القطاع">1</td>
+<td class="gt_row gt_left" headers="الوصف">Energy</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">CO2</td>
+<td class="gt_row gt_right" headers="الملف-المعد">27,068.6</td>
+<td class="gt_row gt_right" headers="جداول-CRT">27,068.6</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="القطاع">1</td>
+<td class="gt_row gt_left" headers="الوصف">Energy</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">N20</td>
+<td class="gt_row gt_right" headers="الملف-المعد">1.0</td>
+<td class="gt_row gt_right" headers="جداول-CRT">1.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="القطاع">2</td>
+<td class="gt_row gt_left" headers="الوصف">Industrial Processes and Product Use</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">CH4</td>
+<td class="gt_row gt_right" headers="الملف-المعد">0.0</td>
+<td class="gt_row gt_right" headers="جداول-CRT">0.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="القطاع">2</td>
+<td class="gt_row gt_left" headers="الوصف">Industrial Processes and Product Use</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">CO2</td>
+<td class="gt_row gt_right" headers="الملف-المعد">5,006.3</td>
+<td class="gt_row gt_right" headers="جداول-CRT">5,006.3</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="القطاع">2</td>
+<td class="gt_row gt_left" headers="الوصف">Industrial Processes and Product Use</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">N20</td>
+<td class="gt_row gt_right" headers="الملف-المعد">1.0</td>
+<td class="gt_row gt_right" headers="جداول-CRT">1.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="القطاع">3</td>
+<td class="gt_row gt_left" headers="الوصف">Agriculture</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">CH4</td>
+<td class="gt_row gt_right" headers="الملف-المعد">105.6</td>
+<td class="gt_row gt_right" headers="جداول-CRT">105.6</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="القطاع">3</td>
+<td class="gt_row gt_left" headers="الوصف">Agriculture</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">CO2</td>
+<td class="gt_row gt_right" headers="الملف-المعد">0.0</td>
+<td class="gt_row gt_right" headers="جداول-CRT">0.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="القطاع">3</td>
+<td class="gt_row gt_left" headers="الوصف">Agriculture</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">N20</td>
+<td class="gt_row gt_right" headers="الملف-المعد">6.4</td>
+<td class="gt_row gt_right" headers="جداول-CRT">6.4</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="القطاع">5</td>
+<td class="gt_row gt_left" headers="الوصف">Waste</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">CH4</td>
+<td class="gt_row gt_right" headers="الملف-المعد">141.7</td>
+<td class="gt_row gt_right" headers="جداول-CRT">141.7</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="القطاع">5</td>
+<td class="gt_row gt_left" headers="الوصف">Waste</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">CO2</td>
+<td class="gt_row gt_right" headers="الملف-المعد">26.9</td>
+<td class="gt_row gt_right" headers="جداول-CRT">26.9</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="القطاع">5</td>
+<td class="gt_row gt_left" headers="الوصف">Waste</td>
+<td class="gt_row gt_left" headers="الغاز-في-الملف">N20</td>
+<td class="gt_row gt_right" headers="الملف-المعد">0.4</td>
+<td class="gt_row gt_right" headers="جداول-CRT">0.4</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>مسألة مفتوحة
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>يكتب الملف <code>Tunisia_UNFCCC.xlsx</code> أكسيد النيتروز «N20»، ويبلغ بآلاف الأطنان من كل غاز لا بمكافئ ثاني أكسيد الكربون، ويغفل بعض الفئات الفرعية، ولا يتضمن الغازات المفلورة. وإذا كان سيستخدم لأغراض أخرى، فمن المفيد مراجعته مع فريق الجرد. كما تستحق معالجة أكسيد النيتروز في الفئة 1.B.2.b.ii ابتداء من 2019 التوضيح.</p>
+</div>
+</div>
+</section>
+<section id="من-فئات-الجرد-إلى-الأنشطة-الاقتصادية" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="من-فئات-الجرد-إلى-الأنشطة-الاقتصادية"><span class="header-section-number">4.2</span> من فئات الجرد إلى الأنشطة الاقتصادية</h2>
+<p>تعطي مصفوفة التحويل، لكل فئة من فئات الجرد، حصة انبعاثاتها التي تعود إلى كل نشاط اقتصادي. وتأتي أداة I2A بمصفوفة افتراضية حسب أبواب التصنيف الصناعي الدولي والأسر، تتبع جدول المطابقة في دليل يوروستات <span class="citation" data-cites="eurostat2015aea imf2026i2a">(<a href="#ref-eurostat2015aea" role="doc-biblioref">Eurostat, 2015</a>، الفقرة 12; <a href="#ref-imf2026i2a" role="doc-biblioref">International Monetary Fund, 2026</a>)</span>. ويبني البرنامج <a href="#script-21">21_build_conversion_matrix.py</a> مصفوفة تونسية حسب الفروع الأربعة والعشرين لجداول الموارد والاستخدامات والأسر، انطلاقًا من جدول المطابقة <code>crt_to_activities.csv</code>. ويعطي كل سطر من هذا الجدول بادئة لرموز CRT ونشاطًا وسببًا. وتأخذ كل فئة السطر صاحب أطول بادئة تطابق رمزها، فتغطي البادئة القصيرة («3» للفلاحة) قطاعًا كاملًا، وتحل محلها بادئة أطول لفئة فرعية.</p>
+<p>وتنتمي معظم الفئات إلى نشاط واحد: الإنتاج العمومي للكهرباء إلى الكهرباء والغاز (35)، وصناعة الإسمنت إلى مواد البناء (23)، والتخمر المعوي إلى الفلاحة (01)، ومصبات النفايات إلى خدمات المياه والنفايات (36). وتحتاج فئتان إلى مفاتيح، وهما تعيدان استخدام مفاتيح حسابات الطاقة، حتى يوزع الحسابان هذين القطاعين بالطريقة نفسها. فيُقسم النقل البري (1.A.3.b) بين الفروع والأسر حسب مشترياتها من المنتجات النفطية المكررة، ويُقسم الاحتراق في التجارة والخدمات العمومية (1.A.4.a) بين فروع الخدمات حسب مشترياتها من الكهرباء والغاز. وفي 2022، تتلقى الأسر 34% من انبعاثات النقل البري.</p>
+<p>ويدرج <a href="#tbl-changes" class="quarto-xref">الجدول&nbsp;3</a> الفئات التي تسندها المصفوفة التونسية إلى باب مختلف عن باب المصفوفة الافتراضية للأداة، مع انبعاثاتها في 2022.</p>
+<div class="cell" data-execution_count="4">
+<div id="tbl-changes" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-changes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الجدول&nbsp;3: فئات الجرد المسندة إلى باب مختلف عن باب المصفوفة الافتراضية لأداة I2A، السنة الأخيرة (ألف طن مكافئ CO2).
+</figcaption>
+<div aria-describedby="tbl-changes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="fvemgrhrmb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#fvemgrhrmb table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#fvemgrhrmb thead, #fvemgrhrmb tbody, #fvemgrhrmb tfoot, #fvemgrhrmb tr, #fvemgrhrmb td, #fvemgrhrmb th { border-style: none; }
+#fvemgrhrmb tr { background-color: transparent; }
+#fvemgrhrmb p { margin: 0; padding: 0; }
+ #fvemgrhrmb .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 11px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #fvemgrhrmb .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #fvemgrhrmb .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #fvemgrhrmb .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #fvemgrhrmb .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #fvemgrhrmb .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #fvemgrhrmb .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #fvemgrhrmb .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #fvemgrhrmb .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #fvemgrhrmb .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #fvemgrhrmb .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #fvemgrhrmb .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #fvemgrhrmb .gt_spanner_row { border-bottom-style: hidden; }
+ #fvemgrhrmb .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #fvemgrhrmb .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #fvemgrhrmb .gt_from_md> :first-child { margin-top: 0; }
+ #fvemgrhrmb .gt_from_md> :last-child { margin-bottom: 0; }
+ #fvemgrhrmb .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #fvemgrhrmb .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #fvemgrhrmb .gt_indent_1 { text-indent: 5px; }
+ #fvemgrhrmb .gt_indent_2 { text-indent: calc(5px * 2); }
+ #fvemgrhrmb .gt_indent_3 { text-indent: calc(5px * 3); }
+ #fvemgrhrmb .gt_indent_4 { text-indent: calc(5px * 4); }
+ #fvemgrhrmb .gt_indent_5 { text-indent: calc(5px * 5); }
+ #fvemgrhrmb .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #fvemgrhrmb .gt_row_group_first td { border-top-width: 2px; }
+ #fvemgrhrmb .gt_row_group_first th { border-top-width: 2px; }
+ #fvemgrhrmb .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #fvemgrhrmb .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #fvemgrhrmb .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #fvemgrhrmb .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #fvemgrhrmb .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #fvemgrhrmb .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #fvemgrhrmb .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #fvemgrhrmb .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #fvemgrhrmb .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #fvemgrhrmb .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #fvemgrhrmb .gt_left { text-align: left; }
+ #fvemgrhrmb .gt_center { text-align: center; }
+ #fvemgrhrmb .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #fvemgrhrmb .gt_font_normal { font-weight: normal; }
+ #fvemgrhrmb .gt_font_bold { font-weight: bold; }
+ #fvemgrhrmb .gt_font_italic { font-style: italic; }
+ #fvemgrhrmb .gt_super { font-size: 65%; }
+ #fvemgrhrmb .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #fvemgrhrmb .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #fvemgrhrmb .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #fvemgrhrmb .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #fvemgrhrmb .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #fvemgrhrmb .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="الفئة" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الفئة</th>
+<th id="الانبعاثات" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الانبعاثات</th>
+<th id="الافتراضي" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الافتراضي</th>
+<th id="تونس" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">تونس</th>
+<th id="الأنشطة-التونسية" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الأنشطة التونسية</th>
+<th id="ملاحظة" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">ملاحظة</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">1.A.1.c.i</td>
+<td class="gt_row gt_right" headers="الانبعاثات">792.4</td>
+<td class="gt_row gt_left" headers="الافتراضي">C</td>
+<td class="gt_row gt_left" headers="تونس">B</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">06</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">1.A.2.g.iii</td>
+<td class="gt_row gt_right" headers="الانبعاثات">15.7</td>
+<td class="gt_row gt_left" headers="الافتراضي">C</td>
+<td class="gt_row gt_left" headers="تونس">B</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">07</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">1.A.3.b.i</td>
+<td class="gt_row gt_right" headers="الانبعاثات">4,271.8</td>
+<td class="gt_row gt_left" headers="الافتراضي">H</td>
+<td class="gt_row gt_left" headers="تونس">HH</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">مفتاح النقل البري</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">1.A.3.b.ii</td>
+<td class="gt_row gt_right" headers="الانبعاثات">1,884.7</td>
+<td class="gt_row gt_left" headers="الافتراضي">H</td>
+<td class="gt_row gt_left" headers="تونس">HH</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">مفتاح النقل البري</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">1.A.3.b.iii</td>
+<td class="gt_row gt_right" headers="الانبعاثات">1,349.4</td>
+<td class="gt_row gt_left" headers="الافتراضي">H</td>
+<td class="gt_row gt_left" headers="تونس">HH</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">مفتاح النقل البري</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">1.A.3.b.iv</td>
+<td class="gt_row gt_right" headers="الانبعاثات">8.0</td>
+<td class="gt_row gt_left" headers="الافتراضي">H</td>
+<td class="gt_row gt_left" headers="تونس">HH</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">مفتاح النقل البري</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">1.A.4.a.i</td>
+<td class="gt_row gt_right" headers="الانبعاثات">765.3</td>
+<td class="gt_row gt_left" headers="الافتراضي">F</td>
+<td class="gt_row gt_left" headers="تونس">Other</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">مفتاح قطاع الخدمات</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">1.A.4.b.ii</td>
+<td class="gt_row gt_right" headers="الانبعاثات">2,646.7</td>
+<td class="gt_row gt_left" headers="الافتراضي">F</td>
+<td class="gt_row gt_left" headers="تونس">HH</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">HH</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">1.B.1.b</td>
+<td class="gt_row gt_right" headers="الانبعاثات">284.1</td>
+<td class="gt_row gt_left" headers="الافتراضي">B</td>
+<td class="gt_row gt_left" headers="تونس">A</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">01</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">1.B.2.b.iv</td>
+<td class="gt_row gt_right" headers="الانبعاثات">495.3</td>
+<td class="gt_row gt_left" headers="الافتراضي">H</td>
+<td class="gt_row gt_left" headers="تونس">D</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">35</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">1.B.2.b.v</td>
+<td class="gt_row gt_right" headers="الانبعاثات">99.6</td>
+<td class="gt_row gt_left" headers="الافتراضي">H</td>
+<td class="gt_row gt_left" headers="تونس">D</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">35</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">2.F.1.a</td>
+<td class="gt_row gt_right" headers="الانبعاثات">862.8</td>
+<td class="gt_row gt_left" headers="الافتراضي">C</td>
+<td class="gt_row gt_left" headers="تونس">Other</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">45</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">2.G.1</td>
+<td class="gt_row gt_right" headers="الانبعاثات">9.0</td>
+<td class="gt_row gt_left" headers="الافتراضي">C</td>
+<td class="gt_row gt_left" headers="تونس">D</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">35</td>
+<td class="gt_row gt_left" headers="ملاحظة">باب مختلف</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">3.D.1.a</td>
+<td class="gt_row gt_right" headers="الانبعاثات">294.0</td>
+<td class="gt_row gt_left" headers="الافتراضي">–</td>
+<td class="gt_row gt_left" headers="تونس">A</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">01</td>
+<td class="gt_row gt_left" headers="ملاحظة">دون معامل في المصفوفة الافتراضية</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">3.D.1.b.i</td>
+<td class="gt_row gt_right" headers="الانبعاثات">299.6</td>
+<td class="gt_row gt_left" headers="الافتراضي">–</td>
+<td class="gt_row gt_left" headers="تونس">A</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">01</td>
+<td class="gt_row gt_left" headers="ملاحظة">دون معامل في المصفوفة الافتراضية</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">3.D.1.c</td>
+<td class="gt_row gt_right" headers="الانبعاثات">453.8</td>
+<td class="gt_row gt_left" headers="الافتراضي">–</td>
+<td class="gt_row gt_left" headers="تونس">A</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">01</td>
+<td class="gt_row gt_left" headers="ملاحظة">دون معامل في المصفوفة الافتراضية</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">3.D.1.d</td>
+<td class="gt_row gt_right" headers="الانبعاثات">63.6</td>
+<td class="gt_row gt_left" headers="الافتراضي">–</td>
+<td class="gt_row gt_left" headers="تونس">A</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">01</td>
+<td class="gt_row gt_left" headers="ملاحظة">دون معامل في المصفوفة الافتراضية</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="الفئة">3.D.2.a</td>
+<td class="gt_row gt_right" headers="الانبعاثات">172.1</td>
+<td class="gt_row gt_left" headers="الافتراضي">–</td>
+<td class="gt_row gt_left" headers="تونس">A</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">01</td>
+<td class="gt_row gt_left" headers="ملاحظة">دون معامل في المصفوفة الافتراضية</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="الفئة">3.D.2.b</td>
+<td class="gt_row gt_right" headers="الانبعاثات">198.7</td>
+<td class="gt_row gt_left" headers="الافتراضي">–</td>
+<td class="gt_row gt_left" headers="تونس">A</td>
+<td class="gt_row gt_left" headers="الأنشطة-التونسية">01</td>
+<td class="gt_row gt_left" headers="ملاحظة">دون معامل في المصفوفة الافتراضية</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>وتبرز ثلاث مجموعات. فالنقل البري والاحتراق السكني ينتقلان من النقل والبناء إلى الأسر، كما تقتضي الحسابات. ونقل الغاز الطبيعي وتوزيعه ينتقلان من النقل إلى فرع الكهرباء والغاز، الذي يشغل الشبكة في تونس. وأخيرًا، ليس في المصفوفة الافتراضية للأداة أي معامل للتربة الفلاحية (3.D)، فكانت انبعاثاتها، 1,482 ألف طن من مكافئ ثاني أكسيد الكربون في 2022، ستضيع لولا قاعدة تونسية. وتسندها المصفوفة التونسية إلى الفلاحة.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>مسألة مفتوحة
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>يحسن أن تُعتمد الخيارات التي تبتعد عن المصفوفة الافتراضية مع المعهد الوطني للإحصاء والوكالة الوطنية للتحكم في الطاقة، ولا سيما تقسيم النقل البري بين الفروع والأسر، وإسناد احتراق التجارة إلى فروع الخدمات بدلًا من البناء، ومعالجة الغازات المفلورة للتبريد التجاري.</p>
+</div>
+</div>
+</section>
+<section id="إعداد-الحسابات-وتعديل-الإقامة" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="إعداد-الحسابات-وتعديل-الإقامة"><span class="header-section-number">4.3</span> إعداد الحسابات وتعديل الإقامة</h2>
+<p>يطبق البرنامج <a href="#script-22">22_compile_aea_tables.py</a> المصفوفة على الجرد. وكما في حسابات الطاقة، يفعل ذلك مرتين: مرة باستدعاء الدالة <code>I2A</code> من الأداة دون تعديلها، ومرة بتطبيق كل قاعدة من قواعدها تطبيقًا صريحًا. والنسخة الصريحة هي التي تنتج الحسابات، ويتوقف البرنامج إذا اختلفت النسختان بأكثر من 10<sup>-9</sup> ألف طن. والقواعد هي التالية.</p>
+<ol type="1">
+<li><strong>مدخلات الجرد.</strong> يُعرض الجرد كورقة الجرد في الأداة: سطر لكل غاز وفئة، وعمود لكل سنة، بآلاف الأطنان من مكافئ ثاني أكسيد الكربون.</li>
+<li><strong>التوزيع.</strong> تُضرب كل قيمة في معاملات فئتها في المصفوفة. والفئة التي لا معامل لها لا تتلقى شيئًا، ولهذا احتاجت التربة الفلاحية إلى قاعدة تونسية.</li>
+<li><strong>النقل الجوي.</strong> تقدر منظمة التعاون والتنمية في الميدان الاقتصادي انبعاثات شركات الطيران المقيمة في الرحلات الداخلية وفي الخارج <span class="citation" data-cites="oecd2024transport">(<a href="#ref-oecd2024transport" role="doc-biblioref">OECD, 2024</a>)</span>. وعندما يكون تقدير المنظمة للرحلات الداخلية أقل من الطيران الداخلي في الجرد، يُسند الفرق إلى غير المقيمين على التراب الوطني. وتُضاف انبعاثات الشركات المقيمة في الخارج إلى النقل الجوي وتُسجَّل بندَ ربط.</li>
+<li><strong>النقل البحري.</strong> عندما يتجاوز تقدير المنظمة للسفن المقيمة الملاحةَ الداخلية في الجرد، يُضاف الفرق إلى النشاط.</li>
+<li><strong>المجاميع.</strong> يجمع مجموع الحسابات الفروع والأسر، ويجمع مجموع غازات الاحتباس الحراري الغازات الأربعة.</li>
+</ol>
+<p>وبتشغيلها بالمصفوفة الافتراضية للأداة، مع بيانات المنظمة ودونها، وبالمصفوفة التونسية لكل سنة، تتطابق النسخة الصريحة مع الأداة في حدود 7e-12 ألف طن (<a href="#tbl-agreement" class="quarto-xref">الجدول&nbsp;4</a>).</p>
+<div class="cell" data-execution_count="5">
+<div id="tbl-agreement" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-agreement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الجدول&nbsp;4: التطابق بين أداة I2A والإعداد الصريح، حسب التشغيل.
+</figcaption>
+<div aria-describedby="tbl-agreement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="itpsvbgiil" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#itpsvbgiil table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#itpsvbgiil thead, #itpsvbgiil tbody, #itpsvbgiil tfoot, #itpsvbgiil tr, #itpsvbgiil td, #itpsvbgiil th { border-style: none; }
+#itpsvbgiil tr { background-color: transparent; }
+#itpsvbgiil p { margin: 0; padding: 0; }
+ #itpsvbgiil .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 11px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #itpsvbgiil .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #itpsvbgiil .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #itpsvbgiil .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #itpsvbgiil .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #itpsvbgiil .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #itpsvbgiil .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #itpsvbgiil .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #itpsvbgiil .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #itpsvbgiil .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #itpsvbgiil .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #itpsvbgiil .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #itpsvbgiil .gt_spanner_row { border-bottom-style: hidden; }
+ #itpsvbgiil .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #itpsvbgiil .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #itpsvbgiil .gt_from_md> :first-child { margin-top: 0; }
+ #itpsvbgiil .gt_from_md> :last-child { margin-bottom: 0; }
+ #itpsvbgiil .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #itpsvbgiil .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #itpsvbgiil .gt_indent_1 { text-indent: 5px; }
+ #itpsvbgiil .gt_indent_2 { text-indent: calc(5px * 2); }
+ #itpsvbgiil .gt_indent_3 { text-indent: calc(5px * 3); }
+ #itpsvbgiil .gt_indent_4 { text-indent: calc(5px * 4); }
+ #itpsvbgiil .gt_indent_5 { text-indent: calc(5px * 5); }
+ #itpsvbgiil .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #itpsvbgiil .gt_row_group_first td { border-top-width: 2px; }
+ #itpsvbgiil .gt_row_group_first th { border-top-width: 2px; }
+ #itpsvbgiil .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #itpsvbgiil .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #itpsvbgiil .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #itpsvbgiil .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #itpsvbgiil .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #itpsvbgiil .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #itpsvbgiil .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #itpsvbgiil .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #itpsvbgiil .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #itpsvbgiil .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #itpsvbgiil .gt_left { text-align: left; }
+ #itpsvbgiil .gt_center { text-align: center; }
+ #itpsvbgiil .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #itpsvbgiil .gt_font_normal { font-weight: normal; }
+ #itpsvbgiil .gt_font_bold { font-weight: bold; }
+ #itpsvbgiil .gt_font_italic { font-style: italic; }
+ #itpsvbgiil .gt_super { font-size: 65%; }
+ #itpsvbgiil .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #itpsvbgiil .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #itpsvbgiil .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #itpsvbgiil .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #itpsvbgiil .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #itpsvbgiil .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="التشغيل" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">التشغيل</th>
+<th id="السنوات" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">السنوات</th>
+<th id="أكبر-فرق-ألف-طن-مكافئ-CO2" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">أكبر فرق (ألف طن مكافئ CO2)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة الافتراضية، دون بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">كل السنوات</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة الافتراضية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">كل السنوات</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة التونسية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">2015</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة التونسية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">2016</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">1.8e-12</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة التونسية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">2017</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة التونسية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">2018</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة التونسية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">2019</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة التونسية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">2020</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة التونسية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">2021</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="التشغيل">المصفوفة التونسية، مع بيانات المنظمة</td>
+<td class="gt_row gt_left" headers="السنوات">2022</td>
+<td class="gt_row gt_left" headers="أكبر-فرق-ألف-طن-مكافئ-CO2">7.3e-12</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>مسألة مفتوحة
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>إن تقدير المنظمة للسفن التي يشغلها مقيمون (546 ألف طن من ثاني أكسيد الكربون في 2022) أكبر بكثير من المستودعات البحرية في الجرد (24 ألف طن)، وهو غائب قبل 2019، مما يحدث انقطاعًا في السلسلة. ومن المفيد مقارنته ببيانات الأسطول التونسي وتزوده بالوقود في الخارج المتوفرة لدى المعهد الوطني للإحصاء والمرصد وديوان البحرية التجارية والموانئ.</p>
+</div>
+</div>
+</section>
+<section id="جدول-الربط-والاختبارات" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="جدول-الربط-والاختبارات"><span class="header-section-number">4.4</span> جدول الربط والاختبارات</h2>
+<p>يبني البرنامج <a href="#script-23">23_bridge_and_indicators.py</a> جدول الربط في <a href="#tbl-bridge" class="quarto-xref">الجدول&nbsp;5</a>. فانطلاقًا من مجموع الحسابات، يطرح انبعاثات الناقلين المقيمين في الخارج، ويضيف انبعاثات غير المقيمين على التراب الوطني، ويجب أن يصل إلى مجموع الجرد دون استخدام الأراضي. والفرق أقل من 10<sup>-6</sup> ألف طن في كل سنة ولكل غاز. وتستحق خاصيتان من خصائص الأداة الإشارة، ويعالجهما خط المعالجة كلتيهما. فالفرق الموجب للنقل البحري يُضاف إلى النشاط دون بند ربط مقابل، فيسجله خط المعالجة على أنه مقيمون في الخارج عن طريق البحر. ومجموع الجرد الخاص بالأداة يجمع بنود الربط دون إشارتها، أما جدول الربط فيستخدم المجموع بالإشارة.</p>
+<div class="cell" data-execution_count="6">
+<div id="tbl-bridge" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="6">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bridge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الجدول&nbsp;5: جدول الربط من حسابات انبعاثات الهواء إلى الجرد الوطني، غازات الاحتباس الحراري (ألف طن مكافئ CO2).
+</figcaption>
+<div aria-describedby="tbl-bridge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="sjnqsexqte" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#sjnqsexqte table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#sjnqsexqte thead, #sjnqsexqte tbody, #sjnqsexqte tfoot, #sjnqsexqte tr, #sjnqsexqte td, #sjnqsexqte th { border-style: none; }
+#sjnqsexqte tr { background-color: transparent; }
+#sjnqsexqte p { margin: 0; padding: 0; }
+ #sjnqsexqte .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 11px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #sjnqsexqte .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #sjnqsexqte .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #sjnqsexqte .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #sjnqsexqte .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #sjnqsexqte .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #sjnqsexqte .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #sjnqsexqte .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #sjnqsexqte .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #sjnqsexqte .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #sjnqsexqte .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #sjnqsexqte .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #sjnqsexqte .gt_spanner_row { border-bottom-style: hidden; }
+ #sjnqsexqte .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #sjnqsexqte .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #sjnqsexqte .gt_from_md> :first-child { margin-top: 0; }
+ #sjnqsexqte .gt_from_md> :last-child { margin-bottom: 0; }
+ #sjnqsexqte .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #sjnqsexqte .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #sjnqsexqte .gt_indent_1 { text-indent: 5px; }
+ #sjnqsexqte .gt_indent_2 { text-indent: calc(5px * 2); }
+ #sjnqsexqte .gt_indent_3 { text-indent: calc(5px * 3); }
+ #sjnqsexqte .gt_indent_4 { text-indent: calc(5px * 4); }
+ #sjnqsexqte .gt_indent_5 { text-indent: calc(5px * 5); }
+ #sjnqsexqte .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #sjnqsexqte .gt_row_group_first td { border-top-width: 2px; }
+ #sjnqsexqte .gt_row_group_first th { border-top-width: 2px; }
+ #sjnqsexqte .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #sjnqsexqte .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #sjnqsexqte .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #sjnqsexqte .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #sjnqsexqte .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #sjnqsexqte .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #sjnqsexqte .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #sjnqsexqte .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #sjnqsexqte .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #sjnqsexqte .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #sjnqsexqte .gt_left { text-align: left; }
+ #sjnqsexqte .gt_center { text-align: center; }
+ #sjnqsexqte .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #sjnqsexqte .gt_font_normal { font-weight: normal; }
+ #sjnqsexqte .gt_font_bold { font-weight: bold; }
+ #sjnqsexqte .gt_font_italic { font-style: italic; }
+ #sjnqsexqte .gt_super { font-size: 65%; }
+ #sjnqsexqte .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #sjnqsexqte .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #sjnqsexqte .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #sjnqsexqte .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #sjnqsexqte .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #sjnqsexqte .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="البند" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">البند</th>
+<th id="2015" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">2015</th>
+<th id="2016" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">2016</th>
+<th id="2017" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">2017</th>
+<th id="2018" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">2018</th>
+<th id="2019" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">2019</th>
+<th id="2020" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">2020</th>
+<th id="2021" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">2021</th>
+<th id="2022" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">2022</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="البند">انبعاثات حسابات انبعاثات الهواء (الوحدات المقيمة)</td>
+<td class="gt_row gt_right" headers="2015">44,797</td>
+<td class="gt_row gt_right" headers="2016">45,299</td>
+<td class="gt_row gt_right" headers="2017">45,513</td>
+<td class="gt_row gt_right" headers="2018">45,574</td>
+<td class="gt_row gt_right" headers="2019">46,158</td>
+<td class="gt_row gt_right" headers="2020">43,690</td>
+<td class="gt_row gt_right" headers="2021">47,213</td>
+<td class="gt_row gt_right" headers="2022">46,921</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="البند">ناقص: النقل الجوي للمقيمين في الخارج</td>
+<td class="gt_row gt_right" headers="2015">556</td>
+<td class="gt_row gt_right" headers="2016">592</td>
+<td class="gt_row gt_right" headers="2017">700</td>
+<td class="gt_row gt_right" headers="2018">808</td>
+<td class="gt_row gt_right" headers="2019">745</td>
+<td class="gt_row gt_right" headers="2020">246</td>
+<td class="gt_row gt_right" headers="2021">288</td>
+<td class="gt_row gt_right" headers="2022">564</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="البند">ناقص: النقل البحري للمقيمين في الخارج</td>
+<td class="gt_row gt_right" headers="2015">0</td>
+<td class="gt_row gt_right" headers="2016">0</td>
+<td class="gt_row gt_right" headers="2017">0</td>
+<td class="gt_row gt_right" headers="2018">0</td>
+<td class="gt_row gt_right" headers="2019">498</td>
+<td class="gt_row gt_right" headers="2020">502</td>
+<td class="gt_row gt_right" headers="2021">540</td>
+<td class="gt_row gt_right" headers="2022">546</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="البند">زائد: النقل الجوي لغير المقيمين في الإقليم</td>
+<td class="gt_row gt_right" headers="2015">0</td>
+<td class="gt_row gt_right" headers="2016">0</td>
+<td class="gt_row gt_right" headers="2017">0</td>
+<td class="gt_row gt_right" headers="2018">0</td>
+<td class="gt_row gt_right" headers="2019">4</td>
+<td class="gt_row gt_right" headers="2020">0</td>
+<td class="gt_row gt_right" headers="2021">0</td>
+<td class="gt_row gt_right" headers="2022">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="البند">زائد: النقل البحري لغير المقيمين في الإقليم</td>
+<td class="gt_row gt_right" headers="2015">0</td>
+<td class="gt_row gt_right" headers="2016">0</td>
+<td class="gt_row gt_right" headers="2017">0</td>
+<td class="gt_row gt_right" headers="2018">0</td>
+<td class="gt_row gt_right" headers="2019">0</td>
+<td class="gt_row gt_right" headers="2020">0</td>
+<td class="gt_row gt_right" headers="2021">0</td>
+<td class="gt_row gt_right" headers="2022">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="البند">تعديلات أخرى</td>
+<td class="gt_row gt_right" headers="2015">−5</td>
+<td class="gt_row gt_right" headers="2016">−4</td>
+<td class="gt_row gt_right" headers="2017">−4</td>
+<td class="gt_row gt_right" headers="2018">−2</td>
+<td class="gt_row gt_right" headers="2019">0</td>
+<td class="gt_row gt_right" headers="2020">−1</td>
+<td class="gt_row gt_right" headers="2021">−4</td>
+<td class="gt_row gt_right" headers="2022">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="البند">الجرد الوطني دون استخدام الأراضي وتغيير استخدامها والحراجة</td>
+<td class="gt_row gt_right" headers="2015">44,236</td>
+<td class="gt_row gt_right" headers="2016">44,704</td>
+<td class="gt_row gt_right" headers="2017">44,809</td>
+<td class="gt_row gt_right" headers="2018">44,765</td>
+<td class="gt_row gt_right" headers="2019">44,919</td>
+<td class="gt_row gt_right" headers="2020">42,941</td>
+<td class="gt_row gt_right" headers="2021">46,381</td>
+<td class="gt_row gt_right" headers="2022">45,812</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="البند">استخدام الأراضي وتغيير استخدامها والحراجة</td>
+<td class="gt_row gt_right" headers="2015">−9,944</td>
+<td class="gt_row gt_right" headers="2016">−9,956</td>
+<td class="gt_row gt_right" headers="2017">−10,192</td>
+<td class="gt_row gt_right" headers="2018">−10,341</td>
+<td class="gt_row gt_right" headers="2019">−10,564</td>
+<td class="gt_row gt_right" headers="2020">−10,563</td>
+<td class="gt_row gt_right" headers="2021">−10,500</td>
+<td class="gt_row gt_right" headers="2022">−10,784</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="البند">الجرد الوطني بما في ذلك استخدام الأراضي وتغيير استخدامها والحراجة</td>
+<td class="gt_row gt_right" headers="2015">34,292</td>
+<td class="gt_row gt_right" headers="2016">34,748</td>
+<td class="gt_row gt_right" headers="2017">34,616</td>
+<td class="gt_row gt_right" headers="2018">34,424</td>
+<td class="gt_row gt_right" headers="2019">34,354</td>
+<td class="gt_row gt_right" headers="2020">32,378</td>
+<td class="gt_row gt_right" headers="2021">35,881</td>
+<td class="gt_row gt_right" headers="2022">35,028</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>ويتحقق البرنامج أيضًا من التوزيع مقارنة بحسابات الطاقة. فلكل نشاط، يعطي ثاني أكسيد الكربون المنبعث من احتراق الوقود، مقسومًا على الطاقة الأحفورية التي تسندها إليه حسابات الطاقة، معاملَ انبعاث ضمنيًا بالأطنان من ثاني أكسيد الكربون لكل تيراجول. وتتراوح المعاملات الضمنية حسب الوقود في الجرد بين 57.7 للغاز الطبيعي و76.8 للوقود السائل في 2022، فينبغي أن يقع معامل كل نشاط داخل هذا المجال أو قريبًا منه. ويبين <a href="#fig-factors" class="quarto-xref">الشكل&nbsp;2</a> النتيجة.</p>
+<div id="cell-fig-factors" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="fig-factors" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-factors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-factors-output-1.png" width="1042" height="739" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-factors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الشكل&nbsp;2: معامل ثاني أكسيد الكربون الضمني لاحتراق الوقود حسب النشاط: ثاني أكسيد الكربون من الاحتراق في حسابات الانبعاثات مقسومًا على استخدام الطاقة الأحفورية في حسابات الطاقة، السنة الأخيرة (طن CO2 لكل تيراجول). يبين الشريط مجال المعاملات الضمنية حسب الوقود في الجرد.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>تقع معظم الأنشطة داخل الشريط. أما الأنشطة الواقعة خارجه فتشير إلى اختلافات في التصنيف بين ميزان الطاقة والجرد، كالاستهلاك الذاتي لقطاع الطاقة والمنتجين الذاتيين للكهرباء، ومن المفيد مراجعتها مع المرصد والوكالة الوطنية للتحكم في الطاقة.</p>
+</section>
+<section id="المؤشرات-والتصدير" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="المؤشرات-والتصدير"><span class="header-section-number">4.5</span> المؤشرات والتصدير</h2>
+<p>تقسم كثافات الانبعاث الانبعاثاتِ على الإنتاج أو القيمة المضافة بالأسعار الجارية، بالأطنان من مكافئ ثاني أكسيد الكربون لكل مليون دينار. وبالنسبة إلى الأسر، فالمقام هو إنفاقها على الاستهلاك النهائي، كما يقترح دليل أداة I2A <span class="citation" data-cites="imf2026i2a">(<a href="#ref-imf2026i2a" role="doc-biblioref">International Monetary Fund, 2026</a>)</span>. ويكتب البرنامج <a href="#script-24">24_export_aea.py</a> الحسابات في مصنفات إكسل بالإنجليزية والفرنسية والعربية، تضم الجدول الطويل، وجدول الربط، وحسابات كل سنة حسب النشاط والغاز، والانبعاثات حسب المصدر والنشاط، والمؤشرات.</p>
+</section>
+</section>
+<section id="النتائج" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> النتائج</h1>
+<section id="الانبعاثات-عبر-الزمن-وحسب-الغاز" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="الانبعاثات-عبر-الزمن-وحسب-الغاز"><span class="header-section-number">5.1</span> الانبعاثات عبر الزمن وحسب الغاز</h2>
+<p>يبين <a href="#fig-gases" class="quarto-xref">الشكل&nbsp;3</a> انبعاثات الوحدات المقيمة حسب الغاز. وقد بقيت قريبة من 45 مليون طن من مكافئ ثاني أكسيد الكربون طوال الفترة، مع انخفاض في 2020، حين تراجع النشاط والتنقل خلال جائحة كوفيد-19.</p>
+<div id="cell-fig-gases" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="fig-gases" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-gases-output-1.png" width="1014" height="497" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الشكل&nbsp;3: انبعاثات غازات الاحتباس الحراري للوحدات المقيمة حسب الغاز (مليون طن مكافئ CO2).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="من-قطاعات-الجرد-إلى-الاقتصاد" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="من-قطاعات-الجرد-إلى-الاقتصاد"><span class="header-section-number">5.2</span> من قطاعات الجرد إلى الاقتصاد</h2>
+<p>يتتبع <a href="#fig-sankey" class="quarto-xref">الشكل&nbsp;4</a> انبعاثات 2022 من قطاعات الجرد إلى أبواب الاقتصاد التي تطلقها. فاحتراق الوقود ينتشر في كل أجزاء الاقتصاد. والعمليات الصناعية تأتي كلها تقريبًا من الصناعات التحويلية، وأساسًا من الإسمنت. وتبقى انبعاثات الفلاحة في الفلاحة، وتذهب انبعاثات النفايات إلى فرع المياه والنفايات. ويضيف تعديل الإقامة انبعاثات الناقلين التونسيين في الخارج إلى النقل.</p>
+<div id="cell-fig-sankey" class="cell" data-execution_count="9">
+<div id="fig-sankey" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sankey-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div style="height:520px; width:820px;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="0d9e3ac3-03a0-44ea-ba87-f554de8cdc5f" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("0d9e3ac3-03a0-44ea-ba87-f554de8cdc5f")) {                    Plotly.newPlot(                        "0d9e3ac3-03a0-44ea-ba87-f554de8cdc5f",                        [{"arrangement":"snap","link":{"color":["rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(37,125,224,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(244,114,48,0.45)","rgba(0,138,23,0.45)","rgba(0,138,23,0.45)","rgba(0,138,23,0.45)","rgba(0,138,23,0.45)","rgba(0,184,148,0.45)","rgba(0,184,148,0.45)","rgba(0,184,148,0.45)","rgba(0,184,148,0.45)","rgba(106,76,226,0.45)"],"hovertemplate":"%{source.label} \u2192 %{target.label}: %{value:,.1f} \u0623\u0644\u0641 \u0637\u0646 \u0645\u0643\u0627\u0641\u0626 CO2\u003cextra\u003e\u003c\u002fextra\u003e","source":[0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"target":[17,18,19,20,21,22,23,25,24,17,18,19,20,23,19,19,19,19,24,20,17,17,17,17,21,21,21,21,23],"value":[1548.1771927729233,1100.5689388580568,6204.946936736254,8332.185188000001,159.23546288115114,483.4752961389385,2879.5945146594036,5233.094718206471,1448.6272978168017,284.116207,2646.288816,12.025813,594.8897519999999,0.874726,4886.185964,266.335335,13.59,106.552879,862.832233,8.977,2737.001988,410.085509,1481.719145,20.49216,3354.1214,0.10266900000000001,54.700585,680.4647170000001,1109.585600974]},"node":{"color":["#257de0","#257de0","#f47230","#f47230","#f47230","#f47230","#f47230","#f47230","#008a17","#008a17","#008a17","#008a17","#00b894","#00b894","#00b894","#00b894","#6a4ce2","#008a17","#f47230","#257de0","#f2a600","#00b894","#ee7fac","#6a4ce2","#ec4647","#5c5c5c"],"label":["1.A \u0627\u062d\u062a\u0631\u0627\u0642 \u0627\u0644\u0648\u0642\u0648\u062f","1.B \u0627\u0644\u0627\u0646\u0628\u0639\u0627\u062b\u0627\u062a \u0627\u0644\u0645\u062a\u0633\u0631\u0628\u0629 \u0645\u0646 \u0627\u0644\u0648\u0642\u0648\u062f","2.A \u0627\u0644\u0635\u0646\u0627\u0639\u0629 \u0627\u0644\u0645\u0639\u062f\u0646\u064a\u0629 \u063a\u064a\u0631 \u0627\u0644\u0641\u0644\u0632\u064a\u0629","2.B \u0627\u0644\u0635\u0646\u0627\u0639\u0629 \u0627\u0644\u0643\u064a\u0645\u064a\u0627\u0626\u064a\u0629","2.C \u0635\u0646\u0627\u0639\u0629 \u0627\u0644\u0645\u0639\u0627\u062f\u0646","2.D \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a \u063a\u064a\u0631 \u0627\u0644\u0637\u0627\u0642\u0648\u064a\u0629 \u0645\u0646 \u0627\u0644\u0648\u0642\u0648\u062f \u0648\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0645\u0630\u064a\u0628\u0627\u062a","2.F \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a \u0643\u0628\u062f\u0627\u0626\u0644 \u0644\u0644\u0645\u0648\u0627\u062f \u0627\u0644\u0645\u0633\u062a\u0646\u0641\u062f\u0629 \u0644\u0644\u0623\u0648\u0632\u0648\u0646","2.G \u062a\u0635\u0646\u064a\u0639 \u0648\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0645\u0646\u062a\u062c\u0627\u062a \u0623\u062e\u0631\u0649","3.A \u0627\u0644\u062a\u062e\u0645\u0631 \u0627\u0644\u0645\u0639\u0648\u064a","3.B \u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0633\u0645\u0627\u062f \u0627\u0644\u062d\u064a\u0648\u0627\u0646\u064a","3.D \u0627\u0644\u062a\u0631\u0628\u0629 \u0627\u0644\u0641\u0644\u0627\u062d\u064a\u0629","3.F \u062d\u0631\u0642 \u0627\u0644\u0645\u062e\u0644\u0641\u0627\u062a \u0627\u0644\u0641\u0644\u0627\u062d\u064a\u0629 \u0641\u064a \u0627\u0644\u062d\u0642\u0648\u0644","5.A \u0627\u0644\u062a\u062e\u0644\u0635 \u0645\u0646 \u0627\u0644\u0646\u0641\u0627\u064a\u0627\u062a \u0627\u0644\u0635\u0644\u0628\u0629","5.B \u0627\u0644\u0645\u0639\u0627\u0644\u062c\u0629 \u0627\u0644\u0628\u064a\u0648\u0644\u0648\u062c\u064a\u0629 \u0644\u0644\u0646\u0641\u0627\u064a\u0627\u062a \u0627\u0644\u0635\u0644\u0628\u0629","5.C \u062d\u0631\u0642 \u0627\u0644\u0646\u0641\u0627\u064a\u0627\u062a \u0648\u062d\u0631\u0642\u0647\u0627 \u0641\u064a \u0627\u0644\u0647\u0648\u0627\u0621 \u0627\u0644\u0637\u0644\u0642","5.D \u0645\u0639\u0627\u0644\u062c\u0629 \u0627\u0644\u0645\u064a\u0627\u0647 \u0627\u0644\u0645\u0633\u062a\u0639\u0645\u0644\u0629 \u0648\u062a\u0635\u0631\u064a\u0641\u0647\u0627","\u0627\u0644\u0645\u0642\u064a\u0645\u0648\u0646 \u0641\u064a \u0627\u0644\u062e\u0627\u0631\u062c (\u0627\u0644\u0646\u0642\u0644 \u0627\u0644\u062c\u0648\u064a)","\u0627\u0644\u0641\u0644\u0627\u062d\u0629 \u0648\u0627\u0644\u063a\u0627\u0628\u0627\u062a \u0648\u0627\u0644\u0635\u064a\u062f \u0627\u0644\u0628\u062d\u0631\u064a","\u0627\u0644\u0635\u0646\u0627\u0639\u0627\u062a \u0627\u0644\u0627\u0633\u062a\u062e\u0631\u0627\u062c\u064a\u0629","\u0627\u0644\u0635\u0646\u0627\u0639\u0627\u062a \u0627\u0644\u062a\u062d\u0648\u064a\u0644\u064a\u0629","\u0625\u0646\u062a\u0627\u062c \u0648\u062a\u0648\u0632\u064a\u0639 \u0627\u0644\u0643\u0647\u0631\u0628\u0627\u0621 \u0648\u0627\u0644\u063a\u0627\u0632 \u0648\u0627\u0644\u0628\u062e\u0627\u0631 \u0648\u062a\u0643\u064a\u064a\u0641 \u0627\u0644\u0647\u0648\u0627\u0621","\u062a\u0648\u0632\u064a\u0639 \u0627\u0644\u0645\u064a\u0627\u0647 \u0648\u0627\u0644\u062a\u0637\u0647\u064a\u0631 \u0648\u0645\u0639\u0627\u0644\u062c\u0629 \u0627\u0644\u0646\u0641\u0627\u064a\u0627\u062a","\u0627\u0644\u0628\u0646\u0627\u0621 \u0648\u0627\u0644\u0623\u0634\u063a\u0627\u0644 \u0627\u0644\u0639\u0627\u0645\u0629","\u0627\u0644\u0646\u0642\u0644 \u0648\u0627\u0644\u062a\u062e\u0632\u064a\u0646","\u062e\u062f\u0645\u0627\u062a \u0623\u062e\u0631\u0649","\u0627\u0644\u0623\u0633\u0631"],"line":{"width":0},"pad":14,"thickness":14},"type":"sankey"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"margin":{"b":0,"l":0,"r":0,"t":30}}},"margin":{"l":10,"r":10,"t":10,"b":10},"font":{"family":"DejaVu Sans, Noto Naskh Arabic, sans-serif","size":11,"color":"#191919"},"height":520,"width":820},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('0d9e3ac3-03a0-44ea-ba87-f554de8cdc5f');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sankey-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الشكل&nbsp;4: انبعاثات غازات الاحتباس الحراري حسب فئة الجرد وباب النشاط المطلِق، السنة الأخيرة (ألف طن مكافئ CO2).
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="الانبعاثات-حسب-النشاط" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="الانبعاثات-حسب-النشاط"><span class="header-section-number">5.3</span> الانبعاثات حسب النشاط</h2>
+<p>يرتب <a href="#fig-activities" class="quarto-xref">الشكل&nbsp;5</a> الجهات المطلِقة في 2022. وتتصدر الكهرباء والغاز، تليها مواد البناء، حيث تطلق أفران الإسمنت انبعاثات من وقودها ومن التحول الكيميائي للحجر الجيري معًا. ثم تأتي الفلاحة، عبر الماشية والتربة، ثم الأسر. وتدين خدمات المياه والنفايات بمرتبتها لمصبات النفايات.</p>
+<div id="cell-fig-activities" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div id="fig-activities" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-activities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-activities-output-1.png" width="1071" height="739" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-activities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الشكل&nbsp;5: انبعاثات غازات الاحتباس الحراري حسب النشاط والغاز، السنة الأخيرة (ألف طن مكافئ CO2). أكبر خمس عشرة جهة مطلِقة.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="كثافة-الانبعاث" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="كثافة-الانبعاث"><span class="header-section-number">5.4</span> كثافة الانبعاث</h2>
+<p>لمجموع الفروع، أطلق الاقتصاد 326 طنًا من مكافئ ثاني أكسيد الكربون لكل مليون دينار من القيمة المضافة في 2022. ويبين <a href="#fig-intensity" class="quarto-xref">الشكل&nbsp;6</a> مدى تفاوت هذا المتوسط. فبعض الفروع، وهي مواد البناء والكهرباء والمياه والنفايات والفلاحة، تطلق لكل دينار أكثر بكثير من البقية. والسياسات التي تغير إنتاج هذه الفروع أو التكنولوجيا التي تستخدمها هي الأكثر أثرًا في الانبعاثات الوطنية.</p>
+<div id="cell-fig-intensity" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="fig-intensity" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-intensity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-intensity-output-1.png" width="1042" height="739" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-intensity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الشكل&nbsp;6: انبعاثات غازات الاحتباس الحراري لكل مليون دينار من القيمة المضافة حسب الفرع، السنة الأخيرة (طن مكافئ CO2 لكل مليون دينار، بالأسعار الجارية).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="الحسابات-حسب-النشاط-والغاز" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="الحسابات-حسب-النشاط-والغاز"><span class="header-section-number">5.5</span> الحسابات حسب النشاط والغاز</h2>
+<div class="cell" data-execution_count="12">
+<div id="tbl-aea" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="12">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-aea-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+الجدول&nbsp;6: حسابات انبعاثات الهواء حسب النشاط والغاز، السنة الأخيرة (ألف طن مكافئ CO2).
+</figcaption>
+<div aria-describedby="tbl-aea-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div id="wxlsnqajnt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#wxlsnqajnt table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#wxlsnqajnt thead, #wxlsnqajnt tbody, #wxlsnqajnt tfoot, #wxlsnqajnt tr, #wxlsnqajnt td, #wxlsnqajnt th { border-style: none; }
+#wxlsnqajnt tr { background-color: transparent; }
+#wxlsnqajnt p { margin: 0; padding: 0; }
+ #wxlsnqajnt .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 11px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #204B92; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #wxlsnqajnt .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #wxlsnqajnt .gt_title { color: #333333; font-size: 13px; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #wxlsnqajnt .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #wxlsnqajnt .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #wxlsnqajnt .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #wxlsnqajnt .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #wxlsnqajnt .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #wxlsnqajnt .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #wxlsnqajnt .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #wxlsnqajnt .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #wxlsnqajnt .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #204B92; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #wxlsnqajnt .gt_spanner_row { border-bottom-style: hidden; }
+ #wxlsnqajnt .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #wxlsnqajnt .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: bold; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #wxlsnqajnt .gt_from_md> :first-child { margin-top: 0; }
+ #wxlsnqajnt .gt_from_md> :last-child { margin-bottom: 0; }
+ #wxlsnqajnt .gt_row { padding-top: 3px; padding-bottom: 3px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #e6e6e6; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #wxlsnqajnt .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #wxlsnqajnt .gt_indent_1 { text-indent: 5px; }
+ #wxlsnqajnt .gt_indent_2 { text-indent: calc(5px * 2); }
+ #wxlsnqajnt .gt_indent_3 { text-indent: calc(5px * 3); }
+ #wxlsnqajnt .gt_indent_4 { text-indent: calc(5px * 4); }
+ #wxlsnqajnt .gt_indent_5 { text-indent: calc(5px * 5); }
+ #wxlsnqajnt .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #wxlsnqajnt .gt_row_group_first td { border-top-width: 2px; }
+ #wxlsnqajnt .gt_row_group_first th { border-top-width: 2px; }
+ #wxlsnqajnt .gt_striped { color: #333333; background-color: #F4F4F4; }
+ #wxlsnqajnt .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #wxlsnqajnt .gt_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #wxlsnqajnt .gt_first_summary_row { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; }
+ #wxlsnqajnt .gt_last_summary_row_top { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #wxlsnqajnt .gt_grand_summary_row { color: #333333; background-color: #FFFFFF; text-transform: inherit; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; }
+ #wxlsnqajnt .gt_first_grand_summary_row_bottom { border-top-style: double; border-top-width: 6px; border-top-color: #D3D3D3; }
+ #wxlsnqajnt .gt_last_grand_summary_row_top { border-bottom-style: double; border-bottom-width: 6px; border-bottom-color: #D3D3D3; }
+ #wxlsnqajnt .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #wxlsnqajnt .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #wxlsnqajnt .gt_left { text-align: left; }
+ #wxlsnqajnt .gt_center { text-align: center; }
+ #wxlsnqajnt .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #wxlsnqajnt .gt_font_normal { font-weight: normal; }
+ #wxlsnqajnt .gt_font_bold { font-weight: bold; }
+ #wxlsnqajnt .gt_font_italic { font-style: italic; }
+ #wxlsnqajnt .gt_super { font-size: 65%; }
+ #wxlsnqajnt .gt_footnotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #wxlsnqajnt .gt_footnote { margin: 0px; font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; }
+ #wxlsnqajnt .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #wxlsnqajnt .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #wxlsnqajnt .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #wxlsnqajnt .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="النشاط" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="color: #666666" scope="col">النشاط</th>
+<th id="ثاني-أكسيد-الكربون-CO2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">ثاني أكسيد الكربون (CO2)</th>
+<th id="الميثان-CH4" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الميثان (CH4)</th>
+<th id="أكسيد-النيتروز-N2O" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">أكسيد النيتروز (N2O)</th>
+<th id="الغازات-المفلورة" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">الغازات المفلورة</th>
+<th id="مجموع-غازات-الاحتباس-الحراري" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="color: #666666" scope="col">مجموع غازات الاحتباس الحراري</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">الفلاحة والغابات والصيد البحري</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">1,459.3</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">3,239.3</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">1,783.1</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">6,481.6</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">استخراج النفط والغاز الطبيعي</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">1,148.0</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">2,368.9</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">2.8</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">3,519.7</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">الصناعات الاستخراجية خارج المحروقات</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">222.2</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.9</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">4.0</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">227.2</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">الصناعات الغذائية</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">495.4</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.9</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">3.5</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">499.9</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">صناعات النسيج والملابس والجلود</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">256.7</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.5</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">2.1</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">259.3</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">تكرير النفط</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">144.9</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">1.6</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">0.2</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">146.8</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">الصناعات الكيميائية</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">399.3</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.9</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">270.0</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">670.2</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">صناعات مواد البناء</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">8,422.9</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">8.6</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">10.5</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">8,441.9</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">الصناعات الميكانيكية والكهربائية</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">202.0</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.7</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">3.2</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">205.9</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">الصناعات المختلفة</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">1,261.6</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">1.2</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">2.7</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">1,265.6</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">إنتاج وتوزيع الكهرباء والغاز</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">8,324.6</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">598.7</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">3.8</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">9.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">8,936.1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">توزيع المياه والتطهير وإدارة النفايات</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">184.4</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">3,967.7</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">96.5</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">4,248.6</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">البناء</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">472.3</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">2.1</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">9.1</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">483.5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">التجارة والإصلاح</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">446.9</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">2.4</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">6.6</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">862.8</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">1,318.7</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">النقل والتخزين</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">3,937.9</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">10.0</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">42.1</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">3,990.1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">الإيواء والمطاعم</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">228.2</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">1.9</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">0.4</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">230.5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">الإعلام والاتصال</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">199.3</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">1.5</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">0.8</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">201.7</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">الأنشطة المالية والتأمين</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">24.5</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.2</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">0.1</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">24.8</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">الإدارة العمومية والدفاع</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">129.3</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.7</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">2.1</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">132.1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">التعليم</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">30.1</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.1</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">0.6</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">30.8</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">الصحة والعمل الاجتماعي</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">40.5</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.2</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">0.7</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">41.4</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">خدمات سوقية أخرى</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">319.6</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">1.7</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">4.9</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">326.1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="النشاط">أنشطة المنظمات الجمعياتية</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">5.2</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">0.0</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">0.1</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">5.3</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="النشاط">الأسر</td>
+<td class="gt_row gt_right" headers="ثاني-أكسيد-الكربون-CO2">4,856.1</td>
+<td class="gt_row gt_right" headers="الميثان-CH4">294.9</td>
+<td class="gt_row gt_right" headers="أكسيد-النيتروز-N2O">82.1</td>
+<td class="gt_row gt_right" headers="الغازات-المفلورة">0.0</td>
+<td class="gt_row gt_right" headers="مجموع-غازات-الاحتباس-الحراري">5,233.1</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="حدود-الحسابات" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> حدود الحسابات</h1>
+<p>هذه الحسابات إعداد أول مؤقت. فتوزيع النقل البري واحتراق التجارة يقوم على المشتريات النقدية لا على البيانات المادية. ويستند تعديل الإقامة إلى تقديرات منظمة التعاون والتنمية في الميدان الاقتصادي، وهي مقدرة بالنمذجة لا مرصودة، ولا تبدأ بالنسبة إلى النقل البحري إلا في 2019. وتوزَّع الغازات المفلورة حسب الفئة دون تفصيل حسب النوع. ولا تشمل الحسابات ملوثات الهواء غير غازات الاحتباس الحراري، كثاني أكسيد الكبريت أو الجسيمات، لأن الجرد لا يتضمن منها إلا القليل. وتمزج الكثافات بالأسعار الجارية بين الحجم والسعر. ويمكن تحسين كل نقطة من هذه النقاط كلما توفرت بيانات أكثر تفصيلًا، ويسمح خط المعالجة بإعادة إعداد الحسابات ببساطة بعد أي تعديل في جدول مطابقة.</p>
+</section>
+<section id="المراجع" class="level1 unnumbered">
+<h1 class="unnumbered">المراجع</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-besbes2026" class="csl-entry" role="listitem">
+Besbes, M. (2026). <em><span>Tunisian</span> <span>GHG</span> Inventory and Climate Policy</em>. Presentation at the virtual workshop on energy and air emissions accounts, National Agency for Energy Conservation, Tunisia.
+</div>
+<div id="ref-eurostat2015aea" class="csl-entry" role="listitem">
+Eurostat. (2015). <em>Manual for Air Emissions Accounts: 2015 Edition</em>. Publications Office of the European Union.
+</div>
+<div id="ref-ipcc2006" class="csl-entry" role="listitem">
+Intergovernmental Panel on Climate Change. (2006). <em>2006 <span>IPCC</span> Guidelines for National Greenhouse Gas Inventories</em> (H. S. Eggleston, L. Buendia, K. Miwa, T. Ngara, &amp; K. Tanabe, تحقيق). Institute for Global Environmental Strategies.
+</div>
+<div id="ref-ipcc2014ar5" class="csl-entry" role="listitem">
+Intergovernmental Panel on Climate Change. (2013). <em>Climate Change 2013: The Physical Science Basis. Contribution of Working Group <span>I</span> to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change</em>. Cambridge University Press.
+</div>
+<div id="ref-imf2026i2a" class="csl-entry" role="listitem">
+International Monetary Fund. (2026). <em>Air Emissions Account Converter: A Framework for Converting Greenhouse Gas Emissions Inventories into Air Emissions Account. User Manual</em> (Version 0.0). Statistics Department, Real Sector Division.
+</div>
+<div id="ref-oecd2024transport" class="csl-entry" role="listitem">
+OECD. (2024). <em>Air and Maritime Transport <span>CO2</span> Emissions</em>. OECD Data Explorer, datasets <span>DSD_AIR_TRANSPORT</span> and <span>DSD_MARITIME_TRANSPORT</span>.
+</div>
+<div id="ref-pegoue2026i2a" class="csl-entry" role="listitem">
+Pegoue, A. (2026). <em>Air Emissions Account Converter (<span>I2A</span>): <span>Excel</span> workbook and <span>Python</span> function <span>I2A</span></em> (إصدار 0.0) [Software]. International Monetary Fund, Statistics Department. <a href="https://github.com/renatovargas/tun-pefa-aea/tree/main/imf-tools/i2a">https://github.com/renatovargas/tun-pefa-aea/tree/main/imf-tools/i2a</a>
+</div>
+<div id="ref-seea2014" class="csl-entry" role="listitem">
+United Nations, European Commission, Food and Agriculture Organization of the United Nations, International Monetary Fund, Organisation for Economic Co-operation and Development, &amp; World Bank. (2014). <em>System of Environmental-Economic Accounting 2012: Central Framework</em>. United Nations.
+</div>
+</div>
+</section>
+<section id="annex-scripts" class="level1 unnumbered">
+<h1 class="unnumbered">الملحق الأول. برامج خط المعالجة</h1>
+<p>يصف هذا الملحق كل برنامج تستخدمه حسابات الانبعاثات، حسب ترتيب تنفيذه. ويفتح الرابط تحت كل اسم شيفرته على GitHub. والتعليقات في الشيفرة بالإنجليزية تليها ترجمتها الفرنسية.</p>
+<section id="script-02" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="script-02">02_extract_crt_inventory.py</h2>
+<p><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/extract/02_extract_crt_inventory.py">عرض على GitHub</a></p>
+<p>يكدس هذا البرنامج ورقة <code>Data</code> من مصنفات CRT الثمانية، ويضيف السنة، ويحول القيم إلى أرقام، ويحذف الأسطر المكررة. ويقارن الانبعاثات المجمعة حسب الفئة بورقة <code>Summary2</code> ويكتب <code>crt.parquet</code>.</p>
+</section>
+<section id="script-20" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="script-20">20_prepare_ghg_inventory.py</h2>
+<p><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/20_prepare_ghg_inventory.py">عرض على GitHub</a></p>
+<p>يبني هذا البرنامج الانبعاثات حسب السنة والفئة والغاز، بآلاف الأطنان وبمكافئ ثاني أكسيد الكربون، ويأخذ الغازات المفلورة من <code>Summary2</code>، ويسم نطاق كل سطر (الجرد، استخدام الأراضي، بند تذكيري)، ويعطي كل فئة رمزها في أداة I2A. ويتحقق من مجموع الجرد مقارنة بـ<code>Summary2</code>، ويقارن الملف المعد للأداة بجداول CRT.</p>
+</section>
+<section id="script-21" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="script-21">21_build_conversion_matrix.py</h2>
+<p><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/21_build_conversion_matrix.py">عرض على GitHub</a></p>
+<p>يسند هذا البرنامج إلى كل رمز من رموز الأداة القاعدةَ صاحبة أطول بادئة مطابقة في <code>crt_to_activities.csv</code>، ويطبق مفاتيح حسابات الطاقة حيث تقتضيها القاعدة، ويكتب مصفوفة التحويل التونسية لكل سنة. ويدرج أيضًا الفئات التي كانت المصفوفة الافتراضية ستُضيعها والخروج عن أبوابها.</p>
+</section>
+<section id="script-22" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="script-22">22_compile_aea_tables.py</h2>
+<p><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/22_compile_aea_tables.py">عرض على GitHub</a></p>
+<p>يعد هذا البرنامج الحسابات باستدعاء الدالة <code>I2A</code> من الأداة دون تعديلها، وبتطبيق كل قاعدة من قواعدها تطبيقًا صريحًا، بما في ذلك تعديلات الإقامة المستندة إلى بيانات المنظمة. ويشغل الطريقتين بالمصفوفة الافتراضية والمصفوفة التونسية، ويتوقف إذا اختلفتا بأكثر من 10<sup>-9</sup> ألف طن. ويكتب <code>aea.parquet</code>.</p>
+</section>
+<section id="script-23" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="script-23">23_bridge_and_indicators.py</h2>
+<p><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/23_bridge_and_indicators.py">عرض على GitHub</a></p>
+<p>يبني هذا البرنامج جدول الربط ويتحقق من وصوله إلى الجرد، ويقارن تقديرات المنظمة بالمستودعات الدولية، ويحسب معاملات ثاني أكسيد الكربون الضمنية حسب الوقود والنشاط، ويستخرج كثافات الانبعاث.</p>
+</section>
+<section id="script-24" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="script-24">24_export_aea.py</h2>
+<p><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/aea/24_export_aea.py">عرض على GitHub</a></p>
+<p>يكتب هذا البرنامج <code>aea_accounts.xlsx</code> بالإنجليزية والفرنسية والعربية، بتسميات مأخوذة من جداول المطابقة.</p>
+</section>
+<section id="script-30" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="script-30">30_publish_tables.py</h2>
+<p><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/scripts/report/30_publish_tables.py">عرض على GitHub</a></p>
+<p>ينشر هذا البرنامج، بصيغتي Parquet وCSV، الجداول والتسميات التي تقرؤها هذه الوثيقة والعروض ومستكشف البيانات.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+// Language menu. The trees en/, fr/ and ar/ are mirrors: the same page exists
+// at the same path in each language. Menu links point to "#lang-xx" and this
+// script replaces them with the matching page in the other language.
+document.addEventListener("DOMContentLoaded", function () {
+  var segment = /\/(fr|en|ar)\/(?!.*\/(fr|en|ar)\/)/;
+  var path = window.location.pathname;
+  document.querySelectorAll('a[href$="#lang-fr"], a[href$="#lang-en"], a[href$="#lang-ar"]').forEach(function (a) {
+    var target = a.getAttribute("href").slice(-2);
+    var dest;
+    if (segment.test(path)) {
+      dest = path.replace(segment, "/" + target + "/");
+    } else {
+      // Root page (language picker): go to the home page of the language
+      dest = path.replace(/[^\/]*$/, "") + target + "/index.html";
+    }
+    a.setAttribute("href", dest);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/renatovargas\.github\.io\/tun-pefa-aea\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/renatovargas/tun-pefa-aea/blob/main/ar/documents/emissions-accounts/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

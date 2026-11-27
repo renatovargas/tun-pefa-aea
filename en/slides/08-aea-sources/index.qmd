@@ -1,0 +1,74 @@
+---
+title: "Air emissions accounts: institutions and sources"
+subtitle: "The greenhouse gas inventory as the starting point"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-09"
+date-format: long
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+inv = read("ghg_inventory")
+by_scope = inv.filter(pl.col("year") == LAST).group_by("scope").agg(pl.col("kt_co2_eq").sum())
+s = dict(by_scope.iter_rows())
+```
+
+## The inventory {.theme-content}
+
+- Coordinated by ANME (energy, industrial processes), the Ministry of Agriculture (agriculture, land use) and ONAS (waste) [@besbes2026].
+- IPCC 2006 guidelines, AR5 warming potentials, reported in CRT format [@ipcc2006].
+- In `{python} LAST`: **`{python} mt(s["inventory"])` Mt CO2 eq** excluding land use, and a net land-use sink of `{python} mt(s["lulucf"])` Mt.
+
+## What the accounts take from the inventory
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.8
+charts.emissions_by_gas(figsize=(9, 3.8))
+```
+
+## Two input files
+
+| File | Content | Used for |
+|:--|:--|:--|
+| CRT workbooks (`Data`, `Summary2`) | All categories, fuels and gases, kt and TJ | The accounts |
+| `Tunisia_UNFCCC.xlsx` | Main categories, kt of each gas | Cross-check |
+
+Sector totals of the two files agree to within `{python} num(check("20_prepare_ghg_inventory", "prepared_file_sectors")["value"], 3)` kt.
+
+## Scope
+
+- **Inside**: CO2, CH4, N2O and fluorinated gases of sectors 1, 2, 3 and 5.
+- **Outside, in the bridge table**: land use, land-use change and forestry (sector 4).
+- **Memo items**: international bunkers (1.D) and CO2 from biomass.
+
+## Points to discuss
+
+- How can the INS receive the CRT workbooks each year, and when?
+- N2O of category 1.B.2.b.ii from 2019: in `Data` but not in `Summary2`.
+- Revising `Tunisia_UNFCCC.xlsx` (unit, the code "N20", missing sub-categories, fluorinated gases) if it is to be reused.
+- Air pollutants (SO2, NOx, particles): any plans to estimate them?
+
+## References
+
+::: {#refs}
+:::

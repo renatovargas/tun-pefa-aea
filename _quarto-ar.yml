@@ -1,4 +1,4 @@
-# الملف الشخصي العربي. Rendu : quarto render ar --profile ar
+# Arabic profile. Render: quarto render ar --profile ar --no-clean
 project:
   render:
     - ar/**/*.qmd
@@ -7,54 +7,25 @@ lang: ar-TN
 dir: rtl
 csl: assets/apa-ar.csl
 
-# Quarto n'a pas de traduction arabe de ses libellés ; on les fixe ici.
+# Quarto has no Arabic UI strings; they are set here.
 language:
   toc-title-document: "المحتويات"
-  toc-title-website: "في هذه الصفحة"
-  section-title-abstract: "الملخص"
-  section-title-references: "المراجع"
-  section-title-footnotes: "الحواشي"
-  title-block-author-single: "المؤلف"
-  title-block-author-plural: "المؤلفون"
-  title-block-affiliation-single: "الانتماء"
-  title-block-affiliation-plural: "الانتماءات"
-  title-block-published: "تاريخ النشر"
-  title-block-modified: "تاريخ التعديل"
-  callout-note-title: "ملاحظة"
-  callout-warning-title: "تحذير"
-  callout-important-title: "مهم"
-  callout-tip-title: "نصيحة"
-  callout-caution-title: "تنبيه"
-  code-tools-menu-caption: "الشيفرة"
-  code-tools-show-all-code: "إظهار كل الشيفرة"
-  code-tools-hide-all-code: "إخفاء كل الشيفرة"
-  code-tools-view-source: "عرض المصدر"
-  copy-button-tooltip: "نسخ"
-  copy-button-tooltip-success: "تم النسخ"
-  crossref-tbl-title: "الجدول"
-  crossref-fig-title: "الشكل"
-  crossref-tbl-prefix: "الجدول"
-  crossref-fig-prefix: "الشكل"
-  crossref-sec-prefix: "القسم"
-  other-links-title: "روابط أخرى"
-  other-formats-title: "صيغ أخرى"
-  repo-action-links-source: "عرض المصدر"
-  search-no-results-text: "لا توجد نتائج"
-
-website:
+  toc-title-website:
   title: "تونس: حسابات الطاقة والانبعاثات"
   description: "حسابات التدفقات المادية للطاقة وحسابات انبعاثات الهواء في تونس"
   navbar:
     left:
       - href: ar/index.qmd
         text: الرئيسية
-      - href: ar/materiaux/index.qmd
-        text: المواد
-      - href: ar/traitement/index.qmd
-        text: معالجة البيانات
-      - href: ar/telechargements.qmd
+      - href: ar/documents/index.qmd
+        text: الوثائق
+      - href: ar/presentations/index.qmd
+        text: العروض
+      - href: ar/explorer/index.qmd
+        text: مستكشف البيانات
+      - href: ar/downloads.qmd
         text: التنزيلات
-      - href: ar/a-propos.qmd
+      - href: ar/about.qmd
         text: حول الموقع
     right:
       - text: "اللغة"
@@ -66,56 +37,15 @@ website:
           - text: "العربية"
             href: "#lang-ar"
   sidebar:
-    - title: المواد
+    - title: الوثائق
       style: docked
       contents:
-        - href: ar/materiaux/index.qmd
-          text: المواد
-        - section: الوثائق
-          contents:
-            - href: ar/materiaux/documents/contexte-mission/index.qmd
-              text: سياق البعثة
-        - section: العروض التقديمية
-          contents:
-            - href: ar/materiaux/presentations/00-introduction.qmd
-              text: مقدمة
-    - title: معالجة البيانات
-      style: docked
-      contents:
-        - href: ar/traitement/index.qmd
-          text: معالجة البيانات
-        - href: ar/traitement/00-bilan-energetique/index.qmd
-          text: قراءة ميزان الطاقة
-        - section: استخراج المصادر
-          contents:
-            - href: ar/traitement/01-extraction-bilans/index.qmd
-              text: موازين الطاقة
-            - href: ar/traitement/02-extraction-crt/index.qmd
-              text: جرد غازات الاحتباس الحراري (CRT)
-            - href: ar/traitement/03-extraction-tre/index.qmd
-              text: جداول الموارد والاستخدامات
-        - section: حسابات الطاقة (PEFA)
-          contents:
-            - href: ar/traitement/10-bilan-format-aie/index.qmd
-              text: الميزان بصيغة الوكالة الدولية للطاقة
-            - href: ar/traitement/11-activites/index.qmd
-              text: فروع النشاط
-            - href: ar/traitement/12-matrice-concordance/index.qmd
-              text: مصفوفة التوافق
-            - href: ar/traitement/13-tableaux-pefa/index.qmd
-              text: جداول PEFA
-            - href: ar/traitement/14-controles-export-pefa/index.qmd
-              text: التحقق والتصدير
-        - section: حسابات انبعاثات الهواء (AEA)
-          contents:
-            - href: ar/traitement/20-inventaire-aea/index.qmd
-              text: جرد غازات الاحتباس الحراري
-            - href: ar/traitement/21-correspondance-aea/index.qmd
-              text: الفئات والفروع
-            - href: ar/traitement/22-comptes-aea/index.qmd
-              text: حسابات AEA
-            - href: ar/traitement/23-passage-export-aea/index.qmd
-              text: الربط والتصدير
+        - href: ar/documents/index.qmd
+          text: الوثائق
+        - href: ar/documents/energy-accounts/index.qmd
+          text: حسابات الطاقة (PEFA)
+        - href: ar/documents/emissions-accounts/index.qmd
+          text: حسابات انبعاثات الهواء (AEA)
 
 format:
   html:
@@ -124,5 +54,3 @@ format:
       - assets/styles.scss
       - assets/styles-ar.scss
 
-execute:
-  eval: false

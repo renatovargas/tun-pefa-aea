@@ -1,0 +1,69 @@
+---
+title: "Air emissions accounts: matrix, residence and checks"
+subtitle: "Conversion matrix, OECD adjustments and the bridge table"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-09"
+date-format: long
+lang: en-US
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-en.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Energy and emissions accounts for Tunisia"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+dropped = read("aea_categories_without_factor").filter(pl.col("year") == LAST)["kt_co2_eq"].sum()
+b = {r["year"]: r for r in bridge.filter(pl.col("gas") == "GHG").iter_rows(named=True)}
+oe = read("aea_bunkers_vs_oecd").filter(pl.col("year") == LAST).row(0, named=True)
+```
+
+## The conversion matrix {.theme-content}
+
+- Default matrix of the I2A tool: inventory categories to ISIC sections and households.
+- Tunisian matrix: the 24 industries and households, one per year.
+- Without a Tunisian rule, agricultural soils (3.D) would be lost: the default matrix has no factors for them (`{python} num(dropped, 0)` kt CO2 eq in `{python} LAST`).
+
+## Residence adjustment with OECD data
+
+- Emissions of **Tunisian airlines abroad** are added to air transport and shown as a bridging item.
+- Emissions of **Tunisian vessels**, when larger than domestic navigation, are added to water transport.
+- In `{python} LAST`: residents abroad by air `{python} num(oe["oecd_air_residents_kt"], 0)` kt CO2; by sea `{python} num(oe["oecd_sea_residents_kt"], 0)` kt, against marine bunkers of `{python} num(oe["marine_bunkers_kt"], 0)` kt in the inventory.
+
+## The bridge table
+
+```{python}
+items = lookup("aea_bridge").sort(pl.col("order").cast(pl.Int32))
+rows = [{"Item": r["en"], **{str(y): b[y][r["code"]] for y in YEARS[-4:]}} for r in items.iter_rows(named=True)]
+gt(pl.DataFrame(rows), decimals=0)
+```
+
+## Checking against the energy accounts
+
+```{python}
+#| fig-width: 9
+#| fig-height: 4.2
+charts.implied_factors(LAST, figsize=(9, 4.2))
+```
+
+CO2 from combustion per terajoule of fossil energy; the band is the range of fuels in the inventory.
+
+## Points to discuss
+
+- OECD maritime estimate much larger than marine bunkers, and missing before 2019: which national data could replace it?
+- Activities outside the band: own use of energy industries and autoproducers, classified differently in the balance and the inventory?
+- Agreement on reporting the bridge table with the accounts.

@@ -1,0 +1,27 @@
+code,en,fr,ar,to_review
+01,"Agriculture, forestry and fishing products","Produits de l'agriculture, de la sylviculture et de la pêche",منتجات الفلاحة والغابات والصيد البحري,yes
+06,Crude petroleum and natural gas,Pétrole et gaz naturel,النفط والغاز الطبيعي,yes
+07,Mining products,Produits miniers,المنتجات المنجمية,yes
+10,Food products,Produits agro-alimentaires,المنتجات الغذائية,yes
+13,"Textiles, clothing and leather products","Produits du textile, de l'habillement et du cuir",منتجات النسيج والملابس والجلود,yes
+19,Refined petroleum products,Produits pétroliers raffinés,المنتجات النفطية المكررة,yes
+20,Chemical products,Produits chimiques,المنتجات الكيميائية,yes
+23,Other non-metallic mineral products,Autres produits minéraux non métalliques,منتجات معدنية غير فلزية أخرى,yes
+24,Mechanical and electrical products,Produits des industries mécaniques et électriques,منتجات الصناعات الميكانيكية والكهربائية,yes
+16,Products of miscellaneous industries,Produits des industries diverses,منتجات الصناعات المختلفة,yes
+35,Electricity and gas,Électricité et gaz,الكهرباء والغاز,yes
+36,"Water supply, sewerage and waste management","Distribution d'eau, assainissement et gestion des déchets",توزيع المياه والتطهير وإدارة النفايات,yes
+41,Construction,Construction,البناء,yes
+45,Trade and repair,Commerce et réparation,التجارة والإصلاح,yes
+49,Transport and storage,Transport et entreposage,النقل والتخزين,yes
+55,Accommodation and food services,Hébergement et restauration,الإيواء والمطاعم,yes
+60,Information and communication,Information et communication,الإعلام والاتصال,yes
+64,Financial and insurance services,Activités financières et d'assurance,الأنشطة المالية والتأمين,yes
+84,Public administration and defence,Administration publique et défense,الإدارة العمومية والدفاع,yes
+85,Education,Enseignement,التعليم,yes
+86,Human health and social work,Santé humaine et action sociale,الصحة والعمل الاجتماعي,yes
+77,Other market services,Autres services marchands,خدمات سوقية أخرى,yes
+97,Domestic services,Services domestiques,الخدمات المنزلية,yes
+94,Activities of membership organisations,Activités des organisations associatives,أنشطة المنظمات الجمعياتية,yes
+CR2,Territorial adjustment,Correction territoriale (CT),التعديل الإقليمي,yes
+CR3,CIF/FOB adjustment,Correction CAF/FOB,تعديل سيف/فوب,yes

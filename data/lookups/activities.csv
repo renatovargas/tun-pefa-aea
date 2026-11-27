@@ -1,0 +1,30 @@
+code,imf_section,en,fr,ar,to_review
+01,A,"Agriculture, forestry and fishing","Agriculture, sylviculture et pêche",الفلاحة والغابات والصيد البحري,yes
+06,B,Extraction of crude petroleum and natural gas,Extraction de pétrole et de gaz naturel,استخراج النفط والغاز الطبيعي,yes
+07,B,Other mining and quarrying,Industries extractives hors hydrocarbures,الصناعات الاستخراجية خارج المحروقات,yes
+10,C,Food industries,Industries agro-alimentaires,الصناعات الغذائية,yes
+13,C,"Textiles, clothing and leather","Industries du textile, de l'habillement et du cuir",صناعات النسيج والملابس والجلود,yes
+19,C,Petroleum refining,Raffinage du pétrole,تكرير النفط,yes
+20,C,Chemical industries,Industries chimiques,الصناعات الكيميائية,yes
+23,C,Non-metallic mineral products,Industries des matériaux de construction,صناعات مواد البناء,yes
+24,C,Mechanical and electrical industries,Industries mécaniques et électriques,الصناعات الميكانيكية والكهربائية,yes
+16,C,Miscellaneous industries,Industries diverses,الصناعات المختلفة,yes
+35,D,Electricity and gas supply,Production et distribution d'électricité et de gaz,إنتاج وتوزيع الكهرباء والغاز,yes
+36,E,"Water supply, sewerage and waste management","Distribution d'eau, assainissement et gestion des déchets",توزيع المياه والتطهير وإدارة النفايات,yes
+41,F,Construction,Construction,البناء,yes
+45,Other,Trade and repair,Commerce et réparation,التجارة والإصلاح,yes
+49,H,Transport and storage,Transport et entreposage,النقل والتخزين,yes
+55,Other,Accommodation and food services,Hébergement et restauration,الإيواء والمطاعم,yes
+60,Other,Information and communication,Information et communication,الإعلام والاتصال,yes
+64,Other,Financial and insurance activities,Activités financières et d'assurance,الأنشطة المالية والتأمين,yes
+84,Other,Public administration and defence,Administration publique et défense,الإدارة العمومية والدفاع,yes
+85,Other,Education,Enseignement,التعليم,yes
+86,Other,Human health and social work,Santé humaine et action sociale,الصحة والعمل الاجتماعي,yes
+77,Other,Other market services,Autres services marchands,خدمات سوقية أخرى,yes
+97,Other,Domestic services,Services domestiques,الخدمات المنزلية,yes
+94,Other,Activities of membership organisations,Activités des organisations associatives,أنشطة المنظمات الجمعياتية,yes
+HH,HH,Households,Ménages,الأسر,yes
+ROW,ROW,Rest of the world,Reste du monde,بقية العالم,yes
+ACC,ACC,Accumulation,Accumulation,التراكم,yes
+ENV,ENV,Environment,Environnement,البيئة,yes
+STATDIFF,STATDIFF,Statistical difference,Écart statistique,الفارق الإحصائي,yes

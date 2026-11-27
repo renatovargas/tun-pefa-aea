@@ -1,0 +1,1061 @@
+year,flow,product,iea_flow,iea_product,tj
+2015,PROD,BIOMASS,Production,Primary solid biofuels,45049.968
+2015,PROD,CRUDE,Production,Crude oil,100273.86
+2015,PROD,HEAT,Production,Heat,3098.232
+2015,PROD,HYDRO,Production,Hydro,251.20800000000003
+2015,PROD,NATGAS,Production,Natural gas,105381.75600000001
+2015,PROD,NGL,Production,Natural gas liquids,10048.32
+2015,PROD,SOLARPV,Production,Solar photovoltaics,150.72480000000002
+2015,PROD,SOLARTH,Production,Solar thermal,1967.796
+2015,PROD,WIND,Production,Wind,1632.852
+2015,IMP,CRUDE,Imports,Crude oil,37597.464
+2015,IMP,ELEC,Imports,Electricity,1465.38
+2015,IMP,FUELOIL,Imports,Fuel oil,23320.476000000002
+2015,IMP,GASOIL,Imports,Gas/diesel oil excl. biofuels,62508.924000000006
+2015,IMP,GASOLINE,Imports,Motor gasoline excl. biofuels,24492.780000000002
+2015,IMP,JETFUEL,Imports,Kerosene type jet fuel excl. biofuels,8792.28
+2015,IMP,LPG,Imports,Liquefied petroleum gases (LPG),17793.9
+2015,IMP,NATGAS,Imports,Natural gas,106344.72
+2015,IMP,OTHOIL,Imports,Other oil products,10299.528
+2015,IMP,PETCOKE,Imports,Petroleum coke,24199.704
+2015,STOCK,CRUDE,Stock changes,Crude oil,-711.7560000000001
+2015,STOCK,FUELOIL,Stock changes,Fuel oil,-2093.4
+2015,STOCK,GASOIL,Stock changes,Gas/diesel oil excl. biofuels,-2553.9480000000003
+2015,STOCK,GASOLINE,Stock changes,Motor gasoline excl. biofuels,-1423.5120000000002
+2015,STOCK,JETFUEL,Stock changes,Kerosene type jet fuel excl. biofuels,-209.34
+2015,STOCK,KEROSENE,Stock changes,Other kerosene,-62.80200000000001
+2015,STOCK,LPG,Stock changes,Liquefied petroleum gases (LPG),-167.472
+2015,STOCK,NAPHTHA,Stock changes,Naphtha,167.472
+2015,STOCK,OTHOIL,Stock changes,Other oil products,-209.34
+2015,STOCK,PETCOKE,Stock changes,Petroleum coke,418.68
+2015,EXP,CRUDE,Exports,Crude oil,-77204.592
+2015,EXP,ELEC,Exports,Electricity,-1800.324
+2015,EXP,FUELOIL,Exports,Fuel oil,-15826.104000000001
+2015,EXP,NAPHTHA,Exports,Naphtha,-12979.08
+2015,EXP,NGL,Exports,Natural gas liquids,-3391.308
+2015,BUNKERS,GASOIL,International marine bunkers,Gas/diesel oil excl. biofuels,-125.60400000000001
+2015,BUNKERS,JETFUEL,International aviation bunkers,Kerosene type jet fuel excl. biofuels,-8750.412
+2015,TI_MAINPLANT,FUELOIL,Main activity producer electricity plants (transf.),Fuel oil,-9001.62
+2015,TI_MAINPLANT,GASOIL,Main activity producer electricity plants (transf.),Gas/diesel oil excl. biofuels,-133.97760000000002
+2015,TI_MAINPLANT,NATGAS,Main activity producer electricity plants (transf.),Natural gas,-143816.58000000002
+2015,TI_AUTOPLANT,FUELOIL,Autoproducer electricity plants (transf.),Fuel oil,-669.888
+2015,TI_AUTOPLANT,HEAT,Autoproducer electricity plants (transf.),Heat,-3098.232
+2015,TI_AUTOPLANT,NATGAS,Autoproducer electricity plants (transf.),Natural gas,-7159.428000000001
+2015,TI_REFINERY,CRUDE,Oil refineries (transf.),Crude oil,-56396.196
+2015,TI_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Primary solid biofuels,-15156.216
+2015,TO_MAINPLANT,ELEC,Main activity producer electricity plants (transf.),Electricity,65439.684
+2015,TO_AUTOPLANT,ELEC,Autoproducer electricity plants (transf.),Electricity,3433.1760000000004
+2015,TO_REFINERY,FUELOIL,Oil refineries (transf.),Fuel oil,17626.428
+2015,TO_REFINERY,GASOIL,Oil refineries (transf.),Gas/diesel oil excl. biofuels,21143.34
+2015,TO_REFINERY,KEROSENE,Oil refineries (transf.),Other kerosene,2344.608
+2015,TO_REFINERY,LPG,Oil refineries (transf.),Liquefied petroleum gases (LPG),1088.568
+2015,TO_REFINERY,NAPHTHA,Oil refineries (transf.),Naphtha,12895.344000000001
+2015,TO_REFINERY,OTHOIL,Oil refineries (transf.),Other oil products,502.41600000000005
+2015,TO_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Charcoal,6238.332
+2015,TRF_PROD,ELEC,Main activity producer electricity plants (transf.),Electricity,2009.6640000000002
+2015,TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),Hydro,-251.20800000000003
+2015,TRF_PROD,LPG,Transfers,Liquefied petroleum gases (LPG),6112.728
+2015,TRF_PROD,NGL,Transfers,Natural gas liquids,-6112.728
+2015,TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),Solar photovoltaics,-146.538
+2015,TRF_PROD,WIND,Main activity producer electricity plants (transf.),Wind,-1632.852
+2015,TRF_TRANSF,OTHOIL,Transfers,Other oil products,460.548
+2015,OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",Electricity,-3391.308
+2015,OWNUSE,FUELOIL,Oil refineries (energy),Fuel oil,-1214.172
+2015,OWNUSE,GASOIL,Oil and gas extraction (energy),Gas/diesel oil excl. biofuels,-753.624
+2015,OWNUSE,NATGAS,Oil and gas extraction (energy),Natural gas,-5861.52
+2015,OWNUSE,NGL,Oil and gas extraction (energy),Natural gas liquids,-209.34
+2015,LOSSES,CRUDE,Losses,Crude oil,-460.548
+2015,LOSSES,ELEC,Losses,Electricity,-11388.096000000001
+2015,NEU_OTHER,KEROSENE,Non-energy use industry/transformation/energy,Other kerosene,460.548
+2015,NEU_OTHER,OTHOIL,Non-energy use industry/transformation/energy,Other oil products,11053.152
+2015,IND_METAL,ELEC,Iron and steel,Electricity,1004.8320000000001
+2015,IND_METAL,NATGAS,Iron and steel,Natural gas,293.076
+2015,IND_CHEM,ELEC,Chemical and petrochemical,Electricity,2428.344
+2015,IND_CHEM,NATGAS,Chemical and petrochemical,Natural gas,4521.744000000001
+2015,IND_NONMET,ELEC,Non-metallic minerals,Electricity,6196.464
+2015,IND_NONMET,NATGAS,Non-metallic minerals,Natural gas,19133.676
+2015,IND_NONMET,PETCOKE,Non-metallic minerals,Petroleum coke,26000.028000000002
+2015,IND_MINING,ELEC,Mining and quarrying,Electricity,1088.568
+2015,IND_MINING,NATGAS,Mining and quarrying,Natural gas,334.944
+2015,IND_FOOD,ELEC,Food and tobacco,Electricity,2805.156
+2015,IND_FOOD,NATGAS,Food and tobacco,Natural gas,3014.496
+2015,IND_TEXTILE,ELEC,Textile and leather,Electricity,1716.5880000000002
+2015,IND_TEXTILE,NATGAS,Textile and leather,Natural gas,2386.476
+2015,IND_PAPER,ELEC,"Paper, pulp and print",Electricity,753.624
+2015,IND_PAPER,NATGAS,"Paper, pulp and print",Natural gas,1925.928
+2015,IND_OTHER,ELEC,Non-specified (industry),Electricity,3684.384
+2015,IND_OTHER,FUELOIL,Non-specified (industry),Fuel oil,8876.016
+2015,IND_OTHER,GASOIL,Non-specified (industry),Gas/diesel oil excl. biofuels,2428.344
+2015,IND_OTHER,KEROSENE,Non-specified (industry),Other kerosene,8.373600000000001
+2015,IND_OTHER,LPG,Non-specified (industry),Liquefied petroleum gases (LPG),1172.304
+2015,IND_OTHER,NATGAS,Non-specified (industry),Natural gas,1800.324
+2015,TRA_RAIL,ELEC,Rail,Electricity,251.20800000000003
+2015,TRA_RAIL,GASOIL,Rail,Gas/diesel oil excl. biofuels,753.624
+2015,TRA_ROAD,GASOIL,Road,Gas/diesel oil excl. biofuels,62550.792
+2015,TRA_ROAD,GASOLINE,Road,Motor gasoline excl. biofuels,25623.216
+2015,TRA_ROAD,LPG,Road,Liquefied petroleum gases (LPG),711.7560000000001
+2015,TRA_AIR,JETFUEL,Domestic aviation,Kerosene type jet fuel excl. biofuels,125.60400000000001
+2015,TRA_PIPE,ELEC,Pipeline transport,Electricity,83.736
+2015,TRA_PIPE,NATGAS,Pipeline transport,Natural gas,3558.78
+2015,OTH_RES,BIOMASS,Residential,Primary solid biofuels,35671.536
+2015,OTH_RES,ELEC,Residential,Electricity,16747.2
+2015,OTH_RES,GASOIL,Residential,Gas/diesel oil excl. biofuels,251.20800000000003
+2015,OTH_RES,KEROSENE,Residential,Other kerosene,1716.5880000000002
+2015,OTH_RES,LPG,Residential,Liquefied petroleum gases (LPG),20724.66
+2015,OTH_RES,NATGAS,Residential,Natural gas,9043.488000000001
+2015,OTH_RES,SOLARTH,Residential,Solar thermal,1884.0600000000002
+2015,OTH_COM,BIOMASS,Commercial and public services,Primary solid biofuels,502.41600000000005
+2015,OTH_COM,ELEC,Commercial and public services,Electricity,14988.744
+2015,OTH_COM,FUELOIL,Commercial and public services,Fuel oil,16.747200000000003
+2015,OTH_COM,GASOIL,Commercial and public services,Gas/diesel oil excl. biofuels,2344.608
+2015,OTH_COM,LPG,Commercial and public services,Liquefied petroleum gases (LPG),1925.928
+2015,OTH_COM,NATGAS,Commercial and public services,Natural gas,7117.56
+2015,OTH_COM,SOLARTH,Commercial and public services,Solar thermal,62.80200000000001
+2015,OTH_AGR,ELEC,Agriculture/forestry,Electricity,3768.1200000000003
+2015,OTH_AGR,FUELOIL,Agriculture/forestry,Fuel oil,1004.8320000000001
+2015,OTH_AGR,GASOIL,Agriculture/forestry,Gas/diesel oil excl. biofuels,13983.912
+2015,OTH_AGR,KEROSENE,Agriculture/forestry,Other kerosene,0.8373600000000001
+2015,OTH_AGR,NATGAS,Agriculture/forestry,Natural gas,837.36
+2015,OTH_AGR,SOLARPV,Agriculture/forestry,Solar photovoltaics,0.41868000000000005
+2015,STATDIFF,CRUDE,Statistical differences,Crude oil,-3140.1000000000004
+2015,STATDIFF,ELEC,Statistical differences,Electricity,-167.472
+2015,STATDIFF,FUELOIL,Statistical differences,Fuel oil,-2219.004
+2015,STATDIFF,GASOIL,Statistical differences,Gas/diesel oil excl. biofuels,2260.8720000000003
+2015,STATDIFF,GASOLINE,Statistical differences,Motor gasoline excl. biofuels,2553.9480000000003
+2015,STATDIFF,JETFUEL,Statistical differences,Kerosene type jet fuel excl. biofuels,293.076
+2015,STATDIFF,KEROSENE,Statistical differences,Other kerosene,-125.60400000000001
+2015,STATDIFF,LPG,Statistical differences,Liquefied petroleum gases (LPG),-293.076
+2015,STATDIFF,NAPHTHA,Statistical differences,Naphtha,-83.736
+2015,STATDIFF,NATGAS,Statistical differences,Natural gas,-921.096
+2015,STATDIFF,NGL,Statistical differences,Natural gas liquids,-334.944
+2015,STATDIFF,OTHOIL,Statistical differences,Other oil products,41.868
+2015,STATDIFF,PETCOKE,Statistical differences,Petroleum coke,1423.5120000000002
+2016,PROD,BIOMASS,Production,Primary solid biofuels,45217.44
+2016,PROD,CRUDE,Production,Crude oil,94244.868
+2016,PROD,HEAT,Production,Heat,3223.8360000000002
+2016,PROD,HYDRO,Production,Hydro,167.472
+2016,PROD,NATGAS,Production,Natural gas,95207.83200000001
+2016,PROD,NGL,Production,Natural gas liquids,10969.416000000001
+2016,PROD,SOLARPV,Production,Solar photovoltaics,167.472
+2016,PROD,SOLARTH,Production,Solar thermal,2093.4
+2016,PROD,WIND,Production,Wind,1716.5880000000002
+2016,IMP,CRUDE,Imports,Crude oil,37890.54
+2016,IMP,ELEC,Imports,Electricity,460.548
+2016,IMP,FUELOIL,Imports,Fuel oil,9420.300000000001
+2016,IMP,GASOIL,Imports,Gas/diesel oil excl. biofuels,64686.060000000005
+2016,IMP,GASOLINE,Imports,Motor gasoline excl. biofuels,22608.72
+2016,IMP,JETFUEL,Imports,Kerosene type jet fuel excl. biofuels,9755.244
+2016,IMP,LPG,Imports,Liquefied petroleum gases (LPG),16830.936
+2016,IMP,NATGAS,Imports,Natural gas,122882.58
+2016,IMP,OTHOIL,Imports,Other oil products,11053.152
+2016,IMP,PETCOKE,Imports,Petroleum coke,27716.616
+2016,STOCK,CRUDE,Stock changes,Crude oil,-2344.608
+2016,STOCK,FUELOIL,Stock changes,Fuel oil,167.472
+2016,STOCK,GASOIL,Stock changes,Gas/diesel oil excl. biofuels,837.36
+2016,STOCK,GASOLINE,Stock changes,Motor gasoline excl. biofuels,669.888
+2016,STOCK,JETFUEL,Stock changes,Kerosene type jet fuel excl. biofuels,-334.944
+2016,STOCK,LPG,Stock changes,Liquefied petroleum gases (LPG),125.60400000000001
+2016,STOCK,NAPHTHA,Stock changes,Naphtha,125.60400000000001
+2016,STOCK,PETCOKE,Stock changes,Petroleum coke,-1088.568
+2016,EXP,CRUDE,Exports,Crude oil,-74859.984
+2016,EXP,ELEC,Exports,Electricity,-921.096
+2016,EXP,FUELOIL,Exports,Fuel oil,-15030.612000000001
+2016,EXP,NAPHTHA,Exports,Naphtha,-10257.66
+2016,EXP,NGL,Exports,Natural gas liquids,-3223.8360000000002
+2016,BUNKERS,GASOIL,International marine bunkers,Gas/diesel oil excl. biofuels,-83.736
+2016,BUNKERS,JETFUEL,International aviation bunkers,Kerosene type jet fuel excl. biofuels,-9294.696
+2016,TI_MAINPLANT,GASOIL,Main activity producer electricity plants (transf.),Gas/diesel oil excl. biofuels,-12.5604
+2016,TI_MAINPLANT,NATGAS,Main activity producer electricity plants (transf.),Natural gas,-144737.676
+2016,TI_AUTOPLANT,FUELOIL,Autoproducer electricity plants (transf.),Fuel oil,-711.7560000000001
+2016,TI_AUTOPLANT,GASOIL,Autoproducer electricity plants (transf.),Gas/diesel oil excl. biofuels,-12.5604
+2016,TI_AUTOPLANT,HEAT,Autoproducer electricity plants (transf.),Heat,-3223.8360000000002
+2016,TI_AUTOPLANT,NATGAS,Autoproducer electricity plants (transf.),Natural gas,-7745.580000000001
+2016,TI_REFINERY,CRUDE,Oil refineries (transf.),Crude oil,-51162.696
+2016,TI_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Primary solid biofuels,-15491.160000000002
+2016,TO_MAINPLANT,ELEC,Main activity producer electricity plants (transf.),Electricity,65230.344000000005
+2016,TO_AUTOPLANT,ELEC,Autoproducer electricity plants (transf.),Electricity,4019.3280000000004
+2016,TO_REFINERY,FUELOIL,Oil refineries (transf.),Fuel oil,16747.2
+2016,TO_REFINERY,GASOIL,Oil refineries (transf.),Gas/diesel oil excl. biofuels,18882.468
+2016,TO_REFINERY,GASOLINE,Oil refineries (transf.),Motor gasoline excl. biofuels,962.964
+2016,TO_REFINERY,KEROSENE,Oil refineries (transf.),Other kerosene,2302.7400000000002
+2016,TO_REFINERY,LPG,Oil refineries (transf.),Liquefied petroleum gases (LPG),921.096
+2016,TO_REFINERY,NAPHTHA,Oil refineries (transf.),Naphtha,10132.056
+2016,TO_REFINERY,OTHOIL,Oil refineries (transf.),Other oil products,460.548
+2016,TO_REFINERY,REFGAS,Oil refineries (transf.),Refinery gas,83.736
+2016,TO_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Charcoal,6363.936000000001
+2016,TRF_PROD,ELEC,Main activity producer electricity plants (transf.),Electricity,2051.532
+2016,TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),Hydro,-167.472
+2016,TRF_PROD,LPG,Transfers,Liquefied petroleum gases (LPG),6489.54
+2016,TRF_PROD,NGL,Transfers,Natural gas liquids,-6489.54
+2016,TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),Solar photovoltaics,-167.472
+2016,TRF_PROD,WIND,Main activity producer electricity plants (transf.),Wind,-1716.5880000000002
+2016,TRF_TRANSF,OTHOIL,Transfers,Other oil products,460.548
+2016,OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",Electricity,-3307.572
+2016,OWNUSE,FUELOIL,Oil refineries (energy),Fuel oil,-1004.8320000000001
+2016,OWNUSE,GASOIL,Oil and gas extraction (energy),Gas/diesel oil excl. biofuels,-628.02
+2016,OWNUSE,NATGAS,Oil and gas extraction (energy),Natural gas,-6573.276000000001
+2016,OWNUSE,NGL,Oil and gas extraction (energy),Natural gas liquids,-209.34
+2016,OWNUSE,REFGAS,Oil refineries (energy),Refinery gas,-83.736
+2016,LOSSES,CRUDE,Losses,Crude oil,-376.812
+2016,LOSSES,ELEC,Losses,Electricity,-11304.36
+2016,NEU_OTHER,KEROSENE,Non-energy use industry/transformation/energy,Other kerosene,418.68
+2016,NEU_OTHER,OTHOIL,Non-energy use industry/transformation/energy,Other oil products,12057.984
+2016,IND_METAL,ELEC,Iron and steel,Electricity,1046.7
+2016,IND_METAL,NATGAS,Iron and steel,Natural gas,376.812
+2016,IND_CHEM,ELEC,Chemical and petrochemical,Electricity,2428.344
+2016,IND_CHEM,NATGAS,Chemical and petrochemical,Natural gas,4438.008
+2016,IND_NONMET,ELEC,Non-metallic minerals,Electricity,5903.388
+2016,IND_NONMET,NATGAS,Non-metallic minerals,Natural gas,18505.656000000003
+2016,IND_NONMET,PETCOKE,Non-metallic minerals,Petroleum coke,24660.252
+2016,IND_MINING,ELEC,Mining and quarrying,Electricity,1130.4360000000001
+2016,IND_MINING,NATGAS,Mining and quarrying,Natural gas,293.076
+2016,IND_FOOD,ELEC,Food and tobacco,Electricity,2805.156
+2016,IND_FOOD,NATGAS,Food and tobacco,Natural gas,3223.8360000000002
+2016,IND_TEXTILE,ELEC,Textile and leather,Electricity,1674.72
+2016,IND_TEXTILE,NATGAS,Textile and leather,Natural gas,2344.608
+2016,IND_PAPER,ELEC,"Paper, pulp and print",Electricity,837.36
+2016,IND_PAPER,NATGAS,"Paper, pulp and print",Natural gas,2009.6640000000002
+2016,IND_OTHER,ELEC,Non-specified (industry),Electricity,3726.2520000000004
+2016,IND_OTHER,FUELOIL,Non-specified (industry),Fuel oil,8917.884
+2016,IND_OTHER,GASOIL,Non-specified (industry),Gas/diesel oil excl. biofuels,2470.212
+2016,IND_OTHER,KEROSENE,Non-specified (industry),Other kerosene,46.05480000000001
+2016,IND_OTHER,LPG,Non-specified (industry),Liquefied petroleum gases (LPG),1046.7
+2016,IND_OTHER,NATGAS,Non-specified (industry),Natural gas,1716.5880000000002
+2016,TRA_RAIL,ELEC,Rail,Electricity,251.20800000000003
+2016,TRA_RAIL,GASOIL,Rail,Gas/diesel oil excl. biofuels,753.624
+2016,TRA_ROAD,GASOIL,Road,Gas/diesel oil excl. biofuels,63639.36
+2016,TRA_ROAD,GASOLINE,Road,Motor gasoline excl. biofuels,24785.856
+2016,TRA_ROAD,LPG,Road,Liquefied petroleum gases (LPG),628.02
+2016,TRA_AIR,JETFUEL,Domestic aviation,Kerosene type jet fuel excl. biofuels,125.60400000000001
+2016,TRA_PIPE,ELEC,Pipeline transport,Electricity,83.736
+2016,TRA_PIPE,NATGAS,Pipeline transport,Natural gas,9671.508
+2016,OTH_RES,BIOMASS,Residential,Primary solid biofuels,35545.932
+2016,OTH_RES,ELEC,Residential,Electricity,16830.936
+2016,OTH_RES,GASOIL,Residential,Gas/diesel oil excl. biofuels,251.20800000000003
+2016,OTH_RES,KEROSENE,Residential,Other kerosene,1674.72
+2016,OTH_RES,LPG,Residential,Liquefied petroleum gases (LPG),20934.0
+2016,OTH_RES,NATGAS,Residential,Natural gas,8876.016
+2016,OTH_RES,SOLARTH,Residential,Solar thermal,2009.6640000000002
+2016,OTH_COM,BIOMASS,Commercial and public services,Primary solid biofuels,586.152
+2016,OTH_COM,ELEC,Commercial and public services,Electricity,15323.688
+2016,OTH_COM,GASOIL,Commercial and public services,Gas/diesel oil excl. biofuels,2386.476
+2016,OTH_COM,LPG,Commercial and public services,Liquefied petroleum gases (LPG),1842.192
+2016,OTH_COM,NATGAS,Commercial and public services,Natural gas,6447.6720000000005
+2016,OTH_COM,SOLARTH,Commercial and public services,Solar thermal,83.736
+2016,OTH_AGR,ELEC,Agriculture/forestry,Electricity,4186.8
+2016,OTH_AGR,FUELOIL,Agriculture/forestry,Fuel oil,1046.7
+2016,OTH_AGR,GASOIL,Agriculture/forestry,Gas/diesel oil excl. biofuels,14235.12
+2016,OTH_AGR,NATGAS,Agriculture/forestry,Natural gas,879.2280000000001
+2016,OTH_AGR,SOLARPV,Agriculture/forestry,Solar photovoltaics,0.41868000000000005
+2016,STATDIFF,CRUDE,Statistical differences,Crude oil,-3391.308
+2016,STATDIFF,ELEC,Statistical differences,Electricity,41.868
+2016,STATDIFF,FUELOIL,Statistical differences,Fuel oil,376.812
+2016,STATDIFF,GASOIL,Statistical differences,Gas/diesel oil excl. biofuels,125.60400000000001
+2016,STATDIFF,GASOLINE,Statistical differences,Motor gasoline excl. biofuels,544.284
+2016,STATDIFF,JETFUEL,Statistical differences,Kerosene type jet fuel excl. biofuels,41.868
+2016,STATDIFF,KEROSENE,Statistical differences,Other kerosene,-167.472
+2016,STATDIFF,LPG,Statistical differences,Liquefied petroleum gases (LPG),125.60400000000001
+2016,STATDIFF,NATGAS,Statistical differences,Natural gas,-251.20800000000003
+2016,STATDIFF,NGL,Statistical differences,Natural gas liquids,-1046.7
+2016,STATDIFF,OTHOIL,Statistical differences,Other oil products,83.736
+2016,STATDIFF,PETCOKE,Statistical differences,Petroleum coke,-1967.796
+2017,PROD,BIOMASS,Production,Primary solid biofuels,45426.78
+2017,PROD,CRUDE,Production,Crude oil,79423.596
+2017,PROD,HEAT,Production,Heat,4019.3280000000004
+2017,PROD,HYDRO,Production,Hydro,83.736
+2017,PROD,NATGAS,Production,Natural gas,89555.652
+2017,PROD,NGL,Production,Natural gas liquids,8750.412
+2017,PROD,SOLARPV,Production,Solar photovoltaics,221.9004
+2017,PROD,SOLARTH,Production,Solar thermal,2219.004
+2017,PROD,WIND,Production,Wind,1632.852
+2017,IMP,CRUDE,Imports,Crude oil,27172.332000000002
+2017,IMP,ELEC,Imports,Electricity,1632.852
+2017,IMP,FUELOIL,Imports,Fuel oil,9127.224
+2017,IMP,GASOIL,Imports,Gas/diesel oil excl. biofuels,74441.304
+2017,IMP,GASOLINE,Imports,Motor gasoline excl. biofuels,23194.872
+2017,IMP,JETFUEL,Imports,Kerosene type jet fuel excl. biofuels,10843.812
+2017,IMP,LPG,Imports,Liquefied petroleum gases (LPG),19426.752
+2017,IMP,NATGAS,Imports,Natural gas,137996.928
+2017,IMP,OTHOIL,Imports,Other oil products,11890.512
+2017,IMP,PETCOKE,Imports,Petroleum coke,24074.100000000002
+2017,STOCK,CRUDE,Stock changes,Crude oil,3391.308
+2017,STOCK,FUELOIL,Stock changes,Fuel oil,544.284
+2017,STOCK,GASOIL,Stock changes,Gas/diesel oil excl. biofuels,460.548
+2017,STOCK,GASOLINE,Stock changes,Motor gasoline excl. biofuels,-251.20800000000003
+2017,STOCK,JETFUEL,Stock changes,Kerosene type jet fuel excl. biofuels,418.68
+2017,STOCK,KEROSENE,Stock changes,Other kerosene,-163.2852
+2017,STOCK,NAPHTHA,Stock changes,Naphtha,619.6464000000001
+2017,STOCK,OTHOIL,Stock changes,Other oil products,-41.868
+2017,STOCK,PETCOKE,Stock changes,Petroleum coke,1256.04
+2017,EXP,CRUDE,Exports,Crude oil,-68161.104
+2017,EXP,ELEC,Exports,Electricity,-1758.4560000000001
+2017,EXP,FUELOIL,Exports,Fuel oil,-13230.288
+2017,EXP,NAPHTHA,Exports,Naphtha,-4731.084
+2017,EXP,NGL,Exports,Natural gas liquids,-2763.288
+2017,BUNKERS,GASOIL,International marine bunkers,Gas/diesel oil excl. biofuels,-334.944
+2017,BUNKERS,JETFUEL,International aviation bunkers,Kerosene type jet fuel excl. biofuels,-10885.68
+2017,TI_MAINPLANT,GASOIL,Main activity producer electricity plants (transf.),Gas/diesel oil excl. biofuels,-25.1208
+2017,TI_MAINPLANT,NATGAS,Main activity producer electricity plants (transf.),Natural gas,-148798.872
+2017,TI_AUTOPLANT,FUELOIL,Autoproducer electricity plants (transf.),Fuel oil,-879.2280000000001
+2017,TI_AUTOPLANT,GASOIL,Autoproducer electricity plants (transf.),Gas/diesel oil excl. biofuels,-12.5604
+2017,TI_AUTOPLANT,HEAT,Autoproducer electricity plants (transf.),Heat,-4019.3280000000004
+2017,TI_AUTOPLANT,NATGAS,Autoproducer electricity plants (transf.),Natural gas,-7787.448
+2017,TI_REFINERY,CRUDE,Oil refineries (transf.),Crude oil,-39104.712
+2017,TI_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Primary solid biofuels,-15826.104000000001
+2017,TO_MAINPLANT,ELEC,Main activity producer electricity plants (transf.),Electricity,68161.104
+2017,TO_AUTOPLANT,ELEC,Autoproducer electricity plants (transf.),Electricity,4228.668000000001
+2017,TO_REFINERY,FUELOIL,Oil refineries (transf.),Fuel oil,13397.76
+2017,TO_REFINERY,GASOIL,Oil refineries (transf.),Gas/diesel oil excl. biofuels,13523.364000000001
+2017,TO_REFINERY,GASOLINE,Oil refineries (transf.),Motor gasoline excl. biofuels,3475.0440000000003
+2017,TO_REFINERY,KEROSENE,Oil refineries (transf.),Other kerosene,2553.9480000000003
+2017,TO_REFINERY,LPG,Oil refineries (transf.),Liquefied petroleum gases (LPG),879.2280000000001
+2017,TO_REFINERY,NAPHTHA,Oil refineries (transf.),Naphtha,4103.064
+2017,TO_REFINERY,OTHOIL,Oil refineries (transf.),Other oil products,460.548
+2017,TO_REFINERY,REFGAS,Oil refineries (transf.),Refinery gas,209.34
+2017,TO_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Charcoal,6531.408
+2017,TRF_PROD,ELEC,Main activity producer electricity plants (transf.),Electricity,1884.0600000000002
+2017,TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),Hydro,-83.736
+2017,TRF_PROD,LPG,Transfers,Liquefied petroleum gases (LPG),5735.916
+2017,TRF_PROD,NGL,Transfers,Natural gas liquids,-5735.916
+2017,TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),Solar photovoltaics,-221.9004
+2017,TRF_PROD,WIND,Main activity producer electricity plants (transf.),Wind,-1632.852
+2017,TRF_TRANSF,OTHOIL,Transfers,Other oil products,502.41600000000005
+2017,OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",Electricity,-2972.628
+2017,OWNUSE,FUELOIL,Oil refineries (energy),Fuel oil,-628.02
+2017,OWNUSE,GASOIL,Oil and gas extraction (energy),Gas/diesel oil excl. biofuels,-669.888
+2017,OWNUSE,NATGAS,Oil and gas extraction (energy),Natural gas,-6196.464
+2017,OWNUSE,NGL,Oil and gas extraction (energy),Natural gas liquids,-125.60400000000001
+2017,OWNUSE,REFGAS,Oil refineries (energy),Refinery gas,-209.34
+2017,LOSSES,CRUDE,Losses,Crude oil,-334.944
+2017,LOSSES,ELEC,Losses,Electricity,-12937.212000000001
+2017,LOSSES,NATGAS,Losses,Natural gas,-2344.608
+2017,NEU_OTHER,KEROSENE,Non-energy use industry/transformation/energy,Other kerosene,418.68
+2017,NEU_OTHER,OTHOIL,Non-energy use industry/transformation/energy,Other oil products,12853.476
+2017,IND_METAL,ELEC,Iron and steel,Electricity,1004.8320000000001
+2017,IND_METAL,NATGAS,Iron and steel,Natural gas,376.812
+2017,IND_CHEM,ELEC,Chemical and petrochemical,Electricity,2553.9480000000003
+2017,IND_CHEM,NATGAS,Chemical and petrochemical,Natural gas,4605.4800000000005
+2017,IND_NONMET,ELEC,Non-metallic minerals,Electricity,5819.652
+2017,IND_NONMET,NATGAS,Non-metallic minerals,Natural gas,20347.848
+2017,IND_NONMET,PETCOKE,Non-metallic minerals,Petroleum coke,22901.796000000002
+2017,IND_MINING,ELEC,Mining and quarrying,Electricity,1172.304
+2017,IND_MINING,NATGAS,Mining and quarrying,Natural gas,293.076
+2017,IND_FOOD,ELEC,Food and tobacco,Electricity,2972.628
+2017,IND_FOOD,NATGAS,Food and tobacco,Natural gas,3223.8360000000002
+2017,IND_TEXTILE,ELEC,Textile and leather,Electricity,1674.72
+2017,IND_TEXTILE,NATGAS,Textile and leather,Natural gas,2512.08
+2017,IND_PAPER,ELEC,"Paper, pulp and print",Electricity,711.7560000000001
+2017,IND_PAPER,NATGAS,"Paper, pulp and print",Natural gas,2219.004
+2017,IND_OTHER,ELEC,Non-specified (industry),Electricity,3935.592
+2017,IND_OTHER,FUELOIL,Non-specified (industry),Fuel oil,8541.072
+2017,IND_OTHER,GASOIL,Non-specified (industry),Gas/diesel oil excl. biofuels,2512.08
+2017,IND_OTHER,KEROSENE,Non-specified (industry),Other kerosene,29.3076
+2017,IND_OTHER,LPG,Non-specified (industry),Liquefied petroleum gases (LPG),1088.568
+2017,IND_OTHER,NATGAS,Non-specified (industry),Natural gas,1884.0600000000002
+2017,TRA_RAIL,ELEC,Rail,Electricity,251.20800000000003
+2017,TRA_RAIL,GASOIL,Rail,Gas/diesel oil excl. biofuels,753.624
+2017,TRA_ROAD,GASOIL,Road,Gas/diesel oil excl. biofuels,68537.916
+2017,TRA_ROAD,GASOLINE,Road,Motor gasoline excl. biofuels,27465.408000000003
+2017,TRA_ROAD,LPG,Road,Liquefied petroleum gases (LPG),544.284
+2017,TRA_AIR,JETFUEL,Domestic aviation,Kerosene type jet fuel excl. biofuels,167.472
+2017,TRA_PIPE,ELEC,Pipeline transport,Electricity,83.736
+2017,TRA_PIPE,NATGAS,Pipeline transport,Natural gas,9127.224
+2017,OTH_RES,BIOMASS,Residential,Primary solid biofuels,35504.064
+2017,OTH_RES,ELEC,Residential,Electricity,17793.9
+2017,OTH_RES,GASOIL,Residential,Gas/diesel oil excl. biofuels,293.076
+2017,OTH_RES,KEROSENE,Residential,Other kerosene,1674.72
+2017,OTH_RES,LPG,Residential,Liquefied petroleum gases (LPG),22524.984
+2017,OTH_RES,NATGAS,Residential,Natural gas,9462.168
+2017,OTH_RES,SOLARTH,Residential,Solar thermal,2135.268
+2017,OTH_COM,BIOMASS,Commercial and public services,Primary solid biofuels,586.152
+2017,OTH_COM,ELEC,Commercial and public services,Electricity,16161.048
+2017,OTH_COM,FUELOIL,Commercial and public services,Fuel oil,12.5604
+2017,OTH_COM,GASOIL,Commercial and public services,Gas/diesel oil excl. biofuels,2512.08
+2017,OTH_COM,LPG,Commercial and public services,Liquefied petroleum gases (LPG),1758.4560000000001
+2017,OTH_COM,NATGAS,Commercial and public services,Natural gas,7243.164000000001
+2017,OTH_COM,SOLARTH,Commercial and public services,Solar thermal,92.10960000000001
+2017,OTH_AGR,ELEC,Agriculture/forestry,Electricity,4186.8
+2017,OTH_AGR,FUELOIL,Agriculture/forestry,Fuel oil,1381.644
+2017,OTH_AGR,GASOIL,Agriculture/forestry,Gas/diesel oil excl. biofuels,15198.084
+2017,OTH_AGR,KEROSENE,Agriculture/forestry,Other kerosene,2.51208
+2017,OTH_AGR,NATGAS,Agriculture/forestry,Natural gas,962.964
+2017,OTH_AGR,SOLARPV,Agriculture/forestry,Solar photovoltaics,0.41868000000000005
+2017,STATDIFF,CRUDE,Statistical differences,Crude oil,-2386.476
+2017,STATDIFF,ELEC,Statistical differences,Electricity,41.868
+2017,STATDIFF,FUELOIL,Statistical differences,Fuel oil,1632.852
+2017,STATDIFF,GASOIL,Statistical differences,Gas/diesel oil excl. biofuels,2386.476
+2017,STATDIFF,GASOLINE,Statistical differences,Motor gasoline excl. biofuels,1088.568
+2017,STATDIFF,JETFUEL,Statistical differences,Kerosene type jet fuel excl. biofuels,-209.34
+2017,STATDIFF,KEROSENE,Statistical differences,Other kerosene,-251.20800000000003
+2017,STATDIFF,LPG,Statistical differences,Liquefied petroleum gases (LPG),-125.60400000000001
+2017,STATDIFF,NATGAS,Statistical differences,Natural gas,-293.076
+2017,STATDIFF,NGL,Statistical differences,Natural gas liquids,-125.60400000000001
+2017,STATDIFF,OTHOIL,Statistical differences,Other oil products,41.868
+2017,STATDIFF,PETCOKE,Statistical differences,Petroleum coke,-2428.344
+2018,PROD,BIOMASS,Production,Primary solid biofuels,45636.12
+2018,PROD,CRUDE,Production,Crude oil,78000.084
+2018,PROD,HEAT,Production,Heat,4144.932
+2018,PROD,HYDRO,Production,Hydro,41.868
+2018,PROD,NATGAS,Production,Natural gas,85745.664
+2018,PROD,NGL,Production,Natural gas liquids,7996.7880000000005
+2018,PROD,SOLARPV,Production,Solar photovoltaics,628.02
+2018,PROD,SOLARTH,Production,Solar thermal,2428.344
+2018,PROD,WIND,Production,Wind,1632.852
+2018,IMP,CRUDE,Imports,Crude oil,21938.832000000002
+2018,IMP,ELEC,Imports,Electricity,1381.644
+2018,IMP,FUELOIL,Imports,Fuel oil,11304.36
+2018,IMP,GASOIL,Imports,Gas/diesel oil excl. biofuels,72012.96
+2018,IMP,GASOLINE,Imports,Motor gasoline excl. biofuels,28428.372000000003
+2018,IMP,JETFUEL,Imports,Kerosene type jet fuel excl. biofuels,12309.192000000001
+2018,IMP,LPG,Imports,Liquefied petroleum gases (LPG),20515.32
+2018,IMP,NATGAS,Imports,Natural gas,144444.6
+2018,IMP,OTHOIL,Imports,Other oil products,11388.096000000001
+2018,IMP,PETCOKE,Imports,Petroleum coke,20808.396
+2018,STOCK,CRUDE,Stock changes,Crude oil,2428.344
+2018,STOCK,FUELOIL,Stock changes,Fuel oil,334.944
+2018,STOCK,GASOIL,Stock changes,Gas/diesel oil excl. biofuels,1549.116
+2018,STOCK,GASOLINE,Stock changes,Motor gasoline excl. biofuels,1549.116
+2018,STOCK,JETFUEL,Stock changes,Kerosene type jet fuel excl. biofuels,-334.944
+2018,STOCK,KEROSENE,Stock changes,Other kerosene,-4.186800000000001
+2018,STOCK,LPG,Stock changes,Liquefied petroleum gases (LPG),12.5604
+2018,STOCK,NAPHTHA,Stock changes,Naphtha,-297.2628
+2018,STOCK,NGL,Stock changes,Natural gas liquids,41.868
+2018,STOCK,OTHOIL,Stock changes,Other oil products,544.284
+2018,STOCK,PETCOKE,Stock changes,Petroleum coke,-669.888
+2018,EXP,CRUDE,Exports,Crude oil,-56898.612
+2018,EXP,ELEC,Exports,Electricity,-1758.4560000000001
+2018,EXP,FUELOIL,Exports,Fuel oil,-12141.720000000001
+2018,EXP,NAPHTHA,Exports,Naphtha,-10383.264000000001
+2018,EXP,NGL,Exports,Natural gas liquids,-2344.608
+2018,BUNKERS,GASOIL,International marine bunkers,Gas/diesel oil excl. biofuels,-418.68
+2018,BUNKERS,JETFUEL,International aviation bunkers,Kerosene type jet fuel excl. biofuels,-12309.192000000001
+2018,TI_MAINPLANT,GASOIL,Main activity producer electricity plants (transf.),Gas/diesel oil excl. biofuels,-20.934
+2018,TI_MAINPLANT,NATGAS,Main activity producer electricity plants (transf.),Natural gas,-151101.612
+2018,TI_AUTOPLANT,FUELOIL,Autoproducer electricity plants (transf.),Fuel oil,-795.4920000000001
+2018,TI_AUTOPLANT,GASOIL,Autoproducer electricity plants (transf.),Gas/diesel oil excl. biofuels,-12.5604
+2018,TI_AUTOPLANT,HEAT,Autoproducer electricity plants (transf.),Heat,-4144.932
+2018,TI_AUTOPLANT,NATGAS,Autoproducer electricity plants (transf.),Natural gas,-8080.524
+2018,TI_REFINERY,CRUDE,Oil refineries (transf.),Crude oil,-45594.252
+2018,TI_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Primary solid biofuels,-16202.916000000001
+2018,TO_MAINPLANT,ELEC,Main activity producer electricity plants (transf.),Electricity,68663.52
+2018,TO_AUTOPLANT,ELEC,Autoproducer electricity plants (transf.),Electricity,4647.348
+2018,TO_REFINERY,FUELOIL,Oil refineries (transf.),Fuel oil,13858.308
+2018,TO_REFINERY,GASOIL,Oil refineries (transf.),Gas/diesel oil excl. biofuels,17500.824
+2018,TO_REFINERY,GASOLINE,Oil refineries (transf.),Motor gasoline excl. biofuels,125.60400000000001
+2018,TO_REFINERY,KEROSENE,Oil refineries (transf.),Other kerosene,1465.38
+2018,TO_REFINERY,LPG,Oil refineries (transf.),Liquefied petroleum gases (LPG),837.36
+2018,TO_REFINERY,NAPHTHA,Oil refineries (transf.),Naphtha,10676.34
+2018,TO_REFINERY,OTHOIL,Oil refineries (transf.),Other oil products,544.284
+2018,TO_REFINERY,REFGAS,Oil refineries (transf.),Refinery gas,4.186800000000001
+2018,TO_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Charcoal,6657.012000000001
+2018,TRF_PROD,ELEC,Main activity producer electricity plants (transf.),Electricity,2302.7400000000002
+2018,TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),Hydro,-41.868
+2018,TRF_PROD,LPG,Transfers,Liquefied petroleum gases (LPG),5442.84
+2018,TRF_PROD,NGL,Transfers,Natural gas liquids,-5442.84
+2018,TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),Solar photovoltaics,-623.8332
+2018,TRF_PROD,WIND,Main activity producer electricity plants (transf.),Wind,-1632.852
+2018,TRF_TRANSF,OTHOIL,Transfers,Other oil products,502.41600000000005
+2018,OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",Electricity,-2972.628
+2018,OWNUSE,FUELOIL,Oil refineries (energy),Fuel oil,-921.096
+2018,OWNUSE,GASOIL,Oil and gas extraction (energy),Gas/diesel oil excl. biofuels,-586.152
+2018,OWNUSE,NATGAS,Oil and gas extraction (energy),Natural gas,-6238.332
+2018,OWNUSE,NGL,Oil and gas extraction (energy),Natural gas liquids,-167.472
+2018,OWNUSE,REFGAS,Oil refineries (energy),Refinery gas,-4.186800000000001
+2018,LOSSES,CRUDE,Losses,Crude oil,-460.548
+2018,LOSSES,ELEC,Losses,Electricity,-12895.344000000001
+2018,NEU_OTHER,KEROSENE,Non-energy use industry/transformation/energy,Other kerosene,376.812
+2018,NEU_OTHER,OTHOIL,Non-energy use industry/transformation/energy,Other oil products,12602.268
+2018,IND_METAL,ELEC,Iron and steel,Electricity,1130.4360000000001
+2018,IND_METAL,NATGAS,Iron and steel,Natural gas,334.944
+2018,IND_CHEM,ELEC,Chemical and petrochemical,Electricity,2679.552
+2018,IND_CHEM,NATGAS,Chemical and petrochemical,Natural gas,4186.8
+2018,IND_NONMET,ELEC,Non-metallic minerals,Electricity,5819.652
+2018,IND_NONMET,NATGAS,Non-metallic minerals,Natural gas,22943.664
+2018,IND_NONMET,PETCOKE,Non-metallic minerals,Petroleum coke,19217.412
+2018,IND_MINING,ELEC,Mining and quarrying,Electricity,1088.568
+2018,IND_MINING,NATGAS,Mining and quarrying,Natural gas,334.944
+2018,IND_FOOD,ELEC,Food and tobacco,Electricity,3056.364
+2018,IND_FOOD,NATGAS,Food and tobacco,Natural gas,3265.704
+2018,IND_TEXTILE,ELEC,Textile and leather,Electricity,1758.4560000000001
+2018,IND_TEXTILE,NATGAS,Textile and leather,Natural gas,2553.9480000000003
+2018,IND_PAPER,ELEC,"Paper, pulp and print",Electricity,962.964
+2018,IND_PAPER,NATGAS,"Paper, pulp and print",Natural gas,2177.136
+2018,IND_OTHER,ELEC,Non-specified (industry),Electricity,4186.8
+2018,IND_OTHER,FUELOIL,Non-specified (industry),Fuel oil,8834.148000000001
+2018,IND_OTHER,GASOIL,Non-specified (industry),Gas/diesel oil excl. biofuels,2595.8160000000003
+2018,IND_OTHER,KEROSENE,Non-specified (industry),Other kerosene,4.186800000000001
+2018,IND_OTHER,LPG,Non-specified (industry),Liquefied petroleum gases (LPG),1256.04
+2018,IND_OTHER,NATGAS,Non-specified (industry),Natural gas,2177.136
+2018,TRA_RAIL,ELEC,Rail,Electricity,251.20800000000003
+2018,TRA_RAIL,GASOIL,Rail,Gas/diesel oil excl. biofuels,669.888
+2018,TRA_ROAD,GASOIL,Road,Gas/diesel oil excl. biofuels,68202.97200000001
+2018,TRA_ROAD,GASOLINE,Road,Motor gasoline excl. biofuels,29391.336000000003
+2018,TRA_ROAD,LPG,Road,Liquefied petroleum gases (LPG),544.284
+2018,TRA_AIR,JETFUEL,Domestic aviation,Kerosene type jet fuel excl. biofuels,167.472
+2018,TRA_PIPE,ELEC,Pipeline transport,Electricity,125.60400000000001
+2018,TRA_PIPE,NATGAS,Pipeline transport,Natural gas,7745.580000000001
+2018,OTH_RES,BIOMASS,Residential,Primary solid biofuels,35587.8
+2018,OTH_RES,ELEC,Residential,Electricity,18003.24
+2018,OTH_RES,GASOIL,Residential,Gas/diesel oil excl. biofuels,293.076
+2018,OTH_RES,KEROSENE,Residential,Other kerosene,921.096
+2018,OTH_RES,LPG,Residential,Liquefied petroleum gases (LPG),23236.74
+2018,OTH_RES,NATGAS,Residential,Natural gas,10550.736
+2018,OTH_RES,SOLARTH,Residential,Solar thermal,2344.608
+2018,OTH_COM,BIOMASS,Commercial and public services,Primary solid biofuels,502.41600000000005
+2018,OTH_COM,ELEC,Commercial and public services,Electricity,16202.916000000001
+2018,OTH_COM,GASOIL,Commercial and public services,Gas/diesel oil excl. biofuels,2512.08
+2018,OTH_COM,LPG,Commercial and public services,Liquefied petroleum gases (LPG),1716.5880000000002
+2018,OTH_COM,NATGAS,Commercial and public services,Natural gas,7954.92
+2018,OTH_COM,SOLARTH,Commercial and public services,Solar thermal,100.4832
+2018,OTH_AGR,ELEC,Agriculture/forestry,Electricity,4186.8
+2018,OTH_AGR,FUELOIL,Agriculture/forestry,Fuel oil,1465.38
+2018,OTH_AGR,GASOIL,Agriculture/forestry,Gas/diesel oil excl. biofuels,15198.084
+2018,OTH_AGR,KEROSENE,Agriculture/forestry,Other kerosene,0.41868000000000005
+2018,OTH_AGR,NATGAS,Agriculture/forestry,Natural gas,1088.568
+2018,OTH_AGR,SOLARPV,Agriculture/forestry,Solar photovoltaics,0.41868000000000005
+2018,OTH_AGR,SOLARTH,Agriculture/forestry,Solar thermal,3.3494400000000004
+2018,STATDIFF,CRUDE,Statistical differences,Crude oil,628.02
+2018,STATDIFF,ELEC,Statistical differences,Electricity,41.868
+2018,STATDIFF,FUELOIL,Statistical differences,Fuel oil,-1339.776
+2018,STATDIFF,GASOIL,Statistical differences,Gas/diesel oil excl. biofuels,-586.152
+2018,STATDIFF,GASOLINE,Statistical differences,Motor gasoline excl. biofuels,-711.7560000000001
+2018,STATDIFF,JETFUEL,Statistical differences,Kerosene type jet fuel excl. biofuels,502.41600000000005
+2018,STATDIFF,KEROSENE,Statistical differences,Other kerosene,-167.472
+2018,STATDIFF,LPG,Statistical differences,Liquefied petroleum gases (LPG),-83.736
+2018,STATDIFF,NATGAS,Statistical differences,Natural gas,418.68
+2018,STATDIFF,NGL,Statistical differences,Natural gas liquids,-41.868
+2018,STATDIFF,OTHOIL,Statistical differences,Other oil products,-334.944
+2018,STATDIFF,PETCOKE,Statistical differences,Petroleum coke,-921.096
+2019,PROD,BIOMASS,Production,Primary solid biofuels,45803.592000000004
+2019,PROD,CRUDE,Production,Crude oil,72306.03600000001
+2019,PROD,HEAT,Production,Heat,4144.932
+2019,PROD,HYDRO,Production,Hydro,251.20800000000003
+2019,PROD,NATGAS,Production,Natural gas,78628.104
+2019,PROD,NGL,Production,Natural gas liquids,6573.276000000001
+2019,PROD,SOLARPV,Production,Solar photovoltaics,431.2404000000001
+2019,PROD,SOLARTH,Production,Solar thermal,2595.8160000000003
+2019,PROD,WIND,Production,Wind,1800.324
+2019,IMP,CRUDE,Imports,Crude oil,5359.104
+2019,IMP,ELEC,Imports,Electricity,1716.5880000000002
+2019,IMP,FUELOIL,Imports,Fuel oil,9127.224
+2019,IMP,GASOIL,Imports,Gas/diesel oil excl. biofuels,82312.488
+2019,IMP,GASOLINE,Imports,Motor gasoline excl. biofuels,29014.524
+2019,IMP,JETFUEL,Imports,Kerosene type jet fuel excl. biofuels,13104.684000000001
+2019,IMP,LPG,Imports,Liquefied petroleum gases (LPG),22901.796000000002
+2019,IMP,NATGAS,Imports,Natural gas,151980.84
+2019,IMP,OTHOIL,Imports,Other oil products,9294.696
+2019,IMP,PETCOKE,Imports,Petroleum coke,22483.116
+2019,STOCK,CRUDE,Stock changes,Crude oil,-3977.46
+2019,STOCK,FUELOIL,Stock changes,Fuel oil,544.284
+2019,STOCK,GASOIL,Stock changes,Gas/diesel oil excl. biofuels,1339.776
+2019,STOCK,GASOLINE,Stock changes,Motor gasoline excl. biofuels,209.34
+2019,STOCK,JETFUEL,Stock changes,Kerosene type jet fuel excl. biofuels,544.284
+2019,STOCK,KEROSENE,Stock changes,Other kerosene,380.9988
+2019,STOCK,LPG,Stock changes,Liquefied petroleum gases (LPG),-37.681200000000004
+2019,STOCK,NAPHTHA,Stock changes,Naphtha,276.3288
+2019,STOCK,NGL,Stock changes,Natural gas liquids,-41.868
+2019,STOCK,OTHOIL,Stock changes,Other oil products,-376.812
+2019,STOCK,PETCOKE,Stock changes,Petroleum coke,502.41600000000005
+2019,EXP,CRUDE,Exports,Crude oil,-66905.064
+2019,EXP,ELEC,Exports,Electricity,-2260.8720000000003
+2019,EXP,FUELOIL,Exports,Fuel oil,-1423.5120000000002
+2019,EXP,NAPHTHA,Exports,Naphtha,-1716.5880000000002
+2019,EXP,NGL,Exports,Natural gas liquids,-1590.9840000000002
+2019,EXP,OTHOIL,Exports,Other oil products,-83.736
+2019,BUNKERS,GASOIL,International marine bunkers,Gas/diesel oil excl. biofuels,-418.68
+2019,BUNKERS,JETFUEL,International aviation bunkers,Kerosene type jet fuel excl. biofuels,-12979.08
+2019,TI_MAINPLANT,GASOIL,Main activity producer electricity plants (transf.),Gas/diesel oil excl. biofuels,-8.373600000000001
+2019,TI_MAINPLANT,NATGAS,Main activity producer electricity plants (transf.),Natural gas,-158093.568
+2019,TI_AUTOPLANT,FUELOIL,Autoproducer electricity plants (transf.),Fuel oil,-544.284
+2019,TI_AUTOPLANT,GASOIL,Autoproducer electricity plants (transf.),Gas/diesel oil excl. biofuels,-20.934
+2019,TI_AUTOPLANT,HEAT,Autoproducer electricity plants (transf.),Heat,-4144.932
+2019,TI_AUTOPLANT,NATGAS,Autoproducer electricity plants (transf.),Natural gas,-7787.448
+2019,TI_REFINERY,CRUDE,Oil refineries (transf.),Crude oil,-6112.728
+2019,TI_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Primary solid biofuels,-16579.728
+2019,TO_MAINPLANT,ELEC,Main activity producer electricity plants (transf.),Electricity,71971.092
+2019,TO_AUTOPLANT,ELEC,Autoproducer electricity plants (transf.),Electricity,4521.744000000001
+2019,TO_REFINERY,FUELOIL,Oil refineries (transf.),Fuel oil,2135.268
+2019,TO_REFINERY,GASOIL,Oil refineries (transf.),Gas/diesel oil excl. biofuels,1758.4560000000001
+2019,TO_REFINERY,KEROSENE,Oil refineries (transf.),Other kerosene,460.548
+2019,TO_REFINERY,LPG,Oil refineries (transf.),Liquefied petroleum gases (LPG),125.60400000000001
+2019,TO_REFINERY,NAPHTHA,Oil refineries (transf.),Naphtha,1465.38
+2019,TO_REFINERY,OTHOIL,Oil refineries (transf.),Other oil products,83.736
+2019,TO_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Charcoal,6824.484
+2019,TRF_PROD,ELEC,Main activity producer electricity plants (transf.),Electricity,2470.212
+2019,TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),Hydro,-251.20800000000003
+2019,TRF_PROD,LPG,Transfers,Liquefied petroleum gases (LPG),4731.084
+2019,TRF_PROD,NGL,Transfers,Natural gas liquids,-4731.084
+2019,TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),Solar photovoltaics,-427.0536
+2019,TRF_PROD,WIND,Main activity producer electricity plants (transf.),Wind,-1800.324
+2019,TRF_TRANSF,OTHOIL,Transfers,Other oil products,502.41600000000005
+2019,OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",Electricity,-2930.76
+2019,OWNUSE,FUELOIL,Oil refineries (energy),Fuel oil,-167.472
+2019,OWNUSE,GASOIL,Oil and gas extraction (energy),Gas/diesel oil excl. biofuels,-502.41600000000005
+2019,OWNUSE,NATGAS,Oil and gas extraction (energy),Natural gas,-6657.012000000001
+2019,OWNUSE,NGL,Oil and gas extraction (energy),Natural gas liquids,-167.472
+2019,LOSSES,CRUDE,Losses,Crude oil,-41.868
+2019,LOSSES,ELEC,Losses,Electricity,-13104.684000000001
+2019,LOSSES,NGL,Losses,Natural gas liquids,-83.736
+2019,NEU_OTHER,KEROSENE,Non-energy use industry/transformation/energy,Other kerosene,293.076
+2019,NEU_OTHER,OTHOIL,Non-energy use industry/transformation/energy,Other oil products,9378.432
+2019,IND_METAL,ELEC,Iron and steel,Electricity,1004.8320000000001
+2019,IND_METAL,NATGAS,Iron and steel,Natural gas,334.944
+2019,IND_CHEM,ELEC,Chemical and petrochemical,Electricity,2763.288
+2019,IND_CHEM,NATGAS,Chemical and petrochemical,Natural gas,4438.008
+2019,IND_NONMET,ELEC,Non-metallic minerals,Electricity,5777.784000000001
+2019,IND_NONMET,NATGAS,Non-metallic minerals,Natural gas,18547.524
+2019,IND_NONMET,PETCOKE,Non-metallic minerals,Petroleum coke,22106.304
+2019,IND_MINING,ELEC,Mining and quarrying,Electricity,1130.4360000000001
+2019,IND_MINING,NATGAS,Mining and quarrying,Natural gas,334.944
+2019,IND_FOOD,ELEC,Food and tobacco,Electricity,3098.232
+2019,IND_FOOD,NATGAS,Food and tobacco,Natural gas,3768.1200000000003
+2019,IND_TEXTILE,ELEC,Textile and leather,Electricity,1800.324
+2019,IND_TEXTILE,NATGAS,Textile and leather,Natural gas,2470.212
+2019,IND_TEXTILE,SOLARTH,Textile and leather,Solar thermal,4.186800000000001
+2019,IND_PAPER,ELEC,"Paper, pulp and print",Electricity,837.36
+2019,IND_PAPER,NATGAS,"Paper, pulp and print",Natural gas,1758.4560000000001
+2019,IND_MACH,ELEC,Machinery,Electricity,1674.72
+2019,IND_OTHER,ELEC,Non-specified (industry),Electricity,2470.212
+2019,IND_OTHER,FUELOIL,Non-specified (industry),Fuel oil,7829.316000000001
+2019,IND_OTHER,GASOIL,Non-specified (industry),Gas/diesel oil excl. biofuels,2470.212
+2019,IND_OTHER,LPG,Non-specified (industry),Liquefied petroleum gases (LPG),1297.9080000000001
+2019,IND_OTHER,NATGAS,Non-specified (industry),Natural gas,2177.136
+2019,TRA_RAIL,ELEC,Rail,Electricity,251.20800000000003
+2019,TRA_RAIL,GASOIL,Rail,Gas/diesel oil excl. biofuels,418.68
+2019,TRA_ROAD,GASOIL,Road,Gas/diesel oil excl. biofuels,65314.08
+2019,TRA_ROAD,GASOLINE,Road,Motor gasoline excl. biofuels,31233.528000000002
+2019,TRA_ROAD,LPG,Road,Liquefied petroleum gases (LPG),502.41600000000005
+2019,TRA_AIR,JETFUEL,Domestic aviation,Kerosene type jet fuel excl. biofuels,209.34
+2019,TRA_PIPE,ELEC,Pipeline transport,Electricity,83.736
+2019,TRA_PIPE,NATGAS,Pipeline transport,Natural gas,4312.404
+2019,OTH_RES,BIOMASS,Residential,Primary solid biofuels,35420.328
+2019,OTH_RES,ELEC,Residential,Electricity,19887.3
+2019,OTH_RES,GASOIL,Residential,Gas/diesel oil excl. biofuels,293.076
+2019,OTH_RES,KEROSENE,Residential,Other kerosene,418.68
+2019,OTH_RES,LPG,Residential,Liquefied petroleum gases (LPG),24576.516
+2019,OTH_RES,NATGAS,Residential,Natural gas,10676.34
+2019,OTH_RES,SOLARTH,Residential,Solar thermal,2470.212
+2019,OTH_COM,BIOMASS,Commercial and public services,Primary solid biofuels,628.02
+2019,OTH_COM,ELEC,Commercial and public services,Electricity,17333.352000000003
+2019,OTH_COM,GASOIL,Commercial and public services,Gas/diesel oil excl. biofuels,2386.476
+2019,OTH_COM,LPG,Commercial and public services,Liquefied petroleum gases (LPG),1632.852
+2019,OTH_COM,NATGAS,Commercial and public services,Natural gas,8247.996000000001
+2019,OTH_COM,SOLARTH,Commercial and public services,Solar thermal,108.8568
+2019,OTH_AGR,ELEC,Agriculture/forestry,Electricity,4061.1960000000004
+2019,OTH_AGR,FUELOIL,Agriculture/forestry,Fuel oil,1465.38
+2019,OTH_AGR,GASOIL,Agriculture/forestry,Gas/diesel oil excl. biofuels,14528.196
+2019,OTH_AGR,NATGAS,Agriculture/forestry,Natural gas,1172.304
+2019,OTH_AGR,SOLARPV,Agriculture/forestry,Solar photovoltaics,2.9307600000000003
+2019,STATDIFF,CRUDE,Statistical differences,Crude oil,-628.02
+2019,STATDIFF,ELEC,Statistical differences,Electricity,-167.472
+2019,STATDIFF,FUELOIL,Statistical differences,Fuel oil,-334.944
+2019,STATDIFF,GASOIL,Statistical differences,Gas/diesel oil excl. biofuels,921.096
+2019,STATDIFF,GASOLINE,Statistical differences,Motor gasoline excl. biofuels,2009.6640000000002
+2019,STATDIFF,JETFUEL,Statistical differences,Kerosene type jet fuel excl. biofuels,-460.548
+2019,STATDIFF,KEROSENE,Statistical differences,Other kerosene,-167.472
+2019,STATDIFF,LPG,Statistical differences,Liquefied petroleum gases (LPG),251.20800000000003
+2019,STATDIFF,NATGAS,Statistical differences,Natural gas,167.472
+2019,STATDIFF,NGL,Statistical differences,Natural gas liquids,41.868
+2019,STATDIFF,PETCOKE,Statistical differences,Petroleum coke,-879.2280000000001
+2020,PROD,BIOMASS,Production,Primary solid biofuels,46012.932
+2020,PROD,CRUDE,Production,Crude oil,66444.516
+2020,PROD,HEAT,Production,Heat,2763.288
+2020,PROD,HYDRO,Production,Hydro,167.472
+2020,PROD,NATGAS,Production,Natural gas,81014.58
+2020,PROD,NGL,Production,Natural gas liquids,6489.54
+2020,PROD,SOLARPV,Production,Solar photovoltaics,544.284
+2020,PROD,SOLARTH,Production,Solar thermal,2679.552
+2020,PROD,WIND,Production,Wind,1674.72
+2020,IMP,CRUDE,Imports,Crude oil,34499.232
+2020,IMP,ELEC,Imports,Electricity,1339.776
+2020,IMP,FUELOIL,Imports,Fuel oil,6531.408
+2020,IMP,GASOIL,Imports,Gas/diesel oil excl. biofuels,62885.736000000004
+2020,IMP,GASOLINE,Imports,Motor gasoline excl. biofuels,29014.524
+2020,IMP,JETFUEL,Imports,Kerosene type jet fuel excl. biofuels,3977.46
+2020,IMP,LPG,Imports,Liquefied petroleum gases (LPG),21855.096
+2020,IMP,NATGAS,Imports,Natural gas,140006.592
+2020,IMP,OTHOIL,Imports,Other oil products,6573.276000000001
+2020,IMP,PETCOKE,Imports,Petroleum coke,20138.508
+2020,STOCK,CRUDE,Stock changes,Crude oil,-837.36
+2020,STOCK,FUELOIL,Stock changes,Fuel oil,125.60400000000001
+2020,STOCK,GASOIL,Stock changes,Gas/diesel oil excl. biofuels,-1967.796
+2020,STOCK,GASOLINE,Stock changes,Motor gasoline excl. biofuels,-1716.5880000000002
+2020,STOCK,JETFUEL,Stock changes,Kerosene type jet fuel excl. biofuels,209.34
+2020,STOCK,KEROSENE,Stock changes,Other kerosene,-8.373600000000001
+2020,STOCK,LPG,Stock changes,Liquefied petroleum gases (LPG),29.3076
+2020,STOCK,NAPHTHA,Stock changes,Naphtha,100.4832
+2020,STOCK,OTHOIL,Stock changes,Other oil products,-460.548
+2020,STOCK,PETCOKE,Stock changes,Petroleum coke,2093.4
+2020,EXP,CRUDE,Exports,Crude oil,-50115.996
+2020,EXP,ELEC,Exports,Electricity,-3475.0440000000003
+2020,EXP,FUELOIL,Exports,Fuel oil,-14360.724
+2020,EXP,NAPHTHA,Exports,Naphtha,-8457.336000000001
+2020,EXP,NGL,Exports,Natural gas liquids,-1800.324
+2020,BUNKERS,GASOIL,International marine bunkers,Gas/diesel oil excl. biofuels,-293.076
+2020,BUNKERS,JETFUEL,International aviation bunkers,Kerosene type jet fuel excl. biofuels,-4396.14
+2020,TI_MAINPLANT,GASOIL,Main activity producer electricity plants (transf.),Gas/diesel oil excl. biofuels,-217.7136
+2020,TI_MAINPLANT,NATGAS,Main activity producer electricity plants (transf.),Natural gas,-154074.24000000002
+2020,TI_AUTOPLANT,FUELOIL,Autoproducer electricity plants (transf.),Fuel oil,-502.41600000000005
+2020,TI_AUTOPLANT,GASOIL,Autoproducer electricity plants (transf.),Gas/diesel oil excl. biofuels,-16.747200000000003
+2020,TI_AUTOPLANT,HEAT,Autoproducer electricity plants (transf.),Heat,-2763.288
+2020,TI_AUTOPLANT,NATGAS,Autoproducer electricity plants (transf.),Natural gas,-7494.372
+2020,TI_REFINERY,CRUDE,Oil refineries (transf.),Crude oil,-47771.388
+2020,TI_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Primary solid biofuels,-16914.672000000002
+2020,TO_MAINPLANT,ELEC,Main activity producer electricity plants (transf.),Electricity,70296.372
+2020,TO_AUTOPLANT,ELEC,Autoproducer electricity plants (transf.),Electricity,4228.668000000001
+2020,TO_REFINERY,FUELOIL,Oil refineries (transf.),Fuel oil,16161.048
+2020,TO_REFINERY,GASOIL,Oil refineries (transf.),Gas/diesel oil excl. biofuels,18086.976000000002
+2020,TO_REFINERY,GASOLINE,Oil refineries (transf.),Motor gasoline excl. biofuels,2135.268
+2020,TO_REFINERY,KEROSENE,Oil refineries (transf.),Other kerosene,879.2280000000001
+2020,TO_REFINERY,LPG,Oil refineries (transf.),Liquefied petroleum gases (LPG),921.096
+2020,TO_REFINERY,NAPHTHA,Oil refineries (transf.),Naphtha,8415.468
+2020,TO_REFINERY,OTHOIL,Oil refineries (transf.),Other oil products,293.076
+2020,TO_REFINERY,REFGAS,Oil refineries (transf.),Refinery gas,314.01
+2020,TO_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Charcoal,6950.088000000001
+2020,TRF_PROD,ELEC,Main activity producer electricity plants (transf.),Electricity,2386.476
+2020,TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),Hydro,-167.472
+2020,TRF_PROD,LPG,Transfers,Liquefied petroleum gases (LPG),4270.536
+2020,TRF_PROD,NGL,Transfers,Natural gas liquids,-4270.536
+2020,TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),Solar photovoltaics,-540.0972
+2020,TRF_PROD,WIND,Main activity producer electricity plants (transf.),Wind,-1674.72
+2020,TRF_TRANSF,OTHOIL,Transfers,Other oil products,418.68
+2020,OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",Electricity,-2763.288
+2020,OWNUSE,FUELOIL,Oil refineries (energy),Fuel oil,-879.2280000000001
+2020,OWNUSE,GASOIL,Oil and gas extraction (energy),Gas/diesel oil excl. biofuels,-628.02
+2020,OWNUSE,NATGAS,Oil and gas extraction (energy),Natural gas,-7033.8240000000005
+2020,OWNUSE,NGL,Oil and gas extraction (energy),Natural gas liquids,-167.472
+2020,OWNUSE,REFGAS,Oil refineries (energy),Refinery gas,-314.01
+2020,LOSSES,CRUDE,Losses,Crude oil,-167.472
+2020,LOSSES,ELEC,Losses,Electricity,-13397.76
+2020,LOSSES,NGL,Losses,Natural gas liquids,-83.736
+2020,NEU_OTHER,KEROSENE,Non-energy use industry/transformation/energy,Other kerosene,209.34
+2020,NEU_OTHER,OTHOIL,Non-energy use industry/transformation/energy,Other oil products,6824.484
+2020,IND_METAL,ELEC,Iron and steel,Electricity,1004.8320000000001
+2020,IND_METAL,NATGAS,Iron and steel,Natural gas,251.20800000000003
+2020,IND_CHEM,ELEC,Chemical and petrochemical,Electricity,2637.684
+2020,IND_CHEM,NATGAS,Chemical and petrochemical,Natural gas,3684.384
+2020,IND_NONMET,ELEC,Non-metallic minerals,Electricity,4982.292
+2020,IND_NONMET,NATGAS,Non-metallic minerals,Natural gas,13858.308
+2020,IND_NONMET,PETCOKE,Non-metallic minerals,Petroleum coke,21478.284
+2020,IND_MINING,ELEC,Mining and quarrying,Electricity,1046.7
+2020,IND_MINING,NATGAS,Mining and quarrying,Natural gas,251.20800000000003
+2020,IND_FOOD,ELEC,Food and tobacco,Electricity,3181.9680000000003
+2020,IND_FOOD,NATGAS,Food and tobacco,Natural gas,3726.2520000000004
+2020,IND_TEXTILE,ELEC,Textile and leather,Electricity,1590.9840000000002
+2020,IND_TEXTILE,NATGAS,Textile and leather,Natural gas,2135.268
+2020,IND_TEXTILE,SOLARTH,Textile and leather,Solar thermal,4.186800000000001
+2020,IND_PAPER,ELEC,"Paper, pulp and print",Electricity,711.7560000000001
+2020,IND_PAPER,NATGAS,"Paper, pulp and print",Natural gas,1674.72
+2020,IND_MACH,ELEC,Machinery,Electricity,1507.248
+2020,IND_OTHER,ELEC,Non-specified (industry),Electricity,2302.7400000000002
+2020,IND_OTHER,FUELOIL,Non-specified (industry),Fuel oil,7033.8240000000005
+2020,IND_OTHER,GASOIL,Non-specified (industry),Gas/diesel oil excl. biofuels,2219.004
+2020,IND_OTHER,KEROSENE,Non-specified (industry),Other kerosene,8.373600000000001
+2020,IND_OTHER,LPG,Non-specified (industry),Liquefied petroleum gases (LPG),1046.7
+2020,IND_OTHER,NATGAS,Non-specified (industry),Natural gas,2051.532
+2020,TRA_RAIL,ELEC,Rail,Electricity,209.34
+2020,TRA_RAIL,GASOIL,Rail,Gas/diesel oil excl. biofuels,376.812
+2020,TRA_ROAD,GASOIL,Road,Gas/diesel oil excl. biofuels,62048.376000000004
+2020,TRA_ROAD,GASOLINE,Road,Motor gasoline excl. biofuels,30647.376
+2020,TRA_ROAD,LPG,Road,Liquefied petroleum gases (LPG),376.812
+2020,TRA_AIR,JETFUEL,Domestic aviation,Kerosene type jet fuel excl. biofuels,83.736
+2020,TRA_PIPE,ELEC,Pipeline transport,Electricity,41.868
+2020,TRA_PIPE,NATGAS,Pipeline transport,Natural gas,5610.312
+2020,OTH_RES,BIOMASS,Residential,Primary solid biofuels,35420.328
+2020,OTH_RES,ELEC,Residential,Electricity,19133.676
+2020,OTH_RES,GASOIL,Residential,Gas/diesel oil excl. biofuels,251.20800000000003
+2020,OTH_RES,KEROSENE,Residential,Other kerosene,544.284
+2020,OTH_RES,LPG,Residential,Liquefied petroleum gases (LPG),24618.384000000002
+2020,OTH_RES,NATGAS,Residential,Natural gas,10173.924
+2020,OTH_RES,SOLARTH,Residential,Solar thermal,2553.9480000000003
+2020,OTH_COM,BIOMASS,Commercial and public services,Primary solid biofuels,669.888
+2020,OTH_COM,ELEC,Commercial and public services,Electricity,15365.556
+2020,OTH_COM,GASOIL,Commercial and public services,Gas/diesel oil excl. biofuels,2219.004
+2020,OTH_COM,LPG,Commercial and public services,Liquefied petroleum gases (LPG),1590.9840000000002
+2020,OTH_COM,NATGAS,Commercial and public services,Natural gas,6866.352000000001
+2020,OTH_COM,SOLARTH,Commercial and public services,Solar thermal,117.2304
+2020,OTH_AGR,ELEC,Agriculture/forestry,Electricity,4731.084
+2020,OTH_AGR,FUELOIL,Agriculture/forestry,Fuel oil,1172.304
+2020,OTH_AGR,GASOIL,Agriculture/forestry,Gas/diesel oil excl. biofuels,13732.704000000002
+2020,OTH_AGR,KEROSENE,Agriculture/forestry,Other kerosene,0.8373600000000001
+2020,OTH_AGR,NATGAS,Agriculture/forestry,Natural gas,1297.9080000000001
+2020,OTH_AGR,SOLARPV,Agriculture/forestry,Solar photovoltaics,5.02416
+2020,STATDIFF,CRUDE,Statistical differences,Crude oil,-2051.532
+2020,STATDIFF,ELEC,Statistical differences,Electricity,-209.34
+2020,STATDIFF,FUELOIL,Statistical differences,Fuel oil,1130.4360000000001
+2020,STATDIFF,GASOIL,Statistical differences,Gas/diesel oil excl. biofuels,2972.628
+2020,STATDIFF,GASOLINE,Statistical differences,Motor gasoline excl. biofuels,1214.172
+2020,STATDIFF,JETFUEL,Statistical differences,Kerosene type jet fuel excl. biofuels,293.076
+2020,STATDIFF,KEROSENE,Statistical differences,Other kerosene,-83.736
+2020,STATDIFF,LPG,Statistical differences,Liquefied petroleum gases (LPG),502.41600000000005
+2020,STATDIFF,NAPHTHA,Statistical differences,Naphtha,-83.736
+2020,STATDIFF,NATGAS,Statistical differences,Natural gas,-795.4920000000001
+2020,STATDIFF,NGL,Statistical differences,Natural gas liquids,-167.472
+2020,STATDIFF,OTHOIL,Statistical differences,Other oil products,41.868
+2020,STATDIFF,PETCOKE,Statistical differences,Petroleum coke,-753.624
+2021,PROD,BIOMASS,Production,Primary solid biofuels,46138.536
+2021,PROD,CRUDE,Production,Crude oil,82605.564
+2021,PROD,HEAT,Production,Heat,3265.704
+2021,PROD,HYDRO,Production,Hydro,83.736
+2021,PROD,NATGAS,Production,Natural gas,93030.69600000001
+2021,PROD,NGL,Production,Natural gas liquids,7033.8240000000005
+2021,PROD,SOLARPV,Production,Solar photovoltaics,782.9316
+2021,PROD,SOLARTH,Production,Solar thermal,2763.288
+2021,PROD,WIND,Production,Wind,1549.116
+2021,IMP,CRUDE,Imports,Crude oil,53632.908
+2021,IMP,ELEC,Imports,Electricity,4772.952
+2021,IMP,FUELOIL,Imports,Fuel oil,7703.712
+2021,IMP,GASOIL,Imports,Gas/diesel oil excl. biofuels,58489.596000000005
+2021,IMP,GASOLINE,Imports,Motor gasoline excl. biofuels,27088.596
+2021,IMP,JETFUEL,Imports,Kerosene type jet fuel excl. biofuels,5861.52
+2021,IMP,LPG,Imports,Liquefied petroleum gases (LPG),22441.248
+2021,IMP,NATGAS,Imports,Natural gas,143481.636
+2021,IMP,OTHOIL,Imports,Other oil products,6447.6720000000005
+2021,IMP,PETCOKE,Imports,Petroleum coke,24325.308
+2021,STOCK,CRUDE,Stock changes,Crude oil,-5066.028
+2021,STOCK,FUELOIL,Stock changes,Fuel oil,83.736
+2021,STOCK,GASOIL,Stock changes,Gas/diesel oil excl. biofuels,376.812
+2021,STOCK,GASOLINE,Stock changes,Motor gasoline excl. biofuels,921.096
+2021,STOCK,JETFUEL,Stock changes,Kerosene type jet fuel excl. biofuels,41.868
+2021,STOCK,KEROSENE,Stock changes,Other kerosene,87.92280000000001
+2021,STOCK,LPG,Stock changes,Liquefied petroleum gases (LPG),-46.05480000000001
+2021,STOCK,NAPHTHA,Stock changes,Naphtha,-473.1084000000001
+2021,STOCK,OTHOIL,Stock changes,Other oil products,628.02
+2021,STOCK,PETCOKE,Stock changes,Petroleum coke,-921.096
+2021,EXP,CRUDE,Exports,Crude oil,-59661.9
+2021,EXP,ELEC,Exports,Electricity,-1088.568
+2021,EXP,FUELOIL,Exports,Fuel oil,-20515.32
+2021,EXP,NAPHTHA,Exports,Naphtha,-11011.284
+2021,EXP,NGL,Exports,Natural gas liquids,-2595.8160000000003
+2021,BUNKERS,GASOIL,International marine bunkers,Gas/diesel oil excl. biofuels,-460.548
+2021,BUNKERS,JETFUEL,International aviation bunkers,Kerosene type jet fuel excl. biofuels,-5526.576
+2021,TI_MAINPLANT,GASOIL,Main activity producer electricity plants (transf.),Gas/diesel oil excl. biofuels,-8.373600000000001
+2021,TI_MAINPLANT,NATGAS,Main activity producer electricity plants (transf.),Natural gas,-157507.416
+2021,TI_AUTOPLANT,FUELOIL,Autoproducer electricity plants (transf.),Fuel oil,-544.284
+2021,TI_AUTOPLANT,GASOIL,Autoproducer electricity plants (transf.),Gas/diesel oil excl. biofuels,-12.5604
+2021,TI_AUTOPLANT,HEAT,Autoproducer electricity plants (transf.),Heat,-3265.704
+2021,TI_AUTOPLANT,NATGAS,Autoproducer electricity plants (transf.),Natural gas,-7996.7880000000005
+2021,TI_REFINERY,CRUDE,Oil refineries (transf.),Crude oil,-69040.33200000001
+2021,TI_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Primary solid biofuels,-17207.748
+2021,TO_MAINPLANT,ELEC,Main activity producer electricity plants (transf.),Electricity,71761.75200000001
+2021,TO_AUTOPLANT,ELEC,Autoproducer electricity plants (transf.),Electricity,4689.216
+2021,TO_REFINERY,FUELOIL,Oil refineries (transf.),Fuel oil,22022.568
+2021,TO_REFINERY,GASOIL,Oil refineries (transf.),Gas/diesel oil excl. biofuels,28219.032000000003
+2021,TO_REFINERY,GASOLINE,Oil refineries (transf.),Motor gasoline excl. biofuels,3391.308
+2021,TO_REFINERY,KEROSENE,Oil refineries (transf.),Other kerosene,795.4920000000001
+2021,TO_REFINERY,LPG,Oil refineries (transf.),Liquefied petroleum gases (LPG),1214.172
+2021,TO_REFINERY,NAPHTHA,Oil refineries (transf.),Naphtha,11471.832
+2021,TO_REFINERY,OTHOIL,Oil refineries (transf.),Other oil products,293.076
+2021,TO_REFINERY,REFGAS,Oil refineries (transf.),Refinery gas,456.36120000000005
+2021,TO_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Charcoal,7075.692
+2021,TRF_PROD,ELEC,Main activity producer electricity plants (transf.),Electricity,2302.7400000000002
+2021,TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),Hydro,-83.736
+2021,TRF_PROD,LPG,Transfers,Liquefied petroleum gases (LPG),4312.404
+2021,TRF_PROD,NGL,Transfers,Natural gas liquids,-4312.404
+2021,TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),Solar photovoltaics,-774.558
+2021,TRF_PROD,WIND,Main activity producer electricity plants (transf.),Wind,-1549.116
+2021,TRF_TRANSF,OTHOIL,Transfers,Other oil products,418.68
+2021,OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",Electricity,-2888.8920000000003
+2021,OWNUSE,FUELOIL,Oil refineries (energy),Fuel oil,-1130.4360000000001
+2021,OWNUSE,GASOIL,Oil and gas extraction (energy),Gas/diesel oil excl. biofuels,-879.2280000000001
+2021,OWNUSE,NATGAS,Oil and gas extraction (energy),Natural gas,-6196.464
+2021,OWNUSE,NGL,Oil and gas extraction (energy),Natural gas liquids,-167.472
+2021,OWNUSE,REFGAS,Oil refineries (energy),Refinery gas,-456.36120000000005
+2021,LOSSES,CRUDE,Losses,Crude oil,-628.02
+2021,LOSSES,ELEC,Losses,Electricity,-16579.728
+2021,LOSSES,NGL,Losses,Natural gas liquids,-83.736
+2021,NEU_OTHER,KEROSENE,Non-energy use industry/transformation/energy,Other kerosene,251.20800000000003
+2021,NEU_OTHER,OTHOIL,Non-energy use industry/transformation/energy,Other oil products,7954.92
+2021,IND_METAL,ELEC,Iron and steel,Electricity,1130.4360000000001
+2021,IND_METAL,NATGAS,Iron and steel,Natural gas,251.20800000000003
+2021,IND_CHEM,ELEC,Chemical and petrochemical,Electricity,2930.76
+2021,IND_CHEM,NATGAS,Chemical and petrochemical,Natural gas,3642.516
+2021,IND_NONMET,ELEC,Non-metallic minerals,Electricity,5777.784000000001
+2021,IND_NONMET,NATGAS,Non-metallic minerals,Natural gas,17710.164
+2021,IND_NONMET,PETCOKE,Non-metallic minerals,Petroleum coke,22859.928
+2021,IND_MINING,ELEC,Mining and quarrying,Electricity,1130.4360000000001
+2021,IND_MINING,NATGAS,Mining and quarrying,Natural gas,251.20800000000003
+2021,IND_FOOD,ELEC,Food and tobacco,Electricity,3140.1000000000004
+2021,IND_FOOD,NATGAS,Food and tobacco,Natural gas,3935.592
+2021,IND_TEXTILE,ELEC,Textile and leather,Electricity,1716.5880000000002
+2021,IND_TEXTILE,NATGAS,Textile and leather,Natural gas,2302.7400000000002
+2021,IND_TEXTILE,SOLARTH,Textile and leather,Solar thermal,4.186800000000001
+2021,IND_PAPER,ELEC,"Paper, pulp and print",Electricity,795.4920000000001
+2021,IND_PAPER,NATGAS,"Paper, pulp and print",Natural gas,2093.4
+2021,IND_MACH,ELEC,Machinery,Electricity,1465.38
+2021,IND_OTHER,ELEC,Non-specified (industry),Electricity,2721.42
+2021,IND_OTHER,FUELOIL,Non-specified (industry),Fuel oil,7159.428000000001
+2021,IND_OTHER,GASOIL,Non-specified (industry),Gas/diesel oil excl. biofuels,2302.7400000000002
+2021,IND_OTHER,LPG,Non-specified (industry),Liquefied petroleum gases (LPG),1088.568
+2021,IND_OTHER,NATGAS,Non-specified (industry),Natural gas,2302.7400000000002
+2021,TRA_RAIL,ELEC,Rail,Electricity,167.472
+2021,TRA_RAIL,GASOIL,Rail,Gas/diesel oil excl. biofuels,418.68
+2021,TRA_ROAD,GASOIL,Road,Gas/diesel oil excl. biofuels,67365.61200000001
+2021,TRA_ROAD,GASOLINE,Road,Motor gasoline excl. biofuels,32950.116
+2021,TRA_ROAD,LPG,Road,Liquefied petroleum gases (LPG),418.68
+2021,TRA_AIR,JETFUEL,Domestic aviation,Kerosene type jet fuel excl. biofuels,83.736
+2021,TRA_PIPE,ELEC,Pipeline transport,Electricity,83.736
+2021,TRA_PIPE,NATGAS,Pipeline transport,Natural gas,11178.756000000001
+2021,OTH_RES,BIOMASS,Residential,Primary solid biofuels,35378.46
+2021,OTH_RES,ELEC,Residential,Electricity,20222.244000000002
+2021,OTH_RES,GASOIL,Residential,Gas/diesel oil excl. biofuels,293.076
+2021,OTH_RES,KEROSENE,Residential,Other kerosene,502.41600000000005
+2021,OTH_RES,LPG,Residential,Liquefied petroleum gases (LPG),25372.008
+2021,OTH_RES,NATGAS,Residential,Natural gas,10760.076000000001
+2021,OTH_RES,SOLARTH,Residential,Solar thermal,2637.684
+2021,OTH_COM,BIOMASS,Commercial and public services,Primary solid biofuels,628.02
+2021,OTH_COM,ELEC,Commercial and public services,Electricity,16789.068
+2021,OTH_COM,GASOIL,Commercial and public services,Gas/diesel oil excl. biofuels,2386.476
+2021,OTH_COM,LPG,Commercial and public services,Liquefied petroleum gases (LPG),1632.852
+2021,OTH_COM,NATGAS,Commercial and public services,Natural gas,7368.768
+2021,OTH_COM,SOLARTH,Commercial and public services,Solar thermal,125.60400000000001
+2021,OTH_AGR,ELEC,Agriculture/forestry,Electricity,4731.084
+2021,OTH_AGR,FUELOIL,Agriculture/forestry,Fuel oil,1004.8320000000001
+2021,OTH_AGR,GASOIL,Agriculture/forestry,Gas/diesel oil excl. biofuels,14821.272
+2021,OTH_AGR,NATGAS,Agriculture/forestry,Natural gas,1423.5120000000002
+2021,OTH_AGR,SOLARPV,Agriculture/forestry,Solar photovoltaics,7.117560000000001
+2021,STATDIFF,CRUDE,Statistical differences,Crude oil,-1842.192
+2021,STATDIFF,ELEC,Statistical differences,Electricity,-167.472
+2021,STATDIFF,FUELOIL,Statistical differences,Fuel oil,502.41600000000005
+2021,STATDIFF,GASOIL,Statistical differences,Gas/diesel oil excl. biofuels,1884.0600000000002
+2021,STATDIFF,GASOLINE,Statistical differences,Motor gasoline excl. biofuels,1507.248
+2021,STATDIFF,JETFUEL,Statistical differences,Kerosene type jet fuel excl. biofuels,-251.20800000000003
+2021,STATDIFF,KEROSENE,Statistical differences,Other kerosene,-167.472
+2021,STATDIFF,LPG,Statistical differences,Liquefied petroleum gases (LPG),544.284
+2021,STATDIFF,NATGAS,Statistical differences,Natural gas,-1507.248
+2021,STATDIFF,NGL,Statistical differences,Natural gas liquids,125.60400000000001
+2021,STATDIFF,OTHOIL,Statistical differences,Other oil products,209.34
+2021,STATDIFF,PETCOKE,Statistical differences,Petroleum coke,-544.284
+2022,PROD,BIOMASS,Production,Primary solid biofuels,47017.764
+2022,PROD,CRUDE,Production,Crude oil,70966.26000000001
+2022,PROD,HEAT,Production,Heat,3140.1000000000004
+2022,PROD,HYDRO,Production,Hydro,41.868
+2022,PROD,NATGAS,Production,Natural gas,88425.216
+2022,PROD,NGL,Production,Natural gas liquids,4689.216
+2022,PROD,SOLARPV,Production,Solar photovoltaics,1159.7436
+2022,PROD,SOLARTH,Production,Solar thermal,2721.42
+2022,PROD,WIND,Production,Wind,1172.304
+2022,IMP,CRUDE,Imports,Crude oil,40151.412000000004
+2022,IMP,ELEC,Imports,Electricity,9797.112000000001
+2022,IMP,FUELOIL,Imports,Fuel oil,6950.088000000001
+2022,IMP,GASOIL,Imports,Gas/diesel oil excl. biofuels,51790.716
+2022,IMP,GASOLINE,Imports,Motor gasoline excl. biofuels,26711.784
+2022,IMP,JETFUEL,Imports,Kerosene type jet fuel excl. biofuels,9587.772
+2022,IMP,LPG,Imports,Liquefied petroleum gases (LPG),24409.044
+2022,IMP,NATGAS,Imports,Natural gas,142853.616
+2022,IMP,OTHOIL,Imports,Other oil products,5861.52
+2022,IMP,PETCOKE,Imports,Petroleum coke,21520.152000000002
+2022,STOCK,CRUDE,Stock changes,Crude oil,7536.240000000001
+2022,STOCK,FUELOIL,Stock changes,Fuel oil,334.944
+2022,STOCK,GASOIL,Stock changes,Gas/diesel oil excl. biofuels,8122.392000000001
+2022,STOCK,GASOLINE,Stock changes,Motor gasoline excl. biofuels,2009.6640000000002
+2022,STOCK,JETFUEL,Stock changes,Kerosene type jet fuel excl. biofuels,-293.076
+2022,STOCK,LPG,Stock changes,Liquefied petroleum gases (LPG),-8.373600000000001
+2022,STOCK,NAPHTHA,Stock changes,Naphtha,519.1632000000001
+2022,STOCK,OTHOIL,Stock changes,Other oil products,83.736
+2022,STOCK,PETCOKE,Stock changes,Petroleum coke,628.02
+2022,EXP,CRUDE,Exports,Crude oil,-51539.508
+2022,EXP,ELEC,Exports,Electricity,-544.284
+2022,EXP,FUELOIL,Exports,Fuel oil,-17165.88
+2022,EXP,NAPHTHA,Exports,Naphtha,-10173.924
+2022,EXP,NGL,Exports,Natural gas liquids,-2093.4
+2022,BUNKERS,GASOIL,International marine bunkers,Gas/diesel oil excl. biofuels,-334.944
+2022,BUNKERS,JETFUEL,International aviation bunkers,Kerosene type jet fuel excl. biofuels,-9210.960000000001
+2022,TI_MAINPLANT,GASOIL,Main activity producer electricity plants (transf.),Gas/diesel oil excl. biofuels,-8.373600000000001
+2022,TI_MAINPLANT,NATGAS,Main activity producer electricity plants (transf.),Natural gas,-144025.92
+2022,TI_AUTOPLANT,FUELOIL,Autoproducer electricity plants (transf.),Fuel oil,-519.1632000000001
+2022,TI_AUTOPLANT,GASOIL,Autoproducer electricity plants (transf.),Gas/diesel oil excl. biofuels,-12.5604
+2022,TI_AUTOPLANT,HEAT,Autoproducer electricity plants (transf.),Heat,-3140.1000000000004
+2022,TI_AUTOPLANT,NATGAS,Autoproducer electricity plants (transf.),Natural gas,-8164.26
+2022,TI_REFINERY,CRUDE,Oil refineries (transf.),Crude oil,-62843.868
+2022,TI_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Primary solid biofuels,-17584.56
+2022,TO_MAINPLANT,ELEC,Main activity producer electricity plants (transf.),Electricity,69961.428
+2022,TO_AUTOPLANT,ELEC,Autoproducer electricity plants (transf.),Electricity,4814.820000000001
+2022,TO_REFINERY,FUELOIL,Oil refineries (transf.),Fuel oil,18380.052
+2022,TO_REFINERY,GASOIL,Oil refineries (transf.),Gas/diesel oil excl. biofuels,25455.744000000002
+2022,TO_REFINERY,GASOLINE,Oil refineries (transf.),Motor gasoline excl. biofuels,4772.952
+2022,TO_REFINERY,KEROSENE,Oil refineries (transf.),Other kerosene,669.888
+2022,TO_REFINERY,LPG,Oil refineries (transf.),Liquefied petroleum gases (LPG),1800.324
+2022,TO_REFINERY,NAPHTHA,Oil refineries (transf.),Naphtha,9629.640000000001
+2022,TO_REFINERY,OTHOIL,Oil refineries (transf.),Other oil products,251.20800000000003
+2022,TO_REFINERY,REFGAS,Oil refineries (transf.),Refinery gas,808.0524
+2022,TO_CHARCOAL,BIOMASS,Charcoal production plants (transf.),Charcoal,7243.164000000001
+2022,TRF_PROD,ELEC,Main activity producer electricity plants (transf.),Electricity,2344.608
+2022,TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),Hydro,-41.868
+2022,TRF_PROD,LPG,Transfers,Liquefied petroleum gases (LPG),2302.7400000000002
+2022,TRF_PROD,NGL,Transfers,Natural gas liquids,-2302.7400000000002
+2022,TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),Solar photovoltaics,-1147.1832
+2022,TRF_PROD,WIND,Main activity producer electricity plants (transf.),Wind,-1172.304
+2022,TRF_TRANSF,OTHOIL,Transfers,Other oil products,418.68
+2022,OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",Electricity,-2805.156
+2022,OWNUSE,FUELOIL,Oil refineries (energy),Fuel oil,-921.096
+2022,OWNUSE,GASOIL,Oil and gas extraction (energy),Gas/diesel oil excl. biofuels,-962.964
+2022,OWNUSE,NATGAS,Oil and gas extraction (energy),Natural gas,-7075.692
+2022,OWNUSE,NGL,Oil and gas extraction (energy),Natural gas liquids,-41.868
+2022,OWNUSE,REFGAS,Oil refineries (energy),Refinery gas,-808.0524
+2022,LOSSES,CRUDE,Losses,Crude oil,-669.888
+2022,LOSSES,ELEC,Losses,Electricity,-16789.068
+2022,LOSSES,NGL,Losses,Natural gas liquids,-83.736
+2022,NEU_OTHER,KEROSENE,Non-energy use industry/transformation/energy,Other kerosene,251.20800000000003
+2022,NEU_OTHER,OTHOIL,Non-energy use industry/transformation/energy,Other oil products,6866.352000000001
+2022,IND_METAL,ELEC,Iron and steel,Electricity,1172.304
+2022,IND_METAL,NATGAS,Iron and steel,Natural gas,293.076
+2022,IND_CHEM,ELEC,Chemical and petrochemical,Electricity,3014.496
+2022,IND_CHEM,NATGAS,Chemical and petrochemical,Natural gas,3433.1760000000004
+2022,IND_NONMET,BIOMASS,Non-metallic minerals,Primary solid biofuels,586.152
+2022,IND_NONMET,ELEC,Non-metallic minerals,Electricity,5484.7080000000005
+2022,IND_NONMET,NATGAS,Non-metallic minerals,Natural gas,20264.112
+2022,IND_NONMET,PETCOKE,Non-metallic minerals,Petroleum coke,20724.66
+2022,IND_MINING,ELEC,Mining and quarrying,Electricity,1130.4360000000001
+2022,IND_MINING,NATGAS,Mining and quarrying,Natural gas,251.20800000000003
+2022,IND_FOOD,ELEC,Food and tobacco,Electricity,3098.232
+2022,IND_FOOD,NATGAS,Food and tobacco,Natural gas,4228.668000000001
+2022,IND_TEXTILE,ELEC,Textile and leather,Electricity,1842.192
+2022,IND_TEXTILE,NATGAS,Textile and leather,Natural gas,2553.9480000000003
+2022,IND_TEXTILE,SOLARTH,Textile and leather,Solar thermal,4.186800000000001
+2022,IND_PAPER,ELEC,"Paper, pulp and print",Electricity,879.2280000000001
+2022,IND_PAPER,NATGAS,"Paper, pulp and print",Natural gas,2093.4
+2022,IND_MACH,ELEC,Machinery,Electricity,1632.852
+2022,IND_OTHER,ELEC,Non-specified (industry),Electricity,2930.76
+2022,IND_OTHER,FUELOIL,Non-specified (industry),Fuel oil,7326.900000000001
+2022,IND_OTHER,GASOIL,Non-specified (industry),Gas/diesel oil excl. biofuels,2219.004
+2022,IND_OTHER,LPG,Non-specified (industry),Liquefied petroleum gases (LPG),1172.304
+2022,IND_OTHER,NATGAS,Non-specified (industry),Natural gas,2470.212
+2022,TRA_RAIL,ELEC,Rail,Electricity,167.472
+2022,TRA_RAIL,GASOIL,Rail,Gas/diesel oil excl. biofuels,460.548
+2022,TRA_ROAD,GASOIL,Road,Gas/diesel oil excl. biofuels,66151.44
+2022,TRA_ROAD,GASOLINE,Road,Motor gasoline excl. biofuels,34164.288
+2022,TRA_ROAD,LPG,Road,Liquefied petroleum gases (LPG),418.68
+2022,TRA_AIR,JETFUEL,Domestic aviation,Kerosene type jet fuel excl. biofuels,125.60400000000001
+2022,TRA_PIPE,ELEC,Pipeline transport,Electricity,41.868
+2022,TRA_PIPE,NATGAS,Pipeline transport,Natural gas,13774.572
+2022,OTH_RES,BIOMASS,Residential,Primary solid biofuels,35378.46
+2022,OTH_RES,ELEC,Residential,Electricity,21980.7
+2022,OTH_RES,GASOIL,Residential,Gas/diesel oil excl. biofuels,293.076
+2022,OTH_RES,KEROSENE,Residential,Other kerosene,334.944
+2022,OTH_RES,LPG,Residential,Liquefied petroleum gases (LPG),25665.084000000003
+2022,OTH_RES,NATGAS,Residential,Natural gas,11513.7
+2022,OTH_RES,SOLARTH,Residential,Solar thermal,2595.8160000000003
+2022,OTH_COM,BIOMASS,Commercial and public services,Primary solid biofuels,711.7560000000001
+2022,OTH_COM,ELEC,Commercial and public services,Electricity,17752.032
+2022,OTH_COM,GASOIL,Commercial and public services,Gas/diesel oil excl. biofuels,2302.7400000000002
+2022,OTH_COM,LPG,Commercial and public services,Liquefied petroleum gases (LPG),1674.72
+2022,OTH_COM,NATGAS,Commercial and public services,Natural gas,8373.6
+2022,OTH_COM,SOLARTH,Commercial and public services,Solar thermal,133.97760000000002
+2022,OTH_AGR,ELEC,Agriculture/forestry,Electricity,5359.104
+2022,OTH_AGR,FUELOIL,Agriculture/forestry,Fuel oil,837.36
+2022,OTH_AGR,GASOIL,Agriculture/forestry,Gas/diesel oil excl. biofuels,14486.328000000001
+2022,OTH_AGR,NATGAS,Agriculture/forestry,Natural gas,1507.248
+2022,OTH_AGR,SOLARPV,Agriculture/forestry,Solar photovoltaics,11.723040000000001
+2022,STATDIFF,CRUDE,Statistical differences,Crude oil,-3600.648
+2022,STATDIFF,ELEC,Statistical differences,Electricity,-293.076
+2022,STATDIFF,FUELOIL,Statistical differences,Fuel oil,1088.568
+2022,STATDIFF,GASOIL,Statistical differences,Gas/diesel oil excl. biofuels,1925.928
+2022,STATDIFF,GASOLINE,Statistical differences,Motor gasoline excl. biofuels,669.888
+2022,STATDIFF,JETFUEL,Statistical differences,Kerosene type jet fuel excl. biofuels,41.868
+2022,STATDIFF,KEROSENE,Statistical differences,Other kerosene,-83.736
+2022,STATDIFF,LPG,Statistical differences,Liquefied petroleum gases (LPG),376.812
+2022,STATDIFF,NATGAS,Statistical differences,Natural gas,-1297.9080000000001
+2022,STATDIFF,NGL,Statistical differences,Natural gas liquids,-125.60400000000001
+2022,STATDIFF,OTHOIL,Statistical differences,Other oil products,251.20800000000003
+2022,STATDIFF,PETCOKE,Statistical differences,Petroleum coke,-1465.38

@@ -1,8 +1,8 @@
 # PEFA Converter (IMF, Achille Pegoue): how EB2PEFA works
 
-Notes from reading `outils-fmi/pefa-converter/PEFA_Converter.py` (function `EB2PEFA`, lines 27 to 789; `EE_EB2PEFA` below it is an older copy, unused) and running it headless with `scripts/outils_fmi.py`. Written 2026-11-24.
+Notes from reading `imf-tools/pefa-converter/PEFA_Converter.py` (function `EB2PEFA`, lines 27 to 789; `EE_EB2PEFA` below it is an older copy, unused) and running it headless with `scripts/imf_tools.py`. Written 2026-11-24.
 
-## Inputs (named ranges, rebuilt by `outils_fmi.plages_classeur`)
+## Inputs (named ranges, rebuilt by `imf_tools.pefa_ranges`)
 
 - `Energy_Balance`: IEA layout, **TJ** (sheet header "UNIT: TJ"), IEA signs (exports, bunkers, transformation inputs, own use, losses negative; stock changes positive = draw). 95 flows in a fixed order (`Energy_Balance_Template` column A); the code finds Level1/Level2 blocks by walking that order, so every template row must be present. Products across (63 + Total).
 - `Concordance_Matrix` (B1, 12 columns): `EB_Flow_Level1, EB_Flow_Level2, EB_Flow, EB_Product, Allocation Factor, PEFA_Target_Product, PEFA_Target_Activity, Comment, PEFA_Target_Product_Level1, PEFA_Target_Product_Level2, PEFA_Quadrant, EB_Category`. Activities are ISIC sections A, B, C, D, E, F, H, Other, HH plus Acc and RoW. Factors are normalised to sum 1 per (flow, product, target product, quadrant).
@@ -21,7 +21,7 @@ Notes from reading `outils-fmi/pefa-converter/PEFA_Converter.py` (function `EB2P
 
 ## Findings
 
-- The plan's sample imbalance (supply 24 197.846 PJ, use 24 386.288 PJ) comes from the default CM, which has rows for the `Total` column on the four non-energy flows. Non-energy use is counted twice. Dropping the `Total` column from the balance range gives supply = use = 24 009.40 PJ. Decision (Renato, 2026-11-24): the tool stays unchanged; pages pass the balance without the `Total` column; documented in `outils-fmi/README.md` and on page 13 (callout « Choix retenu »). Renato reports it to Achille Pegoue.
+- The plan's sample imbalance (supply 24 197.846 PJ, use 24 386.288 PJ) comes from the default CM, which has rows for the `Total` column on the four non-energy flows. Non-energy use is counted twice. Dropping the `Total` column from the balance range gives supply = use = 24 009.40 PJ. Decision (Renato, 2026-11-24): the tool stays unchanged; the pipeline passes the balance without the `Total` column; documented in `imf-tools/README.md` and in script 13. Renato reports it to Achille Pegoue.
 - With filter `'  o/w Statistical differences'`, the statistical difference is counted twice (once in the main table, once in the appended block).
 - Road transport goes entirely to H; no household split. Solar thermal production goes to D.
 - pandas must be < 3 (`fillna('Zachille_')` on a float column fails under pandas 3).

@@ -1,0 +1,10 @@
+flow,product,iea_flow,iea_product,iea_sign,rationale_en,rationale_fr
+BUNKERS,JETFUEL,International aviation bunkers,,-1,Jet fuel in bunkers supplies international aviation; the other bunker products go to international navigation.,Le carburéacteur des soutes alimente l'aviation internationale ; les autres produits des soutes vont à la navigation internationale.
+TRF_PROD,WIND,Main activity producer electricity plants (transf.),,1,"ONEM moves wind generation to electricity through the line of transfers between products. In the IEA format, it is an input to power plants.","L'ONEM transfère la production éolienne vers l'électricité par la ligne des échanges entre produits. Dans le format de l'AIE, c'est une entrée des centrales électriques."
+TRF_PROD,SOLARPV,Main activity producer electricity plants (transf.),,1,Same treatment as wind for solar photovoltaics.,Même traitement que l'éolien pour le solaire photovoltaïque.
+TRF_PROD,HYDRO,Main activity producer electricity plants (transf.),,1,Same treatment as wind for hydro.,Même traitement que l'éolien pour l'hydraulique.
+TRF_PROD,ELEC,Main activity producer electricity plants (transf.),,1,"Electricity generated from wind, solar photovoltaics and hydro: output of power plants.","Électricité produite à partir de l'éolien, du solaire photovoltaïque et de l'hydraulique : sortie des centrales électriques."
+TO_CHARCOAL,BIOMASS,,Charcoal,1,The output of charcoal kilns is charcoal. The ONEM balance records it in the biomass column.,La sortie des charbonnières est du charbon de bois. Le bilan de l'ONEM la range dans la colonne de la biomasse.
+OWNUSE,ELEC,"Own use in electricity, CHP and heat plants (energy)",,-1,Electricity used by power plants.,Électricité consommée par les centrales.
+OWNUSE,REFGAS,Oil refineries (energy),,-1,Refinery gas used by the refinery that produces it.,Gaz de raffinerie consommé par la raffinerie qui le produit.
+OWNUSE,FUELOIL,Oil refineries (energy),,-1,Fuel oil used by the refinery (assumption).,Fioul consommé par la raffinerie (hypothèse).

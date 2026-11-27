@@ -1,0 +1,69 @@
+---
+title: "Téléchargements"
+subtitle: "Les comptes en Excel et les tableaux qui sous-tendent chaque graphique"
+toc: false
+---
+
+Les trois versions linguistiques de chaque classeur contiennent les mêmes chiffres ; seuls les libellés changent. Les classeurs arabes se lisent de droite à gauche. Les comptes sont provisoires : les hypothèses de répartition sont décrites dans les documents.
+
+:::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### Comptes physiques des flux d'énergie, 2015 à 2022
+
+Tableaux des ressources et des emplois d'énergie par branche des comptes nationaux et pour les ménages, en térajoules, pour chaque année ; les mêmes tableaux par section de la CITI ; un tableau long de toutes les années ; et des indicateurs d'utilisation et d'intensité énergétique.
+
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/fr/pefa_accounts.xlsx){.btn .btn-primary download="pefa_accounts.xlsx"}
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/en/pefa_accounts.xlsx){.btn .btn-outline-primary download="pefa_accounts.xlsx"}
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/ar/pefa_accounts.xlsx){.btn .btn-outline-primary download="pefa_accounts.xlsx"}
+
+[Méthodes et résultats](documents/energy-accounts/index.qmd)
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### Comptes des émissions atmosphériques, 2015 à 2022
+
+Émissions de gaz à effet de serre par branche et par les ménages, par gaz, en kilotonnes d'équivalent CO2 ; le tableau de passage à l'inventaire national ; les émissions par catégorie de l'inventaire et par activité ; et des intensités d'émission.
+
+[Français](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/fr/aea_accounts.xlsx){.btn .btn-primary download="aea_accounts.xlsx"}
+[English](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/en/aea_accounts.xlsx){.btn .btn-outline-primary download="aea_accounts.xlsx"}
+[العربية](https://github.com/renatovargas/tun-pefa-aea/raw/main/data/outputs/accounts/ar/aea_accounts.xlsx){.btn .btn-outline-primary download="aea_accounts.xlsx"}
+
+[Méthodes et résultats](documents/emissions-accounts/index.qmd)
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### Tableaux pour l'analyse
+
+Tous les tableaux lus par les documents et l'explorateur de données, en CSV et en Parquet, avec les codes seulement. Les libellés en anglais, en français et en arabe de chaque code sont dans un dossier distinct.
+
+[Tableaux](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/outputs/tables){.btn .btn-primary}
+[Libellés](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/outputs/labels){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100 .shadow-sm .download-card}
+::: {.card-body}
+### Code et tables de correspondance
+
+Les scripts qui compilent les comptes, et les tables de correspondance qui contiennent chaque correspondance et chaque choix de répartition, avec sa raison.
+
+[Scripts](https://github.com/renatovargas/tun-pefa-aea/tree/main/scripts){.btn .btn-primary}
+[Tables de correspondance](https://github.com/renatovargas/tun-pefa-aea/tree/main/data/lookups){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::::

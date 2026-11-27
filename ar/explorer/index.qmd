@@ -1,0 +1,183 @@
+---
+title: "مستكشف البيانات"
+subtitle: "استخدام الطاقة وانبعاثات غازات الاحتباس الحراري حسب النشاط والمنتج والغاز والسنة"
+toc: false
+page-layout: full
+execute:
+  echo: false
+  warning: false
+---
+
+```{python}
+#| label: data
+import sys
+sys.path.insert(0, "scripts/report")
+from doc_helpers import *
+import polars as pl
+setup("ar")
+
+# كلمات الصفحة. لا يُترجم إلا هذا القاموس، والشيفرة أدناه هي نفسها في كل اللغات.
+UI = {
+    "year": "السنة", "activity": "النشاط", "pj": "بيتاجول", "kt": "ألف طن مكافئ CO2", "share": "الحصة من المجموع",
+    "energy_title": "الاستخدام النهائي للطاقة لأغراض طاقوية، حسب المستخدم والمنتج",
+    "energy_series": "الاستخدام النهائي للطاقة للنشاط المختار، حسب المنتج",
+    "emissions_title": "انبعاثات غازات الاحتباس الحراري حسب النشاط والغاز",
+    "emissions_series": "انبعاثات النشاط المختار، حسب الغاز",
+    "intensity_title": "الكثافة الطاقوية وكثافة الانبعاث للقيمة المضافة، حسب الفرع (مقاييس لوغاريتمية)",
+    "intensity_x": "تيراجول لكل مليون دينار من القيمة المضافة", "intensity_y": "طن مكافئ CO2 لكل مليون دينار من القيمة المضافة",
+    "intensity_note": "كل نقطة فرع، وحجمها قيمته المضافة. مرر المؤشر فوق نقطة لترى اسمها وقيمها.",
+    "click": "اختر نشاطًا من القائمة لترى سلسلته.",
+    "class_activities": "أنشطة الحسابات", "class_balance": "من ميزان الطاقة إلى الأنشطة",
+    "class_crt": "من فئات الجرد إلى الأنشطة",
+    "code": "الرمز", "label": "التسمية", "section": "باب التصنيف الصناعي الدولي", "flow": "تدفق نموذج الوكالة الدولية للطاقة", "product": "المنتج",
+    "method": "الطريقة", "key": "المفتاح", "reason": "السبب", "prefix": "بادئة CRT",
+}
+
+acts = [c for c in lab("activities") if c not in ("ROW", "ACC", "ENV", "STATDIFF")]
+names = {c: activity(c) for c in acts}
+energy = (read("pefa_supply_use")
+          .filter(pl.col("quadrant") == "Use", pl.col("level2") == "End-use of energy products by SIEC class:",
+                  pl.col("product") != "End-use of energy products for non-energy purposes", pl.col("activity").is_in(acts))
+          .group_by("year", "activity", "product").agg((pl.col("tj").sum() / 1000).alias("value"))
+          .with_columns(name=pl.col("activity").replace_strict(names), group=pl.col("product").replace_strict(lab("pefa_rows")),
+                        color_key=pl.col("product")))
+emissions = (read("aea_emissions").filter(pl.col("activity").is_in(acts), pl.col("gas").is_in(["CO2", "CH4", "N2O", "F-gases"]))
+             .group_by("year", "activity", "gas").agg(pl.col("kt_co2_eq").sum().alias("value"))
+             .with_columns(name=pl.col("activity").replace_strict(names), group=pl.col("gas").replace_strict(lab("gases")),
+                           color_key=pl.col("gas")))
+intensity = (read("pefa_indicators").select("year", "activity", "intensity_value_added", "value_added_mtnd")
+             .join(read("aea_indicators").select("year", "activity", "ghg_intensity_value_added"), on=["year", "activity"])
+             .filter(pl.col("activity") != "HH", pl.col("value_added_mtnd") > 0)
+             .with_columns(name=pl.col("activity").replace_strict(names), section=pl.col("activity").replace_strict(
+                 dict(lookup("activities").select("code", "imf_section").iter_rows()))))
+classes = lookup("activities").filter(pl.col("code").is_in(acts)).select(
+    pl.col("code"), pl.col(LANG).alias("label"), pl.col("imf_section").alias("section"))
+balance_rules = lookup("balance_to_activities").with_columns(name=pl.col("activity").replace_strict(names, default=pl.col("activity"))).select(
+    "iea_flow", pl.col("iea_product").fill_null(""), "activity", "name", "method", pl.col("key_product").fill_null(""),
+    pl.col("rationale_fr" if LANG == "fr" else "rationale_en").alias("reason"))
+crt_rules = lookup("crt_to_activities").with_columns(name=pl.col("activity").replace_strict(names, default=pl.col("activity"))).select(
+    "prefix", pl.col("activity").fill_null(""), pl.col("name").fill_null(""), "method", pl.col("key").fill_null(""),
+    pl.col("rationale_fr" if LANG == "fr" else "rationale_en").alias("reason"))
+colors = {**{L("pefa_rows", k): v for k, v in PRODUCT_COLORS.items()}, **{L("gases", k): v for k, v in GAS_COLORS.items()}}
+section_colors = SECTION_COLORS
+years = sorted(energy["year"].unique().to_list())
+ojs_define(energy=energy.to_pandas(), emissions=emissions.to_pandas(), intensity=intensity.to_pandas(), classes=classes.to_pandas(),
+           balance_rules=balance_rules.to_pandas(), crt_rules=crt_rules.to_pandas(), UI=UI, colors=colors,
+           section_colors=section_colors, years=years, names=names, rtl=(LANG == "ar"))
+```
+
+```{ojs}
+//| echo: false
+E = transpose(energy)
+M = transpose(emissions)
+I = transpose(intensity)
+domain = Object.keys(colors)
+range = Object.values(colors)
+viewof year = Inputs.range([years[0], years[years.length - 1]], {step: 1, value: years[years.length - 1], label: UI.year})
+```
+
+::: {.panel-tabset}
+
+## الطاقة
+
+```{ojs}
+//| echo: false
+energyYear = E.filter(d => d.year === year)
+energyOrder = d3.groupSort(energyYear, v => -d3.sum(v, d => d.value), d => d.name)
+Plot.plot({
+  title: `${UI.energy_title}, ${year} (${UI.pj})`,
+  marginLeft: rtl ? 10 : 260, marginRight: rtl ? 260 : 40, width: 1000, height: 560,
+  x: {label: UI.pj, grid: true, reverse: rtl},
+  y: {label: null, domain: energyOrder, axis: rtl ? "right" : "left", tickFormat: t => t.length > 40 ? t.slice(0, 39) + "…" : t},
+  color: {domain, range, legend: true},
+  marks: [
+    Plot.barX(energyYear, Plot.stackX({x: "value", y: "name", fill: "group", inset: 0.5, tip: {format: {x: d => d.toFixed(1)}}})),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+viewof energyActivity = Inputs.select(energyOrder, {label: UI.activity, value: energyOrder[0]})
+Plot.plot({
+  title: `${UI.energy_series} (${UI.pj})`, width: 1000, height: 300, marginLeft: 50,
+  x: {label: null, tickFormat: "d", ticks: years.length}, y: {label: UI.pj, grid: true},
+  color: {domain, range, legend: true},
+  marks: [Plot.barY(E.filter(d => d.name === energyActivity), Plot.stackY({x: "year", y: "value", fill: "group", inset: 1, tip: true})), Plot.ruleY([0])]
+})
+```
+
+## الانبعاثات
+
+```{ojs}
+//| echo: false
+emissionsYear = M.filter(d => d.year === year)
+emissionsOrder = d3.groupSort(emissionsYear, v => -d3.sum(v, d => d.value), d => d.name)
+Plot.plot({
+  title: `${UI.emissions_title}, ${year} (${UI.kt})`,
+  marginLeft: rtl ? 10 : 260, marginRight: rtl ? 260 : 40, width: 1000, height: 560,
+  x: {label: UI.kt, grid: true, reverse: rtl},
+  y: {label: null, domain: emissionsOrder, axis: rtl ? "right" : "left", tickFormat: t => t.length > 40 ? t.slice(0, 39) + "…" : t},
+  color: {domain, range, legend: true},
+  marks: [
+    Plot.barX(emissionsYear, Plot.stackX({x: "value", y: "name", fill: "group", inset: 0.5, tip: {format: {x: d => d.toFixed(0)}}})),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+viewof emissionsActivity = Inputs.select(emissionsOrder, {label: UI.activity, value: emissionsOrder[0]})
+Plot.plot({
+  title: `${UI.emissions_series} (${UI.kt})`, width: 1000, height: 300, marginLeft: 60,
+  x: {label: null, tickFormat: "d", ticks: years.length}, y: {label: UI.kt, grid: true},
+  color: {domain, range, legend: true},
+  marks: [Plot.barY(M.filter(d => d.name === emissionsActivity), Plot.stackY({x: "year", y: "value", fill: "group", inset: 1, tip: true})), Plot.ruleY([0])]
+})
+```
+
+## الكثافات
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  title: `${UI.intensity_title}, ${year}`, subtitle: UI.intensity_note, width: 1000, height: 560, marginLeft: 60,
+  x: {type: "log", label: UI.intensity_x, grid: true}, y: {type: "log", label: UI.intensity_y, grid: true},
+  r: {range: [3, 22]},
+  color: {domain: Object.keys(section_colors), range: Object.values(section_colors)},
+  marks: [
+    Plot.dot(I.filter(d => d.year === year && d.intensity_value_added > 0 && d.ghg_intensity_value_added > 0),
+      {x: "intensity_value_added", y: "ghg_intensity_value_added", r: "value_added_mtnd", fill: "section", fillOpacity: 0.75,
+       stroke: "white", tip: {channels: {name: "name"}, format: {x: d => d.toFixed(2), y: d => d.toFixed(0), r: d => d.toFixed(0)}}}),
+    Plot.text(I.filter(d => d.year === year && (d.intensity_value_added > 6 || d.ghg_intensity_value_added > 1500)),
+      {x: "intensity_value_added", y: "ghg_intensity_value_added", text: d => d.name.length > 30 ? d.name.slice(0, 29) + "…" : d.name,
+       dx: 8, textAnchor: "start", fontSize: 10, fill: "#666"})
+  ]
+})
+```
+
+## التصنيفات
+
+```{ojs}
+//| echo: false
+md`### ${UI.class_activities}`
+Inputs.table(transpose(classes), {header: {code: UI.code, label: UI.label, section: UI.section}, rows: 25, layout: "auto"})
+```
+
+```{ojs}
+//| echo: false
+md`### ${UI.class_balance}`
+Inputs.table(transpose(balance_rules), {header: {iea_flow: UI.flow, iea_product: UI.product, activity: UI.code, name: UI.activity,
+  method: UI.method, key_product: UI.key, reason: UI.reason}, rows: 15, layout: "auto"})
+```
+
+```{ojs}
+//| echo: false
+md`### ${UI.class_crt}`
+Inputs.table(transpose(crt_rules), {header: {prefix: UI.prefix, activity: UI.code, name: UI.activity, method: UI.method,
+  key: UI.key, reason: UI.reason}, rows: 15, layout: "auto"})
+```
+
+:::

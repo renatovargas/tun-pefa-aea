@@ -1,0 +1,4 @@
+script,check,value,tolerance,unit,passed,description
+03_extract_supply_use_tables,supply_total,0.6859179120000363,1.0,million TND,true,Largest gap between total supply and the sum of supply items
+03_extract_supply_use_tables,supply_equals_use,0.076611882999714,1.0,million TND,true,"Largest gap between total supply and the sum of uses, by product"
+03_extract_supply_use_tables,output_identity,0.03921697700002369,1.0,million TND,true,Largest gap in output = intermediate consumption + value added

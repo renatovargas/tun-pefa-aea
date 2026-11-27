@@ -1,0 +1,25 @@
+code,parent,level,iea_product,en,fr,ar,to_review
+TOTAL,,0,,Total all products,Total tous produits,مجموع كل المنتجات,yes
+CRUDE,TOTAL,1,Crude oil,Crude oil,Pétrole brut,النفط الخام,yes
+NGL,TOTAL,1,Natural gas liquids,Natural gas liquids,Liquides de gaz naturel,سوائل الغاز الطبيعي,yes
+OILPROD,TOTAL,1,,Oil products,Produits pétroliers,المنتجات النفطية,yes
+REFGAS,OILPROD,2,Refinery gas,Refinery gas,Gaz de raffinerie,غاز المصافي,yes
+LPG,OILPROD,2,Liquefied petroleum gases (LPG),LPG,GPL,غاز النفط المسال,yes
+GASOLINE,OILPROD,2,Motor gasoline excl. biofuels,Motor gasoline,Essences,البنزين,yes
+KEROSENE,OILPROD,2,Other kerosene,Kerosene,Pétrole lampant,الكيروسين,yes
+JETFUEL,OILPROD,2,Kerosene type jet fuel excl. biofuels,Jet fuel,Carburéacteurs,وقود الطائرات,yes
+NAPHTHA,OILPROD,2,Naphtha,Naphtha,Naphta,النافتا,yes
+GASOIL,OILPROD,2,Gas/diesel oil excl. biofuels,Gas/diesel oil,Gasoil,الغازوال,yes
+FUELOIL,OILPROD,2,Fuel oil,Fuel oil,Fioul lourd,زيت الوقود الثقيل,yes
+PETCOKE,OILPROD,2,Petroleum coke,Petroleum coke,Coke de pétrole,فحم الكوك البترولي,yes
+OTHOIL,OILPROD,2,Other oil products,Other oil products,Autres produits pétroliers,منتجات نفطية أخرى,yes
+NATGAS,TOTAL,1,Natural gas,Natural gas,Gaz naturel,الغاز الطبيعي,yes
+RENEW,TOTAL,1,,Renewable energy,Énergies renouvelables,الطاقات المتجددة,yes
+SOLARTH,RENEW,2,Solar thermal,Solar thermal,Solaire thermique,الطاقة الشمسية الحرارية,yes
+SOLARPV,RENEW,2,Solar photovoltaics,Solar photovoltaic,Solaire photovoltaïque,الطاقة الشمسية الكهروضوئية,yes
+GEOTHERM,RENEW,2,Geothermal,Geothermal,Géothermie,الطاقة الحرارية الجوفية,yes
+BIOMASS,RENEW,2,Primary solid biofuels,Biomass,Biomasse,الكتلة الحيوية,yes
+WIND,RENEW,2,Wind,Wind energy,Énergie éolienne,طاقة الرياح,yes
+HYDRO,RENEW,2,Hydro,Hydropower,Énergie hydraulique,الطاقة الكهرومائية,yes
+HEAT,TOTAL,1,Heat,Heat,Chaleur,الحرارة,yes
+ELEC,TOTAL,1,Electricity,Electricity,Électricité,الكهرباء,yes

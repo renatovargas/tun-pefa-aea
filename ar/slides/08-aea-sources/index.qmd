@@ -1,0 +1,76 @@
+---
+title: "حسابات الانبعاثات: المؤسسات والمصادر"
+subtitle: "جرد غازات الاحتباس الحراري نقطة انطلاق"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-09"
+date-format: long
+lang: ar-TN
+dir: rtl
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-ar.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "حسابات الطاقة والانبعاثات في تونس"
+    slide-number: true
+    rtl: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+```{python}
+inv = read("ghg_inventory")
+by_scope = inv.filter(pl.col("year") == LAST).group_by("scope").agg(pl.col("kt_co2_eq").sum())
+s = dict(by_scope.iter_rows())
+```
+
+## الجرد {.theme-content}
+
+- تنسقه الوكالة الوطنية للتحكم في الطاقة (الطاقة، العمليات الصناعية)، ووزارة الفلاحة (الفلاحة، استخدام الأراضي)، والديوان الوطني للتطهير (النفايات) [@besbes2026].
+- المبادئ التوجيهية للهيئة لسنة 2006، وإمكانات الاحترار في التقرير الخامس، والإبلاغ بصيغة CRT [@ipcc2006].
+- في `{python} LAST`: **`{python} mt(s["inventory"])` مليون طن مكافئ CO2** دون استخدام الأراضي، وبالوعة صافية قدرها `{python} mt(s["lulucf"])` مليون طن لاستخدام الأراضي.
+
+## ما تأخذه الحسابات من الجرد
+
+```{python}
+#| fig-width: 9
+#| fig-height: 3.8
+charts.emissions_by_gas(figsize=(9, 3.8))
+```
+
+## ملفا المدخلات
+
+| الملف | المحتوى | الاستخدام |
+|:--|:--|:--|
+| مصنفات CRT (`Data`، `Summary2`) | كل الفئات والأنواع من الوقود والغازات، بآلاف الأطنان والتيراجول | الحسابات |
+| `Tunisia_UNFCCC.xlsx` | الفئات الرئيسية، بآلاف الأطنان من كل غاز | تحقق متقاطع |
+
+تتطابق مجاميع القطاعات في الملفين في حدود `{python} num(check("20_prepare_ghg_inventory", "prepared_file_sectors")["value"], 3)` ألف طن.
+
+## النطاق
+
+- **داخل الحسابات**: ثاني أكسيد الكربون والميثان وأكسيد النيتروز والغازات المفلورة في القطاعات 1 و2 و3 و5.
+- **خارجها، في جدول الربط**: استخدام الأراضي وتغيير استخدامها والحراجة (القطاع 4).
+- **بنود تذكيرية**: المستودعات الدولية (1.D) وثاني أكسيد الكربون من الكتلة الحيوية.
+
+## نقاط للنقاش
+
+- كيف يتلقى المعهد الوطني للإحصاء مصنفات CRT كل سنة، ومتى؟
+- أكسيد النيتروز في الفئة 1.B.2.b.ii ابتداء من 2019: موجود في `Data` وغائب عن `Summary2`.
+- مراجعة `Tunisia_UNFCCC.xlsx` (الوحدة، الرمز «N20»، الفئات الفرعية الناقصة، الغازات المفلورة) إذا كان سيعاد استخدامه.
+- ملوثات الهواء (ثاني أكسيد الكبريت، أكاسيد النيتروجين، الجسيمات): هل هناك خطط لتقديرها؟
+
+## المراجع
+
+::: {#refs}
+:::

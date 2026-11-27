@@ -1,0 +1,4 @@
+script,check,value,tolerance,unit,passed,description
+21_build_conversion_matrix,all_codes_have_rule,0.0,0.0,codes,true,Tool codes without a rule in crt_to_activities.csv
+21_build_conversion_matrix,factors_sum_to_one,1.1102230246251565e-16,1e-9,share,true,Factors of each code add up to one
+21_build_conversion_matrix,known_activities,0.0,0.0,activities,true,Activities of the matrix missing from data/lookups/activities.csv

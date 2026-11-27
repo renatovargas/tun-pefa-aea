@@ -1,0 +1,48 @@
+code,parent,sign,level,iea_flow,iea_sign,en,fr,ar,to_review
+PROD,GIC,1,1,Production,1,Primary production,Production primaire,الإنتاج الأولي,yes
+IMP,GIC,1,1,Imports,1,Imports,Importations,الواردات,yes
+STOCK,GIC,1,1,Stock changes,1,Stock changes,Variation des stocks,التغير في المخزون,yes
+EXP,GIC,-1,1,Exports,-1,Exports,Exportations,الصادرات,yes
+BUNKERS,GIC,-1,1,International marine bunkers,-1,International bunkers,Soutes internationales,وقود السفن والطائرات الدولية,yes
+GIC,,1,0,,,Gross inland consumption,Consommation intérieure brute,الاستهلاك الداخلي الخام,yes
+TI,,1,0,,,Transformation inputs,Entrées en transformation,مدخلات التحويل,yes
+TI_MAINPLANT,TI,1,1,Main activity producer electricity plants (transf.),-1,Main activity thermal power plants,Centrales thermiques : activité principale,محطات حرارية: نشاط رئيسي,yes
+TI_AUTOPLANT,TI,1,1,Autoproducer electricity plants (transf.),-1,Autoproducer thermal power plants,Centrales thermiques : autoproduction,محطات حرارية: إنتاج ذاتي,yes
+TI_REFINERY,TI,1,1,Oil refineries (transf.),-1,Refineries,Raffineries,المصافي,yes
+TI_CHARCOAL,TI,1,1,Charcoal production plants (transf.),-1,Charcoal production,Production de charbon de bois,إنتاج الفحم الخشبي,yes
+TO,,1,0,,,Transformation outputs,Sorties de transformation,مخرجات التحويل,yes
+TO_MAINPLANT,TO,1,1,Main activity producer electricity plants (transf.),1,Main activity thermal power plants,Centrales thermiques : activité principale,محطات حرارية: نشاط رئيسي,yes
+TO_AUTOPLANT,TO,1,1,Autoproducer electricity plants (transf.),1,Autoproducer thermal power plants,Centrales thermiques : autoproduction,محطات حرارية: إنتاج ذاتي,yes
+TO_REFINERY,TO,1,1,Oil refineries (transf.),1,Refineries,Raffineries,المصافي,yes
+TO_CHARCOAL,TO,1,1,Charcoal production plants (transf.),1,Charcoal production,Production de charbon de bois,إنتاج الفحم الخشبي,yes
+TRF,,1,0,,,"Exchanges, transfers, returns","Échanges, transferts, restitutions",التبادلات والتحويلات والمرتجعات,yes
+TRF_PROD,TRF,1,1,Transfers,1,Interproduct transfers,Échanges entre produits,التبادلات بين المنتجات,yes
+TRF_TRANSF,TRF,1,1,Transfers,1,Products transferred,Produits transférés,المنتجات المحولة,yes
+TRF_PETCHEM,TRF,1,1,Transfers,1,Returns from petrochemical industry,Restitutions de la pétrochimie,مرتجعات البتروكيمياء,yes
+OWNUSE,,1,0,Oil and gas extraction (energy),-1,Energy industry own use,Consommation de la branche énergie,استهلاك قطاع الطاقة,yes
+LOSSES,,1,0,Losses,-1,Losses,Pertes,الخسائر,yes
+AVAIL,,1,0,,,Available for final consumption,Disponible pour la consommation finale,المتاح للاستهلاك النهائي,yes
+NEU,AVAIL,1,1,,,Non-energy final consumption,Consommation finale non énergétique,الاستهلاك النهائي غير الطاقوي,yes
+NEU_CHEM,NEU,1,2,Non-energy use industry/transformation/energy,1,Chemicals,Chimie,الكيمياء,yes
+NEU_OTHER,NEU,1,2,Non-energy use industry/transformation/energy,1,Other,Autres,أخرى,yes
+FEC,AVAIL,1,1,,,Final energy consumption,Consommation finale énergétique,الاستهلاك النهائي للطاقة,yes
+IND,FEC,1,2,,,Industry,Industrie,الصناعة,yes
+IND_METAL,IND,1,3,Iron and steel,1,Basic metals including iron and steel,Fabrications métalliques y compris sidérurgie,الصناعات المعدنية بما فيها الحديد والصلب,yes
+IND_CHEM,IND,1,3,Chemical and petrochemical,1,Chemicals,Chimie,الكيمياء,yes
+IND_NONMET,IND,1,3,Non-metallic minerals,1,Non-metallic minerals,Produits minéraux non métalliques,المنتجات المعدنية غير الفلزية,yes
+IND_MINING,IND,1,3,Mining and quarrying,1,Mining and quarrying,Extraction,الاستخراج,yes
+IND_FOOD,IND,1,3,Food and tobacco,1,"Food, beverages and tobacco","Alimentation, boissons, tabac",الأغذية والمشروبات والتبغ,yes
+IND_TEXTILE,IND,1,3,Textile and leather,1,"Textiles, leather and clothing","Textiles, cuir, habillement",النسيج والجلود والملابس,yes
+IND_PAPER,IND,1,3,"Paper, pulp and print",1,Paper and printing,Papier et imprimerie,الورق والطباعة,yes
+IND_MACH,IND,1,3,Machinery,1,Machinery and electrical equipment,Fabrications mécaniques et électriques,الصناعات الميكانيكية والكهربائية,yes
+IND_OTHER,IND,1,3,Non-specified (industry),1,Other industries,Autres industries,صناعات أخرى,yes
+TRA,FEC,1,2,,,Transport,Transport,النقل,yes
+TRA_RAIL,TRA,1,3,Rail,1,Rail,Transport ferroviaire,النقل بالسكك الحديدية,yes
+TRA_ROAD,TRA,1,3,Road,1,Road,Transport routier,النقل البري,yes
+TRA_AIR,TRA,1,3,Domestic aviation,1,Domestic aviation,Transport aérien,النقل الجوي,yes
+TRA_PIPE,TRA,1,3,Pipeline transport,1,Pipeline transport,Transport par conduites,النقل عبر الأنابيب,yes
+OTH,FEC,1,2,,,"Households, commerce, public administration, etc.","Foyers domestiques, commerce, administration, etc.",الأسر والتجارة والإدارة وغيرها,yes
+OTH_RES,OTH,1,3,Residential,1,Households,Foyers domestiques,الأسر,yes
+OTH_COM,OTH,1,3,Commercial and public services,1,"Commerce, public administration, hotels, etc.","Commerce, administration, hôtels, etc.",التجارة والإدارة والفنادق وغيرها,yes
+OTH_AGR,OTH,1,3,Agriculture/forestry,1,Agriculture and fishing,Agriculture et pêche,الفلاحة والصيد البحري,yes
+STATDIFF,AVAIL,1,1,Statistical differences,-1,Statistical difference,Écart statistique,الفارق الإحصائي,yes

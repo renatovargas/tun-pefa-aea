@@ -1,0 +1,30 @@
+code,imf_section,en,fr,ar
+01,A,"Agriculture, forestry and fishing","Agriculture, sylviculture et pêche",الفلاحة والغابات والصيد البحري
+06,B,Extraction of crude petroleum and natural gas,Extraction de pétrole et de gaz naturel,استخراج النفط والغاز الطبيعي
+07,B,Other mining and quarrying,Industries extractives hors hydrocarbures,الصناعات الاستخراجية خارج المحروقات
+10,C,Food industries,Industries agro-alimentaires,الصناعات الغذائية
+13,C,"Textiles, clothing and leather","Industries du textile, de l'habillement et du cuir",صناعات النسيج والملابس والجلود
+19,C,Petroleum refining,Raffinage du pétrole,تكرير النفط
+20,C,Chemical industries,Industries chimiques,الصناعات الكيميائية
+23,C,Non-metallic mineral products,Industries des matériaux de construction,صناعات مواد البناء
+24,C,Mechanical and electrical industries,Industries mécaniques et électriques,الصناعات الميكانيكية والكهربائية
+16,C,Miscellaneous industries,Industries diverses,الصناعات المختلفة
+35,D,Electricity and gas supply,Production et distribution d'électricité et de gaz,إنتاج وتوزيع الكهرباء والغاز
+36,E,"Water supply, sewerage and waste management","Distribution d'eau, assainissement et gestion des déchets",توزيع المياه والتطهير وإدارة النفايات
+41,F,Construction,Construction,البناء
+45,Other,Trade and repair,Commerce et réparation,التجارة والإصلاح
+49,H,Transport and storage,Transport et entreposage,النقل والتخزين
+55,Other,Accommodation and food services,Hébergement et restauration,الإيواء والمطاعم
+60,Other,Information and communication,Information et communication,الإعلام والاتصال
+64,Other,Financial and insurance activities,Activités financières et d'assurance,الأنشطة المالية والتأمين
+84,Other,Public administration and defence,Administration publique et défense,الإدارة العمومية والدفاع
+85,Other,Education,Enseignement,التعليم
+86,Other,Human health and social work,Santé humaine et action sociale,الصحة والعمل الاجتماعي
+77,Other,Other market services,Autres services marchands,خدمات سوقية أخرى
+97,Other,Domestic services,Services domestiques,الخدمات المنزلية
+94,Other,Activities of membership organisations,Activités des organisations associatives,أنشطة المنظمات الجمعياتية
+HH,HH,Households,Ménages,الأسر
+ROW,ROW,Rest of the world,Reste du monde,بقية العالم
+ACC,ACC,Accumulation,Accumulation,التراكم
+ENV,ENV,Environment,Environnement,البيئة
+STATDIFF,STATDIFF,Statistical difference,Écart statistique,الفارق الإحصائي

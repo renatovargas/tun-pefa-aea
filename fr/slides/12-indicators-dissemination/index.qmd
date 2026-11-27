@@ -1,0 +1,81 @@
+---
+title: "Formats de diffusion et indicateurs"
+subtitle: "Transformer les comptes en information pour les utilisateurs"
+author:
+  - name: Renato Vargas
+  - name: Achille Pegoue
+date: "2026-12-10"
+date-format: long
+lang: fr-FR
+bibliography: ../../../assets/references.bib
+csl: ../../../assets/apa-fr.csl
+execute:
+  echo: false
+  warning: false
+format:
+  revealjs:
+    theme: [simple, ../../../assets/slides.scss]
+    footer: "Comptes de l'énergie et des émissions de la Tunisie"
+    slide-number: true
+    width: 1100
+    height: 700
+    title-slide-attributes:
+      class: theme-title
+      data-state: sans-pied
+---
+
+{{< include ../_setup.qmd >}}
+
+## Qui utilise les comptes {.theme-content}
+
+- **Politiques de l'énergie et du climat** : quelles branches tirent la demande et les émissions.
+- **Planification économique** : contenu en énergie et en émissions de la croissance.
+- **Modélisation** : les modèles entrées-sorties et d'équilibre général ont besoin de l'énergie et des émissions par branche.
+- **Déclarations internationales** : formats du SCEE, d'Eurostat et de l'OCDE.
+
+## Indicateurs de base
+
+| Indicateur | Compte | Unité |
+|:--|:--|:--|
+| Utilisation intérieure nette d'énergie | PEFA | PJ |
+| Intensité énergétique de la valeur ajoutée | PEFA + TRE | TJ par million de TND |
+| Énergie des ménages par unité de dépense | PEFA + TRE | TJ par million de TND |
+| Émissions par branche et par gaz | AEA | kt éq. CO2 |
+| Intensité d'émission de la valeur ajoutée | AEA + TRE | t éq. CO2 par million de TND |
+| Émissions des ménages par unité de dépense | AEA + TRE | t éq. CO2 par million de TND |
+
+## Énergie et émissions évoluent ensemble
+
+```{python}
+#| fig-width: 10
+#| fig-height: 4.6
+import matplotlib.pyplot as plt
+e = read("pefa_indicators").filter(pl.col("year") == LAST, pl.col("activity") != "HH").select("activity", "intensity_value_added")
+g = read("aea_indicators").filter(pl.col("year") == LAST, pl.col("activity") != "HH").select("activity", "ghg_intensity_value_added")
+d = e.join(g, on="activity").drop_nulls()
+fig, ax = plt.subplots(figsize=(10, 4.6))
+ax.scatter(d["intensity_value_added"], d["ghg_intensity_value_added"], color=IMF_BLUE, s=36, zorder=3)
+for a, x, y in d.iter_rows():
+    if x > 5 or y > 1000:
+        ax.annotate(activity(a)[:28], (x, y), xytext=(4, 2), textcoords="offset points", fontsize=8, color=INK2)
+ax.set_xscale("log"); ax.set_yscale("log")
+ax.set_xlabel(L("terms", "chart_tj_per_mtnd")); ax.set_ylabel(L("terms", "chart_t_per_mtnd"))
+fig.tight_layout(); plt.close(fig); fig
+```
+
+## Formats
+
+- **Tableaux** : tableaux des ressources et des emplois, comptes par activité et par gaz, tableaux de passage, indicateurs.
+- **Classeurs** en trois langues, produits par le même code.
+- **Documents** dont le texte lit les données, et graphiques **interactifs** sur le web.
+- **Données ouvertes** : CSV et Parquet avec des codes stables et des tables de libellés séparées.
+
+## L'explorateur de données
+
+Graphiques interactifs par année, branche, produit et gaz, sur le site, rubrique *Explorateur de données*.
+
+## Points à discuter
+
+- Quels indicateurs dans les publications de l'INS, et lesquels dans une publication dédiée ?
+- Calendrier : les comptes de l'année *t* dès que le bilan, l'inventaire et le TRE de *t* sont disponibles.
+- Métadonnées et notes de révision.
