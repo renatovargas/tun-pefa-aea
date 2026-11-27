@@ -14,7 +14,7 @@ page-layout: article
 
 Comptes physiques des flux d'énergie et comptes des émissions atmosphériques de la Tunisie.
 
-[Entrer](fr/index.qmd){.btn .btn-primary}
+[Entrer](fr/index.html){.btn .btn-primary}
 :::
 :::
 :::
@@ -26,7 +26,7 @@ Comptes physiques des flux d'énergie et comptes des émissions atmosphériques 
 
 Physical energy flow accounts and air emissions accounts for Tunisia.
 
-[Enter](en/index.qmd){.btn .btn-primary}
+[Enter](en/index.html){.btn .btn-primary}
 :::
 :::
 :::
@@ -38,7 +38,7 @@ Physical energy flow accounts and air emissions accounts for Tunisia.
 
 حسابات التدفقات المادية للطاقة وحسابات انبعاثات الهواء في تونس.
 
-[دخول](ar/index.qmd){.btn .btn-primary}
+[دخول](ar/index.html){.btn .btn-primary}
 :::
 :::
 :::

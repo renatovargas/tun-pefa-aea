@@ -209,7 +209,10 @@ def sankey(nodes: list[str], colors: list[str], links: list[tuple[int, int, floa
         link=dict(source=[s for s, _, _, _ in links], target=[t for _, t, _, _ in links], value=[v for _, _, v, _ in links],
                   color=[c for _, _, _, c in links], hovertemplate="%{source.label} → %{target.label}: %{value:,.1f} " + unit + "<extra></extra>"),
     ))
-    fig.update_layout(height=height, width=820, margin=dict(l=10, r=10, t=10, b=10),
+    # Full text width on the website; a fixed width for the static image of the PDF.
+    # Toute la largeur du texte sur le site ; une largeur fixe pour l'image du PDF.
+    width = None if output_format() in ("html", "revealjs") else 820
+    fig.update_layout(height=height, width=width, autosize=width is None, margin=dict(l=10, r=10, t=10, b=10),
                       font=dict(family="DejaVu Sans, Noto Naskh Arabic, sans-serif", size=11, color=INK))
     return fig
 

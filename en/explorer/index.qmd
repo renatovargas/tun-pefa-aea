@@ -18,19 +18,43 @@ setup("en")
 
 # Words of the page. Translate this dictionary only; the code below is the same in every language.
 UI = {
-    "year": "Year", "activity": "Activity", "pj": "PJ", "kt": "kt CO2 eq", "share": "share of the total",
+    "intro": "Choose a year to see how much energy each industry and households use, how much greenhouse gas they emit, and how both compare with value added. Axes stay fixed across years, so that the bars move only when the data change.",
+    "year": "Year",
+    "activity": "Activity",
+    "pj": "PJ",
+    "kt": "kt CO2 eq",
+    "mt": "Mt CO2 eq",
+    "kpi_energy": "Energy end use",
+    "kpi_emissions": "Greenhouse gas emissions",
+    "kpi_user": "Largest energy user",
+    "kpi_emitter": "Largest emitter",
+    "vs_prev": "vs. previous year",
+    "first_year": "first year of the series",
+    "of_total": "of the total",
     "energy_title": "End use of energy for energy purposes, by user and product",
     "energy_series": "Energy end use of the selected activity, by product",
     "emissions_title": "Greenhouse gas emissions by activity and gas",
     "emissions_series": "Emissions of the selected activity, by gas",
     "intensity_title": "Energy and emission intensity of value added, by industry (logarithmic scales)",
-    "intensity_x": "TJ per million TND of value added", "intensity_y": "t CO2 eq per million TND of value added",
+    "intensity_x": "TJ per million TND of value added",
+    "intensity_y": "t CO2 eq per million TND of value added",
     "intensity_note": "Each point is an industry; its size is its value added. Hover over a point for its name and values.",
-    "click": "Choose an activity in the list to see its series.",
-    "class_activities": "Activities of the accounts", "class_balance": "From the energy balance to activities",
+    "series_note": "The highlighted bar is the year chosen above.",
+    "class_activities": "Activities of the accounts",
+    "class_balance": "From the energy balance to activities",
     "class_crt": "From inventory categories to activities",
-    "code": "Code", "label": "Label", "section": "ISIC section", "flow": "Flow of the IEA template", "product": "Product",
-    "method": "Method", "key": "Key", "reason": "Reason", "prefix": "CRT prefix",
+    "search": "Search by code or name",
+    "no_match": "No row matches the search.",
+    "rows": "rows",
+    "code": "Code",
+    "label": "Label",
+    "section": "ISIC section",
+    "flow": "Flow of the IEA template",
+    "product": "Product",
+    "method": "Method",
+    "key": "Key",
+    "reason": "Reason",
+    "prefix": "CRT prefix",
 }
 
 acts = [c for c in lab("activities") if c not in ("ROW", "ACC", "ENV", "STATDIFF")]
@@ -39,12 +63,10 @@ energy = (read("pefa_supply_use")
           .filter(pl.col("quadrant") == "Use", pl.col("level2") == "End-use of energy products by SIEC class:",
                   pl.col("product") != "End-use of energy products for non-energy purposes", pl.col("activity").is_in(acts))
           .group_by("year", "activity", "product").agg((pl.col("tj").sum() / 1000).alias("value"))
-          .with_columns(name=pl.col("activity").replace_strict(names), group=pl.col("product").replace_strict(lab("pefa_rows")),
-                        color_key=pl.col("product")))
+          .with_columns(name=pl.col("activity").replace_strict(names), group=pl.col("product").replace_strict(lab("pefa_rows"))))
 emissions = (read("aea_emissions").filter(pl.col("activity").is_in(acts), pl.col("gas").is_in(["CO2", "CH4", "N2O", "F-gases"]))
              .group_by("year", "activity", "gas").agg(pl.col("kt_co2_eq").sum().alias("value"))
-             .with_columns(name=pl.col("activity").replace_strict(names), group=pl.col("gas").replace_strict(lab("gases")),
-                           color_key=pl.col("gas")))
+             .with_columns(name=pl.col("activity").replace_strict(names), group=pl.col("gas").replace_strict(lab("gases"))))
 intensity = (read("pefa_indicators").select("year", "activity", "intensity_value_added", "value_added_mtnd")
              .join(read("aea_indicators").select("year", "activity", "ghg_intensity_value_added"), on=["year", "activity"])
              .filter(pl.col("activity") != "HH", pl.col("value_added_mtnd") > 0)
@@ -52,18 +74,26 @@ intensity = (read("pefa_indicators").select("year", "activity", "intensity_value
                  dict(lookup("activities").select("code", "imf_section").iter_rows()))))
 classes = lookup("activities").filter(pl.col("code").is_in(acts)).select(
     pl.col("code"), pl.col(LANG).alias("label"), pl.col("imf_section").alias("section"))
+reason = pl.col("rationale_fr" if LANG == "fr" else "rationale_en").alias("reason")
 balance_rules = lookup("balance_to_activities").with_columns(name=pl.col("activity").replace_strict(names, default=pl.col("activity"))).select(
-    "iea_flow", pl.col("iea_product").fill_null(""), "activity", "name", "method", pl.col("key_product").fill_null(""),
-    pl.col("rationale_fr" if LANG == "fr" else "rationale_en").alias("reason"))
+    "iea_flow", pl.col("iea_product").fill_null(""), "activity", "name", "method", pl.col("key_product").fill_null(""), reason)
 crt_rules = lookup("crt_to_activities").with_columns(name=pl.col("activity").replace_strict(names, default=pl.col("activity"))).select(
-    "prefix", pl.col("activity").fill_null(""), pl.col("name").fill_null(""), "method", pl.col("key").fill_null(""),
-    pl.col("rationale_fr" if LANG == "fr" else "rationale_en").alias("reason"))
+    "prefix", pl.col("activity").fill_null(""), pl.col("name").fill_null(""), "method", pl.col("key").fill_null(""), reason)
 colors = {**{L("pefa_rows", k): v for k, v in PRODUCT_COLORS.items()}, **{L("gases", k): v for k, v in GAS_COLORS.items()}}
-section_colors = SECTION_COLORS
 years = sorted(energy["year"].unique().to_list())
+# Numbers in the language of the page (Arabic keeps Western digits).
+# Nombres dans la langue de la page (l'arabe garde les chiffres occidentaux).
+locale = "fr-FR" if LANG == "fr" else "en-US"
 ojs_define(energy=energy.to_pandas(), emissions=emissions.to_pandas(), intensity=intensity.to_pandas(), classes=classes.to_pandas(),
            balance_rules=balance_rules.to_pandas(), crt_rules=crt_rules.to_pandas(), UI=UI, colors=colors,
-           section_colors=section_colors, years=years, names=names, rtl=(LANG == "ar"))
+           section_colors=SECTION_COLORS, years=years, rtl=(LANG == "ar"), locale=locale)
+```
+
+::: {.explorer}
+
+```{ojs}
+//| echo: false
+html`<p class="ex-intro">${UI.intro}</p>`
 ```
 
 ```{ojs}
@@ -71,14 +101,78 @@ ojs_define(energy=energy.to_pandas(), emissions=emissions.to_pandas(), intensity
 E = transpose(energy)
 M = transpose(emissions)
 I = transpose(intensity)
+YEARS = typeof years === "number" ? [years] : years
 domain = Object.keys(colors)
 range = Object.values(colors)
-viewof year = Inputs.select(years.slice().reverse(), {value: years[years.length - 1], label: UI.year})
+fmt = (x, d = 1) => x.toLocaleString(locale, {minimumFractionDigits: d, maximumFractionDigits: d})
+// Years are labels, never numbers with thousands separators.
+// Les années sont des libellés, jamais des nombres avec séparateur de milliers.
+yearFormat = (y) => String(y)
+
+// Pills for one choice among a few (the year), as in a segmented control.
+// Pastilles pour un choix parmi quelques options (l'année), comme un sélecteur segmenté.
+function segmented(options, value, label) {
+  const el = html`<div class="seg" role="radiogroup" aria-label=${label}></div>`;
+  el.value = value;
+  const buttons = options.map(o => {
+    const b = html`<button type="button" role="radio">${yearFormat(o)}</button>`;
+    b.addEventListener("click", () => { el.value = o; mark(); el.dispatchEvent(new Event("input", {bubbles: true})); });
+    el.append(b);
+    return [b, o];
+  });
+  const mark = () => buttons.forEach(([b, o]) => { b.classList.toggle("on", o === el.value); b.setAttribute("aria-checked", o === el.value); });
+  mark();
+  return el;
+}
+
 // Axes and bar order stay fixed across years, so that only real changes move.
 // Les axes et l'ordre des barres restent fixes d'une année à l'autre.
 totals = (rows) => d3.rollup(rows, v => d3.sum(v, d => d.value), d => d.year, d => d.name)
 maxTotal = (rows) => d3.max(Array.from(totals(rows).values(), m => d3.max(m.values())))
 stableOrder = (rows) => d3.groupSort(rows, v => -d3.sum(v, d => d.value), d => d.name)
+truncate = (t, n = 40) => t.length > n ? t.slice(0, n - 1) + "…" : t
+```
+
+::: {.ex-controls}
+
+```{ojs}
+//| echo: false
+html`<span class="ex-label">${UI.year}</span>`
+```
+
+```{ojs}
+//| echo: false
+viewof year = segmented(YEARS, YEARS[YEARS.length - 1], UI.year)
+```
+
+:::
+
+```{ojs}
+//| echo: false
+kpis = {
+  const sum = (rows, y) => d3.sum(rows.filter(d => d.year === y), d => d.value);
+  const prev = YEARS[YEARS.indexOf(year) - 1];
+  const change = (rows, scale = 1) => {
+    if (prev === undefined) return html`<span class="k-sub">${UI.first_year}</span>`;
+    const c = sum(rows, year) / sum(rows, prev) - 1;
+    return html`<span class="k-sub"><b class=${c >= 0 ? "up" : "down"}>${c >= 0 ? "▲" : "▼"} ${fmt(Math.abs(c) * 100)} %</b> ${UI.vs_prev}</span>`;
+  };
+  const top = (rows) => {
+    const t = d3.rollups(rows.filter(d => d.year === year), v => d3.sum(v, d => d.value), d => d.name).sort((a, b) => b[1] - a[1])[0];
+    return [t[0], t[1] / sum(rows, year)];
+  };
+  const [user, userShare] = top(E), [emitter, emitterShare] = top(M);
+  return html`<div class="ex-kpis">
+    <div class="kpi"><span class="k-label">${UI.kpi_energy}, ${yearFormat(year)}</span>
+      <span class="k-value">${fmt(sum(E, year))} <small>${UI.pj}</small></span>${change(E)}</div>
+    <div class="kpi"><span class="k-label">${UI.kpi_emissions}, ${yearFormat(year)}</span>
+      <span class="k-value">${fmt(sum(M, year) / 1000)} <small>${UI.mt}</small></span>${change(M)}</div>
+    <div class="kpi"><span class="k-label">${UI.kpi_user}</span>
+      <span class="k-name">${user}</span><span class="k-sub"><b>${fmt(userShare * 100)} %</b> ${UI.of_total}</span></div>
+    <div class="kpi"><span class="k-label">${UI.kpi_emitter}</span>
+      <span class="k-name">${emitter}</span><span class="k-sub"><b>${fmt(emitterShare * 100)} %</b> ${UI.of_total}</span></div>
+  </div>`;
+}
 ```
 
 ::: {.panel-tabset}
@@ -87,79 +181,107 @@ stableOrder = (rows) => d3.groupSort(rows, v => -d3.sum(v, d => d.value), d => d
 
 ```{ojs}
 //| echo: false
-energyYear = E.filter(d => d.year === year)
 energyOrder = stableOrder(E)
 Plot.plot({
-  title: `${UI.energy_title}, ${year} (${UI.pj})`,
-  marginLeft: rtl ? 10 : 260, marginRight: rtl ? 260 : 40, width: 1000, height: 560,
+  title: `${UI.energy_title}, ${yearFormat(year)} (${UI.pj})`,
+  marginLeft: rtl ? 10 : 270, marginRight: rtl ? 270 : 30, width: 1100, height: 600,
+  style: {fontSize: "12px"},
   x: {label: UI.pj, grid: true, reverse: rtl, domain: [0, maxTotal(E)], nice: true},
-  y: {label: null, domain: energyOrder, axis: rtl ? "right" : "left", tickFormat: t => t.length > 40 ? t.slice(0, 39) + "…" : t},
+  y: {label: null, domain: energyOrder, axis: rtl ? "right" : "left", tickFormat: t => truncate(t)},
   color: {domain, range, legend: true},
   marks: [
-    Plot.barX(energyYear, Plot.stackX({x: "value", y: "name", fill: "group", inset: 0.5, tip: {format: {x: d => d.toFixed(1)}}})),
+    Plot.barX(E.filter(d => d.year === year), Plot.stackX({x: "value", y: "name", fill: "group", inset: 0.5, rx: 2,
+      tip: {format: {x: d => fmt(d), fill: true, y: true}}})),
     Plot.ruleX([0])
   ]
 })
 ```
 
+::: {.ex-series}
+
 ```{ojs}
 //| echo: false
 viewof energyActivity = Inputs.select(energyOrder, {label: UI.activity, value: energyOrder[0]})
+```
+
+```{ojs}
+//| echo: false
 Plot.plot({
-  title: `${UI.energy_series} (${UI.pj})`, width: 1000, height: 300, marginLeft: 50,
-  x: {label: null, tickFormat: "d", ticks: years.length}, y: {label: UI.pj, grid: true},
+  title: `${UI.energy_series} (${UI.pj})`, subtitle: UI.series_note, width: 1100, height: 300, marginLeft: 50,
+  x: {label: null, tickFormat: yearFormat, reverse: rtl}, y: {label: UI.pj, grid: true, axis: rtl ? "right" : "left"},
   color: {domain, range, legend: true},
-  marks: [Plot.barY(E.filter(d => d.name === energyActivity), Plot.stackY({x: "year", y: "value", fill: "group", inset: 1, tip: true})), Plot.ruleY([0])]
+  marks: [
+    Plot.barY(E.filter(d => d.name === energyActivity), Plot.stackY({x: "year", y: "value", fill: "group", inset: 1,
+      fillOpacity: d => d.year === year ? 1 : 0.45, tip: {format: {x: yearFormat, y: d => fmt(d), fill: true}}})),
+    Plot.ruleY([0])
+  ]
 })
 ```
+
+:::
 
 ## Emissions
 
 ```{ojs}
 //| echo: false
-emissionsYear = M.filter(d => d.year === year)
 emissionsOrder = stableOrder(M)
 Plot.plot({
-  title: `${UI.emissions_title}, ${year} (${UI.kt})`,
-  marginLeft: rtl ? 10 : 260, marginRight: rtl ? 260 : 40, width: 1000, height: 560,
+  title: `${UI.emissions_title}, ${yearFormat(year)} (${UI.kt})`,
+  marginLeft: rtl ? 10 : 270, marginRight: rtl ? 270 : 30, width: 1100, height: 600,
+  style: {fontSize: "12px"},
   x: {label: UI.kt, grid: true, reverse: rtl, domain: [0, maxTotal(M)], nice: true},
-  y: {label: null, domain: emissionsOrder, axis: rtl ? "right" : "left", tickFormat: t => t.length > 40 ? t.slice(0, 39) + "…" : t},
+  y: {label: null, domain: emissionsOrder, axis: rtl ? "right" : "left", tickFormat: t => truncate(t)},
   color: {domain, range, legend: true},
   marks: [
-    Plot.barX(emissionsYear, Plot.stackX({x: "value", y: "name", fill: "group", inset: 0.5, tip: {format: {x: d => d.toFixed(0)}}})),
+    Plot.barX(M.filter(d => d.year === year), Plot.stackX({x: "value", y: "name", fill: "group", inset: 0.5, rx: 2,
+      tip: {format: {x: d => fmt(d, 0), fill: true, y: true}}})),
     Plot.ruleX([0])
   ]
 })
 ```
 
+::: {.ex-series}
+
 ```{ojs}
 //| echo: false
 viewof emissionsActivity = Inputs.select(emissionsOrder, {label: UI.activity, value: emissionsOrder[0]})
+```
+
+```{ojs}
+//| echo: false
 Plot.plot({
-  title: `${UI.emissions_series} (${UI.kt})`, width: 1000, height: 300, marginLeft: 60,
-  x: {label: null, tickFormat: "d", ticks: years.length}, y: {label: UI.kt, grid: true},
+  title: `${UI.emissions_series} (${UI.kt})`, subtitle: UI.series_note, width: 1100, height: 300, marginLeft: 60,
+  x: {label: null, tickFormat: yearFormat, reverse: rtl}, y: {label: UI.kt, grid: true, axis: rtl ? "right" : "left"},
   color: {domain, range, legend: true},
-  marks: [Plot.barY(M.filter(d => d.name === emissionsActivity), Plot.stackY({x: "year", y: "value", fill: "group", inset: 1, tip: true})), Plot.ruleY([0])]
+  marks: [
+    Plot.barY(M.filter(d => d.name === emissionsActivity), Plot.stackY({x: "year", y: "value", fill: "group", inset: 1,
+      fillOpacity: d => d.year === year ? 1 : 0.45, tip: {format: {x: yearFormat, y: d => fmt(d, 0), fill: true}}})),
+    Plot.ruleY([0])
+  ]
 })
 ```
+
+:::
 
 ## Intensities
 
 ```{ojs}
 //| echo: false
 Plot.plot({
-  title: `${UI.intensity_title}, ${year}`, subtitle: UI.intensity_note, width: 1000, height: 560, marginLeft: 60,
-  x: {type: "log", label: UI.intensity_x, grid: true, domain: d3.extent(I.filter(d => d.intensity_value_added > 0), d => d.intensity_value_added)},
-  y: {type: "log", label: UI.intensity_y, grid: true, domain: d3.extent(I.filter(d => d.ghg_intensity_value_added > 0), d => d.ghg_intensity_value_added)},
-  r: {range: [3, 22]},
+  title: `${UI.intensity_title}, ${yearFormat(year)}`, subtitle: UI.intensity_note, width: 1100, height: 600, marginLeft: 60,
+  x: {type: "log", label: UI.intensity_x, grid: true, reverse: rtl,
+      domain: d3.extent(I.filter(d => d.intensity_value_added > 0), d => d.intensity_value_added)},
+  y: {type: "log", label: UI.intensity_y, grid: true, axis: rtl ? "right" : "left",
+      domain: d3.extent(I.filter(d => d.ghg_intensity_value_added > 0), d => d.ghg_intensity_value_added)},
+  r: {range: [3, 24]},
   color: {domain: Object.keys(section_colors), range: Object.values(section_colors)},
   marks: [
     Plot.dot(I.filter(d => d.year === year && d.intensity_value_added > 0 && d.ghg_intensity_value_added > 0),
       {x: "intensity_value_added", y: "ghg_intensity_value_added", r: "value_added_mtnd", fill: "section", fillOpacity: 0.75,
-       stroke: "white", tip: {channels: {name: "name"}, format: {x: d => d.toFixed(2), y: d => d.toFixed(0), r: d => d.toFixed(0)}}}),
+       stroke: "white", tip: {channels: {name: "name"}, format: {x: d => fmt(d, 2), y: d => fmt(d, 0), r: d => fmt(d, 0)}}}),
     Plot.text(I.filter(d => d.year === year && (d.intensity_value_added > 6 || d.ghg_intensity_value_added > 1500)),
-      {x: "intensity_value_added", y: "ghg_intensity_value_added", text: d => d.name.length > 30 ? d.name.slice(0, 29) + "…" : d.name,
-       dx: 8, textAnchor: "start", fontSize: 10, fill: "#666"})
+      {x: "intensity_value_added", y: "ghg_intensity_value_added", text: d => truncate(d.name, 30),
+       dx: rtl ? -8 : 8, textAnchor: rtl ? "end" : "start", fontSize: 10, fill: "#555"})
   ]
 })
 ```
@@ -168,22 +290,53 @@ Plot.plot({
 
 ```{ojs}
 //| echo: false
-md`### ${UI.class_activities}`
-Inputs.table(transpose(classes), {header: {code: UI.code, label: UI.label, section: UI.section}, rows: 25, layout: "auto"})
+// A table with a search box: rows are filtered on every column.
+// Un tableau avec une zone de recherche : les lignes sont filtrées sur toutes les colonnes.
+function searchTable(rows, columns, title) {
+  const norm = (s) => (s ?? "").toString().normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const input = html`<input type="search" placeholder=${UI.search} autocomplete="off">`;
+  const count = html`<span class="t-count"></span>`;
+  const body = html`<tbody></tbody>`;
+  const cell = (c, r) => c.key === "section"
+    ? html`<td><span class="pill" style=${"--c:" + (section_colors[r.section] ?? "#999")}>${r.section}</span></td>`
+    : html`<td class=${c.cls ?? ""}>${r[c.key]}</td>`;
+  const draw = () => {
+    const q = norm(input.value);
+    const shown = rows.filter(r => q === "" || columns.some(c => norm(r[c.key]).includes(q)));
+    body.replaceChildren(...(shown.length ? shown.map(r => html`<tr>${columns.map(c => cell(c, r))}</tr>`)
+      : [html`<tr><td colspan=${columns.length} class="empty">${UI.no_match}</td></tr>`]));
+    count.textContent = `${shown.length} / ${rows.length} ${UI.rows}`;
+  };
+  input.addEventListener("input", (e) => { e.stopPropagation(); draw(); });
+  draw();
+  return html`<section class="ex-table">
+    <header><h3>${title}</h3><label class="search">${input}</label>${count}</header>
+    <div class="t-scroll"><table class="table table-sm">
+      <thead><tr>${columns.map(c => html`<th>${c.label}</th>`)}</tr></thead>${body}</table></div>
+  </section>`;
+}
 ```
 
 ```{ojs}
 //| echo: false
-md`### ${UI.class_balance}`
-Inputs.table(transpose(balance_rules), {header: {iea_flow: UI.flow, iea_product: UI.product, activity: UI.code, name: UI.activity,
-  method: UI.method, key_product: UI.key, reason: UI.reason}, rows: 15, layout: "auto"})
+searchTable(transpose(classes), [{key: "code", label: UI.code, cls: "code"}, {key: "label", label: UI.label},
+  {key: "section", label: UI.section}], UI.class_activities)
 ```
 
 ```{ojs}
 //| echo: false
-md`### ${UI.class_crt}`
-Inputs.table(transpose(crt_rules), {header: {prefix: UI.prefix, activity: UI.code, name: UI.activity, method: UI.method,
-  key: UI.key, reason: UI.reason}, rows: 15, layout: "auto"})
+searchTable(transpose(balance_rules), [{key: "iea_flow", label: UI.flow}, {key: "iea_product", label: UI.product},
+  {key: "activity", label: UI.code, cls: "code"}, {key: "name", label: UI.activity}, {key: "method", label: UI.method, cls: "code"},
+  {key: "key_product", label: UI.key}, {key: "reason", label: UI.reason, cls: "reason"}], UI.class_balance)
 ```
+
+```{ojs}
+//| echo: false
+searchTable(transpose(crt_rules), [{key: "prefix", label: UI.prefix, cls: "code"}, {key: "activity", label: UI.code, cls: "code"},
+  {key: "name", label: UI.activity}, {key: "method", label: UI.method, cls: "code"}, {key: "key", label: UI.key},
+  {key: "reason", label: UI.reason, cls: "reason"}], UI.class_crt)
+```
+
+:::
 
 :::
